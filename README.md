@@ -2,9 +2,6 @@
 
 # Challengers
 
-2022.05.01부터 2022.06.28까지 8주간 진행한 Challengers 프로젝트입니다.   
-기획 1주, 개발 5주의 일정으로 진행하였습니다.
-<br>
 <br>
 [![aidnd](/src/Assets/Img/airdndCapture.png)](https://www.youtube.com/watch?v=iB43qkoJuB0)   
 
