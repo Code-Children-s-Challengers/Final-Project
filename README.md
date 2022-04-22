@@ -162,7 +162,7 @@
 ![Flask](https://img.shields.io/badge/Flask-000000.svg?&style=for-the-badge&logo=Flask&logoColor=white)
 ![Django](https://img.shields.io/badge/Django-092E20.svg?&style=for-the-badge&logo=Django&logoColor=white)
 ![Jupyter](https://img.shields.io/badge/Jupyter-F37626.svg?&style=for-the-badge&logo=Jupyter&logoColor=white)
-![GoogleColab](https://img.shields.io/badge/GoogleColab-F9AB00.svg?&style=for-the-badge&logo=GoogleColab&logoColor=white)
+![Google Colab](https://img.shields.io/badge/Google%20Colab-F9AB00.svg?&style=for-the-badge&logo=Google%20Colab&logoColor=white)
 ![NumPy](https://img.shields.io/badge/NumPy-013243.svg?&style=for-the-badge&logo=NumPy&logoColor=white)
 ![pandas](https://img.shields.io/badge/pandas-150458.svg?&style=for-the-badge&logo=pandas&logoColor=white)
 ![Selenium](https://img.shields.io/badge/Selenium-43B02A.svg?&style=for-the-badge&logo=Selenium&logoColor=white)
@@ -178,6 +178,7 @@ ORACLE 11g Express Edition Release 11.2.0
 Eclipse JEE-2020-03/ STS 3.9.14 / JDK 1.8 / CHROME / SQL DEVELOPER / 
 
 ![Git](https://img.shields.io/badge/Git-F05032.svg?&style=for-the-badge&logo=Git&logoColor=white)
+![Google Chrome](https://img.shields.io/badge/Google%20Chrome-4285F4.svg?&style=for-the-badge&logo=Google%20Chrome&logoColor=white)
 ![Eclipse IDE](https://img.shields.io/badge/Eclipse%20IDE-2C2255.svg?&style=for-the-badge&logo=Eclipse%20IDE&logoColor=white)
 ![Visual Studio Code](https://img.shields.io/badge/Visual%20Studio%20Code-007ACC.svg?&style=for-the-badge&logo=Visual%20Studio%20Code&logoColor=white)
 
@@ -189,6 +190,15 @@ Eclipse JEE-2020-03/ STS 3.9.14 / JDK 1.8 / CHROME / SQL DEVELOPER /
 
 - Slack
 
+- Google Meet 
+
+- Google Drive
+
+- Google Sheets
+
 ![Trello](https://img.shields.io/badge/Trello-0052CC.svg?&style=for-the-badge&logo=Trello&logoColor=white)
 ![Figma](https://img.shields.io/badge/Figma-F24E1E.svg?&style=for-the-badge&logo=Figma&logoColor=white)
 ![Slack](https://img.shields.io/badge/Slack-4A154B.svg?&style=for-the-badge&logo=Slack&logoColor=white)
+![Google Meet](https://img.shields.io/badge/Google%20Meet-00897B.svg?&style=for-the-badge&logo=Google%20Meet&logoColor=white)
+![Google Drive](https://img.shields.io/badge/Google%20Drive-4285F4.svg?&style=for-the-badge&logo=Google%20Drive&logoColor=white)
+![Google Sheets](https://img.shields.io/badge/Google%20Sheets-34A853.svg?&style=for-the-badge&logo=Google%20Sheets&logoColor=white)
