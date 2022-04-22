@@ -8,6 +8,9 @@
 <br>
 [![aidnd](/src/Assets/Img/airdndCapture.png)](https://www.youtube.com/watch?v=iB43qkoJuB0)   
 
+![image](https://user-images.githubusercontent.com/96436971/164655321-ab346abf-df0d-4e83-bf33-b5fe1330fe5e.png)
+
+
 <br>
 
 ## 구성원
