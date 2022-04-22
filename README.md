@@ -161,6 +161,7 @@
 - Python
 - Flask or Django
 - AI
+- Tableau
 
 ![Python](https://img.shields.io/badge/Python-3776AB.svg?&style=for-the-badge&logo=Python&logoColor=white)
 ![Flask](https://img.shields.io/badge/Flask-000000.svg?&style=for-the-badge&logo=Flask&logoColor=white)
@@ -170,6 +171,7 @@
 ![NumPy](https://img.shields.io/badge/NumPy-013243.svg?&style=for-the-badge&logo=NumPy&logoColor=white)
 ![pandas](https://img.shields.io/badge/pandas-150458.svg?&style=for-the-badge&logo=pandas&logoColor=white)
 ![Selenium](https://img.shields.io/badge/Selenium-43B02A.svg?&style=for-the-badge&logo=Selenium&logoColor=white)
+![Tableau](https://img.shields.io/badge/Tableau-3776AB.svg?&style=for-the-badge&logo=Tableau&logoColor=white)
 
 ## 📌 DataBase
 
