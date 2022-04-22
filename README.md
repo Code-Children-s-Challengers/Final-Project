@@ -120,10 +120,7 @@
 </details>
 <br>
 
-<details> <!-- 더보기 기능 -->
-<summary>
-참고 ! (추후 지울 것_20220422)
-</summary>
+
 
     
 ## 📌 프론트엔드 사용 기술
@@ -161,6 +158,12 @@ https://asia-enterprise.taskworld.com/youngjoon-shin/#/project/2?show=/task/20/c
 - Figma
 
 https://www.figma.com/file/UUWs1MQavlacUoeqZcPtRt/Untitled?node-id=0%3A1
+
+<details> <!-- 더보기 기능 -->
+<summary>
+참고 ! (추후 지울 것_20220422)
+</summary>
+
 
 ### 🔗라이브
 [weling.site](http://weling.site/)  
