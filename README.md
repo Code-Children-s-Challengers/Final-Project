@@ -199,3 +199,62 @@ Eclipse JEE-2020-03/ STS 3.9.14 / JDK 1.8 / CHROME / SQL DEVELOPER /
 ![Google Meet](https://img.shields.io/badge/Google%20Meet-00897B.svg?&style=for-the-badge&logo=Google%20Meet&logoColor=white)
 ![Google Drive](https://img.shields.io/badge/Google%20Drive-4285F4.svg?&style=for-the-badge&logo=Google%20Drive&logoColor=white)
 ![Google Sheets](https://img.shields.io/badge/Google%20Sheets-34A853.svg?&style=for-the-badge&logo=Google%20Sheets&logoColor=white)
+
+
+
+============================================================== 참고 할 뼈대 ==========================================================
+=====================================================================================================================================================================
+===============================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================
+
+# 🎸 사용 기술 및 언어
+
+![skill](https://github.com/dhslrl321/L7-monitor/blob/master/assets/skill.png)
+
+# 📑 서비스 흐름 및 UI
+
+# Service Flow
+
+![service-flow](https://github.com/dhslrl321/L7-monitor/blob/master/assets/service-flow.png)
+
+# User Interface
+
+![ui](https://github.com/dhslrl321/L7-monitor/blob/master/assets/ui.png)
+
+- **실시간 트래픽 모니터링**
+  - Line Graph
+  - 5분, 하루, 일주일 트래픽 시각화
+- **보안 위협 트래픽 분류 및 금일 보안 Level 제공**
+  - 정상 대비 악성 트래픽 비율 및 보안 수준
+- **로그 history 확인**
+  - Table Format
+  - 하루에 발생한 Full Log Format 시각화
+  - 식별 불가 로그의 시각화
+- **웹 공격에 따른 분류 및 시각화**
+  - Pie Chart
+  - SQL-Injection, RFI, XSS, Web-Shell 공격 분류 시각화
+
+# DB Schema
+
+![db](https://github.com/dhslrl321/L7-monitor/blob/master/assets/db.png)
+
+- **Tables**
+  - total
+  - abnormal
+  - unknown_log
+  - mal_code
+
+# 🎥 시연 영상 및 사용법
+
+# 시연 영상
+
+[![시연](https://img.youtube.com/vi/v_qsQnZcDeI/0.jpg)](https://www.youtube.com/watch?v=v_qsQnZcDeI)
+
+# 사용법
+
+```
+$ git clone https://github.com/BORI-BoB/L7-monitor.git
+
+$ git checkout -t origin/develop
+
+$ ./execute-service.sh
+```
