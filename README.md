@@ -11,7 +11,6 @@
 ![image](https://user-images.githubusercontent.com/96436971/164655321-ab346abf-df0d-4e83-bf33-b5fe1330fe5e.png)
 
 ## 프로젝트 기간
-<hr>
 2022.05.01 ~ 2022.06.28
 
 <br>
