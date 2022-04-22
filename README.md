@@ -25,7 +25,7 @@
 <br>
 
 ## 프로젝트 개요
-<hr>
+
 
 ## 프론트엔드 핵심 목표
 
@@ -143,7 +143,7 @@
 - AI
 
 ## 📌 DataBase
-<hr>
+
 ORACLE 11g Express Edition Release 11.2.0
 
 ## Tool
