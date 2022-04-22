@@ -16,7 +16,7 @@
 ## 구성원
 <br>
 [Front-end]: 이도원<br>
-[Back-end]: 곽무진, 신한균, 최홍석<br>
+[Back-end]: 신한균(팀장), 곽무진,  최홍석<br>
 [Data-Analalysis] : 신영준<br>
 
 <br>
