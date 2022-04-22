@@ -10,6 +10,9 @@
 
 ![image](https://user-images.githubusercontent.com/96436971/164655321-ab346abf-df0d-4e83-bf33-b5fe1330fe5e.png)
 
+## 프로젝트 기간
+<hr>
+2022.05.01 ~ 2022.06.28
 
 <br>
 
@@ -21,6 +24,8 @@
 
 <br>
 
+## 프로젝트 개요
+<hr>
 
 ## 프론트엔드 핵심 목표
 
@@ -136,6 +141,14 @@
 - Python
 - Flask or Django
 - AI
+
+## 📌 DataBase
+<hr>
+ORACLE 11g Express Edition Release 11.2.0
+
+## Tool
+<hr>
+Eclipse JEE-2020-03/ STS 3.9.14 / JDK 1.8 / CHROME / SQL DEVELOPER / 
 
 ## 📌 프로젝트 협업 Tool
 
