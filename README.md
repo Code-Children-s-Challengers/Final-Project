@@ -29,7 +29,10 @@
 <br>
 
 ## 프로젝트 개요
-
+<details> <!-- 더보기 기능 -->
+<summary>
+자세히 보기
+</summary>
 
 ## 프론트엔드 핵심 목표
 
@@ -60,7 +63,7 @@
 - 사용자 기반 데이터를 활용한 시각화
 - 이미지 인식을 통한 1차 판별
 - 월간 & 연간 리포트 
-
+</details>
 <br>
 
 
@@ -189,11 +192,8 @@ Eclipse JEE-2020-03/ STS 3.9.14 / JDK 1.8 / CHROME / SQL DEVELOPER /
 - [Figma](https://www.figma.com/file/UUWs1MQavlacUoeqZcPtRt/Untitled?node-id=0%3A1)
 
 - Slack
-
 - Google Meet 
-
 - Google Drive
-
 - Google Sheets
 
 ![Trello](https://img.shields.io/badge/Trello-0052CC.svg?&style=for-the-badge&logo=Trello&logoColor=white)
