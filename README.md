@@ -152,6 +152,12 @@
 ![Python](https://img.shields.io/badge/Python-3776AB.svg?&style=for-the-badge&logo=Python&logoColor=white)
 ![Flask](https://img.shields.io/badge/Flask-000000.svg?&style=for-the-badge&logo=Flask&logoColor=white)
 ![Django](https://img.shields.io/badge/Django-092E20.svg?&style=for-the-badge&logo=Django&logoColor=white)
+![Jupyter](https://img.shields.io/badge/Jupyter-F37626.svg?&style=for-the-badge&logo=Jupyter&logoColor=white)
+![GoogleColab](https://img.shields.io/badge/GoogleColab-F9AB00.svg?&style=for-the-badge&logo=GoogleColab&logoColor=white)
+![NumPy](https://img.shields.io/badge/NumPy-013243.svg?&style=for-the-badge&logo=NumPy&logoColor=white)
+![pandas](https://img.shields.io/badge/pandas-150458.svg?&style=for-the-badge&logo=pandas&logoColor=white)
+![Selenium](https://img.shields.io/badge/Selenium-43B02A.svg?&style=for-the-badge&logo=Selenium&logoColor=white)
+![Django](https://img.shields.io/badge/Django-092E20.svg?&style=for-the-badge&logo=Django&logoColor=white)
 
 ## 📌 DataBase
 
