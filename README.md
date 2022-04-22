@@ -119,25 +119,25 @@
 
 <br>
 
-## 프론트엔드 사용 기술
+## 📌 프론트엔드 사용 기술
 
 - Html
 - Css
 - JavaScript
 - Bootstrap
 
-## 백엔드 사용 기술
+## 📌 백엔드 사용 기술
 
 - Java
 - Spring Boot
 
-## 데이터분석 사용 기술
+## 📌 데이터분석 사용 기술
 
 - Python
 - Flask or Django
 - AI
 
-## 프로젝트 협업 Tool
+## 📌 프로젝트 협업 Tool
 
 - Trello
 
@@ -164,10 +164,11 @@ We are traveling의 약자이며 여행자들을 대상으로 서비스를 제�
 2️⃣차 프로젝트 : 2021년 10월 12일 ~ 2021년 10월 19일
 
 ### 👩‍💻 멤버 구성
-- 정태희(팀장)
-- 김혜린
-- 서성혁
-- 우성호  
+- ???(팀장)
+- ???
+- ???
+- ??? 
+- ???
 
 ### 📌 기술
 - HTML, CSS, JavaScript, Ajax, Jinja, jQuery
