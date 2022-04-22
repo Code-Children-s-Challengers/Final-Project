@@ -120,8 +120,9 @@
 </details>
 <br>
 
-    
-## 📌 프론트엔드 사용 기술
+## 🌿 기술 스택
+
+## 📌 Front-End
 
 - HTML
 - CSS
@@ -133,7 +134,7 @@
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E.svg?&style=for-the-badge&logo=JavaScript&logoColor=white)
 ![Bootstrap](https://img.shields.io/badge/Bootstrap-7952B3.svg?&style=for-the-badge&logo=Bootstrap&logoColor=white)
 
-## 📌 백엔드 사용 기술
+## 📌 Back-End
 
 - Java
 - Spring Boot
@@ -143,7 +144,7 @@
 ![SpringBoot](https://img.shields.io/badge/SpringBoot-6DB33F.svg?&style=for-the-badge&logo=SpringBoot&logoColor=white)
 
 
-## 📌 데이터분석 사용 기술
+## 📌 Data-Analysis
 
 - Python
 - Flask or Django
