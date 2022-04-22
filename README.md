@@ -188,13 +188,9 @@ Eclipse JEE-2020-03/ STS 3.9.14 / JDK 1.8 / CHROME / SQL DEVELOPER /
 ## 📌 프로젝트 협업 Tool
 
 - [Trello](https://asia-enterprise.taskworld.com/youngjoon-shin/#/project/2?show=/task/20/comments)
-
 - [Figma](https://www.figma.com/file/UUWs1MQavlacUoeqZcPtRt/Untitled?node-id=0%3A1)
-
 - Slack
-- Google Meet 
-- Google Drive
-- Google Sheets
+- Google Meet / Google Drive / Google Sheets
 
 ![Trello](https://img.shields.io/badge/Trello-0052CC.svg?&style=for-the-badge&logo=Trello&logoColor=white)
 ![Figma](https://img.shields.io/badge/Figma-F24E1E.svg?&style=for-the-badge&logo=Figma&logoColor=white)
