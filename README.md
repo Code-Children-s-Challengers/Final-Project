@@ -1,8 +1,8 @@
 # Final-Project
 
-# airdnd
+# Challengers
 
-2020.08.03부터 2020.09.12까지 6주간 진행한 airbnb 클론 코딩 프로젝트입니다.   
+2022.05.01부터 2022.06.28까지 8주간 진행한 Challengers 프로젝트입니다.   
 기획 1주, 개발 5주의 일정으로 진행하였습니다.
 <br>
 <br>
@@ -12,8 +12,9 @@
 
 ## 구성원
 
-[Front-end](https://github.com/DEVengersAssemble/airdnd-frontend): 김우정, 주한슬, 이하은, 김태진  
-[Back-end](https://github.com/DEVengersAssemble/airdnd-backend): 윤우성, 이유진, 정재은, 최미래
+[Front-end]: 이도원
+[Back-end]: 곽무진, 신한균, 최홍석
+[Data-Analalysis] : 신영준
 
 <br>
 
@@ -21,7 +22,7 @@
 ## 프론트엔드 핵심 목표
 
 - 프론트엔드와 백엔드 개발자들이 협업하여 프로젝트 진행
-- 코딩 작업에 앞서 기능명세서, 데이터구조, 컴포넌트 분리 등 회의 및 기록 ([Figma](https://www.figma.com/file/jRtiFrdpJW6ebdKB4ozmYS/Airbnb?node-id=3%3A92))
+- 코딩 작업에 앞서 기능명세서, 데이터구조, 컴포넌트 분리 등 회의 및 기록 ([Figma](https://www.figma.com/file/UUWs1MQavlacUoeqZcPtRt/Untitled?node-id=0%3A1))
 - Redux를 사용하여 전역에서 상태를 관리하고, redux-thunk로 비동기 작업을 처리
 - styled-components로 스타일링하여 컴포넌트의 재사용성 증가
 - aws를 사용하여 백엔드와 데이터 통신
@@ -93,10 +94,20 @@
 
 ## 프론트엔드 사용 기술
 
+- Html
+- Css
 - JavaScript
-- React
-- router
-- redux
-- redux-thunk
-- styled-component
-- socket.io
+- Bootstrap
+
+## 백엔드 사용 기술
+
+- Java
+- Spring Boot
+
+## 데이터분석 사용 기술
+
+- Python
+- Flask or Django
+- AI
+
+
