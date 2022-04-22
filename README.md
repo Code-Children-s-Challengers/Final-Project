@@ -31,6 +31,30 @@
 
 <br>
 
+## 백엔드 핵심 목표
+
+- 프론트엔드와 백엔드 개발자들이 협업하여 프로젝트 진행
+- 코딩 작업에 앞서 기능명세서, 데이터구조, 컴포넌트 분리 등 회의 및 기록 ([Figma](https://www.figma.com/file/UUWs1MQavlacUoeqZcPtRt/Untitled?node-id=0%3A1))
+- Redux를 사용하여 전역에서 상태를 관리하고, redux-thunk로 비동기 작업을 처리
+- styled-components로 스타일링하여 컴포넌트의 재사용성 증가
+- aws를 사용하여 백엔드와 데이터 통신
+- 3가지 뷰포트 사이즈로 반응형 구현
+- 프레젠테이션 컴포넌트와 컨테이너 컴포넌트를 분리
+
+<br>
+
+##  핵심 목표
+
+- 프론트엔드와 백엔드 개발자들이 협업하여 프로젝트 진행
+- 코딩 작업에 앞서 기능명세서, 데이터구조, 컴포넌트 분리 등 회의 및 기록 ([Figma](https://www.figma.com/file/UUWs1MQavlacUoeqZcPtRt/Untitled?node-id=0%3A1))
+- Redux를 사용하여 전역에서 상태를 관리하고, redux-thunk로 비동기 작업을 처리
+- styled-components로 스타일링하여 컴포넌트의 재사용성 증가
+- aws를 사용하여 백엔드와 데이터 통신
+- 3가지 뷰포트 사이즈로 반응형 구현
+- 프레젠테이션 컴포넌트와 컨테이너 컴포넌트를 분리
+
+<br>
+
 ## 페이지별 기능
 
 ### 메인 페이지
