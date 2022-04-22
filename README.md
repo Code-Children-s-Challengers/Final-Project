@@ -46,7 +46,7 @@
 
 <br>
 
-##  핵심 목표
+## 데이터 분석 핵심 목표
 
 - 프론트엔드와 백엔드 개발자들이 협업하여 프로젝트 진행
 - 코딩 작업에 앞서 기능명세서, 데이터구조, 컴포넌트 분리 등 회의 및 기록 ([Figma](https://www.figma.com/file/UUWs1MQavlacUoeqZcPtRt/Untitled?node-id=0%3A1))
