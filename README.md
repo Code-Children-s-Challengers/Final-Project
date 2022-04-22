@@ -139,7 +139,7 @@
 
 ## 프로젝트 협업 Tool
 
-- 트렐로
+- Trello
 
 https://asia-enterprise.taskworld.com/youngjoon-shin/#/project/2?show=/task/20/comments
 
