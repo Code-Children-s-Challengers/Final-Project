@@ -11,10 +11,10 @@
 <br>
 
 ## 구성원
-
-[Front-end]: 이도원
-[Back-end]: 곽무진, 신한균, 최홍석
-[Data-Analalysis] : 신영준
+<br>
+[Front-end]: 이도원<br>
+[Back-end]: 곽무진, 신한균, 최홍석<br>
+[Data-Analalysis] : 신영준<br>
 
 <br>
 
