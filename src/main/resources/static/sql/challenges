@@ -1,0 +1,55 @@
+-- admin ---------------
+
+create user hifive
+identified by hifive;
+
+grant resource, connect 
+to hifive;
+------------------------
+
+-- hifive ----------------
+
+
+-- 임시제작
+create table users
+(
+  unum number(5) primary key,
+  uname varchar(10)
+);
+-- 임시제작
+
+
+
+create sequence challenge_no_seq
+    START WITH 1
+    INCREMENT BY 1;
+-- insert into challenges(cnum, ...) values(challenge_no_seq.nextval, ...);
+
+create table challenges(
+  cnum number(5) primary key,
+  name varchar(50) not null,
+  sday date not null,
+  eday date not null,
+  mpeople number(4) default 1,
+  fee number(10) default 0,
+  participant number(4) default 1,
+  cartegory varchar(50) not null,
+  dayoff varchar(500)
+);
+
+create table cparticipant(
+  cnum number(5) references challenges(cnum) on delete cascade,
+  unum number(5) references users(unum) on delete cascade,
+  primary key (cnum,unum)
+);
+
+create table cphoto(
+  cnum number(5) references challenges(cnum) on delete cascade,
+  unum number(5) references users(unum) on delete cascade,
+  photo varchar(100) not null,
+  coment varchar(25),
+  uploaddate date not null,
+  validates number(1) default 1,
+  primary key (cnum,unum)
+);
+-----------------------------
