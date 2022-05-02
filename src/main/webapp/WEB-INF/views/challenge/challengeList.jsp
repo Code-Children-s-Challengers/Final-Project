@@ -21,13 +21,18 @@
 				<tr>
 					<td height="10"></td>
 				</tr>
+	<td style="border:1px solid #444444;border-collapse: collapse" rowspan="100" width="100px">
+	<a> study</a><br><br>
+	<a>fitness</a><br><br>
+	<a>others</a>
+	</td>
 				<tr>
 
     <c:set var="list" value ="${allList}"></c:set>
     <c:forEach var="dto" items="${list}" varStatus="status">
     
 						<td style="border:1px solid #444444;border-collapse: collapse">
-							<table style='padding:15px'>
+							<table style='padding:15px;font-size: 12px'>
 								<tr>
 									<td>
 										<a href=""> 
@@ -42,11 +47,8 @@
 								<tr>
 									<td class= "td_default" align ="center">
 										<a class= "a_black" href=""> 
-										${dto.getName()}<br>
+										Name: ${dto.getName()}<br>
 										</a>
-										<font color="gray">
-										 --------------------
-										</font>
 									</td>
 									
 								</tr>
@@ -55,7 +57,15 @@
 								</tr>
 								<tr>
 									<td class="td_gray" align ="center">
-										${dto.getSday()}
+										Date: ${dto.getSday()} ~ ${dto.getEday()}
+									</td>
+								</tr>
+								<tr>
+									<td height="10">
+								</tr>
+								<tr>
+									<td class="td_gray" align ="center">
+										Participant: ${dto.getParticipant()}/${dto.getMpeople()}
 									</td>
 								</tr>
 								<tr>
@@ -63,7 +73,7 @@
 								</tr>
 								<tr>
 									<td class="td_red" align ="center"><font color="red"><strong>
-									${dto.getFee()}	</strong></font></td>
+									Fee: ${dto.getFee()}\	</strong></font></td>
 								</tr>
 							</table>
 						</td>
@@ -79,7 +89,9 @@
   						
 
     </c:forEach>
-    
+    <tr>
+		<td height="10">1 2 3 4 5 6</td>
+	</tr>
 			</table>
 		</td>
 	</tr>
