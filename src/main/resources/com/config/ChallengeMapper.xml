@@ -10,7 +10,7 @@
 	</select>
 	
 	<select id="allChallenge" resultType="ChallengeDTO" parameterType="date">
-		select cnum, name, sday, eday, mpeople, fee, participant, cartegory, dayoff
+		select *
 		from challenges
 		where sday >= #{today}
 	</select>
@@ -19,6 +19,12 @@
 		select *
 		from challenges
 		where name = #{name}
+	</select>
+	
+	<select id="categoryChallenge" resultType="ChallengeDTO" parameterType="hashmap">
+		select *
+		from challenges
+		where sday >= #{today} and cartegory = #{category}
 	</select>
 	
 	
