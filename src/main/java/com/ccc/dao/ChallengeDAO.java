@@ -1,6 +1,7 @@
 package com.ccc.dao;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -23,6 +24,16 @@ public class ChallengeDAO {
 		long timeInMilliSeconds = date.getTime();
         java.sql.Date sqlDate = new java.sql.Date(timeInMilliSeconds);
 		return session.selectList("com.config.ChallengeMapper.allChallenge", sqlDate);
+	}
+	
+	public List<ChallengeDTO> categoryChallenge(String category) throws Exception{
+		Date date = new Date();
+		long timeInMilliSeconds = date.getTime();
+        java.sql.Date sqlDate = new java.sql.Date(timeInMilliSeconds);
+        HashMap<String, String> map = new HashMap<String, String>();
+        map.put("today", sqlDate.toString());
+        map.put("category", category);
+		return session.selectList("com.config.ChallengeMapper.categoryChallenge", map);
 	}
 	
 	public List<ChallengeDTO> searchChallenge(String name) throws Exception{
