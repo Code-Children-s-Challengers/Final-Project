@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.config.ChallengeMapper">
+
+	<select id="challengeNumber" resultType="int">
+		select count(*)
+		from challenges
+	</select>
+	
+	<select id="allChallenge" resultType="ChallengeDTO" parameterType="date">
+		select cnum, name, sday, eday, mpeople, fee, participant, cartegory, dayoff
+		from challenges
+		where sday >= #{today}
+	</select>
+	
+	<select id="searchChallenge" resultType="ChallengeDTO" parameterType="string">
+		select *
+		from challenges
+		where name = #{name}
+	</select>
+	
+	
+</mapper>
