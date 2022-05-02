@@ -29,14 +29,14 @@ public class ChallengeController {
 	
 	
 	@RequestMapping(value="/challenges", method = RequestMethod.GET)
-	public String Challenges(Model m) throws Exception{
-		List<ChallengeDTO> allList = Cservice.allChallenge();
-//		List<ChallengeDTO> myList = new ArrayList<ChallengeDTO>();
-		m.addAttribute("allList", allList);
-		System.out.println("test");
-		for(ChallengeDTO dto : allList) {
-			System.out.println(dto);
+	public String Challenges(Model m, HttpServletRequest request) throws Exception{
+		String category = request.getParameter("category");
+		if(category == null) {
+			category = "study";
 		}
+		List<ChallengeDTO> allList = Cservice.allChallenge();
+		List<ChallengeDTO> cList = Cservice.categoryChallenge(category);
+		m.addAttribute("allList", cList);
 		return "challenge";
 	}
 	
