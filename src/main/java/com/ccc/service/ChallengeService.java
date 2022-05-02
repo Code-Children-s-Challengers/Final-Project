@@ -11,4 +11,5 @@ public interface ChallengeService {
 	public List<ChallengeDTO> allChallenge() throws Exception;
 	public List<ChallengeDTO> searchChallenge(String name) throws Exception;
 	public int challengeNumber() throws Exception;
+	public List<ChallengeDTO> categoryChallenge(String category) throws Exception;
 }

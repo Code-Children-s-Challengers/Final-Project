@@ -33,4 +33,10 @@ public class ChallengeServiceImpl implements ChallengeService {
 		return num;
 	}
 
+	@Override
+	public List<ChallengeDTO> categoryChallenge(String category) throws Exception {
+		List<ChallengeDTO> list = dao.categoryChallenge(category);
+		return list;
+	}
+
 }
