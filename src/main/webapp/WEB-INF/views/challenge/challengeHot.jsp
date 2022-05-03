@@ -4,30 +4,6 @@
 <%@page import="java.util.List"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script>
-$(document).ready(function(){
-	$(".category").on("click",function(){
-		$.ajax({
-			url:'challengescategory', // Controller의 요청매핑값
-			type:'get',
-			data:{
-				category:this.innerText
-			},
-		dataType:'text', // 응답 데이터는 간단한 숫자나 영문자로 주는게 좋다
-		success:function(responseData, status, xhr){
-			console.log(responseData); // 이 데이터를 사용한다
-			var html = `<table style='padding:15px;font-size: 12px'>`
-			html += `</table>`
-			$("#cTable").html(html);
-		},
-		error:function(xhr, status, e){
-			console.log("Error: "+e);
-		}
-		});
-	});
-});
-</script>
 
 
 <table width="100%" cellspacing="0" cellpadding="0">
@@ -45,17 +21,12 @@ $(document).ready(function(){
 				<tr>
 					<td height="10"></td>
 				</tr>
-	<td style="border:1px solid #444444;border-collapse: collapse" rowspan="100" width="100px">
-	<a class="category">study</a><br><br>
-	<a class="category">fitness</a><br><br>
-	<a class="category">others</a>
-	</td>
 				<tr>
 
-    <c:set var="list" value ="${cList}"></c:set>
+    <c:set var="list" value ="${hotList}"></c:set>
     <c:forEach var="dto" items="${list}" varStatus="status">
     
-						<td style="border:1px solid #444444;border-collapse: collapse" id="cTable">
+						<td style="border:1px solid #444444;border-collapse: collapse">
 							<table style='padding:15px;font-size: 12px'>
 								<tr>
 									<td>
@@ -113,9 +84,6 @@ $(document).ready(function(){
   						
 
     </c:forEach>
-    <tr>
-		<td height="10">1 2 3 4 5 6</td>
-	</tr>
 			</table>
 		</td>
 	</tr>

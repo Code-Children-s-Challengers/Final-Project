@@ -35,9 +35,25 @@ public class ChallengeController {
 			category = "study";
 		}
 		List<ChallengeDTO> allList = Cservice.allChallenge();
+		List<ChallengeDTO> hotList = new ArrayList<ChallengeDTO>();
+		for(int i = 0; i < 4; i++) {
+			hotList.add(allList.get(i));
+		}
 		List<ChallengeDTO> cList = Cservice.categoryChallenge(category);
-		m.addAttribute("allList", cList);
+		m.addAttribute("cList", cList);
+		m.addAttribute("hotList", hotList);
 		return "challenge";
+	}
+	
+	@RequestMapping(value="/challengescategory", method = RequestMethod.GET)
+	@ResponseBody
+	public List<ChallengeDTO> ChallengesCategory(HttpServletRequest request) throws Exception{
+		String category = request.getParameter("category");
+		if(category == null) {
+			category = "study";
+		}
+		List<ChallengeDTO> cList = Cservice.categoryChallenge(category);
+		return cList;
 	}
 	
 	

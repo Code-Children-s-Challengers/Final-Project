@@ -19,6 +19,7 @@
 		select *
 		from challenges
 		where name = #{name}
+		order by participant desc
 	</select>
 	
 	<select id="categoryChallenge" resultType="ChallengeDTO" parameterType="hashmap">
