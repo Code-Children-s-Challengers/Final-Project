@@ -12,6 +12,7 @@
 <jsp:include page="common/menu.jsp" flush="true"/><br>
 </div>
 <hr>
+<jsp:include page="challenge/challengeHot.jsp" flush="true"/><br>
 <jsp:include page="challenge/challengeList.jsp" flush="true"/><br>
 </body>
 </html>
