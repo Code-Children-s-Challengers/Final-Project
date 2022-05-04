@@ -2,6 +2,7 @@ package com.ccc.controller;
 
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,6 +29,7 @@ public class ChallengeController {
 	ChallengeService Cservice;
 	
 	
+	
 	@RequestMapping(value="/challenges", method = RequestMethod.GET)
 	public String Challenges(Model m, HttpServletRequest request) throws Exception{
 		String category = request.getParameter("category");
@@ -46,14 +48,15 @@ public class ChallengeController {
 	}
 	
 	@RequestMapping(value="/challengescategory", method = RequestMethod.GET)
-	@ResponseBody
-	public List<ChallengeDTO> ChallengesCategory(HttpServletRequest request) throws Exception{
+	public String ChallengesCategory(HttpServletRequest request, Model m) throws Exception{
 		String category = request.getParameter("category");
 		if(category == null) {
 			category = "study";
 		}
 		List<ChallengeDTO> cList = Cservice.categoryChallenge(category);
-		return cList;
+		m.addAttribute("cList", cList);
+		//return cList.toString();
+		return "challenge/ajaxList";
 	}
 	
 	
