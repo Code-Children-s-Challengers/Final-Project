@@ -40,5 +40,23 @@ public class ChallengeDAO {
 		return session.selectList("com.config.ChallengeMapper.searchChallenge", name);
 	}
 	
+	public int findParticipant(int unum, int cnum) throws Exception{
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		map.put("cnum", cnum);
+		map.put("unum", unum);
+		return session.selectOne("com.config.ChallengeMapper.findParticipant", map);
+	}
+	
+	public int challengeParticipate(int unum, int cnum) throws Exception{
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		map.put("cnum", cnum);
+		map.put("unum", unum);
+		return session.insert("com.config.ChallengeMapper.challengeParticipate", map);
+	}
+	
+	public int challengePeopleUpdate(int cnum) throws Exception{
+		return session.update("com.config.ChallengeMapper.challengePeopleUpdate", cnum);
+	}
+	
 	
 }
