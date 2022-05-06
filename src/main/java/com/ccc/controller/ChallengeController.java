@@ -58,6 +58,42 @@ public class ChallengeController {
 		//return cList.toString();
 		return "challenge/ajaxList";
 	}
+
+	@RequestMapping(value="/participantPopup", method = RequestMethod.GET)
+	public String participantPopup(HttpServletRequest request, Model m) throws Exception{
+		String cnum = request.getParameter("cnum");
+		String photo = request.getParameter("photo");
+		String name = request.getParameter("name");
+		String date = request.getParameter("date");
+		String people = request.getParameter("people");
+		String fee = request.getParameter("fee");
+		
+		m.addAttribute("cnum", cnum);
+		m.addAttribute("photo", photo);
+		m.addAttribute("name", name);
+		m.addAttribute("date", date);
+		m.addAttribute("people", people);
+		m.addAttribute("fee", fee);
+		
+		return "challenge/participantPopup";
+	}
+	
+	
+	@RequestMapping(value="/challengeParticipate", method = RequestMethod.POST)
+	@ResponseBody
+	public String challengeParticipate(@RequestParam int cnum) throws Exception{
+		int unum = 1; // 임시, 로그인기능 완성되면 수정
+		int num = 0;
+		if(Cservice.findParticipant(unum, cnum) >= 1) {
+			return "already participated";
+		}else {
+			num = Cservice.Participate(unum,cnum);
+		}
+		if(num == 0) {
+			return "fail";
+		}
+		return "success";
+	}
 	
 	
 	// 에러처리
