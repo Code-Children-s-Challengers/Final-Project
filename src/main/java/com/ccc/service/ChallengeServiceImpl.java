@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ccc.dao.ChallengeDAO;
 import com.ccc.dto.ChallengeDTO;
@@ -37,6 +38,25 @@ public class ChallengeServiceImpl implements ChallengeService {
 	public List<ChallengeDTO> categoryChallenge(String category) throws Exception {
 		List<ChallengeDTO> list = dao.categoryChallenge(category);
 		return list;
+	}
+
+	@Override
+	public int findParticipant(int unum, int cnum) throws Exception {
+		int num = dao.findParticipant(unum, cnum);
+		return num;
+	}
+	
+	@Transactional
+	public int Participate(int unum, int cnum) throws Exception{
+		int num = 0;
+		try {
+			num = dao.challengeParticipate(unum, cnum);
+			num = dao.challengePeopleUpdate(cnum);
+		}catch (Exception e){
+			e.printStackTrace();
+			throw new Exception("fail");
+		}
+		return num;
 	}
 
 }
