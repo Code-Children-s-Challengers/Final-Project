@@ -28,5 +28,22 @@
 		where sday >= #{today} and cartegory = #{category}
 	</select>
 	
+	<select id="findParticipant" resultType="int" parameterType="hashmap">
+		select count(*)
+		from cparticipant
+		where cnum = #{cnum} and unum = #{unum}
+	</select>
+	
+	<insert id="challengeParticipate" parameterType="hashmap">
+		insert into cparticipant (cnum,unum)
+		values (#{cnum},#{unum})
+	</insert>
+	
+	<update id="challengePeopleUpdate" parameterType="int">
+		update challenges
+		set participant = participant+1
+		where cnum = #{cnum}
+	</update>
+	
 	
 </mapper>
