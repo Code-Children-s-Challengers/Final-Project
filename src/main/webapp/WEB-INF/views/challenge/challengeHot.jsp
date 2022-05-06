@@ -5,6 +5,39 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 
+<script>
+
+	//function participant(){
+		//console.dir(this);
+		//console.log(this.html);
+	//}
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+	$(".hot").on("click",function(){
+		var table = $(this).contents()[1].childNodes;
+		
+		var name = table[4].childNodes[1].childNodes[1].innerText.substr(6);
+		
+		var date = table[8].childNodes[1].childNodes[0].textContent.substring(17,40);
+		//var start = date.substring(17,27);
+		//var end = date.substring(30,40);
+		
+		var people = table[12].childNodes[1].innerText.substr(13);
+		//var people = table[12].childNodes[1].innerText.substr(13).split("/");
+		//var participant = people[0];
+		//var maxpeople = people[1];
+		
+		var fee = table[16].childNodes[1].childNodes[0].childNodes[0].innerText.substr(5).split("\\")[0];
+		var cnum = table[18].childNodes[1].childNodes[0].textContent;
+
+		win = window.open("./participantPopup?cnum="+cnum+"&photo="+name+"&name="+name+"&date="+date+"&people="+people+"&fee="+fee,"participant","width = 500, height = 500, top = 100, left = 200, location = no");
+	});
+});
+
+</script>
 
 <table width="100%" cellspacing="0" cellpadding="0">
 	<tr>
@@ -27,7 +60,7 @@
     <c:forEach var="dto" items="${list}" varStatus="status">
     
 						<td style="border:1px solid #444444;border-collapse: collapse">
-							<table style='padding:15px;font-size: 12px'>
+							<table style='padding:15px;font-size: 12px' class="hot">
 								<tr>
 									<td>
 										<a href=""> 
@@ -69,6 +102,9 @@
 								<tr>
 									<td class="td_red" align ="center"><font color="red"><strong>
 									Fee: ${dto.getFee()}\	</strong></font></td>
+								</tr>
+								<tr>
+									<td class="td_red" align ="center" style="display:none">${dto.getCnum()}</td>
 								</tr>
 							</table>
 						</td>
