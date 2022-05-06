@@ -29,10 +29,6 @@ $(document).ready(function(){
 	});
 });
 
- function a(){
-	 <c:set var="list" value ="${cList}"></c:set>
-	 console.log("${list}");
- }
 </script>
 
 
