@@ -19,6 +19,9 @@ $(document).ready(function(){
 			//console.log(responseData); // 이 데이터를 사용한다
 			//console.log("${list}");
 			//$("#cTable").load(location.href + " #cTable");
+			var html = `<tr id='cTable'>
+			</tr>`
+			$("#cTable").html(html);
 			$("#cTable").html(responseData);
 			return false;
 		},
@@ -26,6 +29,25 @@ $(document).ready(function(){
 			console.log("Error: "+e);
 		}
 		});
+	});
+	$(".ch").on("click",function(){
+		var table = $(this).contents()[1].childNodes;
+		
+		var name = table[4].childNodes[1].childNodes[1].innerText.substr(6);
+		
+		var date = table[8].childNodes[1].childNodes[0].textContent.substring(17,40);
+		//var start = date.substring(17,27);
+		//var end = date.substring(30,40);
+		
+		var people = table[12].childNodes[1].innerText.substr(13);
+		//var people = table[12].childNodes[1].innerText.substr(13).split("/");
+		//var participant = people[0];
+		//var maxpeople = people[1];
+		
+		var fee = table[16].childNodes[1].childNodes[0].childNodes[0].innerText.substr(5).split("\\")[0];
+		var cnum = table[18].childNodes[1].childNodes[0].textContent;
+
+		win = window.open("./participantPopup?cnum="+cnum+"&photo="+name+"&name="+name+"&date="+date+"&people="+people+"&fee="+fee,"participant","width = 500, height = 500, top = 100, left = 200, location = no");
 	});
 });
 
@@ -47,17 +69,19 @@ $(document).ready(function(){
 				<tr>
 					<td height="10"></td>
 				</tr>
+				<tr>
 				<td style="border:1px solid #444444;border-collapse: collapse" rowspan="100" width="100px">
 				<a class="category">study</a><br><br>
 				<a class="category">fitness</a><br><br>
 				<a class="category">others</a>
 				</td>
+				</tr>
 				<tr id='cTable'>
 				    <c:set var="list" value ="${cList}"></c:set>
 				    <c:forEach var="dto" items="${list}" varStatus="status">
 	    
 					<td style="border:1px solid #444444;border-collapse: collapse">
-						<table style='padding:15px;font-size: 12px' width="160px" height="200px">
+						<table style='padding:15px;font-size: 12px' width="160px" height="200px" class="ch">
 							<tr>
 								<td>
 									<a href=""> 
@@ -99,6 +123,9 @@ $(document).ready(function(){
 							<tr>
 								<td class="td_red" align ="center"><font color="red"><strong>
 								Fee: ${dto.getFee()}\	</strong></font></td>
+							</tr>
+							<tr>
+								<td class="td_red" align ="center" style="display:none">${dto.getCnum()}</td>
 							</tr>
 						</table>
 					</td>
