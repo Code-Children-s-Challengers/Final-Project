@@ -67,6 +67,7 @@ public class ChallengeController {
 		String date = request.getParameter("date");
 		String people = request.getParameter("people");
 		String fee = request.getParameter("fee");
+		String holiday = request.getParameter("holiday");
 		
 		m.addAttribute("cnum", cnum);
 		m.addAttribute("photo", photo);
@@ -74,6 +75,7 @@ public class ChallengeController {
 		m.addAttribute("date", date);
 		m.addAttribute("people", people);
 		m.addAttribute("fee", fee);
+		m.addAttribute("holiday", holiday);
 		
 		return "challenge/participantPopup";
 	}
@@ -93,6 +95,12 @@ public class ChallengeController {
 			return "fail";
 		}
 		return "success";
+	}
+	
+	@RequestMapping(value="/makeChallengePopup", method = RequestMethod.GET)
+	public String makeChallengePopup() throws Exception{
+		
+		return "challenge/makeChallengePopup";
 	}
 	
 	
