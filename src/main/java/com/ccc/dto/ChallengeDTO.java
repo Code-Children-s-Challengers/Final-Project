@@ -11,7 +11,8 @@ public class ChallengeDTO {
 	private int fee; // 비용
 	private int participant; // 참가인원
 	private String category;
-	private String dayoff; // 휴무일
+	private int holiday; // 공휴일에 쉬는지
+	private String photo;
 	
 	
 	
@@ -63,17 +64,23 @@ public class ChallengeDTO {
 	public void setCategory(String category) {
 		this.category = category;
 	}
-	public String getDayoff() {
-		return dayoff;
+	public int getHoliday() {
+		return holiday;
 	}
-	public void setDayoff(String dayoff) {
-		this.dayoff = dayoff;
+	public void setHoliday(int holiday) {
+		this.holiday = holiday;
+	}
+	public String getPhoto() {
+		return photo;
+	}
+	public void setPhoto(String photo) {
+		this.photo = photo;
 	}
 	@Override
 	public String toString() {
-		return "ChallengeDTO [cnum=" + cnum + ", name=" + name + ", sdate=" + sday + ", edate=" + eday + ", mpeople="
-				+ mpeople + ", fee=" + fee + ", participant=" + participant + ", category=" + category + ", dayoff="
-				+ dayoff + "]";
+		return "ChallengeDTO [cnum=" + cnum + ", name=" + name + ", sday=" + sday + ", eday=" + eday + ", mpeople="
+				+ mpeople + ", fee=" + fee + ", participant=" + participant + ", category=" + category + ", holiday="
+				+ holiday + ", photo=" + photo + "]";
 	}
 	
 	
