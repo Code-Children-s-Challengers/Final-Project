@@ -13,9 +13,16 @@
 		<table style='padding:15px;font-size: 12px' width="160px" height="200px" class="ch">
 			<tr>
 				<td>
-					<a href=""> 
-						${dto.getCnum()}
-					</a>
+					<c:choose>
+						<c:when test="${empty dto.getPhoto()}">
+							<img src="images/challenge/challenge_sample.jpg" border="0" align="center" width="100">
+							<td class="td_red" align ="center" style="display:none">challenge_sample</td>
+						</c:when>
+						<c:otherwise>
+							<img src="images/challenge/certification/${dto.getPhoto()}.png" border="0" align="center" width="100">
+							<td class="td_red" align ="center" style="display:none">${dto.getPhoto()}</td>
+						</c:otherwise>
+					</c:choose>
 				</td>
 			</tr>
 			<tr>
@@ -77,6 +84,8 @@
 		$(".ch").on("click",function(){
 			var table = $(this).contents()[1].childNodes;
 			
+			var photo = table[0].childNodes[2].innerText;
+			
 			var name = table[4].childNodes[1].childNodes[1].innerText.substr(6);
 			
 			var date = table[8].childNodes[1].childNodes[0].textContent.substring(17,40);
@@ -86,7 +95,7 @@
 			var fee = table[16].childNodes[1].childNodes[0].childNodes[0].innerText.substr(5).split("\\")[0];
 			var cnum = table[18].childNodes[1].childNodes[0].textContent;
 	
-			win = window.open("./participantPopup?cnum="+cnum+"&photo="+name+"&name="+name+"&date="+date+"&people="+people+"&fee="+fee,"participant","width = 500, height = 500, top = 100, left = 200, location = no");
+			win = window.open("./participantPopup?cnum="+cnum+"&photo="+photo+"&name="+name+"&date="+date+"&people="+people+"&fee="+fee,"participant","width = 500, height = 500, top = 100, left = 200, location = no");
 		});
 	});
 </script>
