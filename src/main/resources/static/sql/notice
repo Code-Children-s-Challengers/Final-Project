@@ -8,3 +8,6 @@ create table notice
   hit number,
   files nvarchar2(1000)
 );
+
+insert into notice
+VALUES (1, 'test', 'test', 'test', sysdate, 999, 'test');
