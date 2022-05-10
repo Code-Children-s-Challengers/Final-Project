@@ -5,8 +5,8 @@ import java.sql.Date;
 public class ChallengeDTO {
 	private int cnum; // pk
 	private String name;
-	private Date sday; // 시작날짜
-	private Date eday; // 종료날짜
+	private String sday; // 시작날짜
+	private String eday; // 종료날짜
 	private int mpeople; // 최대인원
 	private int fee; // 비용
 	private int participant; // 참가인원
@@ -28,16 +28,16 @@ public class ChallengeDTO {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public Date getSday() {
+	public String getSday() {
 		return sday;
 	}
-	public void setSday(Date sday) {
+	public void setSday(String sday) {
 		this.sday = sday;
 	}
-	public Date getEday() {
+	public String getEday() {
 		return eday;
 	}
-	public void setEday(Date eday) {
+	public void setEday(String eday) {
 		this.eday = eday;
 	}
 	public int getMpeople() {
