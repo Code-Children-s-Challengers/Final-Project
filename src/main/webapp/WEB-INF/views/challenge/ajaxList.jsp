@@ -19,7 +19,7 @@
 							<td class="td_red" align ="center" style="display:none">challenge_sample</td>
 						</c:when>
 						<c:otherwise>
-							<img src="images/challenge/certification/${dto.getPhoto()}.png" border="0" align="center" width="100">
+							<img src="images/challenge/challenge_image/${dto.getPhoto()}" border="0" align="center" width="100">
 							<td class="td_red" align ="center" style="display:none">${dto.getPhoto()}</td>
 						</c:otherwise>
 					</c:choose>

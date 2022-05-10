@@ -49,7 +49,7 @@
 	<img src="images/challenge/challenge_sample.jpg" border="0" align="center" width="120">
 </c:when>
 <c:otherwise>
-	<img src="images/challenge/certification/${dto.getPhoto()}.png" border="0" align="center" width="120">
+	<img src="images/challenge/challenge_image/${dto.getPhoto()}" border="0" align="center" width="120">
 </c:otherwise>
 </c:choose>
 </div><br>
