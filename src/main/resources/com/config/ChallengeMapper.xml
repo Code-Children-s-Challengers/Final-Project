@@ -45,5 +45,10 @@
 		where cnum = #{cnum}
 	</update>
 	
+	<insert id="challengeAdd" parameterType="ChallengeDTO">
+		insert into challenges (cnum,name,sday,eday,mpeople,fee,cartegory,holiday,photo)
+		values (challenge_no_seq.nextval,#{name},#{sday},#{eday},#{mpeople},#{fee},#{category},#{holiday},#{photo})
+	</insert>
+	
 	
 </mapper>

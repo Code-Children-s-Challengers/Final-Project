@@ -1,5 +1,6 @@
 package com.ccc.dao;
 
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -58,5 +59,8 @@ public class ChallengeDAO {
 		return session.update("com.config.ChallengeMapper.challengePeopleUpdate", cnum);
 	}
 	
+	public int challengeAdd(ChallengeDTO dto) throws Exception{
+		return session.insert("com.config.ChallengeMapper.challengeAdd", dto);
+	}
 	
 }

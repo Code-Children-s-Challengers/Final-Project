@@ -59,4 +59,10 @@ public class ChallengeServiceImpl implements ChallengeService {
 		return num;
 	}
 
+	@Override
+	public int challengeAdd(ChallengeDTO dto) throws Exception {
+		int num = dao.challengeAdd(dto);
+		return num;
+	}
+
 }
