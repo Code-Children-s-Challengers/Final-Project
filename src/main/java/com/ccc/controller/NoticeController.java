@@ -25,10 +25,10 @@ public class NoticeController {
 		return "notice";
 	}
 	//쿼리문을 받은 것에 대한 처리(id를 넘겨 받아 해당 content를 출력)
-	@GetMapping(value="/notice/contents")
+	@GetMapping(value="/notice/content")
 	public String content(Model m, HttpServletRequest request) throws Exception{
 		// 모델에서 id 추출
-		return "notice/contents";
+		return "notice/content";
 	}
 	
 }
