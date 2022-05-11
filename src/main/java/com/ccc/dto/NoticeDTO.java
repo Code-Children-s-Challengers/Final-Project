@@ -2,27 +2,23 @@ package com.ccc.dto;
 
 import java.sql.Date;
 
+import org.apache.ibatis.type.Alias;
+
+@Alias("NoticeDTO")
 public class NoticeDTO {
-	private int number;
+	private int id;
 	private String title;
 	private String writer_id;
 	private String content;
 	private Date regdate;
 	private int hit;
 	private String files;
-	
-	@Override
-	public String toString() {
-		return "NoticeDTO [number=" + number + ", title=" + title + ", writer_id=" + writer_id + ", content=" + content
-				+ ", regdate=" + regdate + ", hit=" + hit + ", files=" + files + "]";
-	}
 	public NoticeDTO() {
-		super();
+		
 		// TODO Auto-generated constructor stub
 	}
-	public NoticeDTO(int number, String title, String writer_id, String content, Date regdate, int hit, String files) {
-		super();
-		this.number = number;
+	public NoticeDTO(int id, String title, String writer_id, String content, Date regdate, int hit, String files) {
+		this.id = id;
 		this.title = title;
 		this.writer_id = writer_id;
 		this.content = content;
@@ -30,11 +26,11 @@ public class NoticeDTO {
 		this.hit = hit;
 		this.files = files;
 	}
-	public int getNumber() {
-		return number;
+	public int getId() {
+		return id;
 	}
-	public void setNumber(int number) {
-		this.number = number;
+	public void setId(int id) {
+		this.id = id;
 	}
 	public String getTitle() {
 		return title;
@@ -72,4 +68,11 @@ public class NoticeDTO {
 	public void setFiles(String files) {
 		this.files = files;
 	}
+	@Override
+	public String toString() {
+		return "NoticeDTO [id=" + id + ", title=" + title + ", writer_id=" + writer_id + ", content=" + content
+				+ ", regdate=" + regdate + ", hit=" + hit + ", files=" + files + "]";
+	}
+	
+	
 }
