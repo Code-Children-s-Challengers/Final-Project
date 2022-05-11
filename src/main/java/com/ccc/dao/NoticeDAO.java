@@ -17,7 +17,7 @@ public class NoticeDAO {
 		return session.selectList("com.config.NoticeMapper.selectAllNotice");
 	}
 	
-	public NoticeDTO selectNoticeContents(int num) throws Exception{
-		return session.selectOne("com.config.NoticeMapper.selectNoticeContents");
+	public NoticeDTO selectNoticeContent(int num) throws Exception{
+		return session.selectOne("com.config.NoticeMapper.selectNoticeContent");
 	}
 }
