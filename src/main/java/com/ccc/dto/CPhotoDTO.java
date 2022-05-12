@@ -7,7 +7,7 @@ public class CPhotoDTO {
 	private int unum;
 	private String photo;
 	private String coment;
-	private Date uploaddate;
+	private String uploaddate;
 	private int validates;
 	public int getCnum() {
 		return cnum;
@@ -33,11 +33,11 @@ public class CPhotoDTO {
 	public void setComent(String coment) {
 		this.coment = coment;
 	}
-	public Date getUploaddate() {
+	public String getUploaddate() {
 		return uploaddate;
 	}
-	public void setUploaddate(Date uploaddate) {
-		this.uploaddate = uploaddate;
+	public void setUploaddate(String uploaddate) {
+		this.uploaddate = uploaddate.substring(0, 10);
 	}
 	public int getValidates() {
 		return validates;
