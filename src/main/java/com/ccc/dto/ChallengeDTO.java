@@ -32,13 +32,13 @@ public class ChallengeDTO {
 		return sday;
 	}
 	public void setSday(String sday) {
-		this.sday = sday;
+		this.sday = sday.substring(0, 10);
 	}
 	public String getEday() {
 		return eday;
 	}
 	public void setEday(String eday) {
-		this.eday = eday;
+		this.eday = eday.substring(0, 10);
 	}
 	public int getMpeople() {
 		return mpeople;
