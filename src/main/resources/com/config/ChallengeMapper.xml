@@ -22,6 +22,12 @@
 		order by participant desc
 	</select>
 	
+	<select id="searchChallengeByNum" resultType="ChallengeDTO" parameterType="int">
+		select *
+		from challenges
+		where cnum = #{cnum}
+	</select>
+	
 	<select id="categoryChallenge" resultType="ChallengeDTO" parameterType="hashmap">
 		select *
 		from challenges
@@ -49,6 +55,18 @@
 		insert into challenges (cnum,name,sday,eday,mpeople,fee,cartegory,holiday,photo)
 		values (challenge_no_seq.nextval,#{name},#{sday},#{eday},#{mpeople},#{fee},#{category},#{holiday},#{photo})
 	</insert>
+	
+	<select id="userChallenge" resultType="ChallengeDTO" parameterType="int">
+		select *
+		from challenges
+		where cnum in (select cnum from cparticipant where unum = #{unum})
+	</select>
+	
+	<select id="userChallengeRetrieve" resultType="CphotoDTO" parameterType="hashmap">
+		select *
+		from cphoto
+		where cnum = #{cnum} and unum = #{unum}
+	</select>
 	
 	
 </mapper>

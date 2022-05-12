@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.ccc.dto.CPhotoDTO;
 import com.ccc.dto.ChallengeDTO;
 
 
@@ -15,4 +16,7 @@ public interface ChallengeService {
 	public int findParticipant(int unum, int cnum) throws Exception;
 	public int Participate(int unum, int cnum) throws Exception;
 	public int challengeAdd(ChallengeDTO dto) throws Exception;
+	public List<ChallengeDTO> userChallenge(int unum) throws Exception;
+	public List<CPhotoDTO> userChallengeRetrieve(int unum, int cnum) throws Exception;
+	public ChallengeDTO searchChallengeByNum(int cnum) throws Exception;
 }

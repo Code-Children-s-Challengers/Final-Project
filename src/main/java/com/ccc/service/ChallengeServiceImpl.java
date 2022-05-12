@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ccc.dao.ChallengeDAO;
+import com.ccc.dto.CPhotoDTO;
 import com.ccc.dto.ChallengeDTO;
 
 @Repository("memberService")
@@ -63,6 +64,24 @@ public class ChallengeServiceImpl implements ChallengeService {
 	public int challengeAdd(ChallengeDTO dto) throws Exception {
 		int num = dao.challengeAdd(dto);
 		return num;
+	}
+
+	@Override
+	public List<ChallengeDTO> userChallenge(int unum) throws Exception {
+		List<ChallengeDTO> list = dao.userChallenge(unum);
+		return list;
+	}
+
+	@Override
+	public List<CPhotoDTO> userChallengeRetrieve(int unum, int cnum) throws Exception {
+		List<CPhotoDTO> list = dao.userChallengeRetrieve(unum, cnum);
+		return list;
+	}
+
+	@Override
+	public ChallengeDTO searchChallengeByNum(int cnum) throws Exception {
+		ChallengeDTO dto = dao.searchChallengeByNum(cnum);
+		return dto;
 	}
 
 }

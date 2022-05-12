@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.ccc.dto.CPhotoDTO;
 import com.ccc.dto.ChallengeDTO;
 import com.ccc.service.ChallengeService;
 
@@ -34,7 +35,7 @@ public class ChallengeController {
 	ChallengeService Cservice;
 	
 	
-	
+	////////////////////////////////////////////////////////////////////////////////// challenge 참가 페이지
 	@RequestMapping(value="/challenges", method = RequestMethod.GET)
 	public String Challenges(Model m, HttpServletRequest request) throws Exception{
 		String category = request.getParameter("category");
@@ -143,6 +144,41 @@ public class ChallengeController {
 		
 		return "success";
 	}
+	
+//////////////////////////////////////////////////////////////////////////////////challenge 참가 페이지
+	
+//////////////////////////////////////////////////////////////////////////////////내 challenge 페이지
+
+	
+	@RequestMapping(value="/mychallenges", method = RequestMethod.GET)
+	public String myChallenges(Model m, HttpServletRequest request) throws Exception{
+		int unum = 1; // 임시, 로그인기능 완성되면 수정
+		List<ChallengeDTO> cList = Cservice.userChallenge(unum);
+		m.addAttribute("cList", cList);
+		return "myChallenges";
+	}
+	
+	@RequestMapping(value="/myChallengeRetrieve", method = RequestMethod.GET)
+	public String myChallengeRetrieve(Model m, HttpServletRequest request) throws Exception{
+		int unum = 1; // 임시, 로그인기능 완성되면 수정
+		int cnum = Integer.parseInt(request.getParameter("cnum"));
+		ChallengeDTO challenge = Cservice.searchChallengeByNum(cnum);
+		List<CPhotoDTO> list = Cservice.userChallengeRetrieve(unum, cnum);
+		m.addAttribute("cdto", challenge);
+		m.addAttribute("photoList", list);
+		return "myChallengeRetrieve";
+	}
+	
+	@RequestMapping(value="/uploadCertificationPopup", method = RequestMethod.GET)
+	public String uploadCertificationPopup(Model m, HttpServletRequest request) throws Exception{
+		return "uploadCertificationPopup";
+	}
+	
+	
+	
+	
+//////////////////////////////////////////////////////////////////////////////////내 challenge 페이지
+
 	
 	
 	// 에러처리

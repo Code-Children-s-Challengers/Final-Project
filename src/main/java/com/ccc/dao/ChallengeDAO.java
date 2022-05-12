@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.ccc.dto.CPhotoDTO;
 import com.ccc.dto.ChallengeDTO;
 
 @Repository("ChallengeDAO")
@@ -61,6 +62,21 @@ public class ChallengeDAO {
 	
 	public int challengeAdd(ChallengeDTO dto) throws Exception{
 		return session.insert("com.config.ChallengeMapper.challengeAdd", dto);
+	}
+	
+	public List<ChallengeDTO> userChallenge(int unum) throws Exception{
+		return session.selectList("com.config.ChallengeMapper.userChallenge", unum);
+	}
+	
+	public List<CPhotoDTO> userChallengeRetrieve(int unum, int cnum) throws Exception{
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+        map.put("unum", unum);
+        map.put("cnum", cnum);
+		return session.selectList("com.config.ChallengeMapper.userChallengeRetrieve", map);
+	}
+	
+	public ChallengeDTO searchChallengeByNum(int cnum) throws Exception{
+		return session.selectOne("com.config.ChallengeMapper.searchChallengeByNum", cnum);
 	}
 	
 }
