@@ -1,0 +1,13 @@
+create table notice
+(
+  id number primary key,
+  title nvarchar2(100),
+  writer_id NVARCHAR2(50),
+  content clob,
+  regdate timestamp,
+  hit number,
+  files nvarchar2(1000)
+);
+
+insert into notice
+VALUES (1, 'test', 'test', 'test', sysdate, 999, 'test');

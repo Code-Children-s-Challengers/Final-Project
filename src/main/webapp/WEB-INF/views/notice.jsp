@@ -11,6 +11,6 @@
 <div>
 <jsp:include page="common/menu.jsp" flush="true"/><br>
 </div>
-notice2
+<jsp:include page="notice/list.jsp" flush="true"/><br>
 </body>
 </html>
