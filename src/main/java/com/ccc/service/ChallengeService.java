@@ -19,4 +19,5 @@ public interface ChallengeService {
 	public List<ChallengeDTO> userChallenge(int unum) throws Exception;
 	public List<CPhotoDTO> userChallengeRetrieve(int unum, int cnum) throws Exception;
 	public ChallengeDTO searchChallengeByNum(int cnum) throws Exception;
+	public int certificationAdd(CPhotoDTO dto) throws Exception;
 }

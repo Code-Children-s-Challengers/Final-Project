@@ -84,4 +84,10 @@ public class ChallengeServiceImpl implements ChallengeService {
 		return dto;
 	}
 
+	@Override
+	public int certificationAdd(CPhotoDTO dto) throws Exception {
+		int num = dao.certificationAdd(dto);
+		return num;
+	}
+
 }

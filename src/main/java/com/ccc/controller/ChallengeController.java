@@ -171,12 +171,48 @@ public class ChallengeController {
 	
 	@RequestMapping(value="/uploadCertificationPopup", method = RequestMethod.GET)
 	public String uploadCertificationPopup(Model m, HttpServletRequest request) throws Exception{
-		return "uploadCertificationPopup";
+		m.addAttribute("cnum", request.getParameter("cnum"));
+		return "challenge/uploadCertificationPopup";
 	}
 	
-	
-	
-	
+	@RequestMapping(value="/uploadCertification", method = RequestMethod.POST)
+	@ResponseBody
+	public String uploadCertification(@RequestParam MultipartFile photo, @RequestParam int cnum, @RequestParam String comment) throws Exception{
+		int unum = 1; // 임시, 로그인기능 완성되면 수정
+		int num = 0;
+		
+		
+		long miliseconds = System.currentTimeMillis();
+        Date date = new Date(miliseconds);
+        List<CPhotoDTO> list = Cservice.userChallengeRetrieve(unum, cnum);
+        if(list != null && list.get(0).getUploaddate().equals(date.toString())) {
+        	return "alreadyUpload";
+        }
+		
+        String filename = "c_"+Integer.toString(unum)+"_"+Integer.toString(cnum)+"_"+date.toString()+".png";
+        
+        
+		File savePath = new File("C://Users//sksms//Desktop//포트폴리오//final//Final-Project//src//main//resources//static//images//challenge//certification_image", filename);
+		try {
+			photo.transferTo(savePath);
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+			return "fail";
+		} catch (IOException e) {
+			e.printStackTrace();
+			return "fail";
+		}
+		
+		CPhotoDTO dto = new CPhotoDTO();
+		dto.setCnum(cnum);
+		dto.setUnum(unum);
+		dto.setPhoto(filename);
+		dto.setComent(comment);
+		dto.setUploaddate(date.toString());
+		num = Cservice.certificationAdd(dto);
+		
+		return "success";
+	}
 //////////////////////////////////////////////////////////////////////////////////내 challenge 페이지
 
 	

@@ -79,4 +79,8 @@ public class ChallengeDAO {
 		return session.selectOne("com.config.ChallengeMapper.searchChallengeByNum", cnum);
 	}
 	
+	public int certificationAdd(CPhotoDTO dto) throws Exception{
+		return session.insert("com.config.ChallengeMapper.certificationAdd", dto);
+	}
+	
 }
