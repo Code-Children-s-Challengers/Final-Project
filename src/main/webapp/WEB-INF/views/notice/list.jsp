@@ -54,8 +54,8 @@
 					%>
 					<tr>
 						<td>${n.id}</td>
-						<td><a href="content?id=${n.id}"></a>${n.title}</td>
-						<td>${n.writerId}</td>
+						<td><a href="content?id=${n.id}">${n.title}</a></td>
+						<td>${n.writer_id}</td>
 						<td>${n.regdate}</td>
 						<td>${n.hit}</td>
 					</tr>							
