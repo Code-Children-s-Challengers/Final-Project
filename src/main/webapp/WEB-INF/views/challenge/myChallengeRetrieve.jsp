@@ -101,7 +101,7 @@ $(document).ready(function(){
 							</tr>
 							<tr>
 								<c:choose>
-									<c:when test="${empty dto.getValidates()}">
+									<c:when test="${dto.getValidates() eq 1}">
 										<td class="td_gray" align ="center">Validate: good</td>
 									</c:when>
 									<c:otherwise>
