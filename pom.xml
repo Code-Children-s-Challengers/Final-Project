@@ -109,7 +109,33 @@
         </dependency>
         <!-- Logging -->
 		
+		<!-- 홍석_추가 dependency -->
+		<!-- SpringSecurity -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<!-- SpringSecurity -->
 		
+		<!-- OAuth 로그인 방식 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-oauth2-client</artifactId>
+		</dependency>
+		<!-- OAuth 로그인 방식 -->
+		
+		<!-- JSP에서 Security Session을 쓰기 위한 dependency -->
+		<dependency>
+  	 		<groupId>org.springframework.security</groupId>
+ 	 	 	<artifactId>spring-security-taglibs</artifactId>
+  	  	    <version>5.2.2.RELEASE</version>
+		</dependency>
+		<!-- JSP에서 Security Session을 쓰기 위한 dependency -->
 	</dependencies>
 
 	<build>
