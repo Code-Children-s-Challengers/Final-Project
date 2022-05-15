@@ -22,6 +22,7 @@ $(document).ready(function(){
 			var html = `<tr id='cTable'>
 			</tr>`
 			$("#cTable").html(html);
+			$("#page").html("");
 			$("#cTable").html(responseData);
 			return false;
 		},
@@ -54,8 +55,6 @@ $(document).ready(function(){
 });
 
 </script>
-
-
 <table width="100%" cellspacing="0" cellpadding="0" id="test">
 	<tr>
 		<td>
@@ -79,7 +78,7 @@ $(document).ready(function(){
 				</td>
 				</tr>
 				<tr id='cTable'>
-				    <c:set var="list" value ="${cList}"></c:set>
+				    <c:set var="list" value ="${PageDTO.getList()}"></c:set>
 				    <c:forEach var="dto" items="${list}" varStatus="status">
 	    
 					<td style="border:1px solid #444444;border-collapse: collapse">
@@ -151,8 +150,9 @@ $(document).ready(function(){
 	
 	    			</c:forEach>
 	    		</tr>
-			    <tr>
-					<td height="10" onclick="a()">1 2 3 4 5 6</td>
+			    <tr id='page'>
+					<td height="10" colspan="100"><jsp:include page="page.jsp"></jsp:include></td>
+					<td class="td_red" align ="center" style="display:none"><input type="hidden" id="nowcategory" value="${category}"/></td>
 				</tr>
 			</table>
 		</td>

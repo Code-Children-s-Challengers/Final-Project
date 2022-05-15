@@ -67,7 +67,7 @@ $(document).ready(function(){
 				</td>
 				</tr>
 				<tr id='cTable'>
-				    <c:set var="list" value ="${photoList}"></c:set>
+				    <c:set var="list" value ="${PageDTO.getList()}"></c:set>
 				    <c:forEach var="dto" items="${list}" varStatus="status">
 	    
 					<td style="border:1px solid #444444;border-collapse: collapse">
@@ -118,8 +118,8 @@ $(document).ready(function(){
 						</c:if>
 	    			</c:forEach>
 	    		</tr>
-			    <tr>
-					<td height="10" onclick="a()">1 2 3 4 5 6</td>
+			    <tr id='page'>
+					<td height="10" colspan="100"><jsp:include page="page.jsp"></jsp:include></td>
 				</tr>
 			</table>
 		</td>

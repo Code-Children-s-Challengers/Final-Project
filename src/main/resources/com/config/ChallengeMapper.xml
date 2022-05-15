@@ -9,6 +9,24 @@
 		from challenges
 	</select>
 	
+	<select id="categoryNumber" resultType="int" parameterType="string">
+		select count(*)
+		from challenges
+		where cartegory = #{category}
+	</select>
+	
+	<select id="userChallengeNumber" resultType="int" parameterType="int">
+		select count(*)
+		from cparticipant
+		where unum = #{unum}
+	</select>
+	
+	<select id="photoNumber" resultType="int" parameterType="hashmap">
+		select count(*)
+		from cphoto
+		where unum = #{unum} and cnum = #{cnum}
+	</select>
+	
 	<select id="allChallenge" resultType="ChallengeDTO" parameterType="date">
 		select *
 		from challenges

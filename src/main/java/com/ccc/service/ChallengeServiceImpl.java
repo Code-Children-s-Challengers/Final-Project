@@ -11,6 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.ccc.dao.ChallengeDAO;
 import com.ccc.dto.CPhotoDTO;
 import com.ccc.dto.ChallengeDTO;
+import com.ccc.dto.PageDTO;
+import com.ccc.dto.PhotoPageDTO;
 
 @Repository("memberService")
 public class ChallengeServiceImpl implements ChallengeService {
@@ -36,8 +38,8 @@ public class ChallengeServiceImpl implements ChallengeService {
 	}
 
 	@Override
-	public List<ChallengeDTO> categoryChallenge(String category) throws Exception {
-		List<ChallengeDTO> list = dao.categoryChallenge(category);
+	public PageDTO categoryChallenge(String category, int curPage, int perPage) throws Exception {
+		PageDTO list = dao.categoryChallenge(category, curPage, perPage);
 		return list;
 	}
 
@@ -67,14 +69,13 @@ public class ChallengeServiceImpl implements ChallengeService {
 	}
 
 	@Override
-	public List<ChallengeDTO> userChallenge(int unum) throws Exception {
-		List<ChallengeDTO> list = dao.userChallenge(unum);
+	public PageDTO userChallenge(int unum, int curPage, int perPage) throws Exception {
+		PageDTO list = dao.userChallenge(unum, curPage, perPage);
 		return list;
 	}
-
 	@Override
-	public List<CPhotoDTO> userChallengeRetrieve(int unum, int cnum) throws Exception {
-		List<CPhotoDTO> list = dao.userChallengeRetrieve(unum, cnum);
+	public PhotoPageDTO userChallengeRetrieve(int unum, int cnum, int curPage, int perPage) throws Exception {
+		PhotoPageDTO list = dao.userChallengeRetrieve(unum, cnum, curPage, perPage);
 		return list;
 	}
 

@@ -28,6 +28,8 @@ import org.springframework.web.multipart.MultipartFile;
 import com.ccc.dto.CPhotoDTO;
 import com.ccc.dto.ChallengeDTO;
 import com.ccc.service.ChallengeService;
+import com.ccc.dto.PageDTO;
+import com.ccc.dto.PhotoPageDTO;
 
 @Controller
 public class ChallengeController {
@@ -39,29 +41,71 @@ public class ChallengeController {
 	@RequestMapping(value="/challenges", method = RequestMethod.GET)
 	public String Challenges(Model m, HttpServletRequest request) throws Exception{
 		String category = request.getParameter("category");
+		String curPage = request.getParameter("curPage");
+		String perPage = request.getParameter("perPage");
 		if(category == null) {
 			category = "study";
 		}
+		if(curPage == null) {
+			curPage = "1";
+		}
+		int pp = 8; // perPage
+		if(perPage != null) {			
+			pp = Integer.parseInt(perPage);
+		}
+		
+		PageDTO dto = Cservice.categoryChallenge(category, Integer.parseInt(curPage),pp);
+		dto.setPerPage(pp);
+		int tot = dto.getTotalRecord() / dto.getPerPage();
+		if(dto.getTotalRecord() % dto.getPerPage() != 0) tot++;
+		
+		
 		List<ChallengeDTO> allList = Cservice.allChallenge();
 		List<ChallengeDTO> hotList = new ArrayList<ChallengeDTO>();
 		for(int i = 0; i < 4; i++) {
+			if(allList.get(i) == null) {
+				break;
+			}
 			hotList.add(allList.get(i));
 		}
-		List<ChallengeDTO> cList = Cservice.categoryChallenge(category);
-		m.addAttribute("cList", cList);
+		m.addAttribute("curPage", curPage);
+		m.addAttribute("perPage", pp);
 		m.addAttribute("hotList", hotList);
+		m.addAttribute("totalPage", tot);
+		m.addAttribute("PageDTO", dto);
+		m.addAttribute("catogory", category);
+		
 		return "challenge";
 	}
 	
 	@RequestMapping(value="/challengescategory", method = RequestMethod.GET)
 	public String ChallengesCategory(HttpServletRequest request, Model m) throws Exception{
 		String category = request.getParameter("category");
+		String curPage = request.getParameter("curPage");
+		String perPage = request.getParameter("perPage");
 		if(category == null) {
 			category = "study";
 		}
-		List<ChallengeDTO> cList = Cservice.categoryChallenge(category);
-		m.addAttribute("cList", cList);
-		//return cList.toString();
+		if(curPage == null) {
+			curPage = "1";
+		}
+		int pp = 8; // perPage
+		if(perPage != null) {			
+			pp = Integer.parseInt(perPage);
+		}
+		
+		PageDTO dto = Cservice.categoryChallenge(category, Integer.parseInt(curPage),pp);
+		dto.setPerPage(pp);
+		int tot = dto.getTotalRecord() / dto.getPerPage();
+		if(dto.getTotalRecord() % dto.getPerPage() != 0) tot++;
+		
+		
+		m.addAttribute("curPage", curPage);
+		m.addAttribute("perPage", pp);
+		m.addAttribute("totalPage", tot);
+		m.addAttribute("PageDTO", dto);
+		m.addAttribute("catogory", category);
+		
 		return "challenge/ajaxList";
 	}
 
@@ -153,8 +197,26 @@ public class ChallengeController {
 	@RequestMapping(value="/mychallenges", method = RequestMethod.GET)
 	public String myChallenges(Model m, HttpServletRequest request) throws Exception{
 		int unum = 1; // 임시, 로그인기능 완성되면 수정
-		List<ChallengeDTO> cList = Cservice.userChallenge(unum);
-		m.addAttribute("cList", cList);
+		String curPage = request.getParameter("curPage");
+		String perPage = request.getParameter("perPage");
+		if(curPage == null) {
+			curPage = "1";
+		}
+		int pp = 20; // perPage
+		if(perPage != null) {			
+			pp = Integer.parseInt(perPage);
+		}
+		
+		PageDTO dto = Cservice.userChallenge(unum, Integer.parseInt(curPage),pp);
+		dto.setPerPage(pp);
+		int tot = dto.getTotalRecord() / dto.getPerPage();
+		if(dto.getTotalRecord() % dto.getPerPage() != 0) tot++;
+		
+		
+		m.addAttribute("curPage", curPage);
+		m.addAttribute("perPage", pp);
+		m.addAttribute("totalPage", tot);
+		m.addAttribute("PageDTO", dto);
 		return "myChallenges";
 	}
 	
@@ -163,9 +225,28 @@ public class ChallengeController {
 		int unum = 1; // 임시, 로그인기능 완성되면 수정
 		int cnum = Integer.parseInt(request.getParameter("cnum"));
 		ChallengeDTO challenge = Cservice.searchChallengeByNum(cnum);
-		List<CPhotoDTO> list = Cservice.userChallengeRetrieve(unum, cnum);
+		
+		String curPage = request.getParameter("curPage");
+		String perPage = request.getParameter("perPage");
+		if(curPage == null) {
+			curPage = "1";
+		}
+		int pp = 20; // perPage
+		if(perPage != null) {			
+			pp = Integer.parseInt(perPage);
+		}
+		
+		PhotoPageDTO dto = Cservice.userChallengeRetrieve(unum, cnum, Integer.parseInt(curPage),pp);
+		dto.setPerPage(pp);
+		int tot = dto.getTotalRecord() / dto.getPerPage();
+		if(dto.getTotalRecord() % dto.getPerPage() != 0) tot++;
+		
+		
+		m.addAttribute("curPage", curPage);
+		m.addAttribute("perPage", pp);
+		m.addAttribute("totalPage", tot);
+		m.addAttribute("PageDTO", dto);
 		m.addAttribute("cdto", challenge);
-		m.addAttribute("photoList", list);
 		return "myChallengeRetrieve";
 	}
 	
@@ -184,7 +265,8 @@ public class ChallengeController {
 		
 		long miliseconds = System.currentTimeMillis();
         Date date = new Date(miliseconds);
-        List<CPhotoDTO> list = Cservice.userChallengeRetrieve(unum, cnum);
+        PhotoPageDTO pdto = Cservice.userChallengeRetrieve(unum, cnum, 1, 2);
+        List<CPhotoDTO> list = pdto.getList();
         if(list != null && list.get(0).getUploaddate().equals(date.toString())) {
         	return "alreadyUpload";
         }

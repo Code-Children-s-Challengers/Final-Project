@@ -6,7 +6,7 @@
 
 
 <tr id='cTable'>
-    <c:set var="list" value ="${cList}"></c:set>
+    <c:set var="list" value ="${PageDTO.getList()}"></c:set>
     <c:forEach var="dto" items="${list}" varStatus="status">
  
 	<td style="border:1px solid #444444;border-collapse: collapse">
@@ -77,6 +77,10 @@
 					
 
  			</c:forEach>
+</tr>
+<tr id='page'>
+	<td height="10" colspan="100"><jsp:include page="page.jsp"></jsp:include></td>
+	<td class="td_red" align ="center" style="display:none"><input type="hidden" id="nowcategory" value="${category}"/></td>
 </tr>
 
 <script>
