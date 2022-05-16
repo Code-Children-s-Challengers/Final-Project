@@ -10,8 +10,9 @@
 </head>
 <body>
 <h1>메인 페이지입니다.</h1>
-<!--  -->
-
+<div>
+<jsp:include page="common/menu.jsp" flush="true"/><br>
+</div>
 
 <!-- 로그인하지 않은 모든 사용자(로그인 중인 사용자에게는 보이지 않음) -->
 <sec:authorize access="isAnonymous()">
@@ -24,7 +25,7 @@
 <p>사용자이름: <sec:authentication property="principal.user.username"/></p>
 <p>사용자이메일: <sec:authentication property="principal.user.email"/></p>
 <p>사용한 sns: <sec:authentication property="principal.user.provider"/></p>
-    <a href="">로그아웃</a>
+    <a href="/hifive/logout">로그아웃</a>
 </sec:authorize>
 </body>
 </html>

@@ -8,9 +8,6 @@
 <title>myChallenges</title>
 </head>
 <body>
-<div>
-<jsp:include page="common/menu.jsp" flush="true"/><br>
-</div>
 <hr>
 <jsp:include page="challenge/myChallengeList.jsp" flush="true"/><br>
 </body>
