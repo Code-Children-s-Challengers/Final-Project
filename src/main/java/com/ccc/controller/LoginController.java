@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ccc.config.login.auth.PrincipalDetails;
@@ -35,11 +36,12 @@ public class LoginController {
 		return "loginForm";
 	}
 	
+	
 	@GetMapping("/joinForm")
 	public String joinForm() {
-		System.out.println("why?");
 		return "joinForm";
 	}
+	
 	
 	@PostMapping("/join")
 	public String join(UserDTO user) {
@@ -54,6 +56,23 @@ public class LoginController {
 		userDAO.save(user);
 		return "redirect:/loginForm";		
 	}
+	
+	// SNS 로그인 시 추가정보를 입력해야 합니다
+	@GetMapping("/additionalInfoForm")
+	public String additonalInfoForm() {
+		return "additionalInfoForm";
+	}
+	
+	// SNS 로그인 시 추가정보를 입력해야 합니다
+	@PostMapping("/additionalInfo")
+	@ResponseBody
+	public String additonalInfo(UserDTO userDTO) {
+		System.out.println(userDTO);	
+		return "aa";
+	}
+	
+	
+	
 
 	@Secured("ROLE_USER")
 	@GetMapping("/user")
@@ -62,10 +81,7 @@ public class LoginController {
 		return "user";
 	}
 	
-	@PostMapping("/login")
-    public  String login(){
-        return "redirect:/";
-    }
+
 	
 	
 }

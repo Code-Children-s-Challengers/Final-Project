@@ -53,10 +53,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .logoutUrl("/logout") //로그아웃 설정
         .logoutSuccessUrl("/")
         .and()
-		.oauth2Login() // SNS 로그인 설정
-		.loginPage("/hifive/loginForm")  // OAuth2 로그인이 필요한 곳이면 /loginForm.html으로 redirect 됨
+		.oauth2Login()// SNS 로그인 설정
+		.loginPage("/hifive/loginForm")// OAuth2 로그인이 필요한 곳이면 /loginForm.html으로 redirect 됨
 		.userInfoEndpoint()
-		.userService(principalOauth2UserService);
+		.userService(principalOauth2UserService)
 		// 구글 로그인이 완료된 뒤의 후처리가 필요하다. 
 		// 여기서는 사용자 프로필 정보를 가져오고 그 정보를 토대로 회원가입을 자동으로 진행시키기도 함 
 
