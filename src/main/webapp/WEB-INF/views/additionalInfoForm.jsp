@@ -5,11 +5,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회원가입 페이지</title>
+<title>추가 회원가입 페이지</title>
 </head>
 <body>
-<h1>회원가입 페이지</h1>
+<h1>추가 회원가입 페이지</h1>
 <hr/>
-<jsp:include page="member/joinForm.jsp" flush="true"/><br>
+<jsp:include page="member/additionalInfoForm.jsp" flush="true"/><br>
 </body>
 </html>

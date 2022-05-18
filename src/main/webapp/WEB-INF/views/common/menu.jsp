@@ -9,10 +9,6 @@
 </sec:authorize>
 <!-- 로그인 중인 사용자 -->
 <sec:authorize access="isAuthenticated()">
-<p>user: <sec:authentication property="principal.user"/></p>
-<p>사용자이름: <sec:authentication property="principal.user.username"/></p>
-<p>사용자이메일: <sec:authentication property="principal.user.email"/></p>
-<p>사용한 sns: <sec:authentication property="principal.user.provider"/></p>
     <a href="/hifive/logout">로그아웃</a>
     <a href="/hifive/myPage">마이페이지</a>
 </sec:authorize>
