@@ -8,10 +8,23 @@
 		from notice
 	</select>
 	
-	<select id="selectNoticeContent" resultType = "NoticeDTO">
+	<select id="selectNoticeContent" resultType = "NoticeDTO" parameterType="int">
 		select *
 		from notice
+		where id = #{id}
 	</select>
 	
+	<insert id="insertNotice" parameterType="NoticeDTO">
+		insert into notice(id,title,writeid,content,regdate,hit,files)
+		values (#{id},
+				#{title},
+				#{writeid},
+				#{content},
+				#{regdate},
+				#{hit},
+				#{files}			
+		)
+		
+	</insert>
 	
 </mapper>
