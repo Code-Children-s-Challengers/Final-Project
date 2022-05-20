@@ -38,10 +38,28 @@ public class NoticeController {
 		return "noticeContent";
 	}
 	
+	@GetMapping(value="/noticeDelete")
+	public String delete(HttpServletRequest request, @RequestParam int id) throws Exception{
+		
+		int num = service.deleteNotice(id);
+		
+		return "/notice/noticeDeleteSuccess";
+	}
+
+	
 	@GetMapping(value="/noticeWrite")
-	public String write(Model m, HttpServletRequest request) throws Exception{
-				
+	public String writeForm() throws Exception{		
 		return "noticeWrite";
 	}
+	
+	@GetMapping(value="/noticeWriteInsert")
+	public int writeSave(NoticeDTO dto) throws Exception{		
+		
+		System.out.println(dto);
+		
+		int num = service.insertNotice(dto);		
+		return num;
+	}
+	
 	
 }

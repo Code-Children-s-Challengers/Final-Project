@@ -19,7 +19,12 @@ public class NoticeDAO {
 	
 	public NoticeDTO selectNoticeContent(int id) throws Exception{
 		return session.selectOne("com.config.NoticeMapper.selectNoticeContent", id);
+	}	
+	
+	public int deleteNotice(int id) throws Exception{
+		return session.delete("com.config.NoticeMapper.deleteNotice",id);
 	}
+	
 	public int insertNotice(NoticeDTO dto) throws Exception{
 		return session.insert("com.config.NoticeMapper.insertNotice", dto);
 	}

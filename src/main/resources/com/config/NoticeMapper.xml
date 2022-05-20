@@ -13,18 +13,24 @@
 		from notice
 		where id = #{id}
 	</select>
+	<!-- 제목을 선택했을 때 조회수는 어떻게 늘리지? hit += 1을 적용해야하는데 방법을 잘... -->
 	
 	<insert id="insertNotice" parameterType="NoticeDTO">
-		insert into notice(id,title,writeid,content,regdate,hit,files)
-		values (#{id},
+		insert into notice(id,title,writerid,content,regdate,hit,files)
+		values (notice_seq.nextval,
 				#{title},
-				#{writeid},
-				#{content},
+				#{writerid},
+				#{content},							
 				#{regdate},
-				#{hit},
-				#{files}			
-		)
+				#{hit},	
+				#{files}
+				)
 		
 	</insert>
+	
+	<delete id="deleteNotice" parameterType="int">
+		delete from notice
+		where id = #{id}	
+	</delete>
 	
 </mapper>

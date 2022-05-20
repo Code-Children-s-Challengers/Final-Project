@@ -88,4 +88,6 @@
 	writeButton.addEventListener("click",moveWrite);
 	
 	
+	
+	
 	</script>

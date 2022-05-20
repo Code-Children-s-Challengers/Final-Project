@@ -4,7 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 			<main>
-				<h2>공지사항</h2>				
+				<h2>세부 공지사항</h2>				
 				<div>
 						<table>
 							<% 
@@ -12,6 +12,10 @@
 							pageContext.setAttribute("n", n);
 							%>
 							<tbody>
+								<tr>
+									<th>작성번호</th>
+									<td id = "writeNum"colspan="3">${n.id}</td>
+								</tr>
 								<tr>
 									<th>제목</th>
 									<td colspan="3">${n.title}</td>
@@ -24,10 +28,7 @@
 									<th>작성자</th>
 									<td>${n.writerId}</td>									
 								</tr>
-								<tr>
-									<th>작성자</th>
-									<td>${n.writerId}</td>									
-								</tr>								
+															
 								<tr>
 									<th>내용</th>
 									<td colspan="4">${n.content}</td>
@@ -42,8 +43,8 @@
 					
 					<div>
 						<span>
-							<button>목록</button>
-							<button>글 삭제</button>
+							<button id="ListButton">목록</button>
+							<button id="DeleteButton">글 삭제</button>
 						</span>
 					</div>					
 					
@@ -70,3 +71,19 @@
 			
 		</div>
 	</div>
+	<script>
+	var ListButton = document.querySelector("#ListButton");
+	function moveList(){
+		location.href = "/hifive/noticeList";
+	}              
+	ListButton.addEventListener("click",moveList);
+	var id = document.querySelector("#writeNum").innerText;
+	console.log(id);
+	var DeleteButton = document.querySelector("#DeleteButton");
+	function moveDelete(){		
+		location.href = `/hifive/noticeDelete?id=\${id}`;		
+	}              
+	DeleteButton.addEventListener("click",moveDelete);
+	
+	
+	</script>
