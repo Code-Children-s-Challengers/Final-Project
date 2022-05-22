@@ -7,29 +7,31 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
 $(document).ready(function(){
-	//$(".ch").on("click",function(){
-		//var table = $(this).contents()[1].childNodes;
+	$(".ch").on("click",function(){
+		var table = $(this).contents()[1].childNodes;
 		
-		//var photo = table[0].childNodes[2].innerText;
+		var photo = table[0].childNodes[0].baseURI;
 		
-		//var name = table[4].childNodes[1].childNodes[1].innerText.substr(6);
+		var comment = table[4].childNodes[1].childNodes[1].innerText.substr(9);
 		
-		//var date = table[8].childNodes[1].childNodes[0].textContent.substring(17,40);
+		var date = table[8].childNodes[1].childNodes[0].textContent.substring(22,32);
 		
-		//var people = table[12].childNodes[1].innerText.substr(13);
+		var unum = $("#unum").val();
+		var cnum = $("#cnum").val();
 		
-		//var fee = table[16].childNodes[1].childNodes[0].childNodes[0].innerText.substr(5).split("\\")[0];
-		//var cnum = table[18].childNodes[1].childNodes[0].textContent;
-		
-		//location.href = "./myChallengeRetrieve?cnum="+cnum;
+		win = window.open("./myChallengeRetrievePhoto?cnum="+cnum+"&unum="+unum+"&photo="+photo+"&comment="+comment+"&date="+date,"Retrieve","width = 500, height = 500, top = 100, left = 200, location = no");
 
-	//});
+	});
 	$("#upload").on("click",function(){
 		var cnum = $("#cnum").text();
 		win = window.open("./uploadCertificationPopup?cnum="+cnum,"upload certification","width = 500, height = 500, top = 100, left = 200, location = no");
 	});
 });
 </script>
+
+<input type="hidden" value="${unum}" id="unum"/>
+<input type="hidden" value="${cnum}" id="cnum"/>
+
 <button id="upload">upload certification</button>
 <table width="100%" cellspacing="0" cellpadding="0" id="test">
 	<tr>
