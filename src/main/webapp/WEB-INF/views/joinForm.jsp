@@ -5,12 +5,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>notice</title>
+<title>회원가입 페이지</title>
 </head>
 <body>
-<div>
-<jsp:include page="common/menu.jsp" flush="true"/><br>
-</div>
-<jsp:include page="notice/list.jsp" flush="true"/><br>
+<h1>회원가입 페이지</h1>
+<hr/>
+<jsp:include page="member/joinForm.jsp" flush="true"/><br>
 </body>
 </html>

@@ -5,10 +5,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>myChallenges</title>
+<title>로그인 페이지</title>
 </head>
 <body>
-<hr>
-<jsp:include page="challenge/myChallengeList.jsp" flush="true"/><br>
+<h1>로그인 페이지</h1>
+<hr/>
+<jsp:include page="member/loginForm.jsp" flush="true"/><br>
 </body>
 </html>

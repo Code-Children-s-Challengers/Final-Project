@@ -6,5 +6,7 @@ import com.ccc.dto.NoticeDTO;
 
 public interface NoticeService {
 	public List<NoticeDTO> selectAllNotice() throws Exception;
-	public NoticeDTO selectNoticeContent(int num) throws Exception;
+	public NoticeDTO selectNoticeContent(int id) throws Exception;
+	public int insertNotice(NoticeDTO dto) throws Exception;
+	public int deleteNotice(int id)throws Exception;
 }

@@ -1,0 +1,19 @@
+CREATE TABLE user_table (
+id NUMBER(10) NOT NULL,
+email varchar(255),
+password varchar(255),
+phoneNumber varchar(255),
+nickname varchar(255),
+point Number(10),
+provider varchar(255),
+providerId varchar(255),
+role varchar(255),
+username varchar(255),
+CONSTRAINT id PRIMARY KEY (id)
+);
+
+-- 자동으로 설정되는 id를 위한 시퀀스
+CREATE SEQUENCE USER_SEQ START WITH 1 INCREMENT BY 1 MAXVALUE 99999999 NOCYCLE NOCACHE;
+
+commit;
+

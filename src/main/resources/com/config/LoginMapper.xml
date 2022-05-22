@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.config.LoginMapper">
+	
+
+	<select id="findByUsername" resultType="UserDTO" parameterType="string">
+		select *
+		from user_table
+		where username = #{username}
+	</select>
+
+
+	<insert id="save" parameterType="UserDTO">
+		insert into User_table ( id, email, password, phoneNumber, nickname, point,  provider, providerId, role, username ) 
+		values ( 
+		USER_SEQ.NEXTVAL, #{email} , #{password}, #{phoneNumber, jdbcType=VARCHAR}, 
+		#{nickname, jdbcType=VARCHAR}, #{point, jdbcType=NUMERIC}, #{provider, jdbcType=VARCHAR}, 
+		#{providerId, jdbcType=VARCHAR}, #{role}, #{username}
+		)
+	</insert>
+</mapper>
+
+

@@ -37,6 +37,10 @@ create table challenges(
   dayoff varchar(500)
 );
 
+-- ALTER TABLE challenges RENAME COLUMN cartegory TO category;  -- challenges 테이블 category 컬렴명 변경 쿼리 (2022-05-16 15:46)
+-- ALTER TABLE 테이블명 RENAME COLUMN 기존 컬럼명 TO 변경할 컬럼명;
+
+
 create table cparticipant(
   cnum number(5) references challenges(cnum) on delete cascade,
   unum number(5) references users(unum) on delete cascade,

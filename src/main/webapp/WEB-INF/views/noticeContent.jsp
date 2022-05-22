@@ -5,10 +5,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>myChallenges</title>
+<title>notice</title>
 </head>
 <body>
-<hr>
-<jsp:include page="challenge/myChallengeList.jsp" flush="true"/><br>
+<div>
+<jsp:include page="common/menu.jsp" flush="true"/><br>
+</div>
+<jsp:include page="notice/noticeContent.jsp" flush="true"/><br>
 </body>
 </html>
