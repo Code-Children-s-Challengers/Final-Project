@@ -22,4 +22,8 @@ public interface ChallengeService {
 	public PhotoPageDTO userChallengeRetrieve(int unum, int cnum, int curPage, int perPage) throws Exception;
 	public ChallengeDTO searchChallengeByNum(int cnum) throws Exception;
 	public int certificationAdd(CPhotoDTO dto) throws Exception;
+	public int photoDelete(String cnum, String unum, String uploaddate) throws Exception;
+	public int searchReport(String cnum, String unum, String uploaddate) throws Exception;
+	public int ReportAdd(String cnum, String unum, String uploaddate) throws Exception;
+	public int ReportUpdate(String cnum, String unum, String uploaddate) throws Exception;
 }

@@ -12,7 +12,7 @@
 	<select id="categoryNumber" resultType="int" parameterType="string">
 		select count(*)
 		from challenges
-		where cartegory = #{category}
+		where category = #{category}
 	</select>
 	
 	<select id="userChallengeNumber" resultType="int" parameterType="int">
@@ -49,7 +49,7 @@
 	<select id="categoryChallenge" resultType="ChallengeDTO" parameterType="hashmap">
 		select *
 		from challenges
-		where sday >= #{today} and cartegory = #{category}
+		where sday >= #{today} and category = #{category}
 	</select>
 	
 	<select id="findParticipant" resultType="int" parameterType="hashmap">
@@ -70,7 +70,7 @@
 	</update>
 	
 	<insert id="challengeAdd" parameterType="ChallengeDTO">
-		insert into challenges (cnum,name,sday,eday,mpeople,fee,cartegory,holiday,photo)
+		insert into challenges (cnum,name,sday,eday,mpeople,fee,category,holiday,photo)
 		values (challenge_no_seq.nextval,#{name},#{sday},#{eday},#{mpeople},#{fee},#{category},#{holiday},#{photo})
 	</insert>
 	
@@ -91,6 +91,28 @@
 		insert into cphoto (cnum,unum,photo,coment,uploaddate)
 		values (#{cnum},#{unum},#{photo},#{coment},#{uploaddate})
 	</insert>
+	
+	<delete id="photoDelete" parameterType="hashmap">
+		delete from cphoto
+		where cnum = #{cnum} and unum = #{unum} and uploaddate = #{uploaddate}
+	</delete>
+	
+	<select id="searchReport" resultType="int" parameterType="hashmap">
+		select count(*)
+		from verifyreport
+		where cnum = #{cnum} and unum = #{unum} and uploaddate = #{uploaddate}
+	</select>
+	
+	<insert id="ReportAdd" parameterType="hashmap">
+		insert into verifyreport (cnum,unum,uploaddate)
+		values (#{cnum},#{unum},#{uploaddate})
+	</insert>
+	
+	<update id="ReportUpdate" parameterType="hashmap">
+		update verifyreport
+		set num = num+1
+		where cnum = #{cnum} and unum = #{unum} and uploaddate = #{uploaddate}
+	</update>
 	
 	
 </mapper>

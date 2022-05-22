@@ -91,4 +91,28 @@ public class ChallengeServiceImpl implements ChallengeService {
 		return num;
 	}
 
+	@Override
+	public int photoDelete(String cnum, String unum, String uploaddate) throws Exception {
+		int num = dao.photoDelete(cnum, unum, uploaddate);
+		return num;
+	}
+
+	@Override
+	public int searchReport(String cnum, String unum, String uploaddate) throws Exception {
+		int num = dao.searchReport(cnum, unum, uploaddate);
+		return num;
+	}
+
+	@Override
+	public int ReportAdd(String cnum, String unum, String uploaddate) throws Exception {
+		int num = dao.ReportAdd(cnum, unum, uploaddate);
+		return num;
+	}
+
+	@Override
+	public int ReportUpdate(String cnum, String unum, String uploaddate) throws Exception {
+		int num = dao.ReportUpdate(cnum, unum, uploaddate);
+		return num;
+	}
+
 }

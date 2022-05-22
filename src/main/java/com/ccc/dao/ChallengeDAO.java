@@ -128,4 +128,36 @@ public class ChallengeDAO {
 		return session.insert("com.config.ChallengeMapper.certificationAdd", dto);
 	}
 	
+	public int photoDelete(String cnum, String unum, String uploaddate) throws Exception{
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("cnum", cnum);
+		map.put("unum", unum);
+		map.put("uploaddate", uploaddate);
+		return session.delete("com.config.ChallengeMapper.photoDelete", map);
+	}
+	
+	public int searchReport(String cnum, String unum, String uploaddate) throws Exception{
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("cnum", cnum);
+		map.put("unum", unum);
+		map.put("uploaddate", uploaddate);
+		return session.selectOne("com.config.ChallengeMapper.searchReport", map);
+	}
+	
+	public int ReportAdd(String cnum, String unum, String uploaddate) throws Exception{
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("cnum", cnum);
+		map.put("unum", unum);
+		map.put("uploaddate", uploaddate);
+		return session.insert("com.config.ChallengeMapper.ReportAdd", map);
+	}
+	
+	public int ReportUpdate(String cnum, String unum, String uploaddate) throws Exception{
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("cnum", cnum);
+		map.put("unum", unum);
+		map.put("uploaddate", uploaddate);
+		return session.update("com.config.ChallengeMapper.ReportUpdate", map);
+	}
+	
 }
