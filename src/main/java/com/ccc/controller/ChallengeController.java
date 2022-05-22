@@ -15,6 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,7 +37,6 @@ import com.ccc.dto.PhotoPageDTO;
 public class ChallengeController {
 	@Autowired
 	ChallengeService Cservice;
-	
 	
 	////////////////////////////////////////////////////////////////////////////////// challenge 참가 페이지
 	@RequestMapping(value="/challenges", method = RequestMethod.GET)
@@ -247,6 +248,8 @@ public class ChallengeController {
 		m.addAttribute("totalPage", tot);
 		m.addAttribute("PageDTO", dto);
 		m.addAttribute("cdto", challenge);
+		m.addAttribute("unum", unum);
+		m.addAttribute("cnum", cnum);
 		return "myChallengeRetrieve";
 	}
 	
@@ -294,6 +297,53 @@ public class ChallengeController {
 		num = Cservice.certificationAdd(dto);
 		
 		return "success";
+	}
+	
+	@RequestMapping(value="/myChallengeRetrievePhoto", method = RequestMethod.GET)
+	public String myChallengeRetrievePhoto(Model m, HttpServletRequest request) throws Exception{
+		m.addAttribute("cnum", request.getParameter("cnum"));
+		m.addAttribute("unum", request.getParameter("unum"));
+		m.addAttribute("photo", request.getParameter("photo"));
+		m.addAttribute("comment", request.getParameter("comment"));
+		m.addAttribute("date", request.getParameter("date"));
+		return "challenge/myChallengeRetrievePhoto";
+	}
+	
+	@RequestMapping(value="/photoDelete", method = RequestMethod.POST)
+	@ResponseBody
+	public String photoDelete(@RequestParam String unum, @RequestParam String cnum, @RequestParam String date) throws Exception{
+		int num = 0;
+
+
+		num = Cservice.photoDelete(cnum, unum, date.substring(2, 4)+"/"+date.substring(5, 7)+"/"+date.substring(8, 10));
+		if(num >= 1) {			
+			return "success";
+		}else {
+			return "fail";
+		}
+	}
+	
+	@RequestMapping(value="/challengeReport", method = RequestMethod.POST)
+	@ResponseBody
+	public String challengeReport(@RequestParam String unum, @RequestParam String cnum, @RequestParam String date) throws Exception{
+		int num = 0;
+		date = date.substring(2, 4)+"/"+date.substring(5, 7)+"/"+date.substring(8, 10);
+		num = Cservice.searchReport(cnum, unum, date);
+		if(num >= 1) {
+			num = Cservice.ReportUpdate(cnum, unum, date);
+			if(num >= 1) {
+				return "success";
+			}else {
+				return "fail";
+			}
+		}else {
+			num = Cservice.ReportAdd(cnum, unum, date);
+			if(num >= 1) {
+				return "success";
+			}else {
+				return "fail";
+			}
+		}
 	}
 //////////////////////////////////////////////////////////////////////////////////내 challenge 페이지
 
