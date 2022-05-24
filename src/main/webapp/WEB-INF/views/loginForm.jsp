@@ -6,10 +6,16 @@
 <head>
 <meta charset="UTF-8">
 <title>로그인 페이지</title>
+<style>
+	*{
+		text-align:center;
+		dispaly : inline;
+	}
+</style>
 </head>
 <body>
-<h1>로그인 페이지</h1>
-<hr/>
+<jsp:include page="common/menu.jsp" flush="true"/><br>
+<hr>
 <jsp:include page="member/loginForm.jsp" flush="true"/><br>
 </body>
 </html>

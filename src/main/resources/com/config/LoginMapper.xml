@@ -20,6 +20,8 @@
 		#{providerId, jdbcType=VARCHAR}, #{role}, #{username}
 		)
 	</insert>
+	
+
 </mapper>
 
 

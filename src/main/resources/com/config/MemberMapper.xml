@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.config.MemberMapper">
+	
+	 <update id="updateNickname" parameterType="hashmap">
+	 	 update user_table
+	 	 set nickname=#{nickname}
+	 	where id = #{id}
+	 </update>
+	 
+	 <update id="updatePhoneNumber" parameterType="hashmap">
+	 	 update user_table
+	 	 set phoneNumber=#{phoneNumber}
+	 	where id = #{id}
+	 </update>
+</mapper>
+
+

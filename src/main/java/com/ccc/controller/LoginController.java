@@ -1,27 +1,26 @@
 package com.ccc.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
-import org.springframework.security.access.prepost.PostAuthorize;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ccc.config.login.auth.PrincipalDetails;
 import com.ccc.dao.UserDAO;
 import com.ccc.dto.UserDTO;
+import com.ccc.service.UserService;
 
 @Controller //view 리턴하겠다
 public class LoginController {
+	@Autowired
+	UserService uService;
 	
 	@Autowired
 	private UserDAO userDAO;
@@ -58,17 +57,35 @@ public class LoginController {
 	}
 	
 	// SNS 로그인 시 추가정보를 입력해야 합니다
+	@Secured("ROLE_USER")
 	@GetMapping("/additionalInfoForm")
 	public String additonalInfoForm() {
 		return "additionalInfoForm";
 	}
 	
 	// SNS 로그인 시 추가정보를 입력해야 합니다
+	@Secured("ROLE_USER")
 	@PostMapping("/additionalInfo")
-	@ResponseBody
-	public String additonalInfo(UserDTO userDTO) {
-		System.out.println(userDTO);	
-		return "aa";
+	public String additonalInfo(@AuthenticationPrincipal PrincipalDetails principalDetails, String nickname, String phoneNumber) {
+		System.out.println(nickname);
+		System.out.println(phoneNumber);
+		
+		String id = Integer.toString(principalDetails.getUser().getId());
+		System.out.println(id);
+		
+		Map<String, String> nicknameMap = new HashMap<String, String>();
+		Map<String, String> phoneNumberMap = new HashMap<String, String>();
+
+		nicknameMap.put("id", id);
+		nicknameMap.put("nickname", nickname);
+		
+		phoneNumberMap.put("id", id);
+		phoneNumberMap.put("phoneNumber",phoneNumber);
+		
+		uService.updateNickname(nicknameMap);
+		uService.updatePhoneNumber(phoneNumberMap);
+		
+		return "member/additionalInfoSuccess";
 	}
 	
 	

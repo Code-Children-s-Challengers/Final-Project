@@ -6,10 +6,15 @@
 <head>
 <meta charset="UTF-8">
 <title>회원가입 페이지</title>
+<style>
+ *{
+ 	text-align:center;
+ }
+</style>
 </head>
 <body>
-<h1>회원가입 페이지</h1>
-<hr/>
+<jsp:include page="common/menu.jsp" flush="true"/><br>
+<hr>
 <jsp:include page="member/joinForm.jsp" flush="true"/><br>
 </body>
 </html>

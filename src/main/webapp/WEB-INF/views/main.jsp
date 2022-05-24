@@ -15,6 +15,7 @@
 </head>
 <body>
 <jsp:include page="common/menu.jsp" flush="true"/><br>
+<hr>
 <jsp:include page="main/main.jsp" flush="true"/><br>
 </body>
 <div>

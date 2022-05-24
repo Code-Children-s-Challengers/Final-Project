@@ -6,9 +6,16 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!-- 로그인 완료 시 -->
 <style>
+
 	h1 {
-		font-size:45px;
-		text-align: left;
+		font-size:80px;
+		text-align: center;
+	}
+	p{
+		text-align: center;
+	}
+	a{
+		text-align: center;
 	}
 </style>
 <h1>메인 페이지입니다.</h1>
@@ -16,11 +23,11 @@
 	<sec:authentication property="principal.user.nickname" var="nickname"/>
 	<p>로그인 되었습니다</p>
     <c:choose>
-    <c:when test="${empty a}">
+    <c:when test="${empty nickname}">
 	<a href="/hifive/additionalInfoForm">회원가입 마저하기</a>
     </c:when>
     <c:otherwise>
-	<p style="width:300px; left:-5%; right:0; margin-left:auto; margin-right:auto;">반갑습니다 ${nickname} 님</p>
+	<p>반갑습니다 ${nickname} 님</p>
     </c:otherwise>
 </c:choose>
 </sec:authorize>

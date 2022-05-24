@@ -64,7 +64,7 @@ public class ChallengeController {
 		List<ChallengeDTO> allList = Cservice.allChallenge();
 		List<ChallengeDTO> hotList = new ArrayList<ChallengeDTO>();
 		for(int i = 0; i < 4; i++) {
-			if(allList.get(i) == null) {
+			if(allList.size() == i) {
 				break;
 			}
 			hotList.add(allList.get(i));
