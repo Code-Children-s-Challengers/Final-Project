@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<div style="width:300px; left:-5%; right:0; margin-left:auto; margin-right:auto;">
+<div style="width:350px; left:-5%; right:0; margin-left:auto; margin-right:auto;">
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <a href="">main</a> 
 <!-- 로그인하지 않은 모든 사용자(로그인 중인 사용자에게는 보이지 않음) -->

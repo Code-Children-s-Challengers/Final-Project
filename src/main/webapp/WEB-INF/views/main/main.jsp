@@ -5,6 +5,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!-- 로그인 완료 시 -->
+<style>
+	h1 {
+		font-size:45px;
+		text-align: left;
+	}
+</style>
+<h1>메인 페이지입니다.</h1>
 <sec:authorize access="isAuthenticated()">
 	<sec:authentication property="principal.user.nickname" var="nickname"/>
 	<p>로그인 되었습니다</p>
