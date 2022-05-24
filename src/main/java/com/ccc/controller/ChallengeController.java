@@ -18,6 +18,7 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -27,6 +28,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.ccc.config.login.auth.PrincipalDetails;
 import com.ccc.dto.CPhotoDTO;
 import com.ccc.dto.ChallengeDTO;
 import com.ccc.service.ChallengeService;
@@ -40,10 +42,12 @@ public class ChallengeController {
 	
 	////////////////////////////////////////////////////////////////////////////////// challenge 참가 페이지
 	@RequestMapping(value="/challenges", method = RequestMethod.GET)
-	public String Challenges(Model m, HttpServletRequest request) throws Exception{
+	public String Challenges(Model m, HttpServletRequest request, @AuthenticationPrincipal PrincipalDetails principalDetails) throws Exception{
 		String category = request.getParameter("category");
 		String curPage = request.getParameter("curPage");
 		String perPage = request.getParameter("perPage");
+		int unum = principalDetails.getUser().getId();
+		
 		if(category == null) {
 			category = "study";
 		}
@@ -119,7 +123,7 @@ public class ChallengeController {
 		String people = request.getParameter("people");
 		String fee = request.getParameter("fee");
 		String holiday = request.getParameter("holiday");
-		
+
 		m.addAttribute("cnum", cnum);
 		m.addAttribute("photo", photo);
 		m.addAttribute("name", name);
@@ -134,8 +138,8 @@ public class ChallengeController {
 	
 	@RequestMapping(value="/challengeParticipate", method = RequestMethod.POST)
 	@ResponseBody
-	public String challengeParticipate(@RequestParam int cnum) throws Exception{
-		int unum = 1; // 임시, 로그인기능 완성되면 수정
+	public String challengeParticipate(@RequestParam int cnum, @AuthenticationPrincipal PrincipalDetails principalDetails) throws Exception{
+		int unum = principalDetails.getUser().getId();
 		int num = 0;
 		if(Cservice.findParticipant(unum, cnum) >= 1) {
 			return "already participated";
@@ -156,8 +160,8 @@ public class ChallengeController {
 	
 	@RequestMapping(value="/makeChallenge", method = RequestMethod.POST)
 	@ResponseBody
-	public String makeChallenge(@RequestParam MultipartFile photo, @RequestParam String name, @RequestParam String category, @RequestParam Date start_date, @RequestParam Date end_date, @RequestParam int people, @RequestParam int fee, @RequestParam int holiday) throws Exception{
-		int unum = 1; // 임시, 로그인기능 완성되면 수정
+	public String makeChallenge(@RequestParam MultipartFile photo, @RequestParam String name, @RequestParam String category, @RequestParam Date start_date, @RequestParam Date end_date, @RequestParam int people, @RequestParam int fee, @RequestParam int holiday, @AuthenticationPrincipal PrincipalDetails principalDetails) throws Exception{
+		int unum = principalDetails.getUser().getId();
 		int num = 0;
 		
 		long miliseconds = System.currentTimeMillis();
@@ -196,8 +200,8 @@ public class ChallengeController {
 
 	
 	@RequestMapping(value="/mychallenges", method = RequestMethod.GET)
-	public String myChallenges(Model m, HttpServletRequest request) throws Exception{
-		int unum = 1; // 임시, 로그인기능 완성되면 수정
+	public String myChallenges(Model m, HttpServletRequest request, @AuthenticationPrincipal PrincipalDetails principalDetails) throws Exception{
+		int unum = principalDetails.getUser().getId();
 		String curPage = request.getParameter("curPage");
 		String perPage = request.getParameter("perPage");
 		if(curPage == null) {
@@ -222,8 +226,8 @@ public class ChallengeController {
 	}
 	
 	@RequestMapping(value="/myChallengeRetrieve", method = RequestMethod.GET)
-	public String myChallengeRetrieve(Model m, HttpServletRequest request) throws Exception{
-		int unum = 1; // 임시, 로그인기능 완성되면 수정
+	public String myChallengeRetrieve(Model m, HttpServletRequest request, @AuthenticationPrincipal PrincipalDetails principalDetails) throws Exception{
+		int unum = principalDetails.getUser().getId();
 		int cnum = Integer.parseInt(request.getParameter("cnum"));
 		ChallengeDTO challenge = Cservice.searchChallengeByNum(cnum);
 		
@@ -261,8 +265,8 @@ public class ChallengeController {
 	
 	@RequestMapping(value="/uploadCertification", method = RequestMethod.POST)
 	@ResponseBody
-	public String uploadCertification(@RequestParam MultipartFile photo, @RequestParam int cnum, @RequestParam String comment) throws Exception{
-		int unum = 1; // 임시, 로그인기능 완성되면 수정
+	public String uploadCertification(@RequestParam MultipartFile photo, @RequestParam int cnum, @RequestParam String comment, @AuthenticationPrincipal PrincipalDetails principalDetails) throws Exception{
+		int unum = principalDetails.getUser().getId();
 		int num = 0;
 		
 		
