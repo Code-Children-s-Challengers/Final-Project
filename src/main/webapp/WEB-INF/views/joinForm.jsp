@@ -7,9 +7,7 @@
 <meta charset="UTF-8">
 <title>회원가입 페이지</title>
 <style>
- *{
- 	text-align:center;
- }
+
 </style>
 </head>
 <body>
