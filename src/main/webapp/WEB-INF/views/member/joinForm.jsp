@@ -21,8 +21,8 @@
 		  </th>
 		  <td>
 		    <input id="nickname" type="text" name="nickname" placeholder="닉네임을 설정해주세요." maxlength="8" title="8자 까지 입력" required autofocus/>
-		    <br/>
-		    <span class="point successNicknameChk">※닉네임은 2자 이상 8자 이하로 설정해주시기 바랍니다.</span>
+		    <span class="point successNicknameChk"></span> <br/>
+		    <span class="point"> ※닉네임은 2자 이상 8자 이하로 설정해주시기 바랍니다.</span>
 		    <input type="hidden" id="nicknameDoubleChk"/>
 		  </td>
 		</tr>
@@ -66,7 +66,7 @@
 					<input id="email" type="text" name="email" title="이메일 주소를 입력해주세요." required/>
 					<span id="checkEmail" class="doubleCheck">인증번호 보내기</span><br/>
 					<input id="email2" type="text" name="email2" title="인증번호 입력" disabled required/>
-					<span id="checkEmail2" class="doubleCheck">이메일인증</span>
+					<span id="checkEmail2" class="doubleCheck">이메일인증</span><br/>
 					<span class="point successEmailCheck">이메일 입력후 인증번호 보내기를 해주십시오.</span>
 					<input type="hidden" id="emailDoubleChk"/>
 				</p>
@@ -83,53 +83,11 @@
 <script src="/hifive/js/checkId.js"></script>
 <script src="/hifive/js/checkPassword.js"></script>
 <script src="/hifive/js/checkNickname.js"></script>
+<script src="/hifive/js/checkEmail.js"></script>
 <script>
 
 	$(document).ready(function(){
 
-		
-		//이메일 인증
-		var code = "";
-		$("#checkEmail").click(function(){
-			var email = $("#email").val();
-			$.ajax({
-		        type:"GET",
-		        url:"checkEmail?email=" + email,
-		        cache : false,
-		        success:function(data){
-		        	if(data == "error"){
-		        		alert("이메일 주소가 올바르지 않습니다. 유효한 이메일 주소를 입력해주세요.");
-						$("#email").attr("autofocus",true);
-						$(".successEmailCheck").text("유효한 이메일 주소를 입력해주세요.");
-						$(".successEmailCheck").css("color","red");
-		        	}else{	        		
-						alert("인증번호 발송이 완료되었습니다.\n입력한 이메일에서 인증번호 확인을 해주십시오.");
-		        		$("email2").attr("disabled",false);
-		        		$("#checkEmail2").css("display","inline-block");
-		        		$(".successEmailCheck").text("인증번호를 입력한 뒤 이메일 인증을 눌러주십시오.");
-		        		$(".successEmailCheckk").css("color","green");
-		        		code = data;
-		        		console.log(data);
-		        	}
-		        }
-		    });
-		});
-		
-		//이메일 인증번호 대조
-		$("#checkEmail2").click(function(){
-			if($("#email2").val() == code){
-				$(".successEmailCheck").text("인증번호가 일치합니다.");
-				$(".successEmailCheck").css("color","green");
-				$("#emailDoubleCheck").val("true");
-				$("#email2").attr("disabled",true);
-				//$("#sm_email").attr("disabled",true);
-			}else{
-				$(".successEmailCheck").text("인증번호가 일치하지 않습니다. 확인해주시기 바랍니다.");
-				$(".successEmailCheck").css("color","red");
-				$("#emailDoubleCheck").val("false");
-				$("#email2").attr("autofocus",true);
-			}
-		});
 	
 	});
 	
