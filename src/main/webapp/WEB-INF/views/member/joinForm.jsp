@@ -63,9 +63,9 @@
 			</th>
 			<td>
 				<p>
-					<input id="email" type="text" name="email" title="이메일 주소를 입력해주세요." required/>
+					<input id="email" type="text" name="email" placeholder="이메일 주소를 입력해주세요." required/>
 					<span id="checkEmail" class="doubleCheck">인증번호 보내기</span><br/>
-					<input id="email2" type="text" name="email2" title="인증번호 입력" disabled required/>
+					<input id="email2" type="text" name="email2" placeholder="인증번호 입력" disabled required/>
 					<span id="checkEmail2" class="doubleCheck">이메일인증</span><br/>
 					<span class="point successEmailCheck">이메일 입력후 인증번호 보내기를 해주십시오.</span>
 					<input type="hidden" id="emailDoubleChk"/>
@@ -74,7 +74,25 @@
 					아이디 비밀번호 분실시 필요한 정보이므로, 정확하게 기입해 주십시오.
 				</p>
 			</td>
-	</tr>
+		</tr>
+		<tr class="phoneNumber">
+			<th>
+				<label for="phoneNumber">휴대폰 번호</label>
+			</th>
+			<td>
+				<p>
+					<input id="phoneNumber" type="text" name="phoneNumber" placeholder="전화번호 입력" required/>
+					<span id="checkPhoneNumber" class="doubleChk">인증번호 보내기</span><br/>
+					<input id="phoneNumber2" type="text" name="phoneNumber2" placeholder="인증번호 입력" disabled required/>
+					<span id="checkPhoneNumber2" class="doubleChk">본인인증</span>
+					<span class="point successPhoneNumberChk">휴대폰 번호 입력후 인증번호 보내기를 해주십시오.</span>
+					<input type="hidden" id="phoneNumberDoubleChk"/>
+				</p>
+				<p class="tip">
+					최초 가입 시에만 사용하고 있습니다. 따로 저장되지 않습니다.(번호만 입력해주세요.)
+				</p>
+			</td>
+		</tr>
 	</table>
 	
 </form>
@@ -84,6 +102,7 @@
 <script src="/hifive/js/checkPassword.js"></script>
 <script src="/hifive/js/checkNickname.js"></script>
 <script src="/hifive/js/checkEmail.js"></script>
+<script src="/hifive/js/checkPhoneNumber.js"></script>
 <script>
 
 	$(document).ready(function(){

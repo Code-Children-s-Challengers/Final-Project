@@ -111,6 +111,7 @@ public class LoginController {
 	}
 	
 
+	// 일반 회원가입 시 사용되는 메서드들
 	@RequestMapping(value = "/checkNickname", method = RequestMethod.POST)
 	@ResponseBody
 	public int checkNickname(@RequestParam("nickname") String nickname) {
