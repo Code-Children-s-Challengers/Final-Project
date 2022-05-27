@@ -31,6 +31,7 @@ public class SmsController {
     	
     	SmsResponse data = smsService.sendSms(request.getRecipientPhoneNumber().substring(1) , content);
     	data.setRandomNumber(randomNumber);
+    	
     	// SmsResponse 타입의 데이터를 json의 body에 포함하여 보낸다
     	return ResponseEntity.ok().body(data); // data에는 header 와 Body가 저장되어 있음, 따라서 응답 시 필요한 status, header, body정보가 다 알맞게 입력된 것!
     

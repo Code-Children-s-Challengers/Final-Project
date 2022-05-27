@@ -1,6 +1,6 @@
 //휴대폰 인증번호 발송
 var code2 = "";
-$("#phoneNumberSendingFalse").click(function(){
+$("#phoneNumberSending").click(function(){
 	alert("인증번호 발송이 완료되었습니다.\n휴대폰에서 인증번호 확인을 해주십시오.");
 	var recipientPhoneNumber = ""+ $("#phone1").val()+$("#phone2").val()+$("#phone3").val();
 	$.ajax({

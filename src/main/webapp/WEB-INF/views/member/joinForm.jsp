@@ -57,9 +57,9 @@
 			<td>
 				<p>
 					<input id="email" type="text" name="email" placeholder="이메일 주소를 입력해주세요." required/>
-					<span id="emailSending" class="doubleCheck">인증번호 보내기</span><br/>
+					<button id="emailSending" class="doubleCheck" >인증번호 보내기</button><br/>
 					<input id="email2" type="text" name="email2" placeholder="인증번호 입력" disabled required/>
-					<span id="emailChecking" class="doubleCheck">이메일인증</span><br/>
+					<button id="emailChecking" class="doubleCheck" >인증번호 확인</button><br/>
 					<span class="point emailSuccess">이메일 입력후 인증번호 보내기를 해주십시오.</span>
 					<input type="hidden" id="emailChecker"/>
 				</p>
@@ -77,9 +77,9 @@
 					<input id="phone1" type="text" name="phone1" placeholder="전화번호 입력" required size=3 />
 					<input id="phone2" type="text" name="phone2" placeholder="전화번호 입력" required size=4/>
 					<input id="phone3" type="text" name="phone3" placeholder="전화번호 입력" required size=4/>
-					<span id="phoneNumberSending" class="doubleChk">인증번호 보내기</span><br/>
+					<button id="phoneNumberSending" class="doubleCheck" >인증번호 보내기</button><br/>
 					<input id="phoneNumber2" type="text" name="phoneNumber2" placeholder="인증번호 입력" disabled required/>
-					<span id="phoneNumberChecking" class="doubleChk">본인인증</span><br/>
+					<button id="phoneNumberChecking" class="doubleCheck" >인증번호 확인</button><br/>
 					<span class="point phoneNumberSuccess">휴대폰 번호 입력후 인증번호 보내기를 해주십시오.</span>
 					<input type="hidden" id="phoneNumberChecker"/>
 				</p>
