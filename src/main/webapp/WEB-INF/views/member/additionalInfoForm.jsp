@@ -9,3 +9,4 @@
 	<input type="text" name="nickname" placeholder="nickname"/><br>	
 	<button>추가 정보 저장</button>
 </form>
+

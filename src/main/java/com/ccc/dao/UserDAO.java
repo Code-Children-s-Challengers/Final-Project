@@ -30,6 +30,13 @@ public class UserDAO {
 	public void updatePhoneNumber(Map<String,String> map) {
 		session.update("com.config.MemberMapper.updatePhoneNumber", map);
 	}
+	
+	public int checkNickname(String nickname) {
+		return session.selectOne("com.config.LoginMapper.checkNickname", nickname);
+	}
+	public int checkUsername(String username) {
+		return session.selectOne("com.config.LoginMapper.checkUsername", username);
+	}
 
 	
 }

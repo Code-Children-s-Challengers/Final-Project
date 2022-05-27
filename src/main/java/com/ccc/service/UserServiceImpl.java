@@ -25,4 +25,14 @@ public class UserServiceImpl implements UserService {
 		userDAO.updatePhoneNumber(map);
 	}
 
+	@Override
+	public int checkNickname(String nickname) {
+		return userDAO.checkNickname(nickname);
+	}
+
+	@Override
+	public int checkUsername(String username) {
+		return userDAO.checkUsername(username);
+	}
+
 }
