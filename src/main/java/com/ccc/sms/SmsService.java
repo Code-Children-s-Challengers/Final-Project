@@ -73,7 +73,7 @@ public class SmsService {
         restTemplate.setRequestFactory(new HttpComponentsClientHttpRequestFactory());
         SmsResponse smsResponse = restTemplate.postForObject(new URI("https://sens.apigw.ntruss.com/sms/v2/services/"+this.serviceId+"/messages"), body, SmsResponse.class);
         //restTemplate.postForObject => post 요청을 보내고 결과로 객체를 반환받는다
-        return smsResponse;ㄴ
+        return smsResponse;
 
     }
     

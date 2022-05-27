@@ -55,10 +55,13 @@ public class LoginController {
 	
 	
 	@PostMapping("/join")
-	public String join(UserDTO user) {
+	public String join(UserDTO user, String phone1, String phone2, String phone3) {
 		System.out.println(user);
+		String phoneNumber = phone1+phone2+phone3;
+		System.out.println(phoneNumber);
 		user.setRole("ROLE_USER");
 		user.setPoint(3000);
+		user.setPhoneNumber(phoneNumber);
 		
 		String rawPassword = user.getPassword();
 		String encPassword = bCryptPasswordEncoder.encode(rawPassword);

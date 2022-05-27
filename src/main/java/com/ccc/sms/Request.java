@@ -1,5 +1,6 @@
 package com.ccc.sms;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,4 +15,5 @@ public class Request {
     private String title;
     private String content;
 
+    
 }

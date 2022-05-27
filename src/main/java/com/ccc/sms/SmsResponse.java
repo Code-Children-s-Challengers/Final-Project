@@ -4,12 +4,13 @@ import java.time.LocalDateTime;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-@Getter
+@Data
 // 응답 json의 body에 포하되어서 보내질 내용
 public class SmsResponse {
 	//요청 아이디
@@ -20,4 +21,6 @@ public class SmsResponse {
     private String statusCode;
     //요청 상태명 : success - 성공, fail - 실패
     private String statusName;
+    //인증번호
+    private int randomNumber;
 }
