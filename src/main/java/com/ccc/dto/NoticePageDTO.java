@@ -8,12 +8,9 @@ public class NoticePageDTO {
 	
 	List<NoticeDTO> list;
 	int curPage; // 현재 페이지
-	int perPage = 8; // 페이지 당 보여줄 개수
-	int totalRecord; // 전체 레코드 개수
-	public NoticePageDTO() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+	int perPage = 3; // 페이지 당 보여줄 개수
+	int totalCount;
+	
 	public List<NoticeDTO> getList() {
 		return list;
 	}
@@ -32,16 +29,19 @@ public class NoticePageDTO {
 	public void setPerPage(int perPage) {
 		this.perPage = perPage;
 	}
-	public int getTotalRecord() {
-		return totalRecord;
+	public int getTotalCount() {
+		return totalCount;
+	}			
+	public void setTotalCount(int totalCount) {
+		this.totalCount = totalCount;
 	}
-	public void setTotalRecord(int totalRecord) {
-		this.totalRecord = totalRecord;
-	}
+	
+	
+	
 	@Override
 	public String toString() {
-		return "NoticePageDTO [list=" + list + ", curPage=" + curPage + ", perPage=" + perPage + ", totalRecord="
-				+ totalRecord + "]";
+		return "NoticePageDTO [list=" + list + ", curPage=" + curPage + ", perPage=" + perPage + ", totalCount="
+				+ totalCount + "]";
 	}
 	
 	

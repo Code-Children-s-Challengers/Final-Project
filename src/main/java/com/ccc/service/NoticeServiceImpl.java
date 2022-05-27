@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.ccc.dao.NoticeDAO;
 import com.ccc.dto.NoticeDTO;
+import com.ccc.dto.NoticePageDTO;
 @Repository("noticeService")
 public class NoticeServiceImpl implements NoticeService {
 
@@ -37,6 +38,12 @@ public class NoticeServiceImpl implements NoticeService {
 	public int deleteNotice(int id) throws Exception {
 		int num = dao.deleteNotice(id);
 		return num;
+	}
+
+	@Override
+	public NoticePageDTO selectNoticePage(int curPage) throws Exception {
+		NoticePageDTO list = dao.selectNoticePage(curPage);
+		return list;
 	}
 
 }
