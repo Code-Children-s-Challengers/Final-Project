@@ -1,12 +1,18 @@
 package com.ccc.dao;
 
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.ccc.dto.ChallengeDTO;
 import com.ccc.dto.NoticeDTO;
+import com.ccc.dto.NoticePageDTO;
+import com.ccc.dto.PageDTO;
 
 @Repository("NoticeDAO")
 public class NoticeDAO {
@@ -28,4 +34,28 @@ public class NoticeDAO {
 	public int insertNotice(NoticeDTO dto) throws Exception{
 		return session.insert("com.config.NoticeMapper.insertNotice", dto);
 	}
+	
+	public int totalCount() {
+		return session.selectOne("com.config.NoticeMapper.totalCount");
+	}	
+	
+						
+	public NoticePageDTO selectNoticePage(int curPage) {
+	
+		NoticePageDTO pDTO = new NoticePageDTO();
+		int perPage = pDTO.getPerPage();
+		int offset = (curPage - 1) * perPage;
+		
+		List<NoticeDTO> list =  session.selectList("com.config.NoticeMapper.selectAllNotice" , null, new RowBounds(offset, perPage));
+		
+		int totalPage = totalCount();
+		pDTO.setCurPage(curPage);
+		pDTO.setList(list);
+		pDTO.setTotalCount(totalPage);
+		
+		System.out.println(list);
+		
+		return pDTO;
+	}
+	
 }

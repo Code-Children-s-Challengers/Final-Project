@@ -6,12 +6,14 @@
 	<select id="selectAllNotice" resultType = "NoticeDTO">
 		select *
 		from notice
+		order by id asc
 	</select>
 	
 	<select id="selectNoticeContent" resultType = "NoticeDTO" parameterType="int">
 		select *
 		from notice
 		where id = #{id}
+		order by id asc
 	</select>
 	<!-- 제목을 선택했을 때 조회수는 어떻게 늘리지? hit += 1을 적용해야하는데 방법을 잘... -->
 	
@@ -31,6 +33,12 @@
 	<delete id="deleteNotice" parameterType="int">
 		delete from notice
 		where id = #{id}	
-	</delete>
+	</delete>	
+	
+	
+	<select id="totalCount" resultType="int">
+      select count(*)
+      from notice     
+    </select>
 	
 </mapper>

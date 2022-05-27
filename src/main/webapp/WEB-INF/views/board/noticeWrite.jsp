@@ -9,8 +9,8 @@
 </head>
 <body>
 <div>
-<jsp:include page="common/menu.jsp" flush="true"/><br>
+<jsp:include page="../common/menu.jsp" flush="true"/><br>
 </div>
-<jsp:include page="notice/noticeContent.jsp" flush="true"/><br>
+<jsp:include page="notice/noticeWrite.jsp" flush="true"/><br>
 </body>
 </html>
