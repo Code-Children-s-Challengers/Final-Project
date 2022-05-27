@@ -136,15 +136,15 @@
 </script>
 <style>
 	table{
-		width: 100%;
+	width: 100%;
     border-collapse: collapse;
 	}
 	th, td {
     border-bottom: 1px solid #444444;
     padding: 10px;
   	}
-  fieldset{
+  	fieldset{
   	width:1000px;
-  }
+ 	 }
  
 </style>
