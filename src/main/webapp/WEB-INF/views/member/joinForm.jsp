@@ -5,7 +5,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <h1>회원가입 페이지</h1>
 <form action="/hifive/join" method="POST">
-	<fieldset class="fieldarea f1">
+	<fieldset class="fieldarea f1" >
 	<legend><span>회원</span>정보</legend>
 	<table>
 		<tr>
@@ -74,9 +74,9 @@
 			</th>
 			<td>
 				<p>
-					<input id="phone1" type="text" name="phone1" placeholder="전화번호 입력" required/>
-					<input id="phone2" type="text" name="phone2" placeholder="전화번호 입력" required/>
-					<input id="phone3" type="text" name="phone3" placeholder="전화번호 입력" required/>
+					<input id="phone1" type="text" name="phone1" placeholder="전화번호 입력" required size=3 />
+					<input id="phone2" type="text" name="phone2" placeholder="전화번호 입력" required size=4/>
+					<input id="phone3" type="text" name="phone3" placeholder="전화번호 입력" required size=4/>
 					<span id="phoneNumberSending" class="doubleChk">인증번호 보내기</span><br/>
 					<input id="phoneNumber2" type="text" name="phoneNumber2" placeholder="인증번호 입력" disabled required/>
 					<span id="phoneNumberChecking" class="doubleChk">본인인증</span><br/>
@@ -134,3 +134,17 @@
 	});
 	
 </script>
+<style>
+	table{
+		width: 100%;
+    border-collapse: collapse;
+	}
+	th, td {
+    border-bottom: 1px solid #444444;
+    padding: 10px;
+  	}
+  fieldset{
+  	width:1000px;
+  }
+ 
+</style>
