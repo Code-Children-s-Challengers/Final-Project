@@ -3,7 +3,43 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.config.QnABoardMapper">
-
+	<select id="selectAllQnABoard" resultType = "QnABoardDTO">
+		select *
+		from QnABoard
+		order by id asc
+	</select>
+	
+	<select id="selectQnABoardContent" resultType = "QnABoardDTO" parameterType="int">
+		select *
+		from QnABoard
+		where id = #{id}
+		order by id asc
+	</select>	
+	
+	<insert id="insertQnABoard" parameterType="QnABoardDTO">
+		insert into QnABoard(id,title,writerid,qcontent,acontent,regdate,hit,files)
+		values (QnABoard_seq.nextval,
+				#{title},
+				#{writerid},
+				#{qcontent},
+				#{acontent},							
+				#{regdate},
+				#{hit},	
+				#{files}
+				)
+		
+	</insert>
+	
+	<delete id="deleteQnABoard" parameterType="int">
+		delete from QnABoard
+		where id = #{id}	
+	</delete>	
+	
+	
+	<select id="totalCount" resultType="int">
+      select count(*)
+      from QnABoard   
+    </select>
 </mapper>
 
 

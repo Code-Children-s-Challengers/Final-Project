@@ -1,5 +1,6 @@
 <%@page import="java.util.List"%>
-<%@page import="com.ccc.dto.NoticeDTO"%>
+<%@page import="com.ccc.dto.QnABoardDTO"%>
+<%@page import="com.ccc.dto.QnABoardPageDTO"%>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -10,8 +11,8 @@
 	<div>
 		<div>
 		<main>
-			<h2>공지사항</h2>					
-			<h3>공지사항 검색</h3>
+			<h2>문의하기 게시판</h2>					
+			<h3>문의사항 검색</h3>
 			<form>
 				<fieldset>					
 					<label>검색분류</label>
@@ -26,7 +27,7 @@
 			</form>			
 			
 			<div>
-				<h3>공지사항 목록</h3>
+				<h3>문의사항 목록</h3>
 				<table>
 					<thead>
 						<tr>
@@ -35,19 +36,21 @@
 							<th>작성자</th>
 							<th>작성일</th>
 							<th>조회수</th>
+							<th>답변여부</th>
 						</tr>
 					</thead>
 					
 					<tbody>							
 
 					<% 
-					List<NoticeDTO> list = (List<NoticeDTO>)request.getAttribute("list");
-					for(NoticeDTO n : list) {
+					QnABoardPageDTO pDTO = (QnABoardPageDTO)request.getAttribute("list");
+					List<QnABoardDTO> list = pDTO.getList();
+					for(QnABoardDTO n : list) {
 						pageContext.setAttribute("n", n);
 					%>
 					<tr>
 						<td>${n.id}</td>						
-						<td><a href="noticeContent?id=${n.id}">${n.title}</a></td>
+						<td><a href="QnABoardContent?id=${n.id}">${n.title}</a></td>
 						<td>${n.writerId}</td>
 						<td>${n.regdate}</td>
 						<td>${n.hit}</td>
@@ -56,37 +59,37 @@
 					
 					</tbody>
 				</table>
-			</div>
+			</div>			
+			
+			<c:set var="totalRecord" value ="${pDTO.totalRecord}"></c:set>
+			<c:set var="perPage" value ="${pDTO.perPage}"></c:set>
+			<c:set var="totalPage" value ="${totalPage}"></c:set>
+			
+			<c:forEach var="i" begin="1" end="${totalPage}">
+				<a href="QnABoardList?curPage=${i}">${i}</a><span>  </span>
+			</c:forEach>
+			
 			
 			<div>
-				<h3>현재 페이지</h3>
-				<div><span>1</span> / 1 pages</div>
-			</div>
-		
-			<div>					
-				<span onclick="alert('이전 페이지가 없습니다.');">이전</span>				
-			</div>
-			<ul>
-				<li><a href="?p=1&t=&q=" >1</a></li>						
-			</ul>
-			<div>				
-				<span onclick="alert('다음 페이지가 없습니다.');">다음</span>				
-			</div>
-			
-			<div>
-				<button id="writeButton">글쓰기</button>
+				<button id="writeQButton">문의글 작성</button>
+				
 			</div>
 	
 		</main>			
 		</div>
 	</div> 
 	<script>
-	var writeButton = document.querySelector("#writeButton");
+	var writeQButton = document.querySelector("#writeQButton");
 	function moveWrite(){
 		location.href = "/hifive/noticeWrite";
 	}              
-	writeButton.addEventListener("click",moveWrite);
+	writeQButton.addEventListener("click",moveWrite);
 	
+	var writeAButton = document.querySelector("#writeQButton");
+	function moveWrite(){
+		location.href = "/hifive/noticeWrite";
+	}              
+	writeAButton.addEventListener("click",moveWrite);
 	
 	
 	

@@ -74,14 +74,14 @@
 	<script>
 	var ListButton = document.querySelector("#ListButton");
 	function moveList(){
-		location.href = "/hifive/noticeList";
+		location.href = "/hifive/board/noticeList?curPage=1";
 	}              
 	ListButton.addEventListener("click",moveList);
 	var id = document.querySelector("#writeNum").innerText;
 	console.log(id);
 	var DeleteButton = document.querySelector("#DeleteButton");
 	function moveDelete(){		
-		location.href = `/hifive/noticeDelete?id=\${id}`;		
+		location.href = `/hifive/board/noticeDelete?id=\${id}`;		
 	}              
 	DeleteButton.addEventListener("click",moveDelete);
 	

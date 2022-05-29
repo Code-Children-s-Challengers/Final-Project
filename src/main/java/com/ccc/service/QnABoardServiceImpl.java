@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.ccc.dao.QnABoardDAO;
 import com.ccc.dto.QnABoardDTO;
+import com.ccc.dto.QnABoardPageDTO;
 
 @Repository("QnABoardService")
 public class QnABoardServiceImpl implements QnABoardService {
@@ -17,7 +18,7 @@ public class QnABoardServiceImpl implements QnABoardService {
 	
 	@Override
 	public List<QnABoardDTO> selectAllQnA() throws Exception {
-		List<QnABoardDTO> list = dao.selectAllQnA();
+		List<QnABoardDTO> list = dao.selectAllQnABoard();
 		return list;
 	}
 
@@ -37,6 +38,12 @@ public class QnABoardServiceImpl implements QnABoardService {
 	public int insertQnABoard(QnABoardDTO dto) throws Exception {
 		int num = dao.insertQnABoard(dto);
 		return num;
+	}
+
+	@Override
+	public QnABoardPageDTO selectQnABoardPage(int curPage) throws Exception {
+		QnABoardPageDTO list = dao.selectQnABoardPage(curPage);
+		return list;
 	}
 
 }

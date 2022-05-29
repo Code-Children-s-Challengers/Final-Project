@@ -40,5 +40,13 @@
       select count(*)
       from notice     
     </select>
+    
+    <update id="hitChange" parameterType="int">
+    	update notice
+    	set hit = hit + 1
+    	where id = #{id}
+    </update>
+    
+    
 	
 </mapper>

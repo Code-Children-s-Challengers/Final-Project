@@ -4,6 +4,6 @@
   
 	<!-- --------------------------- <body> --------------------------------------- -->
 <script>
-  alert("공지사항 삭제 성공");
-  location.href="/hifive/noticeList";
+  alert("공지사항  삭제 성공");
+  location.href="noticeList?curPage=1";
 </script>

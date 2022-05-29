@@ -5,12 +5,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>notice</title>
+<title>QnABoard</title>
 </head>
 <body>
 <div>
-<jsp:include page="common/menu.jsp" flush="true"/><br>
+<jsp:include page="../common/menu.jsp" flush="true"/><br>
 </div>
-<jsp:include page="notice/QnABoard.jsp" flush="true"/><br>
+<jsp:include page="QnABoard/QnABoardContent.jsp" flush="true"/><br>
 </body>
 </html>

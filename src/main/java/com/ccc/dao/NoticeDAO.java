@@ -23,7 +23,7 @@ public class NoticeDAO {
 		return session.selectList("com.config.NoticeMapper.selectAllNotice");
 	}
 	
-	public NoticeDTO selectNoticeContent(int id) throws Exception{
+	public NoticeDTO selectNoticeContent(int id) throws Exception{		
 		return session.selectOne("com.config.NoticeMapper.selectNoticeContent", id);
 	}	
 	
@@ -35,12 +35,16 @@ public class NoticeDAO {
 		return session.insert("com.config.NoticeMapper.insertNotice", dto);
 	}
 	
-	public int totalCount() {
+	public int totalCount() throws Exception{
 		return session.selectOne("com.config.NoticeMapper.totalCount");
 	}	
 	
+	public int hitChange(int id) throws Exception{
+		return session.update("com.config.NoticeMapper.hitChange", id);
+	}
+	
 						
-	public NoticePageDTO selectNoticePage(int curPage) {
+	public NoticePageDTO selectNoticePage(int curPage) throws Exception {
 	
 		NoticePageDTO pDTO = new NoticePageDTO();
 		int perPage = pDTO.getPerPage();

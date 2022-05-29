@@ -23,6 +23,7 @@ public class NoticeServiceImpl implements NoticeService {
 
 	@Override
 	public NoticeDTO selectNoticeContent(int id) throws Exception {
+		dao.hitChange(id);
 		NoticeDTO dto = dao.selectNoticeContent(id);
 		return dto;
 	}
