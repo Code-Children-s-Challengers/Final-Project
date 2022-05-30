@@ -8,8 +8,8 @@
 <title>추가 회원가입 페이지</title>
 </head>
 <body>
-<h1>추가 회원가입 페이지</h1>
-<hr/>
+<jsp:include page="common/menu.jsp" flush="true"/><br>
+<hr>
 <jsp:include page="member/additionalInfoForm.jsp" flush="true"/><br>
 </body>
 </html>

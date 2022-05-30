@@ -14,7 +14,8 @@
 	p{
 		text-align: center;
 	}
-	a{
+	a{		
+		display: inline-block;
 		text-align: center;
 	}
 </style>

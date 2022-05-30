@@ -38,7 +38,8 @@ public class LoginController {
 	// SNS 로그인 시 추가정보를 입력해야 합니다
 	@Secured("ROLE_USER")
 	@PostMapping("/additionalInfo")
-	public String additonalInfo(@AuthenticationPrincipal PrincipalDetails principalDetails, String nickname, String phoneNumber) {
+	public String additonalInfo(@AuthenticationPrincipal PrincipalDetails principalDetails, String nickname, String phone1, String phone2, String phone3) {
+		String phoneNumber = phone1+phone2+phone3;
 		System.out.println(nickname);
 		System.out.println(phoneNumber);
 		
@@ -57,7 +58,7 @@ public class LoginController {
 		uService.updateNickname(nicknameMap);
 		uService.updatePhoneNumber(phoneNumberMap);
 		
-		return "member/additionalInfoSuccess";
+		return "redirect:/member/myPage";
 	}
 	
 	@Secured("ROLE_USER")

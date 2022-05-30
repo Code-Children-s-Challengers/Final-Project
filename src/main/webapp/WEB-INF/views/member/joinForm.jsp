@@ -3,6 +3,8 @@
 <%@page import="com.ccc.dto.ChallengeDTO"%>
 <%@page import="java.util.List"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+
 <h1>회원가입 페이지</h1>
 <form action="/hifive/join" method="POST">
 	<fieldset class="fieldarea f1" >
@@ -118,6 +120,21 @@
 	</div>
 </form>
 
+<style>
+	table{
+	width: 100%;
+    border-collapse: collapse;
+	}
+	th, td {
+    border-bottom: 1px solid #444444;
+    padding: 10px;
+  	}
+  	fieldset{
+  	width:1000px;
+ 	 }
+ 
+</style>
+
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="/hifive/js/checkId.js"></script>
 <script src="/hifive/js/checkPassword.js"></script>
@@ -134,17 +151,3 @@
 	});
 	
 </script>
-<style>
-	table{
-	width: 100%;
-    border-collapse: collapse;
-	}
-	th, td {
-    border-bottom: 1px solid #444444;
-    padding: 10px;
-  	}
-  	fieldset{
-  	width:1000px;
- 	 }
- 
-</style>
