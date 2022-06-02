@@ -3,7 +3,7 @@ create table notice
   id number primary key,
   title nvarchar2(100),
   writer_id NVARCHAR2(50),
-  content clob,
+  content NVARCHAR2(1000),,
   regdate timestamp,
   hit number,
   files nvarchar2(1000)
@@ -11,3 +11,9 @@ create table notice
 
 insert into notice
 VALUES (1, 'test', 'test', 'test', sysdate, 999, 'test');
+
+create sequence notice_id_seq 
+START WITH 1
+INCREMENT BY 1;
+
+회원정보와 아직은 미연동된 DB

@@ -1,0 +1,20 @@
+create table qnaBoard
+(
+  id number primary key,
+  title nvarchar2(100),
+  writer_id NVARCHAR2(50),
+  qcontent NVARCHAR2(1000),
+  acontent NVARCHAR2(1000),
+  regdate timestamp,
+  hit number,
+  files nvarchar2(1000)
+);
+
+create sequence challenge_no_seq
+    START WITH 1
+    INCREMENT BY 1;
+    
+insert into qnaboard
+values (qnaboard_id_seq.nextval,'test','test','test','test',SYSDATE,0,'test');
+
+회원정보와 아직은 미연동된 DB 
