@@ -8,7 +8,7 @@ public class NoticePageDTO {
 	
 	List<NoticeDTO> list;
 	int curPage; // 현재 페이지
-	int perPage = 3; // 페이지 당 보여줄 개수
+	int perPage = 5; // 페이지 당 보여줄 개수
 	int totalCount;
 	
 	public List<NoticeDTO> getList() {

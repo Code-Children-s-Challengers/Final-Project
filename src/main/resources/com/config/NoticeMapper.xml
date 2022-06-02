@@ -47,6 +47,23 @@
     	where id = #{id}
     </update>
     
+    <select id="searchNotice" parameterType="noticeDTO" resultType = "NoticeDTO">
+   		select *
+   		from notice
+   		<choose>
+   			<when test="type != null and type.equals('title')">
+	   		where title like ('%' || #{keyword} || '%') 	   		    
+	   		</when>
+	   		
+	   		<when test="type != null and type.equals('writerId')">
+	   		where writerId = #{keyword}	   		
+	   		</when> 
+   		</choose>
+    
+    </select>
+    
+    
+    
     
 	
 </mapper>

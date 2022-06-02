@@ -24,6 +24,7 @@ public class QnABoardServiceImpl implements QnABoardService {
 
 	@Override
 	public QnABoardDTO selectQnABoardContent(int id) throws Exception {
+		dao.hitChange(id);
 		QnABoardDTO dto = dao.selectQnABoardContent(id);
 		return dto;
 	}
@@ -35,8 +36,8 @@ public class QnABoardServiceImpl implements QnABoardService {
 	}
 
 	@Override
-	public int insertQnABoard(QnABoardDTO dto) throws Exception {
-		int num = dao.insertQnABoard(dto);
+	public int insertQnABoard(QnABoardDTO saveDTO) throws Exception {
+		int num = dao.insertQnABoard(saveDTO);
 		return num;
 	}
 
@@ -44,6 +45,18 @@ public class QnABoardServiceImpl implements QnABoardService {
 	public QnABoardPageDTO selectQnABoardPage(int curPage) throws Exception {
 		QnABoardPageDTO list = dao.selectQnABoardPage(curPage);
 		return list;
+	}
+
+	@Override
+	public List<QnABoardDTO> searchQnABoard(QnABoardDTO dto) throws Exception {
+		List<QnABoardDTO> list = dao.searchQnABoard(dto);
+		return list;
+	}
+
+	@Override
+	public QnABoardDTO checkAnswer(int id) throws Exception {
+		QnABoardDTO cdto = dao.checkAnswer(id);
+		return cdto;
 	}
 
 }

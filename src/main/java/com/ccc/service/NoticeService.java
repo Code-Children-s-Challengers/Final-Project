@@ -11,4 +11,6 @@ public interface NoticeService {
 	public int insertNotice(NoticeDTO dto) throws Exception;
 	public int deleteNotice(int id)throws Exception;
 	public NoticePageDTO selectNoticePage(int curPage) throws Exception;
+	public List<NoticeDTO> searchNotice(NoticeDTO dto) throws Exception;
+	
 }

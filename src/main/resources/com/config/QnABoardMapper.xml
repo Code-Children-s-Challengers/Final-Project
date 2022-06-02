@@ -17,17 +17,16 @@
 	</select>	
 	
 	<insert id="insertQnABoard" parameterType="QnABoardDTO">
-		insert into QnABoard(id,title,writerid,qcontent,acontent,regdate,hit,files)
+		insert into QnABoard(id,title,writerId,qcontent,acontent,regdate,hit,files)
 		values (QnABoard_seq.nextval,
 				#{title},
-				#{writerid},
+				#{writerId},
 				#{qcontent},
 				#{acontent},							
 				#{regdate},
-				#{hit},	
+				0,	
 				#{files}
-				)
-		
+				)		
 	</insert>
 	
 	<delete id="deleteQnABoard" parameterType="int">
@@ -40,6 +39,34 @@
       select count(*)
       from QnABoard   
     </select>
+    
+    <update id="hitChange" parameterType="int">
+    	update qnaBoard
+    	set hit = hit + 1
+    	where id = #{id}
+    </update>
+    
+    <select id="searchQnABoard" parameterType="QnABoardDTO" resultType = "QnABoardDTO">
+   		select *
+   		from QnABoard
+   		<choose>
+   			<when test="type != null and type.equals('title')">
+	   		where title like ('%' || #{keyword} || '%') 	   		    
+	   		</when>
+	   		
+	   		<when test="type != null and type.equals('writerId')">
+	   		where writerId = #{keyword}	   		
+	   		</when> 
+   		</choose>
+    
+    </select>
+    
+    <select id="checkAnswer" resultType = "QnABoardDTO" parameterType="int">
+    	select acontent
+    	from qnaboard
+    	where id = ${id}
+    </select>
+    
 </mapper>
 
 

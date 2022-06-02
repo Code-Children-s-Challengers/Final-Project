@@ -1,6 +1,6 @@
 <%@page import="java.util.List"%>
-<%@page import="com.ccc.dto.NoticeDTO"%>
-<%@page import="com.ccc.dto.NoticePageDTO"%>
+<%@page import="com.ccc.dto.QnABoardDTO"%>
+<%@page import="com.ccc.dto.QnABoardPageDTO"%>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -12,19 +12,7 @@
 		<div>
 		<main>
 			<h2>공지사항</h2>					
-			<h3>공지사항 검색</h3>
-			<form id="searchButton">
-				<fieldset>					
-					<label>검색분류</label>
-					<select name="type">
-						<option  value="title">제목</option>
-						<option  value="writerId">작성자</option>
-					</select> 
-					<label>검색어</label>
-					<input type="text" name="keyword" value=""/>
-					<input type="submit" value="검색" />
-				</fieldset>
-			</form>			
+			<a href="QnABoardList?curPage=1"><h3>리스트로 돌아가기</h3></a>			
 			
 			<div>
 				<h3>공지사항 목록</h3>
@@ -42,14 +30,14 @@
 					<tbody>							
 
 					<% 
-					NoticePageDTO pDTO = (NoticePageDTO)request.getAttribute("list");
-					List<NoticeDTO> list = pDTO.getList();
-					for(NoticeDTO n : list) {
+					List<QnABoardDTO> list = (List<QnABoardDTO>)request.getAttribute("searchList");
+					
+					for(QnABoardDTO n : list) {
 						pageContext.setAttribute("n", n);
 					%>
 					<tr>
 						<td>${n.id}</td>						
-						<td><a href="noticeContent?id=${n.id}">${n.title}</a></td>
+						<td><a href="QnABoardContent?id=${n.id}">${n.title}</a></td>
 						<td>${n.writerId}</td>
 						<td>${n.regdate}</td>
 						<td>${n.hit}</td>
@@ -65,7 +53,7 @@
 			<c:set var="totalPage" value ="${totalPage}"></c:set>
 			
 			<c:forEach var="i" begin="1" end="${totalPage}">
-				<a href="noticeList?curPage=${i}">${i}</a><span>  </span>
+				<a href="QnABoardList?curPage=${i}">${i}</a><span>  </span>
 			</c:forEach>
 			
 			
@@ -76,30 +64,13 @@
 		</main>			
 		</div>
 	</div> 
-	
 	<script>
 	var writeButton = document.querySelector("#writeButton");
 	function moveWrite(){
-		location.href = "noticeWrite";
+		location.href = "/hifive/QnABoardWrite";
 	}              
 	writeButton.addEventListener("click",moveWrite);
 	
-	
-	var searchButton = document.querySelector("#searchButton");
-	function moveSearch(event){
-		event.preventDefault();
-		var mesg = "";
-		
-		
-		var type = searchButton[1].value;
-		var keyword = searchButton[2].value;
-		mesg = "type=" + type + "&" + "keyword=" + keyword;
-		console.log(type);
-		console.log(keyword);
-		
-		location.href = `noticeSearch?\${mesg}`;
-	}
-	searchButton.addEventListener("submit",moveSearch);
 	
 	
 	

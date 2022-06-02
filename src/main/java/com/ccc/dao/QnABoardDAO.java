@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 
 import com.ccc.dto.QnABoardPageDTO;
+import com.ccc.dto.NoticeDTO;
 import com.ccc.dto.QnABoardDTO;
 
 @Repository("QnABoardDAO")
@@ -29,8 +30,8 @@ public class QnABoardDAO {
 		return session.delete("com.config.QnABoardMapper.deleteQnABoard",id);
 	}
 
-	public int insertQnABoard(QnABoardDTO dto) throws Exception {
-		return session.insert("com.config.QnABoardMapper.insertQnABaord", dto);
+	public int insertQnABoard(QnABoardDTO saveDTO) throws Exception {
+		return session.insert("com.config.QnABoardMapper.insertQnABoard", saveDTO);
 	}
 	
 	public int totalCount() {
@@ -54,4 +55,17 @@ public class QnABoardDAO {
 		
 		return pDTO;
 	}
+	
+	public int hitChange(int id) throws Exception{
+		return session.update("com.config.QnABoardMapper.hitChange", id);
+	}
+	
+	public List<QnABoardDTO> searchQnABoard(QnABoardDTO dto) throws Exception{
+		return session.selectList("com.config.QnABoardMapper.searchQnABoard",dto);
+	}
+	
+	public QnABoardDTO checkAnswer(int id) throws Exception{
+		return session.selectOne("com.config.QnABoardMapper.checkAnswer",id);
+	}
+	
 }
