@@ -13,6 +13,8 @@ import com.ccc.dto.CPhotoDTO;
 import com.ccc.dto.ChallengeDTO;
 import com.ccc.dto.PageDTO;
 import com.ccc.dto.PhotoPageDTO;
+import com.ccc.dto.ReportDTO;
+import com.ccc.dto.ReportPageDTO;
 
 @Repository("memberService")
 public class ChallengeServiceImpl implements ChallengeService {
@@ -98,21 +100,21 @@ public class ChallengeServiceImpl implements ChallengeService {
 	}
 
 	@Override
-	public int searchReport(String cnum, String unum, String uploaddate) throws Exception {
-		int num = dao.searchReport(cnum, unum, uploaddate);
+	public int ReportAdd(String cnum, String unum, String uploaddate, String reportnum) throws Exception {
+		int num = dao.ReportAdd(cnum, unum, uploaddate,reportnum);
 		return num;
 	}
 
 	@Override
-	public int ReportAdd(String cnum, String unum, String uploaddate) throws Exception {
-		int num = dao.ReportAdd(cnum, unum, uploaddate);
+	public int ReportCheck(String cnum, String unum, String uploaddate, String reportnum) throws Exception {
+		int num = dao.ReportCheck(cnum, unum, uploaddate, reportnum);
 		return num;
 	}
 
 	@Override
-	public int ReportUpdate(String cnum, String unum, String uploaddate) throws Exception {
-		int num = dao.ReportUpdate(cnum, unum, uploaddate);
-		return num;
+	public ReportPageDTO allCertificationReport(int curPage, int perPage) throws Exception {
+		ReportPageDTO list = dao.allCertificationReport(curPage, perPage);
+		return list;
 	}
 
 }

@@ -8,6 +8,8 @@ import com.ccc.dto.CPhotoDTO;
 import com.ccc.dto.ChallengeDTO;
 import com.ccc.dto.PageDTO;
 import com.ccc.dto.PhotoPageDTO;
+import com.ccc.dto.ReportDTO;
+import com.ccc.dto.ReportPageDTO;
 
 
 public interface ChallengeService {
@@ -23,7 +25,7 @@ public interface ChallengeService {
 	public ChallengeDTO searchChallengeByNum(int cnum) throws Exception;
 	public int certificationAdd(CPhotoDTO dto) throws Exception;
 	public int photoDelete(String cnum, String unum, String uploaddate) throws Exception;
-	public int searchReport(String cnum, String unum, String uploaddate) throws Exception;
-	public int ReportAdd(String cnum, String unum, String uploaddate) throws Exception;
-	public int ReportUpdate(String cnum, String unum, String uploaddate) throws Exception;
+	public int ReportAdd(String cnum, String unum, String uploaddate, String reportnum) throws Exception;
+	public int ReportCheck(String cnum, String unum, String uploaddate, String reportnum) throws Exception;
+	public ReportPageDTO allCertificationReport(int curPage, int perPage) throws Exception;
 }

@@ -14,6 +14,8 @@ import com.ccc.dto.CPhotoDTO;
 import com.ccc.dto.ChallengeDTO;
 import com.ccc.dto.PageDTO;
 import com.ccc.dto.PhotoPageDTO;
+import com.ccc.dto.ReportDTO;
+import com.ccc.dto.ReportPageDTO;
 
 @Repository("ChallengeDAO")
 public class ChallengeDAO {
@@ -34,6 +36,10 @@ public class ChallengeDAO {
 	
 	public int photoNumber(HashMap<String, Integer> map) throws Exception{
 		return session.selectOne("com.config.ChallengeMapper.photoNumber", map);
+	}
+	
+	public int reportNumber() throws Exception{
+		return session.selectOne("com.config.ChallengeMapper.reportNumber");
 	}
 	
 	public List<ChallengeDTO> allChallenge() throws Exception{
@@ -136,28 +142,37 @@ public class ChallengeDAO {
 		return session.delete("com.config.ChallengeMapper.photoDelete", map);
 	}
 	
-	public int searchReport(String cnum, String unum, String uploaddate) throws Exception{
+	public int ReportCheck(String cnum, String unum, String uploaddate, String reportnum) throws Exception{
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("cnum", cnum);
 		map.put("unum", unum);
 		map.put("uploaddate", uploaddate);
-		return session.selectOne("com.config.ChallengeMapper.searchReport", map);
+		map.put("reportnum", reportnum);
+		return session.insert("com.config.ChallengeMapper.ReportCheck", map);
 	}
 	
-	public int ReportAdd(String cnum, String unum, String uploaddate) throws Exception{
+	public int ReportAdd(String cnum, String unum, String uploaddate, String reportnum) throws Exception{
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("cnum", cnum);
 		map.put("unum", unum);
 		map.put("uploaddate", uploaddate);
-		return session.insert("com.config.ChallengeMapper.ReportAdd", map);
-	}
-	
-	public int ReportUpdate(String cnum, String unum, String uploaddate) throws Exception{
-		HashMap<String, String> map = new HashMap<String, String>();
-		map.put("cnum", cnum);
-		map.put("unum", unum);
-		map.put("uploaddate", uploaddate);
+		map.put("reportnum", reportnum);
 		return session.update("com.config.ChallengeMapper.ReportUpdate", map);
+	}
+	
+	public ReportPageDTO allCertificationReport(int curPage, int perPage) throws Exception{
+		ReportPageDTO pageDTO = new ReportPageDTO();
+		int offset = (curPage-1)*perPage;
+		List<ReportDTO> list = session.selectList("com.config.ChallengeMapper.allCertificationReport", null, new RowBounds(offset,perPage));
+		
+		int totalRecord = reportNumber();
+		
+		pageDTO.setList(list);
+		pageDTO.setCurPage(curPage);
+		pageDTO.setTotalRecord(totalRecord);
+		
+		
+		return pageDTO;
 	}
 	
 }

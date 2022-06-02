@@ -97,22 +97,27 @@
 		where cnum = #{cnum} and unum = #{unum} and uploaddate = #{uploaddate}
 	</delete>
 	
-	<select id="searchReport" resultType="int" parameterType="hashmap">
-		select count(*)
-		from verifyreport
-		where cnum = #{cnum} and unum = #{unum} and uploaddate = #{uploaddate}
-	</select>
-	
 	<insert id="ReportAdd" parameterType="hashmap">
-		insert into verifyreport (cnum,unum,uploaddate)
-		values (#{cnum},#{unum},#{uploaddate})
+		insert into verifyreport (cnum,unum,uploaddate,reportnum)
+		values (#{cnum},#{unum},#{uploaddate},#{reportnum})
 	</insert>
 	
-	<update id="ReportUpdate" parameterType="hashmap">
-		update verifyreport
-		set num = num+1
-		where cnum = #{cnum} and unum = #{unum} and uploaddate = #{uploaddate}
-	</update>
+	<select id="ReportCheck" resultType="int" parameterType="hashmap">
+		select count(*)
+		from verifyreport
+		where cnum = #{cnum} and unum = #{unum} and uploaddate = #{uploaddate} and reportnum = #{reportnum}
+	</select>
+	
+	<select id="allCertificationReport" resultType="ReportDTO">
+		select cnum, unum, uploaddate, count(*) as cnt
+		from verifyreport
+		group by cnum, unum, uploaddate
+	</select>
+	
+	<select id="reportNumber" resultType="int">
+		select count(*)
+		from verifyreport
+	</select>
 	
 	
 </mapper>

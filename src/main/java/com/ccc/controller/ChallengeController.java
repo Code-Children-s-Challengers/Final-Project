@@ -34,6 +34,7 @@ import com.ccc.dto.ChallengeDTO;
 import com.ccc.service.ChallengeService;
 import com.ccc.dto.PageDTO;
 import com.ccc.dto.PhotoPageDTO;
+import com.ccc.dto.ReportPageDTO;
 
 @Controller
 public class ChallengeController {
@@ -328,19 +329,15 @@ public class ChallengeController {
 	
 	@RequestMapping(value="/challengeReport", method = RequestMethod.POST)
 	@ResponseBody
-	public String challengeReport(@RequestParam String unum, @RequestParam String cnum, @RequestParam String date) throws Exception{
+	public String challengeReport(@AuthenticationPrincipal PrincipalDetails principalDetails, @RequestParam String unum, @RequestParam String cnum, @RequestParam String date) throws Exception{
+		String reportnum = Integer.toString(principalDetails.getUser().getId());
 		int num = 0;
 		date = date.substring(2, 4)+"/"+date.substring(5, 7)+"/"+date.substring(8, 10);
-		num = Cservice.searchReport(cnum, unum, date);
+		num = Cservice.ReportCheck(cnum, unum, date, reportnum);
 		if(num >= 1) {
-			num = Cservice.ReportUpdate(cnum, unum, date);
-			if(num >= 1) {
-				return "success";
-			}else {
-				return "fail";
-			}
+			return "already reported";
 		}else {
-			num = Cservice.ReportAdd(cnum, unum, date);
+			num = Cservice.ReportAdd(cnum, unum, date,reportnum);
 			if(num >= 1) {
 				return "success";
 			}else {
@@ -349,8 +346,38 @@ public class ChallengeController {
 		}
 	}
 //////////////////////////////////////////////////////////////////////////////////내 challenge 페이지
+// report page
+	@RequestMapping(value="/checkCertificationReport", method = RequestMethod.GET)
+	public String checkCertificationReport(Model m, HttpServletRequest request, @AuthenticationPrincipal PrincipalDetails principalDetails) throws Exception{
+		String reportnum = Integer.toString(principalDetails.getUser().getId()); // 관리자 권한 확인용
+		
+		String curPage = request.getParameter("curPage");
+		String perPage = request.getParameter("perPage");
+		int unum = principalDetails.getUser().getId();
 
-	
+		if(curPage == null) {
+			curPage = "1";
+		}
+		int pp = 10; // perPage
+		if(perPage != null) {			
+			pp = Integer.parseInt(perPage);
+		}
+		
+		ReportPageDTO dto = Cservice.allCertificationReport(Integer.parseInt(curPage),pp);
+		dto.setPerPage(pp);
+		int tot = dto.getTotalRecord() / dto.getPerPage();
+		if(dto.getTotalRecord() % dto.getPerPage() != 0) tot++;
+
+		m.addAttribute("curPage", curPage);
+		m.addAttribute("perPage", pp);
+		m.addAttribute("totalPage", tot);
+		m.addAttribute("PageDTO", dto);
+		
+		
+		return "ReportList";
+	}
+
+// report page
 	
 	// 에러처리
 	@ExceptionHandler({Exception.class})
