@@ -47,7 +47,6 @@ public class ChallengeController {
 		String curPage = request.getParameter("curPage");
 		String perPage = request.getParameter("perPage");
 		int unum = principalDetails.getUser().getId();
-		
 		if(category == null) {
 			category = "study";
 		}
