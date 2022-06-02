@@ -31,3 +31,7 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### email ###
+src/main/resources/email.properties
+src/main/resources/sms.properties
