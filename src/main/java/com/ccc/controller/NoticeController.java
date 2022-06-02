@@ -1,8 +1,6 @@
 package com.ccc.controller;
 
-import java.util.Collection;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -11,10 +9,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ccc.dto.NoticeDTO;
 import com.ccc.dto.NoticePageDTO;
-import com.ccc.dto.PageDTO;
 import com.ccc.service.NoticeService;
 
 @Controller
@@ -77,6 +75,26 @@ public class NoticeController {
 		
 		int num = service.insertNotice(dto);		
 		return 0;
+	}
+	
+	@GetMapping(value="/board/noticeSearch")	
+	public String noticeSerach(@RequestParam("type") String type,
+							   @RequestParam("keyword") String keyword,
+			Model m) throws Exception{
+		
+		System.out.println("type:" + type);
+		System.out.println(keyword);
+		
+		NoticeDTO sDTO = new NoticeDTO();
+		
+		sDTO.setType(type);
+		sDTO.setKeyword(keyword);
+		
+		List<NoticeDTO> searchList = service.searchNotice(sDTO);
+		
+		m.addAttribute("searchList", searchList);
+		
+		return "board/noticeSearch";
 	}
 	
 	

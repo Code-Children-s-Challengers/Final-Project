@@ -47,4 +47,10 @@ public class NoticeServiceImpl implements NoticeService {
 		return list;
 	}
 
+	@Override
+	public List<NoticeDTO> searchNotice(NoticeDTO dto) throws Exception {
+		List<NoticeDTO> list = dao.searchNotice(dto);
+		return list;
+	}
+
 }

@@ -15,18 +15,20 @@
 								<tr>
 									<th>작성번호</th>
 									<td id = "writeNum"colspan="3">${n.id}</td>
+									<th>작성자</th>
+									<td>${n.writerId}</td>		
+									<th>작성일</th>
+									<td colspan="3">${n.regdate}	</td>
 								</tr>
 								<tr>
 									<th>제목</th>
 									<td colspan="3">${n.title}</td>
 								</tr>
 								<tr>
-									<th>작성일</th>
-									<td colspan="3">${n.regdate}	</td>
+									
 								</tr>
 								<tr>
-									<th>작성자</th>
-									<td>${n.writerId}</td>									
+																
 								</tr>
 															
 								<tr>
@@ -43,39 +45,33 @@
 								</tr>
 							</tbody>
 						</table>
-					</div>
+					</div>	
+			<div>											
+			
+			
+			<div>
+				<table>
+					<tbody>								
+						<tr>
+							<th>다음글</th>
+							<td colspan="3">다음글제목</td>
+							<th>이전글</th>
+							<td colspan="3"  ><a href="">이전글제목</a></td>
 					
-					<div>
-						<span>
-							<button id="ListButton">목록</button>
-							<button id="DeleteButton">글 삭제</button>
-							<button id="writeAButton">문의글 답변하기</button>
-						</span>
-					</div>					
-					
-					<div>
-						<table>
-							<tbody>								
-								<tr>
-									<th>다음글</th>
-									<td colspan="3">다음글제목</td>
-								</tr>							
-								
-								
-								<tr>
-									<th>이전글</th>
-									<td colspan="3"  ><a href="">이전글제목</a></td>
-								</tr>								
-							</tbody>					
-						</table>
-						
-					
-					</div>			
+						</tr>								
+					</tbody>					
+				</table>					
+			</div>
+			
+			<div>
+				<span>
+					<button id="ListButton">목록</button>
+					<button id="DeleteButton">글 삭제</button>							
+				</span>
+			</div>			
 					
 			</main>		
-			
-		</div>
-	</div>
+	
 	<script>
 	var ListButton = document.querySelector("#ListButton");
 	function moveList(){

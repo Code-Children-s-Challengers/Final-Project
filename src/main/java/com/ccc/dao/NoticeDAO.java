@@ -45,7 +45,11 @@ public class NoticeDAO {
 	
 						
 	public NoticePageDTO selectNoticePage(int curPage) throws Exception {
-	
+		
+		if(curPage==0) {
+			curPage = 1;
+		}
+		
 		NoticePageDTO pDTO = new NoticePageDTO();
 		int perPage = pDTO.getPerPage();
 		int offset = (curPage - 1) * perPage;
@@ -62,4 +66,7 @@ public class NoticeDAO {
 		return pDTO;
 	}
 	
+	public List<NoticeDTO> searchNotice(NoticeDTO dto) throws Exception{
+		return session.selectList("com.config.NoticeMapper.searchNotice",dto);
+	}
 }

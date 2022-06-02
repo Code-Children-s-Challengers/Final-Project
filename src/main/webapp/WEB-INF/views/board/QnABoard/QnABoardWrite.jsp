@@ -6,21 +6,18 @@
 	<div>
 		<div>
 		<main>
-			<h2>공지사항 작성하기</h2>
+			<h2>문의사항 작성하기</h2>
 			<form id="noticeSave" method="GET">
 				<table>
-					<tbody>
-						<tr>
-							<th>작성자</th>
-							<td><input type="text" value="" size="80"/></td>
-						</tr>
+					<tbody>						
 						<tr>
 							<th>제목</th>
-							<td><input type="text" value="" size="80"></td>
+							<td><input type="text" id="title" name = "title" value=""  placeholder="제목을 입력하세요" size="30"></td>
 						</tr>
 						<tr>
 							<th>내용</th>
-							<td><input type="text" value="" size="80"></td>
+							<td><textarea id="qcontent" name="qcontent" placeholder="내용을 입력하세요" style="height:100px; width:100%"; ></textarea>
+					 </div></td>
 						</tr>
 						<!-- 
 						<tr>
@@ -31,44 +28,37 @@
 						
 						<tr>
 							<td><button id="noticeSave">글 저장</button></td>
+									
 						</tr>	
 						
 					</tbody>
 				</table>
 			</form>		
-			
-			<div>
-				<span>
-					<button id="ListButton">목록</button>					
-				</span>
-			</div>		
-	
+			<td><button id="ListButton">목록</button></td>	
 		</main>			
 		</div>
 	</div> 
 	<script>
 		var noticeSave = document.querySelector("#noticeSave");		
 		
-		function noticeInsert(event){			
+		function QnABoardInsert(event){			
 			event.preventDefault();
-			var mesg = "";
-			var writerId = noticeSave[0].value;
-			var title = noticeSave[1].value;
-			var content = noticeSave[2].value;
-			//var files = noticeSave[3].value;
-			console.log(writerId);
+			var mesg = "";			
+			var title = noticeSave[0].value;
+			var qcontent = noticeSave[1].value;
+			//var files = noticeSave[2].value;			
 			console.log(title);
-			console.log(content);			
+			console.log(qcontent);			
 			
-			mesg = "writerId=" + writerId + "&" + "title=" + title + "&" + "content=" + content;			
-			location.href = `/hifive/noticeWriteInsert?\${mesg}`;
+			mesg = "title=" + title + "&" + "qcontent=" + qcontent;			
+			location.href = `/hifive/board/QnABoardWriteInsert?\${mesg}`;
 			
 		}		
-		noticeSave.addEventListener("submit",noticeInsert);
+		noticeSave.addEventListener("submit",QnABoardInsert);
 		
 		var ListButton = document.querySelector("#ListButton");
 		function moveList(){
-			location.href = "/hifive/noticeList";
+			location.href = "/hifive/board/QnABoardList?curPage=1";
 		}              
 		ListButton.addEventListener("click",moveList);
 	</script>

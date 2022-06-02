@@ -1,4 +1,5 @@
 <%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="com.ccc.dto.QnABoardDTO"%>
 <%@page import="com.ccc.dto.QnABoardPageDTO"%>
 
@@ -13,15 +14,15 @@
 		<main>
 			<h2>문의하기 게시판</h2>					
 			<h3>문의사항 검색</h3>
-			<form>
+			<form id="searchButton">
 				<fieldset>					
 					<label>검색분류</label>
-					<select name="f">
+					<select name="type">
 						<option  value="title">제목</option>
 						<option  value="writerId">작성자</option>
 					</select> 
 					<label>검색어</label>
-					<input type="text" name="q" value=""/>
+					<input type="text" name="keyword" value=""/>
 					<input type="submit" value="검색" />
 				</fieldset>
 			</form>			
@@ -37,25 +38,50 @@
 							<th>작성일</th>
 							<th>조회수</th>
 							<th>답변여부</th>
+							<th>답변달기</th>
 						</tr>
 					</thead>
 					
-					<tbody>							
-
+					<tbody>						
+					
+					
+					
 					<% 
 					QnABoardPageDTO pDTO = (QnABoardPageDTO)request.getAttribute("list");
 					List<QnABoardDTO> list = pDTO.getList();
+					ArrayList<String> answers = (ArrayList<String>)request.getAttribute("resultAnswer");
+					int i = 0;
+					
 					for(QnABoardDTO n : list) {
 						pageContext.setAttribute("n", n);
+												
 					%>
 					<tr>
 						<td>${n.id}</td>						
 						<td><a href="QnABoardContent?id=${n.id}">${n.title}</a></td>
 						<td>${n.writerId}</td>
 						<td>${n.regdate}</td>
-						<td>${n.hit}</td>
+						<td>${n.hit}</td>						
+						<%
+						int j = 0;
+							for(String answer : answers){
+								pageContext.setAttribute("answer", answer);
+							
+								if(j == i){
+								%>
+									<td>${answer}</td>
+								<%		
+								System.out.println(j);																
+							}
+							j ++;
+						}%>
+												
+						<td><button id="writeAButton">작성</button>
 					</tr>							
-					<% } %>
+					
+					<% 
+					
+					i ++;} %>
 					
 					</tbody>
 				</table>
@@ -80,16 +106,33 @@
 	</div> 
 	<script>
 	var writeQButton = document.querySelector("#writeQButton");
-	function moveWrite(){
-		location.href = "/hifive/noticeWrite";
+	function moveQWrite(){
+		location.href = "/hifive/board/QnABoardWrite";
 	}              
-	writeQButton.addEventListener("click",moveWrite);
+	writeQButton.addEventListener("click",moveQWrite);
 	
-	var writeAButton = document.querySelector("#writeQButton");
-	function moveWrite(){
-		location.href = "/hifive/noticeWrite";
+	var writeAButton = document.querySelector("#writeAButton");
+	function moveAWrite(){
+		location.href = "/hifive/board/QnABoardWrite";
+		// 글 id 전달되야함.
 	}              
-	writeAButton.addEventListener("click",moveWrite);
+	writeAButton.addEventListener("click",moveAWrite);
+	
+	var searchButton = document.querySelector("#searchButton");
+	function moveSearch(event){		
+		event.preventDefault();
+		var mesg = "";
+		
+		
+		var type = searchButton[1].value;
+		var keyword = searchButton[2].value;
+		mesg = "type=" + type + "&" + "keyword=" + keyword;
+		console.log(type);
+		console.log(keyword);
+		
+		location.href = `QnABoardSearch?\${mesg}`;
+	}
+	searchButton.addEventListener("submit",moveSearch);
 	
 	
 	
