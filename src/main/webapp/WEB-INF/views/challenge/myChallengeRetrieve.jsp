@@ -23,7 +23,7 @@ $(document).ready(function(){
 
 	});
 	$("#upload").on("click",function(){
-		var cnum = $("#cnum").text();
+		var cnum = $("#cnum").val();
 		win = window.open("./uploadCertificationPopup?cnum="+cnum,"upload certification","width = 500, height = 500, top = 100, left = 200, location = no");
 	});
 });
@@ -60,7 +60,8 @@ $(document).ready(function(){
 							<img src="images/challenge/challenge_image/${cdto.getPhoto()}" border="0" align="center" width="120">
 							<td class="td_red" align ="center" style="display:none">${cdto.getPhoto()}</td>
 						</c:otherwise>
-					</c:choose><td class="td_red" align ="center" style="display:none" id="cnum">${cdto.getCnum()}</td><br>
+					</c:choose>
+					<input type="hidden" style="display:none" id="cnum" value="${cdto.getCnum()}"/><br>
 					Name: ${cdto.getName()}<br>
 					Date: ${cdto.getSday()} ~ ${cdto.getEday()}<br>
 					Participant: ${cdto.getParticipant()}/${cdto.getMpeople()}<br>
