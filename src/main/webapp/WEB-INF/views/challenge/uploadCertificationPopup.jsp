@@ -20,6 +20,8 @@
 	}
 	
 	$(document).ready(function(){
+		
+		
 		$("#yes").on("click",function(){
 			var form = $('#cert')[0];
 			var data = new FormData(form);
