@@ -15,6 +15,25 @@
 	 	 set phoneNumber=#{phoneNumber}
 	 	where id = #{id}
 	 </update>
+	 
+	 <update id="updateProfileImage" parameterType="profileDTO">
+		update profileImage
+		set 
+		mimetype=#{mimetype},
+		original_name=#{original_name},
+		data= #{data}
+		where id = #{id}
+	 </update>
+	 
+	  <insert id="insertProfileImage" parameterType="profileDTO">
+		insert into profileImage(id, mimetype, original_name, data)
+		values (#{id}, #{mimetype}, #{original_name}, #{data})
+	 </insert>
+	 
+	 <select id="findProfileImage" parameterType="int" resultType="profileDTO">
+	 	select * from profileImage
+	 	where id = #{id}
+	 </select>
 </mapper>
 
 
