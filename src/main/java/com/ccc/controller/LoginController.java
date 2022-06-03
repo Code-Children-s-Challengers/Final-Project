@@ -58,8 +58,10 @@ public class LoginController {
 		uService.updateNickname(nicknameMap);
 		uService.updatePhoneNumber(phoneNumberMap);
 		
-		return "redirect:/member/myPage";
+		return "redirect:/";
 	}
+
+	
 	
 	@Secured("ROLE_USER")
 	@GetMapping("/user")

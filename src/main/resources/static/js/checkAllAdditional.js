@@ -5,7 +5,7 @@ $("#button1").click(function(){
     		&& $("#nicknameChecker").val() == "true" 
     		&& $("#phoneNumberChecker").val() == "true"
     			){
-    	alert($('#nickname').val()+"님 환영합니다. 선택해주셔서 감사합니다 :)");
+ 
     	
     }else{
     	alert("회원가입을 완료할 수 없습니다. 다시한번 확인해주십시오.");

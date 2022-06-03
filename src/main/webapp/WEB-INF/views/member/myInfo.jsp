@@ -57,9 +57,9 @@
 <body>
 <jsp:include page="../common/menu.jsp" flush="true"/><br>
 <h2>마이페이지 입니다</h2>
-<div id="grid">
+	<div id="grid">
 	<ul>
-		<li><a href="myPage">내 프로필</a></li>
+		<li><a href="myPage">프로필 수정</a></li>
 		<li><a href="myInfo">개인 정보 설정</a></li>
 		<li><a href="myPoint">내 포인트 내역보기</a></li>
 		<li><a href="myChallenges">내 챌린지 보기</a></li>
