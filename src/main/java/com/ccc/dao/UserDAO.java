@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.ccc.dto.ProfileDTO;
 import com.ccc.dto.UserDTO;
 
 @Repository
@@ -36,6 +37,21 @@ public class UserDAO {
 	}
 	public int checkUsername(String username) {
 		return session.selectOne("com.config.LoginMapper.checkUsername", username);
+	}
+	
+	public void updateProfileImage(ProfileDTO profileImage) {
+		session.update("com.config.MemberMapper.updateProfileImage",profileImage);
+	}
+
+	public ProfileDTO findProfileImage(int id) {
+		return session.selectOne("com.config.MemberMapper.findProfileImage",id);
+	}
+	
+	public void insertProfileImage(ProfileDTO profileImage) {
+		session.insert("com.config.MemberMapper.insertProfileImage",profileImage);		
+	}
+	public void updateNickname2(Map<Integer, String> map) {
+		session.update("com.config.MemberMapper.updateNickname", map);
 	}
 
 	
