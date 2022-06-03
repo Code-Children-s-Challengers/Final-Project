@@ -18,7 +18,6 @@
 	h2{
 		font-size: 45px;
 		border-bottom : 1px solid gray;
-		text-align: center;
 		margin : 0px;
 		padding: 20px;
 	}
@@ -26,11 +25,16 @@
 		border-right: 1px solid gray;
 		width : 200px;
 		margin : 0px;
-		padding : 20px;
+		padding : 0px;
 		height: 600px;
+		border: 1px solid gray;
+		list-style-type : none
+	}
+	li{
+		border: 2px solid black;
+		height :50px;
 	}
 	#grid {
-		border: 5px solid pink;
 		display: grid;
 		grid-template-columns: 150px 1fr;
 	}
@@ -46,6 +50,7 @@
 	ul{
 		font-size : 20px;
 	}
+	
 </style>
 
 </head>

@@ -60,6 +60,8 @@
 				<li><a href="myChallenges">내 챌린지 보기</a></li>
 			</ul>
 	<div id="content"> 
+	<sec:authentication property="principal.user.nickname" var="nickname"/>
+	닉네임:<input type="text" value="${nickname}" name="nickname"/><br>
 	<span>넣어야 할 것들 : 프로필 사진, 자기 소개, 관심 있는 카테고리</span>
 	</div>
 </div>
