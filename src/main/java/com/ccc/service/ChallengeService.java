@@ -28,4 +28,7 @@ public interface ChallengeService {
 	public int ReportAdd(String cnum, String unum, String uploaddate, String reportnum) throws Exception;
 	public int ReportCheck(String cnum, String unum, String uploaddate, String reportnum) throws Exception;
 	public ReportPageDTO allCertificationReport(int curPage, int perPage) throws Exception;
+	public CPhotoDTO certificationRetrieve(int unum, int cnum, String uploaddate) throws Exception;
+	public int validationUpdate(String unum, String cnum, String uploaddate) throws Exception;
+	public int reportDelete(String unum, String cnum, String uploaddate) throws Exception;
 }

@@ -87,6 +87,12 @@
 		order by uploaddate desc
 	</select>
 	
+	<select id="certificationRetrieve" resultType="CphotoDTO" parameterType="hashmap">
+		select *
+		from cphoto
+		where cnum = #{cnum} and unum = #{unum} and uploaddate = #{uploaddate}
+	</select>
+	
 	<insert id="certificationAdd" parameterType="CPhotoDTO">
 		insert into cphoto (cnum,unum,photo,coment,uploaddate)
 		values (#{cnum},#{unum},#{photo},#{coment},#{uploaddate})
@@ -98,14 +104,14 @@
 	</delete>
 	
 	<insert id="ReportAdd" parameterType="hashmap">
-		insert into verifyreport (cnum,unum,uploaddate,reportnum)
+		insert into verifyreport (cnum,unum,uploaddate,reportunum)
 		values (#{cnum},#{unum},#{uploaddate},#{reportnum})
 	</insert>
 	
 	<select id="ReportCheck" resultType="int" parameterType="hashmap">
 		select count(*)
 		from verifyreport
-		where cnum = #{cnum} and unum = #{unum} and uploaddate = #{uploaddate} and reportnum = #{reportnum}
+		where cnum = #{cnum} and unum = #{unum} and uploaddate = #{uploaddate} and reportunum = #{reportnum}
 	</select>
 	
 	<select id="allCertificationReport" resultType="ReportDTO">
@@ -118,6 +124,17 @@
 		select count(*)
 		from verifyreport
 	</select>
+	
+	<update id="validationUpdate" parameterType="hashmap">
+		update cphoto
+		set validates = 0
+		where cnum = #{cnum} and unum = #{unum} and uploaddate = #{uploaddate}
+	</update>
+	
+	<delete id="reportDelete" parameterType="hashmap">
+		delete from verifyreport
+		where cnum = #{cnum} and unum = #{unum} and uploaddate = #{uploaddate}
+	</delete>
 	
 	
 </mapper>

@@ -157,7 +157,7 @@ public class ChallengeDAO {
 		map.put("unum", unum);
 		map.put("uploaddate", uploaddate);
 		map.put("reportnum", reportnum);
-		return session.update("com.config.ChallengeMapper.ReportUpdate", map);
+		return session.update("com.config.ChallengeMapper.ReportAdd", map);
 	}
 	
 	public ReportPageDTO allCertificationReport(int curPage, int perPage) throws Exception{
@@ -175,4 +175,29 @@ public class ChallengeDAO {
 		return pageDTO;
 	}
 	
+	public CPhotoDTO certificationRetrieve(int unum, int cnum, String uploaddate) throws Exception{
+		HashMap<String, String> map = new HashMap<String, String>();
+        map.put("unum", Integer.toString(unum));
+        map.put("cnum", Integer.toString(cnum));
+        map.put("uploaddate", uploaddate);
+		return session.selectOne("com.config.ChallengeMapper.certificationRetrieve", map);
+	}
+	
+	public int validationUpdate(String unum, String cnum, String uploaddate) throws Exception{
+		HashMap<String, String> map = new HashMap<String, String>();
+        map.put("unum", unum);
+        map.put("cnum", cnum);
+        map.put("uploaddate", uploaddate);
+        
+		return session.update("com.config.ChallengeMapper.validationUpdate", map);
+	}
+	
+	public int reportDelete(String unum, String cnum, String uploaddate) throws Exception{
+		HashMap<String, String> map = new HashMap<String, String>();
+        map.put("unum", unum);
+        map.put("cnum", cnum);
+        map.put("uploaddate", uploaddate);
+        
+		return session.delete("com.config.ChallengeMapper.reportDelete", map);
+	}
 }

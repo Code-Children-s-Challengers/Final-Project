@@ -117,4 +117,22 @@ public class ChallengeServiceImpl implements ChallengeService {
 		return list;
 	}
 
+	@Override
+	public CPhotoDTO certificationRetrieve(int unum, int cnum, String uploaddate) throws Exception {
+		CPhotoDTO dto = dao.certificationRetrieve(unum, cnum, uploaddate);
+		return dto;
+	}
+
+	@Override
+	public int validationUpdate(String unum, String cnum, String uploaddate) throws Exception {
+		int num = dao.validationUpdate(unum, cnum, uploaddate);
+		return num;
+	}
+
+	@Override
+	public int reportDelete(String unum, String cnum, String uploaddate) throws Exception {
+		int num = dao.reportDelete(unum, cnum, uploaddate);
+		return num;
+	}
+
 }

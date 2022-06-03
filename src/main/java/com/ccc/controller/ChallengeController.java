@@ -268,18 +268,15 @@ public class ChallengeController {
 	public String uploadCertification(@RequestParam MultipartFile photo, @RequestParam int cnum, @RequestParam String comment, @AuthenticationPrincipal PrincipalDetails principalDetails) throws Exception{
 		int unum = principalDetails.getUser().getId();
 		int num = 0;
-		
-		
+
 		long miliseconds = System.currentTimeMillis();
         Date date = new Date(miliseconds);
         PhotoPageDTO pdto = Cservice.userChallengeRetrieve(unum, cnum, 1, 2);
         List<CPhotoDTO> list = pdto.getList();
-        if(list != null && list.get(0).getUploaddate().equals(date.toString())) {
+        if(list != null && list.size() > 0 && list.get(0).getUploaddate().equals(date.toString())) {
         	return "alreadyUpload";
         }
-		
         String filename = "c_"+Integer.toString(unum)+"_"+Integer.toString(cnum)+"_"+date.toString()+".png";
-        
         
 		File savePath = new File("C://Users//sksms//Desktop//포트폴리오//final//Final-Project//src//main//resources//static//images//challenge//certification_image", filename);
 		try {
@@ -346,7 +343,7 @@ public class ChallengeController {
 		}
 	}
 //////////////////////////////////////////////////////////////////////////////////내 challenge 페이지
-// report page
+//////////////////////////////////////////////////////// report page
 	@RequestMapping(value="/checkCertificationReport", method = RequestMethod.GET)
 	public String checkCertificationReport(Model m, HttpServletRequest request, @AuthenticationPrincipal PrincipalDetails principalDetails) throws Exception{
 		String reportnum = Integer.toString(principalDetails.getUser().getId()); // 관리자 권한 확인용
@@ -376,8 +373,49 @@ public class ChallengeController {
 		
 		return "ReportList";
 	}
+	
+	@RequestMapping(value="/reportCheck", method = RequestMethod.GET)
+	public String reportCheck(Model m, @AuthenticationPrincipal PrincipalDetails principalDetails, HttpServletRequest request) throws Exception{
+		String reportnum = Integer.toString(principalDetails.getUser().getId()); // 관리자 권한 확인
+		int cnum = Integer.parseInt(request.getParameter("cnum"));
+		int unum = Integer.parseInt(request.getParameter("unum"));
+		String date = request.getParameter("date");
+		int num = 0;
+		date = date.substring(2, 4)+"/"+date.substring(5, 7)+"/"+date.substring(8, 10);
+		CPhotoDTO dto = Cservice.certificationRetrieve(unum, cnum, date);
+		m.addAttribute("dto", dto);
+		return "challenge/reportCheck";
+	}
+	
+	@RequestMapping(value="/reportUpdate", method = RequestMethod.POST)
+	@ResponseBody
+	public String reportUpdate(@AuthenticationPrincipal PrincipalDetails principalDetails, @RequestParam String unum, @RequestParam String cnum, @RequestParam String date) throws Exception{
+		String reportnum = Integer.toString(principalDetails.getUser().getId()); // 관리자 권한 확인
+		int num = 0;
+		date = date.substring(2, 4)+"/"+date.substring(5, 7)+"/"+date.substring(8, 10);
+		num = Cservice.validationUpdate(unum, cnum, date);
+		if(num >= 1) {
+			return "success";
+		}else {
+			return "fail";
+		}
+	}
+	
+	@RequestMapping(value="/reportDelete", method = RequestMethod.POST)
+	@ResponseBody
+	public String reportDelete(@AuthenticationPrincipal PrincipalDetails principalDetails, @RequestParam String unum, @RequestParam String cnum, @RequestParam String date) throws Exception{
+		String reportnum = Integer.toString(principalDetails.getUser().getId()); // 관리자 권한 확인
+		int num = 0;
+		date = date.substring(2, 4)+"/"+date.substring(5, 7)+"/"+date.substring(8, 10);
+		num = Cservice.reportDelete(unum, cnum, date);
+		if(num >= 1) {
+			return "success";
+		}else {
+			return "fail";
+		}
+	}
 
-// report page
+//////////////////////////////////////////////////////// report page
 	
 	// 에러처리
 	@ExceptionHandler({Exception.class})
