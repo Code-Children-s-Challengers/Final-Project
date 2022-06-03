@@ -15,5 +15,14 @@ CONSTRAINT id PRIMARY KEY (id)
 -- 자동으로 설정되는 id를 위한 시퀀스
 CREATE SEQUENCE USER_SEQ START WITH 1 INCREMENT BY 1 MAXVALUE 99999999 NOCYCLE NOCACHE;
 
+create table profileImage
+(
+    id            number(10),
+    mimetype      varchar(100)                          null,
+    data          blob                        null,
+    original_name varchar(100)                          null,
+    constraint fk_id FOREIGN key(id) REFERENCES user_table(id)
+);
+
 commit;
 
