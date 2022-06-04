@@ -68,6 +68,8 @@ public class JoinController {
 	@RequestMapping(value = "/checkUsername", method = RequestMethod.POST)
 	@ResponseBody
 	public int checkUsername(@RequestBody String username) {
+		System.out.println(username);
+		System.out.println(uService.checkUsername(username));
 		return uService.checkUsername(username);
 	}
 	

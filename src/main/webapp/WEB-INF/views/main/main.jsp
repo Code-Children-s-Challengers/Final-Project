@@ -14,9 +14,12 @@
 	p{
 		text-align: center;
 	}
-	a{		
+	a {		
 		display: inline-block;
 		text-align: center;
+	}
+	div {
+		text-align:center;
 	}
 </style>
 <h1>메인 페이지입니다.</h1>
@@ -25,7 +28,7 @@
 	<p>로그인 되었습니다</p>
     <c:choose>
     <c:when test="${empty nickname}">
-	<a href="/hifive/additionalInfoForm">회원가입 마저하기</a>
+	<div><a href="/hifive/additionalInfoForm">회원가입 마저하기</a></div>
     </c:when>
     <c:otherwise>
 	<p>반갑습니다 ${nickname} 님</p>

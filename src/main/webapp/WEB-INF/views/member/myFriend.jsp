@@ -73,25 +73,8 @@
 			<li><a href="myChallenges">내 챌린지 보기</a></li>
 		</ul>
 		<div id="content"> 
-		<h3>프로필 수정</h3><br/>
+		<h3>친구 목록 보기</h3><br/>
 		
-		프로필 사진
-		<div class="box" style="background: #BDBDBD;"><img class="profile" src="/hifive/view/${id}"/></div>
-		<br/>
-		<form name="form" method="post" action="/hifive/upload" enctype="multipart/form-data">
-    		<input type="file" name="file" value="파일 선택" accept="image/*"/> 
-    		<input type="submit" id="submit" value="저장"/>
-  		</form>
-  		<br/> 				
-		
-		<br/>
-			
-				
-		<form name="form2" action="hifive/nickname/${id}" method="post">
-			닉네임:<input type="text" value="${nickname}" name="nickname"/>
-			<input type="submit" id="submit" value="저장"/>
-		</form>
-
 				
 		
 		</div>

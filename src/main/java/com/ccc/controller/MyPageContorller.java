@@ -114,4 +114,12 @@ public class MyPageContorller {
 		
 	}
 	
+	@Secured("ROLE_USER")
+	@GetMapping("/member/myFriend")
+	public String myFriend(){
+		return "member/myFriend";
+
+		
+	}
+	
 }
