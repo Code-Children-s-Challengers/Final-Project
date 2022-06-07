@@ -31,7 +31,15 @@ public class ChallengeDAO {
 	}
 	
 	public int categoryNumber(String category) throws Exception{
-		return session.selectOne("com.config.ChallengeMapper.categoryNumber", category);
+		Date date = new Date();
+		long timeInMilliSeconds = date.getTime();
+        java.sql.Date sqlDate = new java.sql.Date(timeInMilliSeconds);
+        
+        HashMap<String, String> map = new HashMap<String, String>();
+		map.put("category", category);
+		map.put("date", sqlDate.toString());
+        
+		return session.selectOne("com.config.ChallengeMapper.categoryNumber", map);
 	}
 	
 	public int photoNumber(HashMap<String, Integer> map) throws Exception{
@@ -47,6 +55,10 @@ public class ChallengeDAO {
 		long timeInMilliSeconds = date.getTime();
         java.sql.Date sqlDate = new java.sql.Date(timeInMilliSeconds);
 		return session.selectList("com.config.ChallengeMapper.allChallenge", sqlDate);
+	}
+	
+	public ChallengeDTO challengeByCnum(int cnum) throws Exception{
+		return session.selectOne("com.config.ChallengeMapper.challengeByCnum", cnum);
 	}
 	
 	public PageDTO categoryChallenge(String category, int curPage, int perPage) throws Exception{
