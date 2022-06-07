@@ -24,14 +24,6 @@
 </style>
 <h1>메인 페이지입니다.</h1>
 <sec:authorize access="isAuthenticated()">
-	<sec:authentication property="principal.user.nickname" var="nickname"/>
 	<p>로그인 되었습니다</p>
-    <c:choose>
-    <c:when test="${empty nickname}">
-	<div><a href="/hifive/additionalInfoForm">회원가입 마저하기</a></div>
-    </c:when>
-    <c:otherwise>
 	<p>반갑습니다 ${nickname} 님</p>
-    </c:otherwise>
-</c:choose>
 </sec:authorize>

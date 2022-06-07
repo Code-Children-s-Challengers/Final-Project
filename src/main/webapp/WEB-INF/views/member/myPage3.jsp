@@ -15,47 +15,41 @@
 		margin : 0px;
 		padding: 20px;
 	}
-	ul{
-		border-right: 1px solid gray;
-		width : 200px;
-		margin : 0px;
-		padding : 0px;
-		height: 600px;
-		border: 1px solid gray;
-		list-style-type : none
-	}
-	li{
-		border: 2px solid black;
-		height :50px;
-	}
+
+ 	ul {
+ 	list-style-type:none;
+ 	margin:0;
+ 	padding:0;
+ 	width:25%;
+ 	background-color: #f1f1f1;
+ 	position: fixed;
+ 	height:100%;
+ 	overflow:auto;
+ 	}
+ 	
+ 	li a{
+ 	display: block;
+ 	color: #000;
+ 	padding: 8px 16px;
+ 	text-decoration: none;
+ 	}
+ 	
+ 	li a.active{
+ 	background-color: #555;
+ 	color:whtie;
+ 	}
+ 	li a.hover:not(.active){
+ 	background-color: #555;
+ 	color:white;
+ 	}
 	#grid {
 		display: grid;
 		grid-template-columns: 150px 1fr;
 	}
 	#content {
 		font-size : 30px;
-		padding-left : 100px;
+		padding-left : 500px;
 	}
-	input {
-		width:200px;
-	  	height:35x;
-  		font-size:30px;
-	}
-	ul{
-		font-size : 20px;
-	}
-	.box {
-    width: 150px;
-    height: 150px; 
-    border-radius: 70%;
-    overflow: hidden;
-	}
-	.profile {
-	    width: 100%;
-	    height: 100%;
-	    object-fit: cover;
-	}
-	
 </style>
 
 </head>
@@ -65,16 +59,20 @@
 	<jsp:include page="../common/menu.jsp" flush="true"/><br>
 	<h2>마이페이지 입니다</h2>
 	
+	
 	<div id="grid">
-		<ul>
+	
+		<ul >
+			<li><a class="active" href="">홈</a></li>
 			<li><a href="myPage">프로필 수정</a></li>
-			<li><a href="myInfo">개인 정보 설정</a></li>
+			<li><a href="myInfo">개인 정보 수정</a></li>
 			<li><a href="myFriend">친구 목록 보기</a></li>
-			<li><a href="myChallenges">내 챌린지 보기</a></li>
+			<li><a href="myCallenges">내 챌린지 보기</a></li>
 		</ul>
+	
+		
 		<div id="content"> 
 		<h3>프로필 수정</h3><br/>
-		
 		
 		프로필 사진
 		<div class="box" style="background: #BDBDBD;"><img class="profile" src="/hifive/view/${id}"/></div>
@@ -84,7 +82,6 @@
     		<input type="submit" id="submit" value="저장"/>
   		</form>
   		<br/> 				
-		
 		<br/>
 			
 				
