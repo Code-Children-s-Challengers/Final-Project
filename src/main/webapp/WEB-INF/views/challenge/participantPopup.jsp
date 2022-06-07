@@ -17,11 +17,18 @@
 				},
 			dataType:'text',
 			success:function(responseData, status, xhr){
+				console.log(responseData);
 				if(responseData == "success"){
 					alert("참가됨");
 					window.close();
 				}else if(responseData == "already participated"){
 					alert("이미 참가중");
+					window.close();
+				}else if(responseData == "nomoney"){
+					alert("참가비 부족");
+					window.close();
+				}else if(responseData == "full"){
+					alert("정원초과");
 					window.close();
 				}else{
 					alert("오류 발생");
