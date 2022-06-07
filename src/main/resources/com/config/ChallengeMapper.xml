@@ -9,10 +9,10 @@
 		from challenges
 	</select>
 	
-	<select id="categoryNumber" resultType="int" parameterType="string">
+	<select id="categoryNumber" resultType="int" parameterType="hashmap">
 		select count(*)
 		from challenges
-		where category = #{category}
+		where category = #{category} and sday >= #{date}
 	</select>
 	
 	<select id="userChallengeNumber" resultType="int" parameterType="int">
@@ -30,7 +30,13 @@
 	<select id="allChallenge" resultType="ChallengeDTO" parameterType="date">
 		select *
 		from challenges
-		where sday >= #{today}
+		where sday >= #{today} and mpeople > 1
+	</select>
+	
+	<select id="challengeByCnum" resultType="ChallengeDTO" parameterType="int">
+		select *
+		from challenges
+		where cnum = #{cnum}
 	</select>
 	
 	<select id="searchChallenge" resultType="ChallengeDTO" parameterType="string">
