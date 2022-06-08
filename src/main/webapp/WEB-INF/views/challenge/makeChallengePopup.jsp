@@ -7,7 +7,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
 
-
+	var skiparray = new Array();
 	
 	function setThumbnail(event) { 
 		var reader = new FileReader();
@@ -72,7 +72,27 @@
 		$("#no").on("click",function(){
 			window.close();
 		});
+		$("#skip").on("click",function(){
+			win = window.open("./skipdayPopup", "_blank","width = 500, height = 300, top = 100, left = 200, location = no, status = no, fullscreen = no");
+			return false;
+		});
 	});
+	
+	function addskipday(str){
+		skiparray.push(str);
+	}
+	function setskipday(){
+		var skipday = document.querySelector("#skipday");
+		var hidden = document.querySelector("#skiphidden");
+		skipday.innerHTML = ``;
+		hidden.value = "";
+		
+		var set = new Set(skiparray);
+		for(var i of set){
+			skipday.innerHTML += i + `<br>`;
+			hidden.value += i+" "
+		}
+	}
 
 
 </script>
@@ -82,6 +102,7 @@
 
 <form method="post" action="makeChallenge" enctype="multipart/form-data" id="make">
    <input type="text" name="theName" hidden="true"/>
+   <input type="text" name="skiphidden" id="skiphidden" value="" hidden="true"/>
    <img src="images/challenge/challenge_sample.jpg" border="0" align="center" width="200" id="thumbnail"><br>
    <input type="file" name="photo" id="photo" accept="image/*" onchange="setThumbnail(event)"/>
    <br>
@@ -106,6 +127,7 @@
 				<option value="0">no</option>
 			</select>
 	<br>
+	<button id="skip">쉬는날 추가</button><br><span id="skipday"></span>
 	생성하시겠습니까?
 	<br>
 	<button id="yes">yes</button> <button id="no">no</button>

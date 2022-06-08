@@ -141,4 +141,10 @@ public class ChallengeServiceImpl implements ChallengeService {
 		return num;
 	}
 
+	@Override
+	public int insertHoliday(String cnum, String hday) throws Exception {
+		int num = dao.insertHoliday(cnum, hday);
+		return num;
+	}
+
 }

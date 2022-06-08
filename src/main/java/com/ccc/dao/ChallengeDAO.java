@@ -212,4 +212,15 @@ public class ChallengeDAO {
         
 		return session.delete("com.config.ChallengeMapper.reportDelete", map);
 	}
+	
+	public int insertHoliday(String cnum, String hday) throws Exception{
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("cnum", cnum);
+		String[] temp = hday.split(" ");
+		for(String holiday : temp) {
+			map.put("holiday", holiday);
+			session.insert("com.config.ChallengeMapper.insertHoliday", map);
+		}
+		return 1;
+	}
 }
