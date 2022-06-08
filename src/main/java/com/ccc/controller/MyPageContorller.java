@@ -19,7 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.ccc.config.login.auth.PrincipalDetails;
 import com.ccc.dao.UserDAO;
-import com.ccc.dto.ProfileDTO;
+import com.ccc.dto.ProfileImageDTO;
 import com.ccc.dto.UserDTO;
 
 @Controller //view 리턴하겠다
@@ -74,9 +74,9 @@ public class MyPageContorller {
 	@PostMapping("/upload")
 	public String handleFileUpload(@RequestParam("file") MultipartFile file, @AuthenticationPrincipal PrincipalDetails principalDetails) throws IOException{
 		int id = principalDetails.getUser().getId();
-		ProfileDTO originalProfileImage = userDAO.findProfileImage(id);
+		ProfileImageDTO originalProfileImage = userDAO.findProfileImage(id);
 		
-		ProfileDTO profileImage = new ProfileDTO();
+		ProfileImageDTO profileImage = new ProfileImageDTO();
 		profileImage.setId(id);
 		profileImage.setMimetype(file.getContentType());
 		profileImage.setOriginal_name(file.getOriginalFilename());
@@ -94,7 +94,7 @@ public class MyPageContorller {
 	@Secured("ROLE_USER")
 	@GetMapping("/view/{id}")
 	public ResponseEntity<byte[]> findProfileImage(@PathVariable int id){
-		ProfileDTO profileIamge = userDAO.findProfileImage(id);
+		ProfileImageDTO profileIamge = userDAO.findProfileImage(id);
 		
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Content-Type",profileIamge.getMimetype());
@@ -110,6 +110,14 @@ public class MyPageContorller {
 		map.put(id, nickname);
 		userDAO.updateNickname2(map);
 		return "redirect:/member/myPage";
+
+		
+	}
+	
+	@Secured("ROLE_USER")
+	@GetMapping("/member/myFriend")
+	public String myFriend(){
+		return "member/myFriend";
 
 		
 	}

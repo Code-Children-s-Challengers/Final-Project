@@ -16,7 +16,7 @@
 	 	where id = #{id}
 	 </update>
 	 
-	 <update id="updateProfileImage" parameterType="profileDTO">
+	 <update id="updateProfileImage" parameterType="profileImageDTO">
 		update profileImage
 		set 
 		mimetype=#{mimetype},
@@ -25,13 +25,18 @@
 		where id = #{id}
 	 </update>
 	 
-	  <insert id="insertProfileImage" parameterType="profileDTO">
+	  <insert id="insertProfileImage" parameterType="profileImageDTO">
 		insert into profileImage(id, mimetype, original_name, data)
 		values (#{id}, #{mimetype}, #{original_name}, #{data})
 	 </insert>
 	 
-	 <select id="findProfileImage" parameterType="int" resultType="profileDTO">
+	 <select id="findProfileImage" parameterType="int" resultType="profileImageDTO">
 	 	select * from profileImage
+	 	where id = #{id}
+	 </select>
+	 
+	 <select id="findUser" parameterType="int" resultType="userDTO">
+	 	select * from user_table
 	 	where id = #{id}
 	 </select>
 </mapper>

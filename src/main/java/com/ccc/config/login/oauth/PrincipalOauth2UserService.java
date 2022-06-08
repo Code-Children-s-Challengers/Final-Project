@@ -17,6 +17,7 @@ import com.ccc.config.login.oauth.provider.GoogleUserInfo;
 import com.ccc.config.login.oauth.provider.NaverUserInfo;
 import com.ccc.config.login.oauth.provider.OAuth2UserInfo;
 import com.ccc.dao.UserDAO;
+import com.ccc.dto.ProfileImageDTO;
 import com.ccc.dto.UserDTO;
 
 @Service
@@ -72,7 +73,11 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
 					.providerId(providerId)
 					.point(3000)
 					.build();
+			
+			// 회원가입 완료(DB에 저장)
 			userDAO.save(userEntity); // 저장하는 시점
+		
+			// 프로필 사진 저장
 					
 		}else {
 			System.out.println("로그인을 이미 한 적이 있습니다. 당신은 자동 회원가입이 되어 있습니다.");

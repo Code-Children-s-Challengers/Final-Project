@@ -11,7 +11,7 @@ $("#username").on("blur",function(){
 					url : '/hifive/checkUsername',
 					type : 'post',
 					data : username,
-					cache : false,
+					cache : true,
 					success : function(data) {
 						if (data == 0) {
 							$(".usernameSuccess").text("사용가능한 ID입니다.");

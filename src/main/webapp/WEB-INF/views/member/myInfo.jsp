@@ -61,7 +61,7 @@
 	<ul>
 		<li><a href="myPage">프로필 수정</a></li>
 		<li><a href="myInfo">개인 정보 설정</a></li>
-		<li><a href="myPoint">내 포인트 내역보기</a></li>
+		<li><a href="myFriend">친구 목록 보기</a></li>
 		<li><a href="myChallenges">내 챌린지 보기</a></li>
 	</ul>
 

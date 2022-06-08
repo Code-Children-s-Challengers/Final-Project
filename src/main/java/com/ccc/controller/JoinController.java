@@ -39,6 +39,7 @@ public class JoinController {
 		return "joinForm";
 	}
 	
+	// 일반 회원가입
 	@PostMapping("/join")
 	public String join(UserDTO user, String phone1, String phone2, String phone3) {
 		System.out.println(user);
@@ -52,6 +53,7 @@ public class JoinController {
 		String encPassword = bCryptPasswordEncoder.encode(rawPassword);
 		user.setPassword(encPassword);
 		
+		// 회원가입 정보를 저장
 		userDAO.save(user);
 		return "redirect:/loginForm";		
 	}
@@ -68,6 +70,8 @@ public class JoinController {
 	@RequestMapping(value = "/checkUsername", method = RequestMethod.POST)
 	@ResponseBody
 	public int checkUsername(@RequestBody String username) {
+		System.out.println(username);
+		System.out.println(uService.checkUsername(username));
 		return uService.checkUsername(username);
 	}
 	

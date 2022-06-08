@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ccc.dao.UserDAO;
+import com.ccc.dto.UserDTO;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -33,6 +34,11 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public int checkUsername(String username) {
 		return userDAO.checkUsername(username);
+	}
+
+	@Override
+	public UserDTO findUser(int id) {
+		return userDAO.findUser(id);
 	}
 
 }
