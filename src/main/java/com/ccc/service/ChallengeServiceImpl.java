@@ -44,6 +44,12 @@ public class ChallengeServiceImpl implements ChallengeService {
 		PageDTO list = dao.categoryChallenge(category, curPage, perPage);
 		return list;
 	}
+	
+	@Override
+	public ChallengeDTO challengeByCnum(int cnum) throws Exception {
+		ChallengeDTO dto = dao.challengeByCnum(cnum);
+		return dto;
+	}
 
 	@Override
 	public int findParticipant(int unum, int cnum) throws Exception {

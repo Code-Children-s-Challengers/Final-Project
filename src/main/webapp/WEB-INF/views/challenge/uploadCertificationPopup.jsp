@@ -22,30 +22,47 @@
 	$(document).ready(function(){
 		
 		
-		$("#yes").on("click",function(){
+		$("#yes").on("click",function(event){
+			event.preventDefault();
 			var form = $('#cert')[0];
 			var data = new FormData(form);
-			
-			$.ajax({
-				url:'uploadCertification',
-				type:'post',
-				enctype:'multipart/form-data',
-				data:data,
-			dataType:'text',
-			success:function(responseData, status, xhr){
-				console.log(responseData);
-			},
-			error:function(xhr, status, e){
-				console.log("Error: "+e);
+			var photo = $('#photo').val();
+			if(photo == ""){
+				alert("인증 사진을 업로드해주세요");
+			}else{
+				$.ajax({
+					url:'uploadCertification',
+					type:'post',
+					enctype:'multipart/form-data',
+					data:data,
+					processData: false,
+				    contentType: false,
+				dataType:'text',
+				success:function(responseData, status, xhr){
+					if(responseData == "alreadyUpload"){
+						alert("이미 인증을 완료했습니다");
+						window.close();
+					}else if(responseData == "fail"){
+						alert("오류 발생");
+						window.close();
+					}else{
+						alert("인증을 성공했습니다");
+						opener.location.reload();
+						window.close();
+					}
+					return false;
+				},
+				error:function(xhr, status, e){
+					console.log("Error: "+e);
+				}
+				});
+				return false;
 			}
-			});
 		});
 		$("#no").on("click",function(){
 			window.close();
 		});
 	});
-
-
 </script>
 
 

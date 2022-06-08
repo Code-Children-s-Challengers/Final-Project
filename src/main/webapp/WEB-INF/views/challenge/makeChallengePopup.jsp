@@ -24,19 +24,50 @@
 			var form = $('#make')[0];
 			var data = new FormData(form);
 			
-			$.ajax({
-				url:'makeChallenge',
-				type:'post',
-				enctype:'multipart/form-data',
-				data:data,
-			dataType:'text',
-			success:function(responseData, status, xhr){
-				console.log(responseData);
-			},
-			error:function(xhr, status, e){
-				console.log("Error: "+e);
+			var name = $('#name').val();
+			var category = $('#category').val();
+			var start_date = $('#start_date').val();
+			var end_date = $('#end_date').val();
+			var people = $('#people').val();
+			var fee = $('#fee').val();
+			var today = new Date();
+			
+			if(name == "" || category == "" || start_date == "" || end_date == "" || people == "" || fee == ""){
+				alert("모든 항목을 채워주세요");
+			}else if(people < 1){
+				alert("최소 인원은 1입니다");
+			}else if(people < 0){
+				alert("최소 비용은 0입니다");
+			}else if(start_date >= end_date){
+				alert("종료 날짜는 시작 날짜 이전일 수 없습니다");
+			}else if(start_date <= today.toISOString().substr(0,10)){
+				alert("시작 날짜는 오늘날짜 이후일 수 없습니다");
+			}else{
+				$.ajax({
+					url:'makeChallenge',
+					type:'post',
+					enctype:'multipart/form-data',
+					data:data,
+					processData: false,
+				    contentType: false,
+				dataType:'text',
+				success:function(responseData, status, xhr){
+					if(responseData == "success"){
+						alert("챌린지를 등록했습니다");
+						opener.location.reload();
+						window.close();
+					}else{
+						alert("오류 발생");
+						window.close();
+					}
+				},
+				error:function(xhr, status, e){
+					console.log("Error: "+e);
+				}
+				});
 			}
-			});
+			return false;
+			
 		});
 		$("#no").on("click",function(){
 			window.close();
@@ -66,9 +97,9 @@
 	<br>
 	end date: <input type="date" name="end_date" id="end_date">
 	<br>
-	max participant: <input type="number" name="people" id="people">
+	max participant: <input type="number" name="people" id="people" placeholder="개인 challenge의 경우 1입력">
 	<br>
-	fee: <input type="number" name="fee" id="fee">
+	fee: <input type="number" name="fee" id="fee" placeholder="개인 challenge의 경우 0입력">
 	<br>
 	rest on holiday: <select name="holiday" id="holiday">
 				<option value="1">yes</option>

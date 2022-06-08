@@ -24,14 +24,24 @@ $(document).ready(function(){
 	});
 	$("#upload").on("click",function(){
 		var cnum = $("#cnum").val();
-		win = window.open("./uploadCertificationPopup?cnum="+cnum,"upload certification","width = 500, height = 500, top = 100, left = 200, location = no");
+		var today = new Date().toISOString().substr(0,10);
+		var sday = $('#sday').val();
+		var eday = $('#eday').val();
+		if(today < sday){
+			alert("시작되지 않은 챌린지입니다");
+		}else if(today > eday){
+			alert("이미 종료된 챌린지입니다");
+		}else{
+			win = window.open("./uploadCertificationPopup?cnum="+cnum,"upload certification","width = 500, height = 500, top = 100, left = 200, location = no");
+		}
 	});
 });
 </script>
 
 <input type="hidden" value="${unum}" id="unum"/>
 <input type="hidden" value="${cnum}" id="cnum"/>
-
+<input type="hidden" value="${cdto.getSday()}" id="sday"/>
+<input type="hidden" value="${cdto.getEday()}" id="eday"/>
 <button id="upload">upload certification</button>
 <table width="100%" cellspacing="0" cellpadding="0" id="test">
 	<tr>

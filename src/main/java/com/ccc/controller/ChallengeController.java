@@ -144,6 +144,13 @@ public class ChallengeController {
 		if(Cservice.findParticipant(unum, cnum) >= 1) {
 			return "already participated";
 		}else {
+			ChallengeDTO dto = Cservice.challengeByCnum(cnum);
+			if(dto.getFee() > principalDetails.getUser().getPoint()) {
+				return "nomoney";
+			}
+			if(dto.getParticipant() >= dto.getMpeople()) {
+				return "full";
+			}
 			num = Cservice.Participate(unum,cnum);
 		}
 		if(num == 0) {

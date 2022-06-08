@@ -32,31 +32,36 @@
 			}
 			});
 		});
-		$("#photodelete").on("click",function(){	
-			$.ajax({
-				url:'photoDelete',
-				type:'post',
-				data:{
-					cnum:$("#cnum").val(),
-					unum:$("#unum").val(),
-					date:$("#date").val()
+		$("#photodelete").on("click",function(){
+			var today = new Date().toISOString().substr(0,10);
+			if(today != $("#date").val()){
+				alert("이전 날짜에 업로드한 사진은 삭제할 수 없습니다");
+			}else{
+				$.ajax({
+					url:'photoDelete',
+					type:'post',
+					data:{
+						cnum:$("#cnum").val(),
+						unum:$("#unum").val(),
+						date:$("#date").val()
+					},
+				dataType:'text',
+				success:function(responseData, status, xhr){
+					if(responseData == "success"){
+						alert("인증사진 삭제완료");
+						opener.location.reload();
+						window.close();
+					}else{
+						alert("오류 발생");
+						opener.location.reload();
+						window.close();
+					}
 				},
-			dataType:'text',
-			success:function(responseData, status, xhr){
-				if(responseData == "success"){
-					alert("인증사진 삭제완료");
-					opener.location.reload();
-					window.close();
-				}else{
-					alert("오류 발생");
-					opener.location.reload();
-					window.close();
+				error:function(xhr, status, e){
+					console.log("Error: "+e);
 				}
-			},
-			error:function(xhr, status, e){
-				console.log("Error: "+e);
+				});
 			}
-			});
 		});
 		$("#close").on("click",function(){
 			window.close();
