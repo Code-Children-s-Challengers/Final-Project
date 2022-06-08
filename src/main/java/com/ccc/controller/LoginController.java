@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ccc.config.login.auth.PrincipalDetails;
+import com.ccc.dto.UserDTO;
 import com.ccc.service.UserService;
 
 @Controller //view 리턴하겠다
@@ -43,7 +44,8 @@ public class LoginController {
 		System.out.println(nickname);
 		System.out.println(phoneNumber);
 		
-		String id = Integer.toString(principalDetails.getUser().getId());
+		UserDTO userDB = uService.findByUsername(principalDetails.getUsername());
+		String id = Integer.toString(userDB.getId());
 		System.out.println(id);
 		
 		Map<String, String> nicknameMap = new HashMap<String, String>();

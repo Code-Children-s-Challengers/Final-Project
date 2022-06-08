@@ -60,8 +60,6 @@
 
 </head>
 <body>
-	<sec:authentication property="principal.user.nickname" var="nickname"/>
-	<sec:authentication property="principal.user.id" var="id"/>
 	<jsp:include page="../common/menu.jsp" flush="true"/><br>
 	<h2>마이페이지 입니다</h2>
 	
@@ -77,10 +75,12 @@
 		
 		
 		프로필 사진
-		<div class="box" style="background: #BDBDBD;"><img class="profile" src="/hifive/view/${id}"/></div>
+		<!-- <div class="box" style="background: #BDBDBD;"><img class="profile" src="/hifive/view/${id}"/></div> -->
+		<div class="box" style="background: #BDBDBD;"><img id="profile" class="profile" src="/hifive/view/${id}"/></div>
+		
 		<br/>
 		<form name="form" method="post" action="/hifive/upload" enctype="multipart/form-data">
-    		<input type="file" name="file" value="파일 선택" accept="image/*"/> 
+    		<input id="profileImage" type="file" name="file" value="파일 선택" accept="image/*"/> 
     		<input type="submit" id="submit" value="저장"/>
   		</form>
   		<br/> 				
@@ -97,7 +97,32 @@
 		
 		</div>
 	</div>
-
-
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script>
+			$(document).ready(function(){
+				$("#profileImage").on("change",handleProfileImage);
+				;
+			});
+			
+			var sel_file;
+			function handleProfileImage(e){
+				console.log("hi")
+				var files = e.target.files;
+				var filesArr =Array.prototype.slice.call(files);
+				filesArr.forEach(function(f){
+					if(!f.type.match("image.*")){
+						alert("확장자는 이미지 확장자만 가능합니다.");
+						return;
+					}
+					sel_file = f;
+					var reader = new FileReader();
+					reader.onload = function(e){
+						$("#profile").attr("src", e.target.result);
+					}
+					reader.readAsDataURL(f);
+				});
+			}
+		
+</script>
 
 </html>

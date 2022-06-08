@@ -35,7 +35,7 @@
 					<input id="phoneNumber2" type="text" name="phoneNumber2" placeholder="인증번호 입력" disabled required/>
 					<button type='button' id="phoneNumberChecking" class="doubleCheck" >인증번호 확인</button><br/>
 					<span class="point phoneNumberSuccess">휴대폰 번호 입력후 인증번호 보내기를 해주십시오.</span>
-					<input type="hidden" id="phoneNumberChecker"/>
+					<input type="hidden" id="phoneNumberChecker" value="true"/>
 				</p>
 				<p class="tip">
 					최초 가입 시에만 사용하고 있습니다. 따로 저장되지 않습니다.(번호만 입력해주세요.)

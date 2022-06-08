@@ -11,5 +11,6 @@ public interface UserService {
 	public int checkNickname(String nickname);
 	public int checkUsername(String username);
 	public UserDTO findUser(int id);
+	public UserDTO findByUsername(String username);
 	
 }

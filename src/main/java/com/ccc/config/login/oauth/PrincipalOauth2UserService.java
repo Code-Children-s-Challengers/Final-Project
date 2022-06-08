@@ -78,7 +78,12 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
 			userDAO.save(userEntity); // 저장하는 시점
 		
 			// 프로필 사진 저장
-					
+			//기본 사진을 저장
+			ProfileImageDTO defaultImage = new ProfileImageDTO();
+			UserDTO defaultUser = userDAO.findLatestUser();
+			defaultImage.setId(defaultUser.getId());
+			userDAO.insertProfileImage(defaultImage);
+				
 		}else {
 			System.out.println("로그인을 이미 한 적이 있습니다. 당신은 자동 회원가입이 되어 있습니다.");
 		}
