@@ -11,6 +11,6 @@
 <div>
 <jsp:include page="../common/menu.jsp" flush="true"/><br>
 </div>
-<jsp:include page="QnABoard/QnABoardWrite.jsp" flush="true"/><br>
+<jsp:include page="QnABoard/QnABoardAWrite.jsp" flush="true"/><br>
 </body>
 </html>

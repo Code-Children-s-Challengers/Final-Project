@@ -36,8 +36,14 @@ public class QnABoardServiceImpl implements QnABoardService {
 	}
 
 	@Override
-	public int insertQnABoard(QnABoardDTO saveDTO) throws Exception {
-		int num = dao.insertQnABoard(saveDTO);
+	public int insertQQnABoard(QnABoardDTO dto) throws Exception {
+		int num = dao.insertQQnABoard(dto);
+		return num;
+	}
+	
+	@Override
+	public int insertAQnABoard(QnABoardDTO dto) throws Exception {
+		int num = dao.insertAQnABoard(dto);
 		return num;
 	}
 

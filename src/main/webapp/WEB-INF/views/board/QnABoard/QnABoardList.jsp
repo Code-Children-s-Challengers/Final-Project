@@ -14,8 +14,7 @@
 		<main>
 			<select id = "selectBoard">
 				<option value="notice"><h2>공지사항</h2></option>
-				<option value="QnABoard" selected><h2>문의사항</h2></option>
-				<option value="Challenge"><h2>전체 챌린지</h2></option>				
+				<option value="QnABoard" selected><h2>문의사항</h2></option>							
 			</select>					
 			<h3>문의사항 검색</h3>
 			<form id="searchButton">
@@ -111,13 +110,13 @@
 	<script>
 	var writeQButton = document.querySelector("#writeQButton");
 	function moveQWrite(){
-		location.href = "/hifive/board/QnABoardWrite";
+		location.href = "/hifive/board/QnABoardQWrite";
 	}              
 	writeQButton.addEventListener("click",moveQWrite);
 	
 	var writeAButton = document.querySelector("#writeAButton");
 	function moveAWrite(){
-		location.href = "/hifive/board/QnABoardWrite";
+		location.href = "/hifive/board/QnABoardAWrite";
 		// 글 id 전달되야함.
 	}              
 	writeAButton.addEventListener("click",moveAWrite);

@@ -108,16 +108,22 @@ public class QnABoardController {
 		return "board/QnABoardAWrite";
 	}
 	
-	@GetMapping(value="/board/QnABoardWriteInsert")
-	public String writeSave(QnABoardDTO dto) throws Exception{		
+	@GetMapping(value="/board/QnABoardQWriteInsert")
+	public String writeQSave(QnABoardDTO dto) throws Exception{		
 		
-		System.out.println(dto);	
+		System.out.println(dto);			
 		
-		QnABoardDTO saveDTO = new QnABoardDTO();
-		saveDTO.setTitle(dto.getTitle());
-		saveDTO.setQcontent(dto.getQcontent());
+		int num = service.insertQQnABoard(dto);		
 		
-		int num = service.insertQnABoard(saveDTO);		
+		return "board/QnABoard/QnABoardWriteSuccess";
+	}
+	
+	@GetMapping(value="/board/QnABoardAWriteInsert")
+	public String writeASave(QnABoardDTO dto) throws Exception{		
+		
+		System.out.println(dto);			
+		
+		int num = service.insertAQnABoard(dto);		
 		
 		return "board/QnABoard/QnABoardWriteSuccess";
 	}

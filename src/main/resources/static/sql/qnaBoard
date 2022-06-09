@@ -14,7 +14,7 @@ create table qnaBoard
   
 );
 
-create sequence challenge_no_seq
+create sequence qnaboard_id_seq
     START WITH 1
     INCREMENT BY 1;
     
