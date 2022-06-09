@@ -140,4 +140,51 @@ public class MyPageContorller {
 		
 	}
 	
+	
+	@Secured("ROLE_USER")
+	@PostMapping("/myProfileInfo/{id}")
+	public String myProfileInfo (@RequestParam("file") MultipartFile file, @RequestParam("nickname") String nickname, @PathVariable int id, @AuthenticationPrincipal PrincipalDetails principalDetails) throws IOException{
+		System.out.println("id : "+id);
+		System.out.println("nickname: "+nickname);
+		System.out.println("file: "+file.getOriginalFilename()+"11");
+
+		
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("id", Integer.toString(id));
+		map.put("nickname", nickname);
+		
+		
+		//file이 null일 경우
+		if(file.isEmpty()) {
+			System.out.println("this");
+			userDAO.updateNickname(map);
+			
+		//file이 null이 아닐 경우
+		}else {
+			System.out.println("not this");
+			ProfileImageDTO profileImage = new ProfileImageDTO();
+			profileImage.setId(id);
+			profileImage.setMimetype(file.getContentType());
+			profileImage.setOriginal_name(file.getOriginalFilename());
+			profileImage.setData(file.getBytes());
+		
+		
+			ProfileImageDTO originalProfileImage = userDAO.findProfileImage(id);
+			if(originalProfileImage == null) {
+				userDAO.insertProfileImage(profileImage);
+			}else {
+				userDAO.updateProfileImage(profileImage);
+			}
+			userDAO.updateNickname(map);
+
+		}
+		
+		
+		return "redirect:/member/myPage";
+	}
+	
+	
+	
+	
+	
 }

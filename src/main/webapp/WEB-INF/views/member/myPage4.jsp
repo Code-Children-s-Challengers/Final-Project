@@ -87,26 +87,29 @@ th, td {
 		<div id="content"> 
 		<h3>프로필 수정</h3><br/>
 		
-		<form name="form" method="post" action="/hifive/myProfileInfo/${id}" enctype="multipart/form-data">
+		<form name="form" method="post" action="/hifive/upload" enctype="multipart/form-data">
 		
 		<table border=1px>
 			<tr>
 				<th id="profileImage">프로필 사진</th>
-				<td>
+				<td><!-- <div class="box" style="background: #BDBDBD;"><img class="profile" src="/hifive/view/${id}"/></div> -->
 					<div class="box" style="background: #BDBDBD;"><img id="profile" class="profile" src="/hifive/view/${id}"/></div><br/>
-	    			<input id="profileImage" type="file" name="file" value="파일 선택" accept="image/*"/> 	  				
+	    			<input id="profileImage" type="file" name="file" value="파일 선택" accept="image/*"/> 
+	    			<input type="submit" id="submit" value="저장"/>
+	  				
 	  			</td>
 			</tr>
 			<tr>
 				<th id="nickname">닉네임</th>
 				<td>
+					<form name="form2" action="hifive/nickname/${id}" method="post">
 					<input type="text" value="${nickname}" name="nickname"/>
-					<input type="hidden" id="nicknameChecker" value="false"/>
+					<input type="submit" id="submit" value="저장"/>
+					</form>
 				</td>
 			</tr>		
 			
-		</table><br/>
-		<input type="submit" id="submit" value="저장" onclick="submitChecker"/>
+		</table>
 		</form>		
 		
 		</div>
@@ -115,8 +118,8 @@ th, td {
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script>
 			$(document).ready(function(){
-				$("table").on("change","#profileImage",handleProfileImage);
-				console.log("hi@");
+				$("#profileImage").on("change",handleProfileImage);
+				;
 			});
 			
 			var sel_file;
