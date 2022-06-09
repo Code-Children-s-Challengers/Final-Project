@@ -18,11 +18,12 @@
 	<!-- 제목을 선택했을 때 조회수는 어떻게 늘리지? hit += 1을 적용해야하는데 방법을 잘... -->
 	
 	<insert id="insertNotice" parameterType="NoticeDTO">
-		insert into notice(title,writerid,content)
+		insert into notice(id,title,content,regdate)
 		values (
-				#{title},
-				#{writerid},
-				#{content}	
+				notice_seq.nextval,
+				#{title},			
+				#{content},
+				SYSDATE
 				)		
 	</insert>
 	

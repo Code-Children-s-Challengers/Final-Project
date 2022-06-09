@@ -73,13 +73,12 @@ public class NoticeController {
 	}
 	
 	@GetMapping(value="/board/noticeWriteInsert")
-	public int writeSave(NoticeDTO dto) throws Exception{		
+	public String writeSave(NoticeDTO dto) throws Exception{		
 		
-		System.out.println(dto);	
-		
+		System.out.println(dto);		
 		
 		int num = service.insertNotice(dto);		
-		return 0;
+		return "board/notice/noticeWriteSuccess";
 	}
 	
 	@GetMapping(value="/board/noticeSearch")	
