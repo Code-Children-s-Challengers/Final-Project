@@ -12,7 +12,11 @@
 	<div>
 		<div>
 		<main>
-			<h2>문의하기 게시판</h2>					
+			<select id = "selectBoard">
+				<option value="notice"><h2>공지사항</h2></option>
+				<option value="QnABoard" selected><h2>문의사항</h2></option>
+				<option value="Challenge"><h2>전체 챌린지</h2></option>				
+			</select>					
 			<h3>문의사항 검색</h3>
 			<form id="searchButton">
 				<fieldset>					
@@ -134,6 +138,21 @@
 	}
 	searchButton.addEventListener("submit",moveSearch);
 	
+var selectBoard = document.querySelector("#selectBoard");
+	
+	function moveBoard(){
+		if (selectBoard.value == "notice"){
+			location.href = `noticeList?curPage=1`;
+		}
+		if (selectBoard.value == "QnABoard"){
+			location.href = `QnABoardList?curPage=1`;
+		}
+		if (selectBoard.value == "Challenge"){
+			location.href = `ChallengeList?curPage=1`;
+		}
+		
+	}	
+	selectBoard.addEventListener("change",moveBoard)
 	
 	
 	</script>

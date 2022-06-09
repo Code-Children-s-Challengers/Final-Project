@@ -55,7 +55,7 @@
 			console.log(content);			
 			
 			mesg = "title=" + title + "&" + "content=" + content;			
-			location.href = `/hifive/noticeWriteInsert?\${mesg}`;
+			location.href = `/hifive/board/noticeWriteInsert?\${mesg}`;
 			
 		}		
 		noticeSave.addEventListener("submit",noticeInsert);

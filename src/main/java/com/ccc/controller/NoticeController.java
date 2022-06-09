@@ -5,12 +5,14 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ccc.config.login.auth.PrincipalDetails;
 import com.ccc.dto.NoticeDTO;
 import com.ccc.dto.NoticePageDTO;
 import com.ccc.service.NoticeService;
@@ -22,7 +24,9 @@ public class NoticeController {
 	NoticeService service;
 	
 	@GetMapping(value="/board/noticeList")
-	public String notice(Model m, @RequestParam String curPage, String perPage, HttpServletRequest request) throws Exception{
+	public String notice(Model m, @RequestParam(defaultValue="1") String curPage, String perPage, HttpServletRequest request) throws Exception{
+		//,@AuthenticationPrincipal PrincipalDetails principalDetails
+		//String uname = principalDetails.getUser().getUsername();
 		
 		System.out.println(curPage);
 		if(curPage == "") curPage = "1";		
@@ -38,6 +42,7 @@ public class NoticeController {
 		m.addAttribute("list", list);
 		m.addAttribute("curPage", curPage);				
 		m.addAttribute("totalPage", tot);
+		//m.addAttribute("uname",uname);
 		
 		return "board/noticeList";
 	}
