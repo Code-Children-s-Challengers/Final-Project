@@ -21,7 +21,7 @@ public class QnABoardController {
 	QnABoardService service;
 	
 	@GetMapping(value="/board/QnABoardList")
-	public String QnABoard(Model m, @RequestParam String curPage, HttpServletRequest request) throws Exception{
+	public String QnABoard(Model m, @RequestParam(defaultValue="1") String curPage, HttpServletRequest request) throws Exception{
 		
 		System.out.println(curPage);
 		if(curPage == "") curPage = "1";		
