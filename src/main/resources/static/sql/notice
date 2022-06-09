@@ -6,7 +6,9 @@ create table notice
   content NVARCHAR2(1000),,
   regdate timestamp,
   hit number,
-  files nvarchar2(1000)
+  files nvarchar2(1000),
+  type nvarchar2(100),
+  keyword nvarchar2(100)
 );
 
 insert into notice
