@@ -16,11 +16,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.ccc.config.login.auth.PrincipalDetails;
 import com.ccc.dao.UserDAO;
 import com.ccc.dto.ProfileImageDTO;
 import com.ccc.dto.UserDTO;
+
+import springfox.documentation.schema.Model;
 
 @Controller //view 리턴하겠다
 public class MyPageContorller {
@@ -29,32 +32,52 @@ public class MyPageContorller {
 	
 	@Secured("ROLE_USER")
 	@GetMapping("/member/myPage")
-	public String loginForm(@AuthenticationPrincipal PrincipalDetails principalDetails) {
-		UserDTO user1 = principalDetails.getUser();
-		UserDTO user2 = userDAO.findByUsername(user1.getUsername());
-		if(user2.getNickname() == null) {
-			return "additionalInfoForm";
+	public ModelAndView loginForm(@AuthenticationPrincipal PrincipalDetails principalDetails) {
+		UserDTO user = principalDetails.getUser();
+		UserDTO userDB = userDAO.findByUsername(user.getUsername());
+		
+		ModelAndView mav = new ModelAndView();
+		if(userDB.getNickname() == null) {
+			mav.setViewName("additionalInfoForm");
+			return mav;
 		}else {
-			return "/member/myPage";
+			mav.setViewName("/member/myPage");
+			mav.addObject("id", userDB.getId());
+			mav.addObject("nickname", userDB.getNickname());
+			return mav;
 		}		
 	}
 	
 	@Secured("ROLE_USER")
 	@PostMapping("/member/myPage")
-	public String loginForm2(@AuthenticationPrincipal PrincipalDetails principalDetails) {
+	public ModelAndView loginForm2(@AuthenticationPrincipal PrincipalDetails principalDetails) {
 		UserDTO user = principalDetails.getUser();
-		if(user.getNickname() == null) {
-			return "additionalInfoForm";
+		UserDTO userDB = userDAO.findByUsername(user.getUsername());
+		
+		ModelAndView mav = new ModelAndView();
+		if(userDB.getNickname() == null) {
+			mav.setViewName("additionalInfoForm");
+			return mav;
 		}else {
-			return "/member/myPage";
+			mav.setViewName("/member/myPage");
+			mav.addObject("id", userDB.getId());
+			mav.addObject("nickname", userDB.getNickname());
+
+			return mav;
 		}		
 	}
 	
 	
 	@Secured("ROLE_USER")
-	@GetMapping("/member/myInfo")
-	public String myInfo() {
-		return "member/myInfo";
+	@GetMapping("/member/myInfo/{id}")
+	public ModelAndView myInfo(@PathVariable int id) {
+		UserDTO user = userDAO.findUser(id);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("member/myInfo");
+		mav.addObject("email", user.getEmail());
+		mav.addObject("phoneNumber", user.getPhoneNumber());
+		mav.addObject("password", user.getPassword());
+		return mav;
 	}
 	
 	@Secured("ROLE_USER")
@@ -70,6 +93,7 @@ public class MyPageContorller {
 		return "member/myChallenges";
 	}
 	
+	// 사진 업로드하기 연습  예제
 	@Secured("ROLE_USER")
 	@PostMapping("/upload")
 	public String handleFileUpload(@RequestParam("file") MultipartFile file, @AuthenticationPrincipal PrincipalDetails principalDetails) throws IOException{
@@ -81,7 +105,8 @@ public class MyPageContorller {
 		profileImage.setMimetype(file.getContentType());
 		profileImage.setOriginal_name(file.getOriginalFilename());
 		profileImage.setData(file.getBytes());
-
+		System.out.println(profileImage);
+		
 		if(originalProfileImage == null) {
 			userDAO.insertProfileImage(profileImage);
 		}else {
@@ -91,6 +116,7 @@ public class MyPageContorller {
 		return "redirect:/member/myPage";
 	}
 	
+	// 저장된 사진 가져오기
 	@Secured("ROLE_USER")
 	@GetMapping("/view/{id}")
 	public ResponseEntity<byte[]> findProfileImage(@PathVariable int id){
@@ -110,9 +136,9 @@ public class MyPageContorller {
 		map.put(id, nickname);
 		userDAO.updateNickname2(map);
 		return "redirect:/member/myPage";
-
 		
 	}
+	
 	
 	@Secured("ROLE_USER")
 	@GetMapping("/member/myFriend")
@@ -121,5 +147,52 @@ public class MyPageContorller {
 
 		
 	}
+	
+
+	//myPage에서 정보 저장하기
+	@Secured("ROLE_USER")
+	@PostMapping("/myProfileInfo/{id}")
+	public String myProfileInfo (@RequestParam("file") MultipartFile file, @RequestParam("nickname") String nickname, @PathVariable int id, @AuthenticationPrincipal PrincipalDetails principalDetails) throws IOException{
+		System.out.println("id : "+id);
+		System.out.println("nickname: "+nickname);
+		System.out.println("file: "+file.getOriginalFilename()+"11");
+
+		
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("id", Integer.toString(id));
+		map.put("nickname", nickname);
+		
+		
+		//file이 null일 경우
+		if(file.isEmpty()) {
+			System.out.println("this");
+			userDAO.updateNickname(map);
+			
+		//file이 null이 아닐 경우
+		}else {
+			System.out.println("not this");
+			ProfileImageDTO profileImage = new ProfileImageDTO();
+			profileImage.setId(id);
+			profileImage.setMimetype(file.getContentType());
+			profileImage.setOriginal_name(file.getOriginalFilename());
+			profileImage.setData(file.getBytes());
+		
+		
+			ProfileImageDTO originalProfileImage = userDAO.findProfileImage(id);
+			if(originalProfileImage == null) {
+				userDAO.insertProfileImage(profileImage);
+			}else {
+				userDAO.updateProfileImage(profileImage);
+			}
+			userDAO.updateNickname(map);
+
+		}
+	
+		return "redirect:/member/myPage";
+	}
+	
+	
+	
+	
 	
 }

@@ -56,6 +56,9 @@ public class UserDAO {
 	public UserDTO findUser(int id) {
 		return session.selectOne("com.config.MemberMapper.findUser", id);
 	}
+	public UserDTO findLatestUser() {
+		return session.selectOne("com.config.LoginMapper.findLatestUser");
+	}
 
 	
 }

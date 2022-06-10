@@ -25,7 +25,7 @@ public class MainController {
 		if(principalDetails!=null) {
 			UserDTO user = principalDetails.getUser();
 			System.out.println("0000");
-			UserDTO userDB= uService.findUser(user.getId());
+			UserDTO userDB= uService.findByUsername(user.getUsername());
 			System.out.println(userDB);
 			
 			if(userDB == null) {

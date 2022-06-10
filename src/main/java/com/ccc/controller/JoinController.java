@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ccc.dao.UserDAO;
+import com.ccc.dto.ProfileImageDTO;
 import com.ccc.dto.UserDTO;
 import com.ccc.service.UserService;
 
@@ -55,6 +56,12 @@ public class JoinController {
 		
 		// 회원가입 정보를 저장
 		userDAO.save(user);
+		
+		//기본 사진을 저장
+		ProfileImageDTO defaultImage = new ProfileImageDTO();
+		UserDTO defaultUser = userDAO.findLatestUser();
+		defaultImage.setId(defaultUser.getId());
+		userDAO.insertProfileImage(defaultImage);
 		return "redirect:/loginForm";		
 	}
 

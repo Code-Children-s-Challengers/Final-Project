@@ -29,6 +29,10 @@
 	<select id="checkUsername" resultType="integer" parameterType="string">
 		select count(*) from user_table where username =#{username}
 	</select>
+	
+	<select id="findLatestUser" resultType="userDTO">
+		SELECT * FROM user_table WHERE id = (SELECT max(id) FROM user_table)
+	</select>
 </mapper>
 
 
