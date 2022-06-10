@@ -13,8 +13,7 @@
 		<main>
 			<select id = "selectBoard">
 				<option value="notice" selected><h2>공지사항</h2></option>
-				<option value="QnABoard"><h2>문의사항</h2></option>
-				<option value="Challenge"><h2>전체 챌린지</h2></option>				
+				<option value="QnABoard"><h2>문의사항</h2></option>								
 			</select>					
 			<h3>공지사항 검색</h3>
 			<form id="searchButton">
@@ -109,14 +108,11 @@
 	
 	function moveBoard(){
 		if (selectBoard.value == "notice"){
-			location.href = `noticeList?curPage=1`;
+			location.href = `noticeList`;
 		}
 		if (selectBoard.value == "QnABoard"){
-			location.href = `QnABoardList?curPage=1`;
-		}
-		if (selectBoard.value == "Challenge"){
-			location.href = `ChallengeList?curPage=1`;
-		}
+			location.href = `QnABoardList`;
+		}		
 		
 	}	
 	selectBoard.addEventListener("change",moveBoard)

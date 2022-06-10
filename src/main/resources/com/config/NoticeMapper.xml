@@ -38,6 +38,20 @@
       from notice     
     </select>
     
+    <select id="selectCount" parameterType="noticeDTO" resultType="int">
+      select count(*)
+      from notice     
+      <choose>
+   			<when test="type != null and type.equals('title')">
+	   		where title like ('%' || #{keyword} || '%') 	   		    
+	   		</when>
+	   		
+	   		<when test="type != null and type.equals('writerId')">
+	   		where writerId = #{keyword}	   		
+	   		</when> 
+   		</choose>
+    </select>
+    
     <update id="hitChange" parameterType="int">
     	update notice
     	set hit = hit + 1
@@ -57,9 +71,7 @@
 	   		</when> 
    		</choose>
     
-    </select>
-    
-    
+    </select>  
     
     
 	

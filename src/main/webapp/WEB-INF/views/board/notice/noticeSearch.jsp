@@ -11,8 +11,23 @@
 	<div>
 		<div>
 		<main>
-			<h2>공지사항</h2>					
-			<a href="noticeList?curPage=1"><h3>리스트로 돌아가기</h3></a>			
+			<select id = "selectBoard">
+				<option value="notice" selected><h2>공지사항</h2></option>
+				<option value="QnABoard"><h2>문의사항</h2></option>								
+			</select>					
+			<h3>공지사항 검색</h3>
+			<form id="searchButton">
+				<fieldset>					
+					<label>검색분류</label>
+					<select name="type">
+						<option  value="title">제목</option>
+						<option  value="writerId">작성자</option>
+					</select> 
+					<label>검색어</label>
+					<input type="text" name="keyword" value=""/>
+					<input type="submit" value="검색" />
+				</fieldset>
+			</form>					
 			
 			<div>
 				<h3>공지사항 목록</h3>
@@ -30,8 +45,8 @@
 					<tbody>							
 
 					<% 
-					List<NoticeDTO> list = (List<NoticeDTO>)request.getAttribute("searchList");
-					
+					NoticePageDTO pDTO = (NoticePageDTO)request.getAttribute("searchList");
+					List<NoticeDTO> list = pDTO.getList();
 					for(NoticeDTO n : list) {
 						pageContext.setAttribute("n", n);
 					%>
@@ -51,12 +66,11 @@
 			<c:set var="totalRecord" value ="${pDTO.totalRecord}"></c:set>
 			<c:set var="perPage" value ="${pDTO.perPage}"></c:set>
 			<c:set var="totalPage" value ="${totalPage}"></c:set>
-			
+									
 			<c:forEach var="i" begin="1" end="${totalPage}">
-				<a href="noticeList?curPage=${i}">${i}</a><span>  </span>
+				<a href="noticeSearch?curPage=${i}&type=${type}&keyword=${keyword}">${i}</a><span>  </span>
 			</c:forEach>
-			
-			
+						
 			<div>
 				<button id="writeButton">글쓰기</button>
 			</div>
@@ -71,7 +85,34 @@
 	}              
 	writeButton.addEventListener("click",moveWrite);
 	
+	var searchButton = document.querySelector("#searchButton");
+	function moveSearch(event){
+		event.preventDefault();
+		var mesg = "";
+		
+		
+		var type = searchButton[1].value;
+		var keyword = searchButton[2].value;
+		mesg = "type=" + type + "&" + "keyword=" + keyword;
+		console.log(type);
+		console.log(keyword);
+		
+		location.href = `noticeSearch?\${mesg}`;
+	}
+	searchButton.addEventListener("submit",moveSearch);
 	
+	var selectBoard = document.querySelector("#selectBoard");
+	
+	function moveBoard(){
+		if (selectBoard.value == "notice"){
+			location.href = `noticeList`;
+		}
+		if (selectBoard.value == "QnABoard"){
+			location.href = `QnABoardList`;
+		}		
+		
+	}	
+	selectBoard.addEventListener("change",moveBoard)
 	
 	
 	</script>

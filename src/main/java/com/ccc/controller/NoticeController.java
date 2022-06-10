@@ -84,18 +84,29 @@ public class NoticeController {
 	@GetMapping(value="/board/noticeSearch")	
 	public String noticeSerach(@RequestParam("type") String type,
 							   @RequestParam("keyword") String keyword,
+							   @RequestParam(defaultValue="1") String curPage,
 			Model m) throws Exception{
 		
 		System.out.println("type:" + type);
 		System.out.println(keyword);
+		
+		if(curPage == "") curPage = "1";	
 		
 		NoticeDTO sDTO = new NoticeDTO();
 		
 		sDTO.setType(type);
 		sDTO.setKeyword(keyword);
 		
-		List<NoticeDTO> searchList = service.searchNotice(sDTO);
+		NoticePageDTO searchList = service.searchNotice(sDTO, Integer.parseInt(curPage));		
 		
+		int tot = service.selectCount(sDTO) / searchList.getPerPage();
+		if(searchList.getTotalCount() % searchList.getPerPage() == 0) tot++;
+						
+		System.out.println(tot);
+		m.addAttribute("curPage", curPage);				
+		m.addAttribute("totalPage", tot);
+		m.addAttribute("type",type);
+		m.addAttribute("keyword",keyword);		
 		m.addAttribute("searchList", searchList);
 		
 		return "board/noticeSearch";
