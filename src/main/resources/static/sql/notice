@@ -4,7 +4,7 @@ create table notice
   title nvarchar2(100),
   writer_id NVARCHAR2(50),
   content NVARCHAR2(1000),,
-  regdate timestamp,
+  regdate QnABoardSearch,
   hit number,
   files nvarchar2(1000),
   type nvarchar2(100),
