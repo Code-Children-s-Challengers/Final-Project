@@ -141,14 +141,12 @@ var selectBoard = document.querySelector("#selectBoard");
 	
 	function moveBoard(){
 		if (selectBoard.value == "notice"){
-			location.href = `noticeList?curPage=1`;
+			location.href = `noticeList`;
 		}
 		if (selectBoard.value == "QnABoard"){
-			location.href = `QnABoardList?curPage=1`;
+			location.href = `QnABoardList`;
 		}
-		if (selectBoard.value == "Challenge"){
-			location.href = `ChallengeList?curPage=1`;
-		}
+		
 		
 	}	
 	selectBoard.addEventListener("change",moveBoard)

@@ -13,7 +13,7 @@
 		select *
 		from notice
 		where id = #{id}
-		order by id asc
+		
 	</select>
 	<!-- 제목을 선택했을 때 조회수는 어떻게 늘리지? hit += 1을 적용해야하는데 방법을 잘... -->
 	
@@ -63,13 +63,16 @@
    		from notice
    		<choose>
    			<when test="type != null and type.equals('title')">
-	   		where title like ('%' || #{keyword} || '%') 	   		    
+	   		where title like upper('%' || #{keyword} || '%')
+	   		or title like lower('%' || #{keyword} || '%')	   		    
 	   		</when>
 	   		
 	   		<when test="type != null and type.equals('writerId')">
-	   		where writerId = #{keyword}	   		
+	   		where writerId = upper(#{keyword})
+	   		or writerId = lower(#{keyword})	   		
 	   		</when> 
    		</choose>
+   		order by id asc
     
     </select>  
     
