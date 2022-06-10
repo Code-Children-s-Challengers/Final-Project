@@ -76,6 +76,12 @@
     
     </select>  
     
+    <update id="updateNotice" parameterType="noticeDTO">
+    	update notice
+    	set title = #{title}, content = #{content}
+    	where id = #{id}
+    </update>
+    
     
 	
 </mapper>

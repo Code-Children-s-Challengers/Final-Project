@@ -59,4 +59,11 @@ public class NoticeServiceImpl implements NoticeService {
 		return num;
 	}
 
+	@Override
+	public int updateNotice(NoticeDTO dto) throws Exception {
+		int num = dao.updateNotice(dto);
+		return num;
+		
+	}
+
 }

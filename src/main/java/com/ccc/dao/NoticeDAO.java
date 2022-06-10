@@ -89,4 +89,8 @@ public class NoticeDAO {
 	public int selectCount(NoticeDTO dto) throws Exception{
 		return session.selectOne("com.config.NoticeMapper.selectCount",dto);
 	}	
+	
+	public int updateNotice(NoticeDTO dto) throws Exception{
+		return session.update("com.config.NoticeMapper.updateNotice", dto);
+	}
 }

@@ -13,4 +13,5 @@ public interface NoticeService {
 	public NoticePageDTO selectNoticePage(int curPage) throws Exception;
 	public NoticePageDTO searchNotice(NoticeDTO dto,int curPage) throws Exception;
 	public int selectCount(NoticeDTO dto) throws Exception;
+	public int updateNotice(NoticeDTO dto) throws Exception;
 }

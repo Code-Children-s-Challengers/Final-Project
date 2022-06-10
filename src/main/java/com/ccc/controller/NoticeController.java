@@ -112,5 +112,27 @@ public class NoticeController {
 		return "board/noticeSearch";
 	}
 	
+	@GetMapping(value="/board/noticeUpdate")
+	public String updateForm(@RequestParam int id, Model m) throws Exception{		
+		m.addAttribute("id",id);
+		return "board/noticeUpdate";
+	}
+	
+	@GetMapping(value="/board/noticeUpdateInsert")
+	public String updateNotice(@RequestParam("id") String id,
+							   @RequestParam("title") String title,
+							   @RequestParam("content") String content,							   
+							   Model m) throws Exception{
+		NoticeDTO uDTO = new NoticeDTO();
+		
+		uDTO.setId(Integer.parseInt(id));
+		uDTO.setTitle(title);
+		uDTO.setContent(content);
+		
+		
+		int num = service.updateNotice(uDTO);
+		
+		return "board/notice/noticeUpdateSuccess";		
+	}
 	
 }
