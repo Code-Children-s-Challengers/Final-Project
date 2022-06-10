@@ -69,9 +69,15 @@ public class MyPageContorller {
 	
 	
 	@Secured("ROLE_USER")
-	@GetMapping("/member/myInfo")
-	public String myInfo() {
-		return "member/myInfo";
+	@GetMapping("/member/myInfo/{id}")
+	public ModelAndView myInfo(@PathVariable int id) {
+		UserDTO user = userDAO.findUser(id);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("member/myInfo");
+		mav.addObject("email", user.getEmail());
+		mav.addObject("phoneNumber", user.getPhoneNumber());
+		mav.addObject("password", user.getPassword());
+		return mav;
 	}
 	
 	@Secured("ROLE_USER")
@@ -87,6 +93,7 @@ public class MyPageContorller {
 		return "member/myChallenges";
 	}
 	
+	// 사진 업로드하기 연습  예제
 	@Secured("ROLE_USER")
 	@PostMapping("/upload")
 	public String handleFileUpload(@RequestParam("file") MultipartFile file, @AuthenticationPrincipal PrincipalDetails principalDetails) throws IOException{
@@ -109,6 +116,7 @@ public class MyPageContorller {
 		return "redirect:/member/myPage";
 	}
 	
+	// 저장된 사진 가져오기
 	@Secured("ROLE_USER")
 	@GetMapping("/view/{id}")
 	public ResponseEntity<byte[]> findProfileImage(@PathVariable int id){
@@ -128,9 +136,9 @@ public class MyPageContorller {
 		map.put(id, nickname);
 		userDAO.updateNickname2(map);
 		return "redirect:/member/myPage";
-
 		
 	}
+	
 	
 	@Secured("ROLE_USER")
 	@GetMapping("/member/myFriend")
@@ -140,7 +148,8 @@ public class MyPageContorller {
 		
 	}
 	
-	
+
+	//myPage에서 정보 저장하기
 	@Secured("ROLE_USER")
 	@PostMapping("/myProfileInfo/{id}")
 	public String myProfileInfo (@RequestParam("file") MultipartFile file, @RequestParam("nickname") String nickname, @PathVariable int id, @AuthenticationPrincipal PrincipalDetails principalDetails) throws IOException{
@@ -178,8 +187,7 @@ public class MyPageContorller {
 			userDAO.updateNickname(map);
 
 		}
-		
-		
+	
 		return "redirect:/member/myPage";
 	}
 	

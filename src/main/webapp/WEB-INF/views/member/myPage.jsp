@@ -55,20 +55,29 @@
 	    height: 100%;
 	    object-fit: cover;
 	}
-	#profileImage{
-		padding: 50px;
+	.profileImage{
+		padding: 5px;
 	}
-	#nickname{
-		padding: 50px;
+	.nickname{
+		padding: 10px;
 	}
 	table {
   border-top: 1px solid #444444;
   border-collapse: collapse;
 }
-th, td {
+	th, td {
   border-bottom: 1px solid #444444;
   padding: 10px;
 }
+	th{
+		background-color:lightgray;
+	}
+	td{
+		padding-left:50px;
+	}
+	.point{
+		font-size:20px;
+	}
 	
 </style>
 
@@ -80,64 +89,47 @@ th, td {
 	<div id="grid">
 		<ul>
 			<li><a href="myPage">프로필 수정</a></li>
-			<li><a href="myInfo">개인 정보 설정</a></li>
-			<li><a href="myFriend">친구 목록 보기</a></li>
-			<li><a href="myChallenges">내 챌린지 보기</a></li>
+			<li><a href="myInfo/${id}">개인 정보 설정</a></li>
+			<li><a href="myFriend/${id}">친구 목록 보기</a></li>
+			<li><a href="myChallenges/${id}">내 챌린지 보기</a></li>
 		</ul>
 		<div id="content"> 
-		<h3>프로필 수정</h3><br/>
+		<h3>프로필 수정</h3>
 		
 		<form name="form" method="post" action="/hifive/myProfileInfo/${id}" enctype="multipart/form-data">
 		
-		<table border=1px>
+		<table>
 			<tr>
-				<th id="profileImage">프로필 사진</th>
+				<th class="profileImage">프로필 사진</th>
 				<td>
 					<div class="box" style="background: #BDBDBD;"><img id="profile" class="profile" src="/hifive/view/${id}"/></div><br/>
 	    			<input id="profileImage" type="file" name="file" value="파일 선택" accept="image/*"/> 	  				
 	  			</td>
 			</tr>
 			<tr>
-				<th id="nickname">닉네임</th>
+				<th class="nickname">닉네임</th>
 				<td>
-					<input type="text" value="${nickname}" name="nickname"/>
-					<input type="hidden" id="nicknameChecker" value="false"/>
+					<input type="text" value="${nickname}" name="nickname" id="nickname"/>
+					<span class="point nicknameSuccess"></span><br/>
+					<span class="point">※ 영문자, 소문자 입력가능, 최소 4자 이상, 최대 12자 까지 입력</span>
+					<input type="hidden" id="nicknameChecker"/>
 				</td>
 			</tr>		
 			
 		</table><br/>
-		<input type="submit" id="submit" value="저장" onclick="submitChecker"/>
+		<input type="submit" id="submit" value="저장"/>
 		</form>		
-		
 		</div>
 	</div>
 	
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="/hifive/js/myPageProfileImage.js"></script>
+<script src="/hifive/js/myPageNickname.js"></script>
 <script>
 			$(document).ready(function(){
-				$("table").on("change","#profileImage",handleProfileImage);
-				console.log("hi@");
-			});
-			
-			var sel_file;
-			function handleProfileImage(e){
-				console.log("hi")
-				var files = e.target.files;
-				var filesArr =Array.prototype.slice.call(files);
-				filesArr.forEach(function(f){
-					if(!f.type.match("image.*")){
-						alert("확장자는 이미지 확장자만 가능합니다.");
-						return;
-					}
-					sel_file = f;
-					var reader = new FileReader();
-					reader.onload = function(e){
-						$("#profile").attr("src", e.target.result);
-					}
-					reader.readAsDataURL(f);
-				});
-			}
-		
+				
+				
+			});			
 </script>
 
 </html>
