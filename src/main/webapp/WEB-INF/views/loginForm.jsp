@@ -6,12 +6,15 @@
 <head>
 <meta charset="UTF-8">
 <title>로그인 페이지</title>
+<!-- 
 <style>
 	*{
 		text-align:center;
 		dispaly : inline;
 	}
+	  
 </style>
+ -->
 </head>
 <body>
 <jsp:include page="common/menu.jsp" flush="true"/><br>
