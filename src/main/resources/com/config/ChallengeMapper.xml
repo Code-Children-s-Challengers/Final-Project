@@ -147,5 +147,11 @@
 		values (#{cnum},#{holiday})
 	</insert>
 	
+	<select id="holidayCheck" resultType="int" parameterType="hashmap">
+		select count(*)
+		from choliday
+		where cnum = #{cnum} and holiday = #{today}
+	</select>
+	
 	
 </mapper>

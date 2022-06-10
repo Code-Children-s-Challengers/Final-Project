@@ -5,9 +5,21 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <h1>로그인 페이지</h1>
-<a href="oauth2/authorization/google">구글 로그인</a><br>
-<a href="oauth2/authorization/facebook">페이스북 로그인</a><br>
-<a href="oauth2/authorization/naver">네이버 로그인</a><br>
+<!-- 구글 로그인  -->
+<a href="oauth2/authorization/google">
+<img src="images/login/google_login.png" style= "width:250px; height:50px;"/>
+</a><br>
+
+<!-- 페이스북 로그인  -->
+<a href="oauth2/authorization/facebook">
+<img src="images/login/facebook_login.png" style= "width:250px; height:50px;"/>
+</a><br>
+
+<!-- 네이버 로그인  -->
+<a href="oauth2/authorization/naver">
+<img src="images/login/naver_login.png" style= "width:250px; height:50px;"/>
+</a><br>
+
 <a href="joinForm">아직 회원가입하지 않으셨나요?</a><br>
 <form action="/hifive/login" method="POST" ><!-- 로그인은 무조건 post -->
 	<input type="text" id="username" name="username" placeholder="Username"/><br>
@@ -18,7 +30,6 @@
 
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script>
-
 	$(document).ready(function(){
 		$("#login").click(function(){
 			if($("#username").val().length == 0){

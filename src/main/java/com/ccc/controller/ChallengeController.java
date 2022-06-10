@@ -204,6 +204,7 @@ public class ChallengeController {
 		
 		num = Cservice.challengeAdd(dto);
 		num = Cservice.insertHoliday(Integer.toString(cnum+1), skiphidden);
+		num = Cservice.Participate(unum, cnum+1);
 		
 		return "success";
 	}
@@ -269,6 +270,20 @@ public class ChallengeController {
 		m.addAttribute("unum", unum);
 		m.addAttribute("cnum", cnum);
 		return "myChallengeRetrieve";
+	}
+	
+	@RequestMapping(value="/uploadCertificationCheck", method = RequestMethod.GET)
+	@ResponseBody
+	public String uploadCertificationCheck(HttpServletRequest request) throws Exception{
+		String today = request.getParameter("today");
+		String cnum = request.getParameter("cnum");
+		int num = Cservice.holidayCheck(cnum, today);
+		if(num >= 1) {
+			return "false";
+		}
+		else {
+			return "true";
+		}
 	}
 	
 	@RequestMapping(value="/uploadCertificationPopup", method = RequestMethod.GET)
