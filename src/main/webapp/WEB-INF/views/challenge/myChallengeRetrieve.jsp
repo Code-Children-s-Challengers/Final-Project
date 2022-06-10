@@ -32,7 +32,26 @@ $(document).ready(function(){
 		}else if(today > eday){
 			alert("이미 종료된 챌린지입니다");
 		}else{
-			win = window.open("./uploadCertificationPopup?cnum="+cnum,"upload certification","width = 500, height = 500, top = 100, left = 200, location = no");
+			$.ajax({
+				url:'uploadCertificationCheck',
+				type:'get',
+				data:{
+					today:today,
+					cnum:cnum
+				},
+			dataType:'text', // 응답 데이터는 간단한 숫자나 영문자로 주는게 좋다
+			success:function(responseData, status, xhr){
+				if(responseData == 'true'){
+					win = window.open("./uploadCertificationPopup?cnum="+cnum,"upload certification","width = 500, height = 500, top = 100, left = 200, location = no");
+				}else{
+					alert("휴일로 지정된 날짜입니다");
+				}
+			},
+			error:function(xhr, status, e){
+				console.log("Error: "+e);
+			}
+			});
+			//win = window.open("./uploadCertificationPopup?cnum="+cnum,"upload certification","width = 500, height = 500, top = 100, left = 200, location = no");
 		}
 	});
 });

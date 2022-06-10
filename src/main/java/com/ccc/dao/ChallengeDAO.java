@@ -223,4 +223,11 @@ public class ChallengeDAO {
 		}
 		return 1;
 	}
+	
+	public int holidayCheck(String cnum, String today) throws Exception{
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("cnum", cnum);
+		map.put("today", today);
+		return session.selectOne("com.config.ChallengeMapper.holidayCheck");
+	}
 }
