@@ -6,8 +6,8 @@
 	<div>
 		<div>
 		<main>
-			<h2>문의사항 작성하기</h2>
-			<form id="noticeSave" method="GET">
+			<h2>문의사항 답변하기</h2>
+			<form id="qnaboardSave" method="GET">
 				<table>
 					<tbody>						
 						<tr>
@@ -16,7 +16,7 @@
 						</tr>
 						<tr>
 							<th>내용</th>
-							<td><textarea id="qcontent" name="qcontent" placeholder="내용을 입력하세요" style="height:100px; width:100%"; ></textarea>
+							<td><textarea id="acontent" name="acontent" placeholder="내용을 입력하세요" style="height:100px; width:100%"; ></textarea>
 					 </div></td>
 						</tr>
 						<!-- 
@@ -27,7 +27,7 @@
 						 -->				
 						
 						<tr>
-							<td><button id="noticeSave">글 저장</button></td>
+							<td><button id="qnaboardSave">글 저장</button></td>
 									
 						</tr>	
 						
@@ -39,22 +39,22 @@
 		</div>
 	</div> 
 	<script>
-		var noticeSave = document.querySelector("#noticeSave");		
+		var qnaboardSave = document.querySelector("#qnaboardSave");		
 		
 		function QnABoardInsert(event){			
 			event.preventDefault();
 			var mesg = "";			
-			var title = noticeSave[0].value;
-			var qcontent = noticeSave[1].value;
-			//var files = noticeSave[2].value;			
+			var title = qnaboardSave[0].value;
+			var acontent = qnaboardSave[1].value;
+			//var files = qnaboardSave[2].value;			
 			console.log(title);
-			console.log(qcontent);			
+			console.log(acontent);			
 			
-			mesg = "title=" + title + "&" + "qcontent=" + qcontent;			
-			location.href = `/hifive/board/QnABoardWriteInsert?\${mesg}`;
+			mesg = "title=" + title + "&" + "acontent=" + acontent;			
+			location.href = `/hifive/board/QnABoardAWriteInsert?\${mesg}`;
 			
 		}		
-		noticeSave.addEventListener("submit",QnABoardInsert);
+		qnaboardSave.addEventListener("submit",QnABoardInsert);
 		
 		var ListButton = document.querySelector("#ListButton");
 		function moveList(){

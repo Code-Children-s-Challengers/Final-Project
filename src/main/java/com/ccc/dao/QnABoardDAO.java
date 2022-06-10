@@ -30,8 +30,12 @@ public class QnABoardDAO {
 		return session.delete("com.config.QnABoardMapper.deleteQnABoard",id);
 	}
 
-	public int insertQnABoard(QnABoardDTO saveDTO) throws Exception {
-		return session.insert("com.config.QnABoardMapper.insertQnABoard", saveDTO);
+	public int insertQQnABoard(QnABoardDTO dto) throws Exception {
+		return session.insert("com.config.QnABoardMapper.insertQQnABoard", dto);
+	}
+	
+	public int insertAQnABoard(QnABoardDTO dto) throws Exception {
+		return session.insert("com.config.QnABoardMapper.insertAQnABoard", dto);
 	}
 	
 	public int totalCount() {

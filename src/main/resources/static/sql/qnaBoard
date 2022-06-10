@@ -7,10 +7,14 @@ create table qnaBoard
   acontent NVARCHAR2(1000),
   regdate timestamp,
   hit number,
-  files nvarchar2(1000)
+  files nvarchar2(1000),
+  answeryn nvarchar2(50)
+  type nvarchar2(100),
+  keyword nvarchar2(100)
+  
 );
 
-create sequence challenge_no_seq
+create sequence qnaboard_id_seq
     START WITH 1
     INCREMENT BY 1;
     

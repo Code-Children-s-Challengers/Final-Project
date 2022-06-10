@@ -5,5 +5,5 @@
 	<!-- --------------------------- <body> --------------------------------------- -->
 
 	<script>
-	location.href="/noticeSuccess";
+	location.href="/noticeWriteSuccess";
 	</script>

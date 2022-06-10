@@ -5,5 +5,5 @@
 	<!-- --------------------------- <body> --------------------------------------- -->
 <script>
   alert("공지사항 저장 성공");
-  location.href="/noticeList";
+  location.href="/hifive/board/noticeList";
 </script>

@@ -48,9 +48,15 @@ public class NoticeServiceImpl implements NoticeService {
 	}
 
 	@Override
-	public List<NoticeDTO> searchNotice(NoticeDTO dto) throws Exception {
-		List<NoticeDTO> list = dao.searchNotice(dto);
+	public NoticePageDTO searchNotice(NoticeDTO dto, int curPage) throws Exception {
+		NoticePageDTO list = dao.searchNotice(dto, curPage);
 		return list;
+	}
+
+	@Override
+	public int selectCount(NoticeDTO dto) throws Exception {
+		int num = dao.selectCount(dto);
+		return num;
 	}
 
 }

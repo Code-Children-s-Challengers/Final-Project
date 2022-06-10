@@ -6,8 +6,8 @@
 	<div>
 		<div>
 		<main>
-			<h2>공지사항 작성하기</h2>
-			<form id="noticeSave" method="GET">
+			<h2>문의사항 작성하기</h2>
+			<form id="qnaboardSave" method="GET">
 				<table>
 					<tbody>						
 						<tr>
@@ -27,43 +27,38 @@
 						 -->				
 						
 						<tr>
-							<td><button id="noticeSave">글 저장</button></td>
-												
+							<td><button id="qnaboardSave">글 저장</button></td>
+									
 						</tr>	
 						
 					</tbody>
 				</table>
-			</form>
-				<td><button id="listButton">목록</button></td>		
-			
+			</form>		
+			<td><button id="ListButton">목록</button></td>	
 		</main>			
 		</div>
-	</div> 	
-	
+	</div> 
 	<script>
-		var noticeSave = document.querySelector("#noticeSave");		
+		var qnaboardSave = document.querySelector("#qnaboardSave");		
 		
-		function noticeInsert(event){			
+		function QnABoardInsert(event){			
 			event.preventDefault();
-			var mesg = "";
-			
-			var title = noticeSave[0].value;
-			var content = noticeSave[1].value;
-			//var files = noticeSave[3].value;
-			
+			var mesg = "";			
+			var title = qnaboardSave[0].value;
+			var qcontent = qnaboardSave[1].value;
+			//var files = qnaboardSave[2].value;			
 			console.log(title);
-			console.log(content);			
+			console.log(qcontent);			
 			
-			mesg = "title=" + title + "&" + "content=" + content;			
-			location.href = `/hifive/board/noticeWriteInsert?\${mesg}`;
+			mesg = "title=" + title + "&" + "qcontent=" + qcontent;			
+			location.href = `/hifive/board/QnABoardQWriteInsert?\${mesg}`;
 			
 		}		
-		noticeSave.addEventListener("submit",noticeInsert);
+		qnaboardSave.addEventListener("submit",QnABoardInsert);
 		
-		var listButton = document.querySelector("#listButton");
+		var ListButton = document.querySelector("#ListButton");
 		function moveList(){
-			location.href = "/hifive/board/noticeList?curPage=1";
-		}             		
-		
-		listButton.addEventListener("click",moveList);
+			location.href = "/hifive/board/QnABoardList";
+		}              
+		ListButton.addEventListener("click",moveList);
 	</script>

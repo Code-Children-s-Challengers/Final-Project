@@ -142,5 +142,16 @@
 		where cnum = #{cnum} and unum = #{unum} and uploaddate = #{uploaddate}
 	</delete>
 	
+	<insert id="insertHoliday" parameterType="hashmap">
+		insert into choliday (cnum,holiday)
+		values (#{cnum},#{holiday})
+	</insert>
+	
+	<select id="holidayCheck" resultType="int" parameterType="hashmap">
+		select count(*)
+		from choliday
+		where cnum = #{cnum} and holiday = #{today}
+	</select>
+	
 	
 </mapper>

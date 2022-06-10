@@ -66,7 +66,27 @@ public class NoticeDAO {
 		return pDTO;
 	}
 	
-	public List<NoticeDTO> searchNotice(NoticeDTO dto) throws Exception{
-		return session.selectList("com.config.NoticeMapper.searchNotice",dto);
+	public NoticePageDTO searchNotice(NoticeDTO dto, int curPage) throws Exception{
+		
+		if(curPage==0) {
+			curPage = 1;
+		}
+		
+		NoticePageDTO pDTO = new NoticePageDTO();
+		int perPage = pDTO.getPerPage();
+		int offset = (curPage - 1) * perPage;
+		
+		List<NoticeDTO> list = session.selectList("com.config.NoticeMapper.searchNotice",dto, new RowBounds(offset, perPage));
+		
+		int totalPage = totalCount();
+		pDTO.setCurPage(curPage);
+		pDTO.setList(list);
+		pDTO.setTotalCount(totalPage);
+		
+		return pDTO;
 	}
+	
+	public int selectCount(NoticeDTO dto) throws Exception{
+		return session.selectOne("com.config.NoticeMapper.selectCount",dto);
+	}	
 }

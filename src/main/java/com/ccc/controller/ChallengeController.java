@@ -165,16 +165,22 @@ public class ChallengeController {
 		return "challenge/makeChallengePopup";
 	}
 	
+	@RequestMapping(value="/skipdayPopup", method = RequestMethod.GET)
+	public String skipdayPopup() throws Exception{
+		return "challenge/skipdayPopup";
+	}
+	
 	@RequestMapping(value="/makeChallenge", method = RequestMethod.POST)
 	@ResponseBody
-	public String makeChallenge(@RequestParam MultipartFile photo, @RequestParam String name, @RequestParam String category, @RequestParam Date start_date, @RequestParam Date end_date, @RequestParam int people, @RequestParam int fee, @RequestParam int holiday, @AuthenticationPrincipal PrincipalDetails principalDetails) throws Exception{
+	public String makeChallenge(@RequestParam MultipartFile photo, @RequestParam String name, @RequestParam String category, @RequestParam Date start_date, @RequestParam Date end_date, @RequestParam int people, @RequestParam int fee, @RequestParam int holiday, @RequestParam String skiphidden, @AuthenticationPrincipal PrincipalDetails principalDetails) throws Exception{
 		int unum = principalDetails.getUser().getId();
 		int num = 0;
 		
 		long miliseconds = System.currentTimeMillis();
         Date date = new Date(miliseconds);
+        int cnum = Cservice.challengeNumber();
 		
-        String filename = "c_"+unum+"_"+Integer.toString(Cservice.challengeNumber()+1)+".png";
+        String filename = "c_"+unum+"_"+Integer.toString(cnum+1)+".png";
         
         
 		File savePath = new File("C://Users//sksms//Desktop//포트폴리오//final//Final-Project//src//main//resources//static//images//challenge//challenge_image", filename);
@@ -197,6 +203,8 @@ public class ChallengeController {
 		dto.setMpeople(people);
 		
 		num = Cservice.challengeAdd(dto);
+		num = Cservice.insertHoliday(Integer.toString(cnum+1), skiphidden);
+		num = Cservice.Participate(unum, cnum+1);
 		
 		return "success";
 	}
@@ -262,6 +270,20 @@ public class ChallengeController {
 		m.addAttribute("unum", unum);
 		m.addAttribute("cnum", cnum);
 		return "myChallengeRetrieve";
+	}
+	
+	@RequestMapping(value="/uploadCertificationCheck", method = RequestMethod.GET)
+	@ResponseBody
+	public String uploadCertificationCheck(HttpServletRequest request) throws Exception{
+		String today = request.getParameter("today");
+		String cnum = request.getParameter("cnum");
+		int num = Cservice.holidayCheck(cnum, today);
+		if(num >= 1) {
+			return "false";
+		}
+		else {
+			return "true";
+		}
 	}
 	
 	@RequestMapping(value="/uploadCertificationPopup", method = RequestMethod.GET)

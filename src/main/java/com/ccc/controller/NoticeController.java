@@ -5,12 +5,14 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ccc.config.login.auth.PrincipalDetails;
 import com.ccc.dto.NoticeDTO;
 import com.ccc.dto.NoticePageDTO;
 import com.ccc.service.NoticeService;
@@ -22,7 +24,9 @@ public class NoticeController {
 	NoticeService service;
 	
 	@GetMapping(value="/board/noticeList")
-	public String notice(Model m, @RequestParam String curPage, String perPage, HttpServletRequest request) throws Exception{
+	public String notice(Model m, @RequestParam(defaultValue="1") String curPage, String perPage, HttpServletRequest request) throws Exception{
+		//,@AuthenticationPrincipal PrincipalDetails principalDetails
+		//String uname = principalDetails.getUser().getUsername();
 		
 		System.out.println(curPage);
 		if(curPage == "") curPage = "1";		
@@ -38,6 +42,7 @@ public class NoticeController {
 		m.addAttribute("list", list);
 		m.addAttribute("curPage", curPage);				
 		m.addAttribute("totalPage", tot);
+		//m.addAttribute("uname",uname);
 		
 		return "board/noticeList";
 	}
@@ -68,30 +73,40 @@ public class NoticeController {
 	}
 	
 	@GetMapping(value="/board/noticeWriteInsert")
-	public int writeSave(NoticeDTO dto) throws Exception{		
+	public String writeSave(NoticeDTO dto) throws Exception{		
 		
-		System.out.println(dto);	
-		
+		System.out.println(dto);		
 		
 		int num = service.insertNotice(dto);		
-		return 0;
+		return "board/notice/noticeWriteSuccess";
 	}
 	
 	@GetMapping(value="/board/noticeSearch")	
 	public String noticeSerach(@RequestParam("type") String type,
 							   @RequestParam("keyword") String keyword,
+							   @RequestParam(defaultValue="1") String curPage,
 			Model m) throws Exception{
 		
 		System.out.println("type:" + type);
 		System.out.println(keyword);
+		
+		if(curPage == "") curPage = "1";	
 		
 		NoticeDTO sDTO = new NoticeDTO();
 		
 		sDTO.setType(type);
 		sDTO.setKeyword(keyword);
 		
-		List<NoticeDTO> searchList = service.searchNotice(sDTO);
+		NoticePageDTO searchList = service.searchNotice(sDTO, Integer.parseInt(curPage));		
 		
+		int tot = service.selectCount(sDTO) / searchList.getPerPage();
+		if(searchList.getTotalCount() % searchList.getPerPage() == 0) tot++;
+						
+		System.out.println(tot);
+		m.addAttribute("curPage", curPage);				
+		m.addAttribute("totalPage", tot);
+		m.addAttribute("type",type);
+		m.addAttribute("keyword",keyword);		
 		m.addAttribute("searchList", searchList);
 		
 		return "board/noticeSearch";

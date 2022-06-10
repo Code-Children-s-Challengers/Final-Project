@@ -16,16 +16,21 @@
 		order by id asc
 	</select>	
 	
-	<insert id="insertQnABoard" parameterType="QnABoardDTO">
-		insert into QnABoard(id,title,writerId,qcontent,acontent,regdate,hit,files)
-		values (QnABoard_seq.nextval,
-				#{title},
-				#{writerId},
-				#{qcontent},
-				#{acontent},							
-				#{regdate},
-				0,	
-				#{files}
+	<insert id="insertQQnABoard" parameterType="QnABoardDTO">
+		insert into QnABoard(id,title,qcontent,regdate)
+		values (qnaboard_id_seq.nextval,
+				#{title},				
+				#{qcontent},										
+				sysdate				
+				)		
+	</insert>
+	
+	<insert id="insertAQnABoard" parameterType="QnABoardDTO">
+		insert into QnABoard(id,title,acontent,regdate)
+		values (qnaboard_id_seq.nextval,
+				#{title},				
+				#{acontent},										
+				sysdate				
 				)		
 	</insert>
 	

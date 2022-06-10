@@ -13,7 +13,7 @@
     <a href="/hifive/member/myPage">마이페이지</a>
 </sec:authorize>
 <a href="">challenges</a> 
-<a href="">board</a>
+<a href="/hifive/board/noticeList?curPage=1">board</a>
 
 
 </div>

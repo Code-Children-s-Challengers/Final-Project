@@ -12,7 +12,10 @@
 	<div>
 		<div>
 		<main>
-			<h2>문의하기 게시판</h2>					
+			<select id = "selectBoard">
+				<option value="notice"><h2>공지사항</h2></option>
+				<option value="QnABoard" selected><h2>문의사항</h2></option>							
+			</select>					
 			<h3>문의사항 검색</h3>
 			<form id="searchButton">
 				<fieldset>					
@@ -107,13 +110,13 @@
 	<script>
 	var writeQButton = document.querySelector("#writeQButton");
 	function moveQWrite(){
-		location.href = "/hifive/board/QnABoardWrite";
+		location.href = "/hifive/board/QnABoardQWrite";
 	}              
 	writeQButton.addEventListener("click",moveQWrite);
 	
 	var writeAButton = document.querySelector("#writeAButton");
 	function moveAWrite(){
-		location.href = "/hifive/board/QnABoardWrite";
+		location.href = "/hifive/board/QnABoardAWrite";
 		// 글 id 전달되야함.
 	}              
 	writeAButton.addEventListener("click",moveAWrite);
@@ -134,6 +137,21 @@
 	}
 	searchButton.addEventListener("submit",moveSearch);
 	
+var selectBoard = document.querySelector("#selectBoard");
+	
+	function moveBoard(){
+		if (selectBoard.value == "notice"){
+			location.href = `noticeList?curPage=1`;
+		}
+		if (selectBoard.value == "QnABoard"){
+			location.href = `QnABoardList?curPage=1`;
+		}
+		if (selectBoard.value == "Challenge"){
+			location.href = `ChallengeList?curPage=1`;
+		}
+		
+	}	
+	selectBoard.addEventListener("change",moveBoard)
 	
 	
 	</script>

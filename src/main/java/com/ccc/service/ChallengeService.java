@@ -32,4 +32,6 @@ public interface ChallengeService {
 	public int validationUpdate(String unum, String cnum, String uploaddate) throws Exception;
 	public int reportDelete(String unum, String cnum, String uploaddate) throws Exception;
 	public ChallengeDTO challengeByCnum(int cnum) throws Exception;
+	public int insertHoliday(String cnum, String hday) throws Exception;
+	public int holidayCheck(String cnum, String today) throws Exception;
 }

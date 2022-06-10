@@ -18,16 +18,13 @@
 	<!-- 제목을 선택했을 때 조회수는 어떻게 늘리지? hit += 1을 적용해야하는데 방법을 잘... -->
 	
 	<insert id="insertNotice" parameterType="NoticeDTO">
-		insert into notice(id,title,writerid,content,regdate,hit,files)
-		values (notice_seq.nextval,
-				#{title},
-				#{writerid},
-				#{content},							
-				#{regdate},
-				#{hit},	
-				#{files}
-				)
-		
+		insert into notice(id,title,content,regdate)
+		values (
+				notice_seq.nextval,
+				#{title},			
+				#{content},
+				SYSDATE
+				)		
 	</insert>
 	
 	<delete id="deleteNotice" parameterType="int">
@@ -39,6 +36,20 @@
 	<select id="totalCount" resultType="int">
       select count(*)
       from notice     
+    </select>
+    
+    <select id="selectCount" parameterType="noticeDTO" resultType="int">
+      select count(*)
+      from notice     
+      <choose>
+   			<when test="type != null and type.equals('title')">
+	   		where title like ('%' || #{keyword} || '%') 	   		    
+	   		</when>
+	   		
+	   		<when test="type != null and type.equals('writerId')">
+	   		where writerId = #{keyword}	   		
+	   		</when> 
+   		</choose>
     </select>
     
     <update id="hitChange" parameterType="int">
@@ -60,9 +71,7 @@
 	   		</when> 
    		</choose>
     
-    </select>
-    
-    
+    </select>  
     
     
 	
