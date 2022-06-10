@@ -14,6 +14,7 @@ public interface QnABoardService {
 	public int insertQQnABoard(QnABoardDTO saveDTO) throws Exception;
 	public int insertAQnABoard(QnABoardDTO saveDTO) throws Exception;
 	public QnABoardPageDTO selectQnABoardPage(int curPage) throws Exception;
-	public List<QnABoardDTO> searchQnABoard(QnABoardDTO dto) throws Exception;
+	public QnABoardPageDTO searchQnABoard(QnABoardDTO dto,int curPage) throws Exception;
 	public QnABoardDTO checkAnswer(int id) throws Exception;
+	public int selectCount(QnABoardDTO dto) throws Exception;
 }

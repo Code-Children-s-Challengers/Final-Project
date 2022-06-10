@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.ccc.dto.QnABoardPageDTO;
 import com.ccc.dto.NoticeDTO;
+import com.ccc.dto.NoticePageDTO;
 import com.ccc.dto.QnABoardDTO;
 
 @Repository("QnABoardDAO")
@@ -64,12 +65,32 @@ public class QnABoardDAO {
 		return session.update("com.config.QnABoardMapper.hitChange", id);
 	}
 	
-	public List<QnABoardDTO> searchQnABoard(QnABoardDTO dto) throws Exception{
-		return session.selectList("com.config.QnABoardMapper.searchQnABoard",dto);
+	public QnABoardPageDTO searchQnABoard(QnABoardDTO dto,int curPage) throws Exception{
+		if(curPage==0) {
+			curPage = 1;
+		}
+		
+		QnABoardPageDTO pDTO = new QnABoardPageDTO();
+		int perPage = pDTO.getPerPage();
+		int offset = (curPage - 1) * perPage;
+		
+		List<QnABoardDTO> list = session.selectList("com.config.QnABoardMapper.searchQnABoard",dto, new RowBounds(offset, perPage));
+		
+		int totalPage = totalCount();
+		pDTO.setCurPage(curPage);
+		pDTO.setList(list);
+		pDTO.setTotalCount(totalPage);
+		
+		return pDTO;
+		
 	}
 	
 	public QnABoardDTO checkAnswer(int id) throws Exception{
 		return session.selectOne("com.config.QnABoardMapper.checkAnswer",id);
 	}
+	
+	public int selectCount(QnABoardDTO dto) throws Exception{
+		return session.selectOne("com.config.QnABoardMapper.selectCount",dto);
+	}	
 	
 }

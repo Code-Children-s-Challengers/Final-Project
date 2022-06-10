@@ -1,4 +1,5 @@
 <%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="com.ccc.dto.QnABoardDTO"%>
 <%@page import="com.ccc.dto.QnABoardPageDTO"%>
 
@@ -11,11 +12,26 @@
 	<div>
 		<div>
 		<main>
-			<h2>공지사항</h2>					
-			<a href="QnABoardList?curPage=1"><h3>리스트로 돌아가기</h3></a>			
+			<select id = "selectBoard">
+				<option value="notice" selected><h2>공지사항</h2></option>
+				<option value="QnABoard"><h2>문의사항</h2></option>								
+			</select>	
 			
+			<h3>문의사항 검색</h3>
+			<form id="searchButton">
+				<fieldset>					
+					<label>검색분류</label>
+					<select name="type">
+						<option  value="title">제목</option>
+						<option  value="writerId">작성자</option>
+					</select> 
+					<label>검색어</label>
+					<input type="text" name="keyword" value=""/>
+					<input type="submit" value="검색" />
+				</fieldset>
+			</form>			
 			<div>
-				<h3>공지사항 목록</h3>
+				<h3>문의사항 목록</h3>
 				<table>
 					<thead>
 						<tr>
@@ -24,16 +40,22 @@
 							<th>작성자</th>
 							<th>작성일</th>
 							<th>조회수</th>
+							<th>답변여부</th>
+							<th>답변달기</th>
 						</tr>
 					</thead>
 					
 					<tbody>							
 
 					<% 
-					List<QnABoardDTO> list = (List<QnABoardDTO>)request.getAttribute("searchList");
+					QnABoardPageDTO pDTO = (QnABoardPageDTO)request.getAttribute("searchList");
+					List<QnABoardDTO> list = pDTO.getList();
+					ArrayList<String> answers = (ArrayList<String>)request.getAttribute("resultAnswer");
+					int i = 0;
 					
 					for(QnABoardDTO n : list) {
 						pageContext.setAttribute("n", n);
+												
 					%>
 					<tr>
 						<td>${n.id}</td>						
@@ -41,8 +63,22 @@
 						<td>${n.writerId}</td>
 						<td>${n.regdate}</td>
 						<td>${n.hit}</td>
-					</tr>							
-					<% } %>
+						<%
+						int j = 0;
+							for(String answer : answers){
+								pageContext.setAttribute("answer", answer);
+							
+								if(j == i){
+								%>
+									<td>${answer}</td>
+								<%		
+								System.out.println(j);																
+							}
+							j ++;
+						}%>
+					</tr>											
+					<% 
+					i++;} %>
 					
 					</tbody>
 				</table>
@@ -53,7 +89,7 @@
 			<c:set var="totalPage" value ="${totalPage}"></c:set>
 			
 			<c:forEach var="i" begin="1" end="${totalPage}">
-				<a href="QnABoardList?curPage=${i}">${i}</a><span>  </span>
+				<a href="QnABoardSearch?curPage=${i}&type=${type}&keyword=${keyword}">${i}</a><span>  </span>
 			</c:forEach>
 			
 			
@@ -65,12 +101,44 @@
 		</div>
 	</div> 
 	<script>
-	var writeButton = document.querySelector("#writeButton");
-	function moveWrite(){
-		location.href = "/hifive/QnABoardWrite";
+	var writeQButton = document.querySelector("#writeQButton");
+	function moveQWrite(){
+		location.href = "/hifive/board/QnABoardQWrite";
 	}              
-	writeButton.addEventListener("click",moveWrite);
+	writeQButton.addEventListener("click",moveQWrite);
 	
+	var writeAButton = document.querySelector("#writeAButton");
+	function moveAWrite(){
+		location.href = "/hifive/board/QnABoardAWrite";
+		// 글 id 전달되야함.
+	}  
+	
+	function moveSearch(event){		
+		event.preventDefault();
+		var mesg = "";
+		
+		
+		var type = searchButton[1].value;
+		var keyword = searchButton[2].value;
+		mesg = "type=" + type + "&" + "keyword=" + keyword;
+		console.log(type);
+		console.log(keyword);
+		
+		location.href = `QnABoardSearch?\${mesg}`;
+	}
+	searchButton.addEventListener("submit",moveSearch);
+	
+	var selectBoard = document.querySelector("#selectBoard");
+	function moveBoard(){
+		if (selectBoard.value == "notice"){
+			location.href = `noticeList`;
+		}
+		if (selectBoard.value == "QnABoard"){
+			location.href = `QnABoardList`;
+		}		
+		
+	}	
+	selectBoard.addEventListener("change",moveBoard)
 	
 	
 	

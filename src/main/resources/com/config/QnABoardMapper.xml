@@ -74,6 +74,20 @@
     	where id = ${id}
     </select>
     
+    <select id="selectCount" parameterType="QnABoardDTO" resultType="int">
+      select count(*)
+      from qnaboard     
+      <choose>
+   			<when test="type != null and type.equals('title')">
+	   		where title like ('%' || #{keyword} || '%') 	   		    
+	   		</when>
+	   		
+	   		<when test="type != null and type.equals('writerId')">
+	   		where writerId = #{keyword}	   		
+	   		</when> 
+   		</choose>
+    </select>
+    
 </mapper>
 
 

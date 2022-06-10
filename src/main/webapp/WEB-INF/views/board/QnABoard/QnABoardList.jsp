@@ -137,7 +137,7 @@
 	}
 	searchButton.addEventListener("submit",moveSearch);
 	
-var selectBoard = document.querySelector("#selectBoard");
+	var selectBoard = document.querySelector("#selectBoard");
 	
 	function moveBoard(){
 		if (selectBoard.value == "notice"){
