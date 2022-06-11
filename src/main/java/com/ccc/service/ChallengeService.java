@@ -34,4 +34,6 @@ public interface ChallengeService {
 	public ChallengeDTO challengeByCnum(int cnum) throws Exception;
 	public int insertHoliday(String cnum, String hday) throws Exception;
 	public int holidayCheck(String cnum, String today) throws Exception;
+	public int challengeCompleteCheck(String cnum, String unum) throws Exception;
+	public int challengeCompleteUpdate(String cnum, String unum) throws Exception;
 }
