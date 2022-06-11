@@ -153,4 +153,16 @@ public class ChallengeServiceImpl implements ChallengeService {
 		return num;
 	}
 
+	@Override
+	public int challengeCompleteCheck(String cnum, String unum) throws Exception {
+		int num = dao.challengeCompleteCheck(cnum, unum);
+		return num;
+	}
+
+	@Override
+	public int challengeCompleteUpdate(String cnum, String unum) throws Exception {
+		int num = dao.challengeCompleteUpdate(cnum, unum);
+		return num;
+	}
+
 }

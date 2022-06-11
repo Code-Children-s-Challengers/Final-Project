@@ -41,9 +41,14 @@ public class MyPageContorller {
 			mav.setViewName("additionalInfoForm");
 			return mav;
 		}else {
+			Map<String, String> modelMap = new HashMap<String,String>();
+			modelMap.put("id", Integer.toString(userDB.getId()));
+			modelMap.put("nickname1", userDB.getNickname());
+
 			mav.setViewName("/member/myPage");
-			mav.addObject("id", userDB.getId());
-			mav.addObject("nickname", userDB.getNickname());
+			mav.addAllObjects(modelMap);
+			System.out.println(userDB.getNickname());
+
 			return mav;
 		}		
 	}
@@ -62,6 +67,7 @@ public class MyPageContorller {
 			mav.setViewName("/member/myPage");
 			mav.addObject("id", userDB.getId());
 			mav.addObject("nickname", userDB.getNickname());
+			System.out.println(userDB.getNickname());
 
 			return mav;
 		}		
@@ -74,9 +80,9 @@ public class MyPageContorller {
 		UserDTO user = userDAO.findUser(id);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("member/myInfo");
-		mav.addObject("email", user.getEmail());
-		mav.addObject("phoneNumber", user.getPhoneNumber());
-		mav.addObject("password", user.getPassword());
+		mav.addObject("email1", user.getEmail());
+		mav.addObject("phoneNumber1", user.getPhoneNumber());
+		mav.addObject("password1", user.getPassword());
 		return mav;
 	}
 	

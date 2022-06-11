@@ -153,5 +153,17 @@
 		where cnum = #{cnum} and holiday = #{today}
 	</select>
 	
+	<select id="challengeCompleteCheck" resultType="int" parameterType="hashmap">
+		select complete
+		from cparticipant
+		where cnum = #{cnum} and unum = #{unum}
+	</select>
+	
+	<update id="challengeCompleteUpdate" parameterType="hashmap">
+		update cparticipant
+		set complete = 1
+		where cnum = #{cnum} and unum = #{unum}
+	</update>
+	
 	
 </mapper>

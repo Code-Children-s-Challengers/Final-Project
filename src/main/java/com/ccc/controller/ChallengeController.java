@@ -203,10 +203,32 @@ public class ChallengeController {
 		dto.setMpeople(people);
 		
 		num = Cservice.challengeAdd(dto);
-		num = Cservice.insertHoliday(Integer.toString(cnum+1), skiphidden);
+		if(skiphidden.length() > 5) {
+			num = Cservice.insertHoliday(Integer.toString(cnum+1), skiphidden);
+		}
 		num = Cservice.Participate(unum, cnum+1);
 		
 		return "success";
+	}
+	
+	@RequestMapping(value="/endChallenge", method = RequestMethod.GET)
+	@ResponseBody
+	public String endChallenge(@AuthenticationPrincipal PrincipalDetails principalDetails, HttpServletRequest request) throws Exception{
+		int unum = principalDetails.getUser().getId();
+		String cnum = request.getParameter("cnum");
+		int num = 0;
+		
+		num = Cservice.challengeCompleteCheck(cnum, Integer.toString(unum));
+		if(num == 0) {
+			num = Cservice.challengeCompleteUpdate(cnum, Integer.toString(unum));
+			if(num >= 1) {
+				return "success";
+			}else {
+				return "fail";
+			}
+		}else {
+			return "alreadydone";
+		}
 	}
 	
 //////////////////////////////////////////////////////////////////////////////////challenge 참가 페이지

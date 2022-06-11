@@ -53,7 +53,7 @@
  -->  
 <sec:authorize access="isAuthenticated()">
 	<p>로그인 되었습니다</p>
-	<p>반갑습니다 ${nickname} 님</p>
+	<p>반갑습니다 ${nickname1} 님</p>
 </sec:authorize> 
   
   
