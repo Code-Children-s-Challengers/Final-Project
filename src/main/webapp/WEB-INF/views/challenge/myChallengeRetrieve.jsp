@@ -54,6 +54,37 @@ $(document).ready(function(){
 			//win = window.open("./uploadCertificationPopup?cnum="+cnum,"upload certification","width = 500, height = 500, top = 100, left = 200, location = no");
 		}
 	});
+	$("#endchallenge").on("click",function(){
+		var cnum = $("#cnum").val();
+		var today = new Date().toISOString().substr(0,10);
+		var eday = $('#eday').val();
+		if(today < eday){
+			alert("아직 종료되지 않은 챌린지입니다");
+		}else{
+			$.ajax({
+				url:'endChallenge',
+				type:'get',
+				data:{
+					cnum:cnum
+				},
+			dataType:'text',
+			success:function(responseData, status, xhr){
+				if(responseData == 'success'){
+					alert("챌린지가 종료되었습니다.");
+				}else if(responseData == 'fail'){
+					alert("서버 오류로 인한 실패, 잠시 후 다시 시도해 주세요");
+				}else{
+					alert("서버 오류로 인한 실패, 잠시 후 다시 시도해 주세요");
+				}
+			},
+			error:function(xhr, status, e){
+				alert("서버 오류로 인한 실패, 잠시 후 다시 시도해 주세요");
+				console.log("Error: "+e);
+			}
+			});
+			//win = window.open("./uploadCertificationPopup?cnum="+cnum,"upload certification","width = 500, height = 500, top = 100, left = 200, location = no");
+		}
+	});
 });
 </script>
 
@@ -61,7 +92,7 @@ $(document).ready(function(){
 <input type="hidden" value="${cnum}" id="cnum"/>
 <input type="hidden" value="${cdto.getSday()}" id="sday"/>
 <input type="hidden" value="${cdto.getEday()}" id="eday"/>
-<button id="upload">upload certification</button>
+<button id="upload">upload certification</button> <button id="endchallenge">end challenge</button>
 <table width="100%" cellspacing="0" cellpadding="0" id="test">
 	<tr>
 		<td>

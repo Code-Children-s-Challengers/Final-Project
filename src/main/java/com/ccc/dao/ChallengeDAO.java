@@ -230,4 +230,18 @@ public class ChallengeDAO {
 		map.put("today", today);
 		return session.selectOne("com.config.ChallengeMapper.holidayCheck");
 	}
+	
+	public int challengeCompleteCheck(String cnum, String unum) throws Exception{
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("cnum", cnum);
+		map.put("unum", unum);
+		return session.selectOne("com.config.ChallengeMapper.challengeCompleteCheck", map);
+	}
+	
+	public int challengeCompleteUpdate(String cnum, String unum) throws Exception{
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("cnum", cnum);
+		map.put("unum", unum);
+		return session.update("com.config.ChallengeMapper.challengeCompleteUpdate", map);
+	}
 }
