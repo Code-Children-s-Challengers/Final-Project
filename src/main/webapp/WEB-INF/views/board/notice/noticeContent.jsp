@@ -47,26 +47,8 @@
 							<button id="DeleteButton">글 삭제</button>
 							<button id="UpdateButton">글 수정</button>
 						</span>
-					</div>					
+					</div>		
 					
-					<div>
-						<table>
-							<tbody>								
-								<tr>
-									<th>다음글</th>
-									<td colspan="3">다음글제목</td>
-								</tr>							
-								
-								
-								<tr>
-									<th>이전글</th>
-									<td colspan="3"  ><a href="">이전글제목</a></td>
-								</tr>								
-							</tbody>					
-						</table>
-						
-					
-					</div>			
 					
 			</main>		
 			
