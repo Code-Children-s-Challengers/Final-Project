@@ -48,7 +48,6 @@ public class MyPageContorller {
 			mav.setViewName("/member/myPage");
 			mav.addAllObjects(modelMap);
 			System.out.println(userDB.getNickname());
-			System.out.println("이게 맞는데");
 
 			return mav;
 		}		
@@ -81,9 +80,9 @@ public class MyPageContorller {
 		UserDTO user = userDAO.findUser(id);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("member/myInfo");
-		mav.addObject("email", user.getEmail());
-		mav.addObject("phoneNumber", user.getPhoneNumber());
-		mav.addObject("password", user.getPassword());
+		mav.addObject("email1", user.getEmail());
+		mav.addObject("phoneNumber1", user.getPhoneNumber());
+		mav.addObject("password1", user.getPassword());
 		return mav;
 	}
 	
