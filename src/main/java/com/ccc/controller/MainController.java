@@ -39,7 +39,7 @@ public class MainController {
 			}else {
 				System.out.println("3");
 				mav.setViewName("main");
-				mav.addObject("nickname", userDB.getNickname());
+				mav.addObject("nickname1", userDB.getNickname());
 				return mav;
 			}
 		}else {

@@ -114,7 +114,7 @@
 			<tr>
 				<th class="nickname">닉네임</th>
 				<td>
-					<input type="text" value="${nickname}" name="nickname" id="nickname"/>
+					<input type="text" value="${nickname1}" name="nickname" id="nickname"/>
 					<span class="point nicknameSuccess"></span><br/>
 					<span class="point">※ 영문자, 소문자 입력가능, 최소 4자 이상, 최대 12자 까지 입력</span>
 					<input type="hidden" id="nicknameChecker"/>

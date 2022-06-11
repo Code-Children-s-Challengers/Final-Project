@@ -41,9 +41,15 @@ public class MyPageContorller {
 			mav.setViewName("additionalInfoForm");
 			return mav;
 		}else {
+			Map<String, String> modelMap = new HashMap<String,String>();
+			modelMap.put("id", Integer.toString(userDB.getId()));
+			modelMap.put("nickname1", userDB.getNickname());
+
 			mav.setViewName("/member/myPage");
-			mav.addObject("id", userDB.getId());
-			mav.addObject("nickname", userDB.getNickname());
+			mav.addAllObjects(modelMap);
+			System.out.println(userDB.getNickname());
+			System.out.println("이게 맞는데");
+
 			return mav;
 		}		
 	}
@@ -62,6 +68,7 @@ public class MyPageContorller {
 			mav.setViewName("/member/myPage");
 			mav.addObject("id", userDB.getId());
 			mav.addObject("nickname", userDB.getNickname());
+			System.out.println(userDB.getNickname());
 
 			return mav;
 		}		
