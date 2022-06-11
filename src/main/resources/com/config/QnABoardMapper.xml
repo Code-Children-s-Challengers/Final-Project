@@ -88,6 +88,12 @@
    		</choose>
     </select>
     
+    <update id="updateQnABoard" parameterType="QnABoardDTO">
+    	update qnaboard
+    	set title = #{title}, qcontent = #{qcontent}
+    	where id = #{id}
+    </update>
+    
 </mapper>
 
 

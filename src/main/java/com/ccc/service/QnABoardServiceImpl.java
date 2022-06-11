@@ -74,4 +74,10 @@ public class QnABoardServiceImpl implements QnABoardService {
 		return num;
 	}
 
+	@Override
+	public int updateQnABoard(QnABoardDTO dto) throws Exception {
+		int num = dao.updateQnABoard(dto);
+		return num;
+	}
+
 }

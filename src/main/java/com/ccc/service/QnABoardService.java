@@ -17,4 +17,5 @@ public interface QnABoardService {
 	public QnABoardPageDTO searchQnABoard(QnABoardDTO dto,int curPage) throws Exception;
 	public QnABoardDTO checkAnswer(int id) throws Exception;
 	public int selectCount(QnABoardDTO dto) throws Exception;
+	public int updateQnABoard(QnABoardDTO dto) throws Exception;
 }

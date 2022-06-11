@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.ccc.dto.NoticeDTO;
 import com.ccc.dto.QnABoardDTO;
 import com.ccc.dto.QnABoardPageDTO;
 import com.ccc.service.QnABoardService;
@@ -177,4 +178,29 @@ public class QnABoardController {
 		
 		return "board/QnABoardSearch";
 	}
+	
+	@GetMapping(value="/board/QnABoardQUpdate")
+	public String updateForm(@RequestParam int id, Model m) throws Exception{		
+		m.addAttribute("id",id);
+		return "board/QnABoardQUpdate";
+	}
+	
+	@GetMapping(value="/board/QnABoardQUpdateInsert")
+	public String updateNotice(@RequestParam("id") String id,
+							   @RequestParam("title") String title,
+							   @RequestParam("content") String content,							   
+							   Model m) throws Exception{
+		QnABoardDTO uDTO = new QnABoardDTO();
+		
+		uDTO.setId(Integer.parseInt(id));
+		uDTO.setTitle(title);
+		uDTO.setQcontent(content);
+		
+		
+		int num = service.updateQnABoard(uDTO);
+		
+		return "board/QnABoard/QnABoardQUpdateSuccess";		
+	}
+	
+	
 }

@@ -66,7 +66,8 @@
 			<div>
 				<span>
 					<button id="ListButton">목록</button>
-					<button id="DeleteButton">글 삭제</button>							
+					<button id="DeleteButton">글 삭제</button>			
+					<button id="UpdateButton">글 수정</button>				
 				</span>
 			</div>			
 					
@@ -78,6 +79,7 @@
 		location.href = "/hifive/board/QnABoardList?curPage=1";
 	}              
 	ListButton.addEventListener("click",moveList);
+	
 	var id = document.querySelector("#writeNum").innerText;
 	console.log(id);
 	var DeleteButton = document.querySelector("#DeleteButton");
@@ -86,5 +88,9 @@
 	}              
 	DeleteButton.addEventListener("click",moveDelete);
 	
-	
+	var UpdateButton = document.querySelector("#UpdateButton");
+	function moveUpdate(){		
+		location.href = `/hifive/board/noticeUpdate?id=\${id}`;		
+	}              
+	UpdateButton.addEventListener("click",moveUpdate);
 	</script>
