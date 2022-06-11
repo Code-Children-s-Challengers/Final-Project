@@ -25,14 +25,7 @@
 				)		
 	</insert>
 	
-	<insert id="insertAQnABoard" parameterType="QnABoardDTO">
-		insert into QnABoard(id,title,acontent,regdate)
-		values (qnaboard_id_seq.nextval,
-				#{title},				
-				#{acontent},										
-				sysdate				
-				)		
-	</insert>
+	
 	
 	<delete id="deleteQnABoard" parameterType="int">
 		delete from QnABoard
@@ -88,12 +81,18 @@
    		</choose>
     </select>
     
-    <update id="updateQnABoard" parameterType="QnABoardDTO">
+    <update id="updateQQnABoard" parameterType="QnABoardDTO">
     	update qnaboard
     	set title = #{title}, qcontent = #{qcontent}
     	where id = #{id}
     </update>
     
+    <update id="updateAQnABoard" parameterType="QnABoardDTO">
+		update qnaboard
+		set acontent = #{acontent}
+		where id = #{id}
+	</update>
+	
 </mapper>
 
 

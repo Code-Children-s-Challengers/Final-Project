@@ -92,7 +92,10 @@ public class QnABoardDAO {
 	public int selectCount(QnABoardDTO dto) throws Exception{
 		return session.selectOne("com.config.QnABoardMapper.selectCount",dto);
 	}	
-	public int updateQnABoard(QnABoardDTO dto) throws Exception{
-		return session.update("com.config.QnABoardMapper.updateQnABoard", dto);
+	public int updateAQnABoard(QnABoardDTO dto) throws Exception{
+		return session.update("com.config.QnABoardMapper.updateAQnABoard", dto);
+	}
+	public int updateQQnABoard(QnABoardDTO dto) throws Exception{
+		return session.update("com.config.QnABoardMapper.updateQQnABoard", dto);
 	}
 }

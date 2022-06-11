@@ -5,11 +5,18 @@
 	<!-- --------------------------- <body> --------------------------------------- -->
 	<div>
 		<div>
+		<c:set var="id" value ="${id}"></c:set>
+		
 		<main>
 			<h2>문의사항 답변하기</h2>
 			<form id="qnaboardSave" method="GET">
 				<table>
-					<tbody>						
+					<tbody>		
+						<tr>
+							<th>글 번호</th>
+							<td>${id}</span></td>
+							<input type="hidden" id="id" name = "id" value="${id}"></td>
+						</tr>					
 						<tr>
 							<th>제목</th>
 							<td><input type="text" id="title" name = "title" value=""  placeholder="제목을 입력하세요" size="30"></td>

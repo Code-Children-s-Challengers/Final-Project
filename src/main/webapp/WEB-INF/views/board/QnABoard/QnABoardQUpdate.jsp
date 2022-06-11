@@ -50,25 +50,25 @@
 	<script>
 		var QnABoardSave = document.querySelector("#QnABoardSave");		
 
-		function noticeInsert(event){			
+		function QnABoardUpdate(event){			
 			event.preventDefault();
 			var mesg = "";
 			
 			
 			var id = QnABoardSave[0].value;
 			var title = QnABoardSave[1].value;
-			var content = QnABoardSave[2].value;
+			var qcontent = QnABoardSave[2].value;
 			//var files = noticeSave[3].value;
 			
 			console.log(id);
 			console.log(title);
-			console.log(content);			
+			console.log(qcontent);			
 			
 			mesg = "id=" + id + "&" + "title=" + title + "&" + "qcontent=" + qcontent;			
 			location.href = `/hifive/board/QnABoardQUpdateInsert?\${mesg}`;
 			
 		}		
-		QnABoardSave.addEventListener("submit",QnABoardInsert);
+		QnABoardSave.addEventListener("submit",QnABoardUpdate);
 		
 		var listButton = document.querySelector("#listButton");
 		function moveList(){

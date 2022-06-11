@@ -50,17 +50,7 @@
 			
 			
 			<div>
-				<table>
-					<tbody>								
-						<tr>
-							<th>다음글</th>
-							<td colspan="3">다음글제목</td>
-							<th>이전글</th>
-							<td colspan="3"  ><a href="">이전글제목</a></td>
-					
-						</tr>								
-					</tbody>					
-				</table>					
+									
 			</div>
 			
 			<div>
@@ -90,7 +80,7 @@
 	
 	var UpdateButton = document.querySelector("#UpdateButton");
 	function moveUpdate(){		
-		location.href = `/hifive/board/noticeUpdate?id=\${id}`;		
+		location.href = `/hifive/board/QnABoardQUpdate?id=\${id}`;		
 	}              
 	UpdateButton.addEventListener("click",moveUpdate);
 	</script>

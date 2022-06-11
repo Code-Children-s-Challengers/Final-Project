@@ -119,15 +119,6 @@ public class QnABoardController {
 		return "board/QnABoard/QnABoardWriteSuccess";
 	}
 	
-	@GetMapping(value="/board/QnABoardAWriteInsert")
-	public String writeASave(QnABoardDTO dto) throws Exception{		
-		
-		System.out.println(dto);			
-		
-		int num = service.insertAQnABoard(dto);		
-		
-		return "board/QnABoard/QnABoardWriteSuccess";
-	}
 	
 	@GetMapping(value="/board/QnABoardSearch")	
 	public String QnABoardSerach(@RequestParam("type") String type,
@@ -178,29 +169,30 @@ public class QnABoardController {
 		
 		return "board/QnABoardSearch";
 	}
-	
+							
 	@GetMapping(value="/board/QnABoardQUpdate")
-	public String updateForm(@RequestParam int id, Model m) throws Exception{		
+	public String updateQForm(@RequestParam int id, Model m) throws Exception{		
 		m.addAttribute("id",id);
 		return "board/QnABoardQUpdate";
-	}
+	}	
 	
 	@GetMapping(value="/board/QnABoardQUpdateInsert")
-	public String updateNotice(@RequestParam("id") String id,
+	public String QnABoardQUpdate(@RequestParam("id") String id,
 							   @RequestParam("title") String title,
-							   @RequestParam("content") String content,							   
+							   @RequestParam("qcontent") String qcontent,							   
 							   Model m) throws Exception{
 		QnABoardDTO uDTO = new QnABoardDTO();
 		
 		uDTO.setId(Integer.parseInt(id));
 		uDTO.setTitle(title);
-		uDTO.setQcontent(content);
+		uDTO.setQcontent(qcontent);
 		
 		
-		int num = service.updateQnABoard(uDTO);
+		int num = service.updateQQnABoard(uDTO);
 		
 		return "board/QnABoard/QnABoardQUpdateSuccess";		
 	}
+	
 	
 	
 }
