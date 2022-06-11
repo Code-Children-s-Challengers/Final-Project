@@ -57,16 +57,17 @@
                 <h4>Password</h4>
                 <input type="password" id="password" name="password" placeholder="Password"/><br>	
             </div>
+            <div class="submit">
+                <!--  <button id="login">Login</button> -->
+                 <input id="login" type="submit" value="submit">
+            </div>
             </form>
             
             
             <div class="login_etc">
                 <a href="joinForm">아직 회원가입을 하지 않으셨나요?</a>    
             </div>
-            <div class="submit">
-                <!--  <button id="login">Login</button> -->
-                 <input id="login" type="submit" value="submit">
-            </div>
+            
         </div>
     </div>
     
