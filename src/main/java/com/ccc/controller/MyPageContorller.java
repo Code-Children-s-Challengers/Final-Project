@@ -81,7 +81,9 @@ public class MyPageContorller {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("member/myInfo");
 		mav.addObject("email1", user.getEmail());
-		mav.addObject("phoneNumber1", user.getPhoneNumber());
+		mav.addObject("phoneNumber1", user.getPhoneNumber().substring(0,3));
+		mav.addObject("phoneNumber2", user.getPhoneNumber().substring(3, 7));
+		mav.addObject("phoneNumber3", user.getPhoneNumber().substring(7,11));
 		mav.addObject("password1", user.getPassword());
 		return mav;
 	}

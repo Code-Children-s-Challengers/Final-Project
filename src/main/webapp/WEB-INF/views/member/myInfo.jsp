@@ -21,17 +21,16 @@
 	}
 	#content {
 	}
-	h2{
+	span{
 		font-size: 45px;
+		width:100%;
+		display:block;
 		border-bottom : 1px solid gray;
 		margin : 0px;
 		padding: 20px;
 		margin-bottom:0;
 	}
-	.h2{
-		margin-bottom:0;
-		font-weight:0;s
-	}	
+
 	h3{
 		font-size: 25px;
 		padding: 20px;
@@ -46,7 +45,7 @@
 </head>
 <body>
 	<jsp:include page="../common/menu.jsp" flush="true"/><br>
-	<h2>마이페이지 입니다</h2>
+	<span>마이페이지 입니다</span>
 	
 	<div id="grid">
 	
@@ -80,7 +79,7 @@
 				    </h2>
 				    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
 				      <div class="accordion-body">
-				       <strong>${phoneNumber1}</strong>
+				       <strong>${phoneNumber1}-${phoneNumber2}-${phoneNumber3}</strong>
 				      </div>
 				    </div>
 				  </div>
