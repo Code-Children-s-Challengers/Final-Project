@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
   
 	<!-- --------------------------- <body> --------------------------------------- -->
-<script>
-  alert("수정 성공");
-  location.href="/hifive/board/noticeList";
-</script>
+
+	<script>
+	location.href="/noticeUpdateSuccess";
+	</script>

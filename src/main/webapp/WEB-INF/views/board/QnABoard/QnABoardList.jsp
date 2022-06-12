@@ -41,12 +41,13 @@
 							<th>작성일</th>
 							<th>조회수</th>
 							<th>답변여부</th>
-							<th>답변달기</th>
+							
 						</tr>
 					</thead>
 					
 					<tbody>						
 					
+					<c:set var="curPage" value ="${curPage}"></c:set>
 					
 					
 					<% 
@@ -57,10 +58,20 @@
 					
 					for(QnABoardDTO n : list) {
 						pageContext.setAttribute("n", n);
-												
+						if(i == 0){
+							%><c:set var="i" value ="1"></c:set><%
+						} else if(i == 1){
+							%><c:set var="i" value ="2"></c:set><%
+						} else if(i == 2){
+							%><c:set var="i" value ="3"></c:set><%
+						} else if(i == 3){
+							%><c:set var="i" value ="4"></c:set><%
+						} else if(i == 4){
+							%><c:set var="i" value ="5"></c:set><%
+						}						
 					%>
 					<tr>
-						<td>${n.id}</td>						
+						<td>${(curPage-1)*5 + i}</td>						
 						<td><a href="QnABoardContent?id=${n.id}">${n.title}</a></td>
 						<td>${n.writerId}</td>
 						<td>${n.regdate}</td>
@@ -79,7 +90,7 @@
 							j ++;
 						}%>
 												
-						<td><button id="writeAButton">작성</button>
+					
 					</tr>							
 					
 					<% 
@@ -113,13 +124,7 @@
 		location.href = "/hifive/board/QnABoardQWrite";
 	}              
 	writeQButton.addEventListener("click",moveQWrite);
-	
-	var writeAButton = document.querySelector("#writeAButton");
-	function moveAWrite(){
-		location.href = "/hifive/board/QnABoardAWrite";
-		// 글 id 전달되야함.
-	}              
-	writeAButton.addEventListener("click",moveAWrite);
+
 	
 	var searchButton = document.querySelector("#searchButton");
 	function moveSearch(event){		

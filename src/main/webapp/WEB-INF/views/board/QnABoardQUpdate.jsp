@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 
-<title>notice</title>
+<title>QnABoard</title>
 </head>
 <body>
 <div>
