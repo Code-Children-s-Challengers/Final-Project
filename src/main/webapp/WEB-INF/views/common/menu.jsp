@@ -12,7 +12,7 @@
     <a href="/hifive/logout">로그아웃</a>
     <a href="/hifive/member/myPage">마이페이지</a>
 </sec:authorize>
-<a href="">challenges</a> 
+<a href="/hifive/challenges">challenges</a> 
 <a href="/hifive/board/noticeList?curPage=1">board</a>
 
 
