@@ -57,6 +57,7 @@ public class ChallengeServiceImpl implements ChallengeService {
 		return num;
 	}
 	
+	@Override
 	@Transactional
 	public int Participate(int unum, int cnum) throws Exception{
 		int num = 0;
@@ -73,6 +74,22 @@ public class ChallengeServiceImpl implements ChallengeService {
 	@Override
 	public int challengeAdd(ChallengeDTO dto) throws Exception {
 		int num = dao.challengeAdd(dto);
+		return num;
+	}
+	
+	@Override
+	@Transactional
+	public int challengeAdd_Participate(ChallengeDTO dto, int unum, int cnum, String skiphidden) throws Exception{
+		int num = 0;
+		try{
+			num = dao.challengeAdd(dto);
+			if(skiphidden != null && skiphidden.length() > 5) {
+				num = dao.insertHoliday(Integer.toString(cnum), skiphidden);
+			}
+			num = Participate(unum, cnum);
+        }catch (Exception e){
+            throw new Exception("fail");
+        }
 		return num;
 	}
 

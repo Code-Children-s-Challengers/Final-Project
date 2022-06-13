@@ -36,4 +36,5 @@ public interface ChallengeService {
 	public int holidayCheck(String cnum, String today) throws Exception;
 	public int challengeCompleteCheck(String cnum, String unum) throws Exception;
 	public int challengeCompleteUpdate(String cnum, String unum) throws Exception;
+	public int challengeAdd_Participate(ChallengeDTO dto, int unum, int cnum, String skiphidden) throws Exception;
 }

@@ -19,8 +19,18 @@
 <jsp:include page="common/menu.jsp" flush="true"/><br>
 </div>
 <hr>
-<button onclick="makeChallengePopup()">challenge 생성</button>
+<div style="margin-left: 200px;">
+<button onclick="makeChallengePopup()" style="width:250px;
+  height: 50px;
+  border: 0;
+  outline: none;
+  border-radius: 40px;
+  background: rgb(190, 210, 204);
+  color: white;
+  font-size: 1.2em;
+  letter-spacing: 2px;">challenge 생성</button>
 <jsp:include page="challenge/challengeHot.jsp" flush="true"/><br>
 <jsp:include page="challenge/challengeList.jsp" flush="true"/><br>
+</div>
 </body>
 </html>

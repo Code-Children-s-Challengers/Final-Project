@@ -228,7 +228,7 @@ public class ChallengeDAO {
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("cnum", cnum);
 		map.put("today", today);
-		return session.selectOne("com.config.ChallengeMapper.holidayCheck");
+		return session.selectOne("com.config.ChallengeMapper.holidayCheck",map);
 	}
 	
 	public int challengeCompleteCheck(String cnum, String unum) throws Exception{

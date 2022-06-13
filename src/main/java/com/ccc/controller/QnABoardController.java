@@ -190,9 +190,31 @@ public class QnABoardController {
 		
 		int num = service.updateQQnABoard(uDTO);
 		
-		return "board/QnABoard/QnABoardQUpdateSuccess";		
+		return "board/QnABoard/QnABoardUpdateSuccess";		
 	}
 	
+	@GetMapping(value="/board/QnABoardAUpdate")
+	public String updateAForm(@RequestParam int id, 
+							@RequestParam String title,
+							Model m) throws Exception{		
+		m.addAttribute("id",id);
+		m.addAttribute("title",title);
+		return "board/QnABoardAUpdate";
+	}	
+	
+	@GetMapping(value="/board/QnABoardAUpdateInsert")
+	public String QnABoardAUpdate(@RequestParam("id") String id,							   
+							   @RequestParam("acontent") String acontent,							   
+							   Model m) throws Exception{
+		QnABoardDTO uDTO = new QnABoardDTO();
+		
+		uDTO.setId(Integer.parseInt(id));		
+		uDTO.setAcontent(acontent);		
+		
+		int num = service.updateAQnABoard(uDTO);
+		
+		return "board/QnABoard/QnABoardUpdateSuccess";		
+	}
 	
 	
 }
