@@ -14,7 +14,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -22,8 +24,8 @@ import com.ccc.config.login.auth.PrincipalDetails;
 import com.ccc.dao.UserDAO;
 import com.ccc.dto.ProfileImageDTO;
 import com.ccc.dto.UserDTO;
-
-import springfox.documentation.schema.Model;
+import com.ccc.sms.Request;
+import com.ccc.sms.SmsResponse;
 
 @Controller //view 리턴하겠다
 public class MyPageContorller {
@@ -80,6 +82,7 @@ public class MyPageContorller {
 		UserDTO user = userDAO.findUser(id);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("member/myInfo");
+		mav.addObject("myId",id);
 		mav.addObject("email1", user.getEmail());
 		mav.addObject("phoneNumber1", user.getPhoneNumber().substring(0,3));
 		mav.addObject("phoneNumber2", user.getPhoneNumber().substring(3, 7));
@@ -199,6 +202,18 @@ public class MyPageContorller {
 		return "redirect:/member/myPage";
 	}
 	
+	
+	@PostMapping("/phoneNumberChange/{myId}")
+	@ResponseBody
+	public void phoneNumberChange(@PathVariable int myId, @RequestBody Request request) {
+		Map<String, String> map = new HashMap<String, String>();
+		System.out.println(request.getRecipientPhoneNumber().substring(1));
+		map.put("id", Integer.toString(myId));
+		map.put("phoneNumber", request.getRecipientPhoneNumber().substring(1));
+		userDAO.updatePhoneNumber(map);
+		
+		Map<String, String> data = new HashMap<String, String>();
+	}
 	
 	
 	
