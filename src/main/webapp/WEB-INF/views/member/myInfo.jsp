@@ -21,15 +21,22 @@
 	}
 	#content {
 	}
-	h2{
+	span{
 		font-size: 45px;
+		width:100%;
+		display:block;
 		border-bottom : 1px solid gray;
 		margin : 0px;
 		padding: 20px;
-	}	
+		margin-bottom:0;
+	}
+
 	h3{
 		font-size: 25px;
 		padding: 20px;
+	}
+	ul.menu{
+	padding-left:0;
 	}
 	
 	
@@ -38,12 +45,19 @@
 </head>
 <body>
 	<jsp:include page="../common/menu.jsp" flush="true"/><br>
-	<h2>마이페이지 입니다</h2>
+	<span>마이페이지 입니다</span>
+	
 	<div id="grid">
 	
 		<div><jsp:include page="../member/myPageMenu.jsp" flush="true"/><br></div>
+		
+		
 		<div id="content"> 
  			<h3>개인정보 수정</h3>
+ 		
+ 			<div class="row">
+		  	<div class="col-sm-1"></div>
+    		<div class="col-sm-6">
  			<div class="accordion" id="accordionExample">
   				<div class="accordion-item">
    				 <h2 class="accordion-header" id="headingOne">
@@ -53,7 +67,7 @@
     			 </h2>
 				    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
 				      <div class="accordion-body">
-				        <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+				        <strong>${email1}</strong> 
 				      </div>
 				    </div>
 				  </div>
@@ -65,7 +79,7 @@
 				    </h2>
 				    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
 				      <div class="accordion-body">
-				        <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+				       <strong>${phoneNumber1}-${phoneNumber2}-${phoneNumber3}</strong>
 				      </div>
 				    </div>
 				  </div>
@@ -77,11 +91,17 @@
 				    </h2>
 				    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
 				      <div class="accordion-body">
-				        <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+				       <strong>${password1}</strong>
 				      </div>
 				    </div>
 				  </div>
+				  
 			</div>
+			</div>
+			<div class="col-sm-5">
+    		</div>
+ 			
+		</div>
 		</div>
 	</div>
 </body>

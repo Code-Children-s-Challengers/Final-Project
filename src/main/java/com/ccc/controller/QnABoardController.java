@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.ccc.dto.NoticeDTO;
 import com.ccc.dto.QnABoardDTO;
 import com.ccc.dto.QnABoardPageDTO;
 import com.ccc.service.QnABoardService;
@@ -118,15 +119,6 @@ public class QnABoardController {
 		return "board/QnABoard/QnABoardWriteSuccess";
 	}
 	
-	@GetMapping(value="/board/QnABoardAWriteInsert")
-	public String writeASave(QnABoardDTO dto) throws Exception{		
-		
-		System.out.println(dto);			
-		
-		int num = service.insertAQnABoard(dto);		
-		
-		return "board/QnABoard/QnABoardWriteSuccess";
-	}
 	
 	@GetMapping(value="/board/QnABoardSearch")	
 	public String QnABoardSerach(@RequestParam("type") String type,
@@ -177,4 +169,52 @@ public class QnABoardController {
 		
 		return "board/QnABoardSearch";
 	}
+							
+	@GetMapping(value="/board/QnABoardQUpdate")
+	public String updateQForm(@RequestParam int id, Model m) throws Exception{		
+		m.addAttribute("id",id);
+		return "board/QnABoardQUpdate";
+	}	
+	
+	@GetMapping(value="/board/QnABoardQUpdateInsert")
+	public String QnABoardQUpdate(@RequestParam("id") String id,
+							   @RequestParam("title") String title,
+							   @RequestParam("qcontent") String qcontent,							   
+							   Model m) throws Exception{
+		QnABoardDTO uDTO = new QnABoardDTO();
+		
+		uDTO.setId(Integer.parseInt(id));
+		uDTO.setTitle(title);
+		uDTO.setQcontent(qcontent);
+		
+		
+		int num = service.updateQQnABoard(uDTO);
+		
+		return "board/QnABoard/QnABoardUpdateSuccess";		
+	}
+	
+	@GetMapping(value="/board/QnABoardAUpdate")
+	public String updateAForm(@RequestParam int id, 
+							@RequestParam String title,
+							Model m) throws Exception{		
+		m.addAttribute("id",id);
+		m.addAttribute("title",title);
+		return "board/QnABoardAUpdate";
+	}	
+	
+	@GetMapping(value="/board/QnABoardAUpdateInsert")
+	public String QnABoardAUpdate(@RequestParam("id") String id,							   
+							   @RequestParam("acontent") String acontent,							   
+							   Model m) throws Exception{
+		QnABoardDTO uDTO = new QnABoardDTO();
+		
+		uDTO.setId(Integer.parseInt(id));		
+		uDTO.setAcontent(acontent);		
+		
+		int num = service.updateAQnABoard(uDTO);
+		
+		return "board/QnABoard/QnABoardUpdateSuccess";		
+	}
+	
+	
 }

@@ -6,10 +6,12 @@
 	<div>
 		<div>
 		<c:set var="id" value ="${id}"></c:set>
+		<c:set var="title" value ="${title}"></c:set>
 		
 		<main>
-			<h2>공지사항 수정하기</h2>
-			<form id="noticeSave" method="GET">
+			<h2>답변 작성하기</h2>
+			<h3>*답변이 완료된 경우 답변내용이 수정됨</h3>
+			<form id="QnABoardSave" method="GET">
 				<table>
 					<tbody>
 						<tr>
@@ -19,11 +21,12 @@
 						</tr>						
 						<tr>
 							<th>제목</th>
-							<td><input type="text" id="title" name = "title" value=""  placeholder="제목을 입력하세요" size="30"></td>
+							<td>${title}</span></td>
+							<input type="hidden" id="title" name = "title" value="${title}"></td>
 						</tr>
 						<tr>
 							<th>내용</th>
-							<td><textarea id="content" name="content" placeholder="내용을 입력하세요" style="height:100px; width:100%"; ></textarea>
+							<td><textarea id="acontent" name="acontent" placeholder="내용을 입력하세요" style="height:100px; width:100%"; ></textarea>
 					 </div></td>
 						</tr>
 						<!-- 
@@ -34,7 +37,7 @@
 						 -->				
 						
 						<tr>
-							<td><button id="noticeSave">글 수정</button></td>
+							<td><button id="QnABoardSave">글 수정</button></td>
 												
 						</tr>	
 						
@@ -48,31 +51,29 @@
 	</div> 	
 	
 	<script>
-		var noticeSave = document.querySelector("#noticeSave");		
+		var QnABoardSave = document.querySelector("#QnABoardSave");		
 
-		function noticeInsert(event){			
+		function QnABoardUpdate(event){			
 			event.preventDefault();
 			var mesg = "";
 			
 			
-			var id = noticeSave[0].value;
-			var title = noticeSave[1].value;
-			var content = noticeSave[2].value;
+			var id = QnABoardSave[0].value;			
+			var acontent = QnABoardSave[2].value;
 			//var files = noticeSave[3].value;
 			
-			console.log(id);
-			console.log(title);
-			console.log(content);			
+			console.log(id);			
+			console.log(acontent);			
 			
-			mesg = "id=" + id + "&" + "title=" + title + "&" + "content=" + content;			
-			location.href = `/hifive/board/noticeUpdateInsert?\${mesg}`;
+			mesg = "id=" + id + "&" + "acontent=" + acontent;			
+			location.href = `/hifive/board/QnABoardAUpdateInsert?\${mesg}`;
 			
 		}		
-		noticeSave.addEventListener("submit",noticeInsert);
+		QnABoardSave.addEventListener("submit",QnABoardUpdate);
 		
 		var listButton = document.querySelector("#listButton");
 		function moveList(){
-			location.href = "/hifive/board/noticeList?curPage";
+			location.href = "/hifive/board/QnABoardList";
 		}             		
 		
 		listButton.addEventListener("click",moveList);

@@ -43,29 +43,42 @@
 					</thead>
 					
 					<tbody>							
-
+					<c:set var="totalRecord" value ="${pDTO.totalRecord}"></c:set>
+					<c:set var="perPage" value ="${pDTO.perPage}"></c:set>
+					<c:set var="totalPage" value ="${totalPage}"></c:set>
+					<c:set var="curPage" value ="${curPage}"></c:set>
+					
 					<% 
 					NoticePageDTO pDTO = (NoticePageDTO)request.getAttribute("list");
 					List<NoticeDTO> list = pDTO.getList();
+					int i = 0;
 					for(NoticeDTO n : list) {
 						pageContext.setAttribute("n", n);
+						if(i == 0){
+							%><c:set var="i" value ="1"></c:set><%
+						} else if(i == 1){
+							%><c:set var="i" value ="2"></c:set><%
+						} else if(i == 2){
+							%><c:set var="i" value ="3"></c:set><%
+						} else if(i == 3){
+							%><c:set var="i" value ="4"></c:set><%
+						} else if(i == 4){
+							%><c:set var="i" value ="5"></c:set><%
+						}
 					%>
 					<tr>
-						<td>${n.id}</td>						
+						<td>${(curPage-1)*5 + i}</td>						
 						<td><a href="noticeContent?id=${n.id}">${n.title}</a></td>
 						<td>${n.writerId}</td>
 						<td>${n.regdate}</td>
 						<td>${n.hit}</td>
-					</tr>							
-					<% } %>
+					</tr>					
+						
+					<% i ++;} %>
 					
 					</tbody>
 				</table>
-			</div>			
-			
-			<c:set var="totalRecord" value ="${pDTO.totalRecord}"></c:set>
-			<c:set var="perPage" value ="${pDTO.perPage}"></c:set>
-			<c:set var="totalPage" value ="${totalPage}"></c:set>
+			</div>		
 			
 			<c:forEach var="i" begin="1" end="${totalPage}">
 				<a href="noticeList?curPage=${i}">${i}</a><span>  </span>

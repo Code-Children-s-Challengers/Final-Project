@@ -14,7 +14,7 @@
 		<main>
 			<select id = "selectBoard">
 				<option value="notice" selected><h2>공지사항</h2></option>
-				<option value="QnABoard"><h2>문의사항</h2></option>								
+				<option value="QnABoard" selected disabled><h2>문의사항</h2></option>								
 			</select>	
 			
 			<h3>문의사항 검색</h3>
@@ -94,7 +94,7 @@
 			
 			
 			<div>
-				<button id="writeButton">글쓰기</button>
+				<button id="writeQButton">글쓰기</button>
 			</div>
 	
 		</main>			

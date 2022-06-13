@@ -8,8 +8,8 @@
 		<c:set var="id" value ="${id}"></c:set>
 		
 		<main>
-			<h2>공지사항 수정하기</h2>
-			<form id="noticeSave" method="GET">
+			<h2>문의사항 수정하기</h2>
+			<form id="QnABoardSave" method="GET">
 				<table>
 					<tbody>
 						<tr>
@@ -23,7 +23,7 @@
 						</tr>
 						<tr>
 							<th>내용</th>
-							<td><textarea id="content" name="content" placeholder="내용을 입력하세요" style="height:100px; width:100%"; ></textarea>
+							<td><textarea id="qcontent" name="qcontent" placeholder="내용을 입력하세요" style="height:100px; width:100%"; ></textarea>
 					 </div></td>
 						</tr>
 						<!-- 
@@ -34,7 +34,7 @@
 						 -->				
 						
 						<tr>
-							<td><button id="noticeSave">글 수정</button></td>
+							<td><button id="QnABoardSave">글 수정</button></td>
 												
 						</tr>	
 						
@@ -48,31 +48,31 @@
 	</div> 	
 	
 	<script>
-		var noticeSave = document.querySelector("#noticeSave");		
+		var QnABoardSave = document.querySelector("#QnABoardSave");		
 
-		function noticeInsert(event){			
+		function QnABoardUpdate(event){			
 			event.preventDefault();
 			var mesg = "";
 			
 			
-			var id = noticeSave[0].value;
-			var title = noticeSave[1].value;
-			var content = noticeSave[2].value;
+			var id = QnABoardSave[0].value;
+			var title = QnABoardSave[1].value;
+			var qcontent = QnABoardSave[2].value;
 			//var files = noticeSave[3].value;
 			
 			console.log(id);
 			console.log(title);
-			console.log(content);			
+			console.log(qcontent);			
 			
-			mesg = "id=" + id + "&" + "title=" + title + "&" + "content=" + content;			
-			location.href = `/hifive/board/noticeUpdateInsert?\${mesg}`;
+			mesg = "id=" + id + "&" + "title=" + title + "&" + "qcontent=" + qcontent;			
+			location.href = `/hifive/board/QnABoardQUpdateInsert?\${mesg}`;
 			
 		}		
-		noticeSave.addEventListener("submit",noticeInsert);
+		QnABoardSave.addEventListener("submit",QnABoardUpdate);
 		
 		var listButton = document.querySelector("#listButton");
 		function moveList(){
-			location.href = "/hifive/board/noticeList?curPage";
+			location.href = "/hifive/board/QnABoardList";
 		}             		
 		
 		listButton.addEventListener("click",moveList);

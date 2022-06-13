@@ -5,5 +5,5 @@
 	<!-- --------------------------- <body> --------------------------------------- -->
 <script>
   alert("수정 성공");
-  location.href="/hifive/board/noticeList";
+  location.href="/hifive/board/QnABoardList";
 </script>

@@ -5,12 +5,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
+
 <title>QnABoard</title>
 </head>
 <body>
 <div>
 <jsp:include page="../common/menu.jsp" flush="true"/><br>
 </div>
-<jsp:include page="QnABoard/QnABoardSearch.jsp" flush="true"/><br>
+<jsp:include page="QnABoard/QnABoardQUpdate.jsp" flush="true"/><br>
 </body>
 </html>

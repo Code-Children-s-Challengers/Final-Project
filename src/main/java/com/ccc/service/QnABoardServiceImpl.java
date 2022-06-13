@@ -43,11 +43,6 @@ public class QnABoardServiceImpl implements QnABoardService {
 		return num;
 	}
 	
-	@Override
-	public int insertAQnABoard(QnABoardDTO dto) throws Exception {
-		int num = dao.insertAQnABoard(dto);
-		return num;
-	}
 
 	@Override
 	public QnABoardPageDTO selectQnABoardPage(int curPage) throws Exception {
@@ -71,6 +66,19 @@ public class QnABoardServiceImpl implements QnABoardService {
 	@Override
 	public int selectCount(QnABoardDTO dto) throws Exception {
 		int num = dao.selectCount(dto);
+		return num;
+	}
+
+	@Override
+	public int updateQQnABoard(QnABoardDTO dto) throws Exception {
+		int num = dao.updateQQnABoard(dto);
+		return num;
+	}
+	
+
+	@Override
+	public int updateAQnABoard(QnABoardDTO dto) throws Exception {
+		int num = dao.updateAQnABoard(dto);
 		return num;
 	}
 
