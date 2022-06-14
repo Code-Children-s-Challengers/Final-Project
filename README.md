@@ -214,6 +214,7 @@
 # DB Schema
 
 ![db](https://github.com/Code-Children-s-Challengers/Final-Project/blob/main/DA/PROJECT_IMAGE/DB1.PNG)
+![db](https://github.com/Code-Children-s-Challengers/Final-Project/blob/main/DA/PROJECT_IMAGE/DB2.png)
 
 - **Tables**
   - CHALLENGES
