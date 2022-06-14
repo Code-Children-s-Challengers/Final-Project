@@ -84,8 +84,8 @@ public class NoticeController {
 	@GetMapping(value="/board/noticeSearch")	
 	public String noticeSerach(@RequestParam("type") String type,
 							   @RequestParam("keyword") String keyword,
-							   @RequestParam("date1") String date1,
-							   @RequestParam("date2") String date2,
+							   @RequestParam(value = "date1", defaultValue="2000-01-01") String date1,
+							   @RequestParam(value = "date2", defaultValue="2049-12-31") String date2,
 							   @RequestParam(defaultValue="1") String curPage,
 			Model m) throws Exception{
 		

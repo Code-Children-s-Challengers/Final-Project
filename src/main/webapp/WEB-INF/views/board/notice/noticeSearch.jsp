@@ -52,11 +52,11 @@
 						pageContext.setAttribute("n", n);
 					%>
 					<tr>
-						<td>${n.id}</td>						
-						<td><a href="noticeContent?id=${n.id}">${n.title}</a></td>
-						<td>${n.writerId}</td>
-						<td>${n.regdate}</td>
-						<td>${n.hit}</td>
+						<td style="text-align:center">${n.id}</td>						
+						<td style="text-align:center"><a href="noticeContent?id=${n.id}">${n.title}</a></td>
+						<td style="text-align:center">${n.writerId}</td>
+						<td style="text-align:center">${n.regdate}</td>
+						<td style="text-align:center">${n.hit}</td>
 					</tr>							
 					<% } %>
 					
@@ -97,14 +97,15 @@
 		var date1 = searchButton[3].value;
 		var date2 = searchButton[4].value;
 		
-		if (date1 > date2){
+		if (date2 == ""){
+			console.log("나오니?");			
+		} else if (date1 > date2){
+			console.log("나오니?2");		
 			var temp = date1;
 			date1 = date2;
 			date2 = temp;			
-		}
+		} 
 		mesg = "type=" + type + "&keyword=" + keyword + "&date1=" + date1 + "&date2=" + date2;
-		console.log(type);
-		console.log(keyword);
 		
 		location.href = `noticeSearch?\${mesg}`;
 	}
