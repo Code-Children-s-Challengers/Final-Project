@@ -84,6 +84,8 @@ public class NoticeController {
 	@GetMapping(value="/board/noticeSearch")	
 	public String noticeSerach(@RequestParam("type") String type,
 							   @RequestParam("keyword") String keyword,
+							   @RequestParam("date1") String date1,
+							   @RequestParam("date2") String date2,
 							   @RequestParam(defaultValue="1") String curPage,
 			Model m) throws Exception{
 		
@@ -96,6 +98,8 @@ public class NoticeController {
 		
 		sDTO.setType(type);
 		sDTO.setKeyword(keyword);
+		sDTO.setDate1(date1);
+		sDTO.setDate2(date2);
 		
 		NoticePageDTO searchList = service.searchNotice(sDTO, Integer.parseInt(curPage));		
 		

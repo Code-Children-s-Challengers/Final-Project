@@ -25,6 +25,7 @@
 					</select> 
 					<label>검색어</label>
 					<input type="text" name="keyword" value=""/>
+					<input type="date"><input type="date">
 					<input type="submit" value="검색" />
 				</fieldset>
 			</form>					
@@ -93,7 +94,15 @@
 		
 		var type = searchButton[1].value;
 		var keyword = searchButton[2].value;
-		mesg = "type=" + type + "&" + "keyword=" + keyword;
+		var date1 = searchButton[3].value;
+		var date2 = searchButton[4].value;
+		
+		if (date1 > date2){
+			var temp = date1;
+			date1 = date2;
+			date2 = temp;			
+		}
+		mesg = "type=" + type + "&keyword=" + keyword + "&date1=" + date1 + "&date2=" + date2;
 		console.log(type);
 		console.log(keyword);
 		

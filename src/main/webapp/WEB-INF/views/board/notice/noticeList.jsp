@@ -25,6 +25,7 @@
 					</select> 
 					<label>검색어</label>
 					<input type="text" name="keyword" value=""/>
+					<input type="date"><input type="date">
 					<input type="submit" value="검색" />
 				</fieldset>
 			</form>			
@@ -67,11 +68,11 @@
 						}
 					%>
 					<tr>
-						<td>${(curPage-1)*5 + i}</td>						
-						<td><a href="noticeContent?id=${n.id}">${n.title}</a></td>
-						<td>${n.writerId}</td>
-						<td>${n.regdate}</td>
-						<td>${n.hit}</td>
+						<td style="text-align:center">${(curPage-1)*5 + i}</td>						
+						<td style="text-align:center"><a href="noticeContent?id=${n.id}">${n.title}</a></td>
+						<td style="text-align:center">${n.writerId}</td>
+						<td style="text-align:center">${n.regdate}</td>
+						<td style="text-align:center">${n.hit}</td>
 					</tr>					
 						
 					<% i ++;} %>
@@ -109,10 +110,19 @@
 		
 		var type = searchButton[1].value;
 		var keyword = searchButton[2].value;
-		mesg = "type=" + type + "&" + "keyword=" + keyword;
+		var date1 = searchButton[3].value;
+		var date2 = searchButton[4].value;
+		
+		if (date1 > date2){
+			var temp = date1;
+			date1 = date2;
+			date2 = temp;			
+		}
 		console.log(type);
 		console.log(keyword);
-		
+		console.log(date1);
+		console.log(date2);
+		mesg = "type=" + type + "&keyword=" + keyword + "&date1=" + date1 + "&date2=" + date2;
 		location.href = `noticeSearch?\${mesg}`;
 	}
 	searchButton.addEventListener("submit",moveSearch);
