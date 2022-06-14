@@ -138,7 +138,7 @@ public class QnABoardController {
 		
 		QnABoardPageDTO searchList = service.searchQnABoard(sDTO, Integer.parseInt(curPage));
 		
-		int tot = service.selectCount(sDTO) / searchList.getPerPage();
+		int tot = service.selectCount(sDTO) / searchList.getPerPage() + 1;
 		if(searchList.getTotalCount() % searchList.getPerPage() == 0) tot++;
 		
 		List<QnABoardDTO> answersList = searchList.getList();

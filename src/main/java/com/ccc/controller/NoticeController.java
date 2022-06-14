@@ -99,10 +99,10 @@ public class NoticeController {
 		
 		NoticePageDTO searchList = service.searchNotice(sDTO, Integer.parseInt(curPage));		
 		
-		int tot = service.selectCount(sDTO) / searchList.getPerPage();
+		int tot = service.selectCount(sDTO) / searchList.getPerPage() + 1;
 		if(searchList.getTotalCount() % searchList.getPerPage() == 0) tot++;
 						
-		System.out.println(tot);
+		System.out.println("total Page" + tot);
 		m.addAttribute("curPage", curPage);				
 		m.addAttribute("totalPage", tot);
 		m.addAttribute("type",type);
