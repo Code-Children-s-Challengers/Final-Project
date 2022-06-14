@@ -213,14 +213,21 @@
 
 # DB Schema
 
-![db](https://github.com/dhslrl321/L7-monitor/blob/master/assets/db.png)
-![db](https://github.com/Code-Children-s-Challengers/Final-Project/tree/main/DA/PROJECT_IMAGE/DB.png)
+![db](https://github.com/Code-Children-s-Challengers/Final-Project/blob/main/DA/PROJECT_IMAGE/DB1.PNG)
 
 - **Tables**
-  - total
-  - abnormal
-  - unknown_log
-  - mal_code
+  - CHALLENGES
+  - CHOLIDAY
+  - CPARTICIPANT
+  - CPHOTO
+  - VERIFYREPORT
+  - USER_TABLE
+  - PROFILEIMAGE
+  - NOTICE
+  - QNABOARD
+
+
+
 
 # 🎥 시연 영상 및 사용법
 
