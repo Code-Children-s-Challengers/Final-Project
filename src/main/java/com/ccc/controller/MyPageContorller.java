@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -152,11 +154,10 @@ public class MyPageContorller {
 	
 	
 	@Secured("ROLE_USER")
-	@GetMapping("/member/myFriend")
-	public String myFriend(){
+	@GetMapping("/member/myFriend/{myId}")
+	public String myFriend(@PathVariable int myId, HttpSession session){
+		session.setAttribute("id", myId );
 		return "member/myFriend";
-
-		
 	}
 	
 

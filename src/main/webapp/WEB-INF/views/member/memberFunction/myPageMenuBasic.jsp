@@ -4,7 +4,7 @@
 <ul class="menu">
 	<li><a href="/hifive/member/myPage">프로필 수정</a></li>
 	<li><a href="/hifive/member/myInfo/${id}">개인 정보 설정</a></li>
-	<li><a href="/hifive/member/myFriend">친구 목록 보기</a></li>
+	<li><a href="/hifive/member/myFriend/${id}">친구 목록 보기</a></li>
 	<li><a href="/hifive/member/myChallenges">내 챌린지 보기</a></li>
 </ul>
 

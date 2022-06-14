@@ -15,120 +15,41 @@
 <meta charset="UTF-8">
 <title></title>
 <style>
-	#grid {
-		display: grid;
-		grid-template-columns: 300px 1fr;
+	.mt-5{
+		border-bottom: 1px solid gray;
+		padding-bottom: 20px;
+		margin-bottom:0;
 	}
-	#content {
+	.miniHead{
+		padding-top:20px;
 	}
-	h2{
-		font-size: 45px;
-		border-bottom : 1px solid gray;
-		margin : 0px;
-		padding: 20px;
-	}	
-	h3{
-		font-size: 25px;
-		padding: 20px;
+	a.nav-link:hover{
+		background-color:darkgray;
+		transition-duration: 0.5s;
 	}
-	
-	form{
-		width:900px;
-		margin:0;
-	}
-	table {
- 	 	border-top: 1px solid #444444;
- 		border-collapse: collapse;
-		margin-left : 50px;
-		width:850px;
-		height:450px;
-	}
-	th, td {
- 	 border-bottom: 1px solid #444444;
-	}
-	th{
-		width: 200px;
-		background-color:lightgray;
-	}
-	td{
-		padding-left:50px;
-	}
-	
-	.box {
-	    width: 150px;
-	    height: 150px; 
-	    border-radius: 70%;
-	    overflow: hidden;
-	}
-	.profile {
-	    width: 100%;
-	    height: 100%;
-	    object-fit: cover;
-	   
-	}
-	
-	input#profileImage{
-		width:100px;
-		font-size:20px;
-		margin-top:30px;
-	}
-	
-	input#nickname{
-		width:200px;
-		height:50px;
-		font-size:30px;
-	}
-	.point{
-		font-size:20px;
-	}
-	input#submit{
-		width:100px;
-		font-size:20px;
-		float:right;
-	}
-	
 	
 	
 	
 </style>
-
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 </head>
 <body>
 	<jsp:include page="../common/menu.jsp" flush="true"/><br>
-	<h2>마이페이지 입니다</h2>
-	<div id="grid">
-		<div>
-		<jsp:include page="../member/myPageMenu.jsp" flush="true"/><br>
+	<h1 class="mt-5">&nbsp;&nbsp;My Page</h1>
+	
+	<div class="row">
+		<div class="col-sm-3">
+			<jsp:include page="memberFunction/myPageMenu_myPage.jsp" flush="true"/><br>
 		</div>
-		<div id="content"> 
-		<h3>프로필 수정</h3>
-		<form name="form" method="post" action="/hifive/myProfileInfo/${id}" enctype="multipart/form-data">
-		<table>
-			<tr>
-				<th class="profileImage">프로필 사진</th>
-				<td>
-					<div class="box" style="background: #BDBDBD;"><img id="profile" class="profile" src="/hifive/view/${id}"/></div>
-	    			<input id="profileImage" type="file" name="file" value="파일 선택" accept="image/*"/> 	  				
-	  			</td>
-			</tr>
-			<tr>
-				<th class="nickname">닉네임</th>
-				<td>
-					<input type="text" value="${nickname1}" name="nickname" id="nickname"/>
-					<span class="point nicknameSuccess"></span><br/>
-					<span class="point">※ 영문자, 소문자 입력가능, 최소 4자 이상, 최대 12자 까지 입력</span>
-					<input type="hidden" id="nicknameChecker"/>
-				</td>
-			</tr>		
-			
-			</table><br/>
-			<input type="submit" id="submit" value="저장"/>
-		</form>
+		<div class="col-sm-9">
+			<h2 class="miniHead">프로필 수정</h2>
+			<jsp:include page="memberFunction/myPageContent.jsp" flush="true"/><br>
 		</div>
 	</div>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="/hifive/js/myPageProfileImage.js"></script>
 <script src="/hifive/js/myPageNickname.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script> 
 <script>
 			$(document).ready(function(){
 				
