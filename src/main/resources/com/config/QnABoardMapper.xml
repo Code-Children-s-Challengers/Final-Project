@@ -49,20 +49,21 @@
    		from QnABoard
    		<choose>
    			<when test="type != null and type.equals('title')">
-	   		where title like upper('%' || #{keyword} || '%') 	
-	   		or title like lower('%' || #{keyword} || '%') 
+	   		where (title like upper('%' || #{keyword} || '%') 	
+	   		or title like lower('%' || #{keyword} || '%')) 
 	   		AND <![CDATA[TO_DATE(#{date1}) <= TO_CHAR(REGDATE,'YYYYMMDD') ]]>
 	   		AND <![CDATA[TO_DATE(#{date2}) >= TO_CHAR(REGDATE,'YYYYMMDD')]]>	     		    
 	   		</when>
 	   		
 	   		<when test="type != null and type.equals('writerId')">
-	   		where writerId = upper(#{keyword})	   	
-	   		or writerId = lower(#{keyword}) 	
+	   		where (writerId = upper(#{keyword})	   	
+	   		or writerId = lower(#{keyword})) 	
 	   		AND <![CDATA[TO_DATE(#{date1}) <= TO_CHAR(REGDATE,'YYYYMMDD') ]]>
 	   		AND <![CDATA[TO_DATE(#{date2}) >= TO_CHAR(REGDATE,'YYYYMMDD') ]]> 		
 	   		</when> 
    		</choose>
-    
+    	order by id asc
+    	
     </select>
     
     <select id="checkAnswer" resultType = "QnABoardDTO" parameterType="int">

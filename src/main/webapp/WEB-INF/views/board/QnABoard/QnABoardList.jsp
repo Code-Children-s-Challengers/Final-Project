@@ -138,11 +138,13 @@
 		var date1 = searchButton[3].value;
 		var date2 = searchButton[4].value;
 		
-		if (date1 > date2){
+		if (date2 == ""){
+			console.log("나오니?");			
+		} else if (date1 > date2){
 			var temp = date1;
 			date1 = date2;
 			date2 = temp;			
-		}
+		} 
 		mesg = "type=" + type + "&keyword=" + keyword + "&date1=" + date1 + "&date2=" + date2;	
 		
 		location.href = `QnABoardSearch?\${mesg}`;
