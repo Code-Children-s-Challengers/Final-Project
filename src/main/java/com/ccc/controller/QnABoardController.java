@@ -123,6 +123,8 @@ public class QnABoardController {
 	@GetMapping(value="/board/QnABoardSearch")	
 	public String QnABoardSerach(@RequestParam("type") String type,
 							   @RequestParam("keyword") String keyword,
+							   @RequestParam(value = "date1", defaultValue="2000-01-01") String date1,
+							   @RequestParam(value = "date2", defaultValue="2049-12-31") String date2,
 							   @RequestParam(defaultValue="1") String curPage,
 			Model m) throws Exception{
 		
@@ -135,6 +137,8 @@ public class QnABoardController {
 		
 		sDTO.setType(type);
 		sDTO.setKeyword(keyword);
+		sDTO.setDate1(date1);
+		sDTO.setDate2(date2);
 		
 		QnABoardPageDTO searchList = service.searchQnABoard(sDTO, Integer.parseInt(curPage));
 		
