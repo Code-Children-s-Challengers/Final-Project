@@ -13,7 +13,28 @@ public class NoticeDTO {
 	private String regdate;
 	private int hit;
 	private String files;
+	private String reguname;
+	private String modiuname;
+	private String modidate;
 	
+	public String getReguname() {
+		return reguname;
+	}
+	public void setReguname(String reguname) {
+		this.reguname = reguname;
+	}
+	public String getModiuname() {
+		return modiuname;
+	}
+	public void setModiuname(String modiuname) {
+		this.modiuname = modiuname;
+	}
+	public String getModidate() {
+		return modidate;
+	}
+	public void setModidate(String modidate) {
+		this.modidate = modidate;
+	}
 	//search 전용 변수
 	private String type;
 	private String keyword;

@@ -5,16 +5,17 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ccc.config.login.auth.PrincipalDetails;
 import com.ccc.dto.NoticeDTO;
 import com.ccc.dto.NoticePageDTO;
+import com.ccc.dto.UserDTO;
 import com.ccc.service.NoticeService;
 
 @Controller
@@ -24,9 +25,9 @@ public class NoticeController {
 	NoticeService service;
 	
 	@GetMapping(value="/board/noticeList")
-	public String notice(Model m, @RequestParam(defaultValue="1") String curPage, String perPage, HttpServletRequest request) throws Exception{
-		//,@AuthenticationPrincipal PrincipalDetails principalDetails
-		//String uname = principalDetails.getUser().getUsername();
+	public String notice(Model m, @RequestParam(defaultValue="1") String curPage, 
+			String perPage, 			
+			HttpServletRequest request) throws Exception{		
 		
 		System.out.println(curPage);
 		if(curPage == "") curPage = "1";		
@@ -49,7 +50,8 @@ public class NoticeController {
 	
 	//쿼리문을 받은 것에 대한 처리(id를 넘겨 받아 해당 content를 출력)
 	@GetMapping(value="/board/noticeContent")
-	public String content(Model m, @RequestParam int id) throws Exception{	
+	public String content(Model m, @RequestParam int id,
+			@AuthenticationPrincipal PrincipalDetails principalDetails) throws Exception{	
 		
 		NoticeDTO dto = service.selectNoticeContent(id);
 		System.out.println(dto);
@@ -58,28 +60,9 @@ public class NoticeController {
 		return "board/noticeContent";
 	}
 	
-	@GetMapping(value="/board/noticeDelete")
-	public String delete(HttpServletRequest request, @RequestParam int id) throws Exception{
-		
-		int num = service.deleteNotice(id);
-		
-		return "board/notice/noticeDeleteSuccess";
-	}
-
 	
-	@GetMapping(value="/board/noticeWrite")
-	public String writeForm() throws Exception{		
-		return "board/noticeWrite";
-	}
 	
-	@GetMapping(value="/board/noticeWriteInsert")
-	public String writeSave(NoticeDTO dto) throws Exception{		
-		
-		System.out.println(dto);		
-		
-		int num = service.insertNotice(dto);		
-		return "board/notice/noticeWriteSuccess";
-	}
+	
 	
 	@GetMapping(value="/board/noticeSearch")	
 	public String noticeSerach(@RequestParam("type") String type,
@@ -87,6 +70,7 @@ public class NoticeController {
 							   @RequestParam(value = "date1", defaultValue="2000-01-01") String date1,
 							   @RequestParam(value = "date2", defaultValue="2049-12-31") String date2,
 							   @RequestParam(defaultValue="1") String curPage,
+							   @AuthenticationPrincipal PrincipalDetails principalDetails,
 			Model m) throws Exception{
 		
 		System.out.println("type:" + type);
@@ -116,27 +100,93 @@ public class NoticeController {
 		return "board/noticeSearch";
 	}
 	
+	
+	@Secured("ROLE_USER")
 	@GetMapping(value="/board/noticeUpdate")
-	public String updateForm(@RequestParam int id, Model m) throws Exception{		
-		m.addAttribute("id",id);
-		return "board/noticeUpdate";
+	public String updateForm(@RequestParam int id, Model m,
+			@AuthenticationPrincipal PrincipalDetails principalDetails) throws Exception{	
+		UserDTO userDTO = principalDetails.getUser();
+		String writerId = userDTO.getUsername();
+		System.out.println(writerId);
+		if ("kyun".equals(writerId)) {
+			m.addAttribute("id",id);
+			return "board/noticeUpdate";
+			
+		} else {
+			return "board/LoginFail";
+		}
 	}
 	
+	@Secured("ROLE_USER")
+	@GetMapping(value="/board/noticeWriteInsert")
+	public String writeSave(NoticeDTO dto,@AuthenticationPrincipal PrincipalDetails principalDetails) throws Exception{
+		UserDTO userDTO = principalDetails.getUser();
+		String writerId = userDTO.getUsername();
+		if ("kyun".equals(writerId)) {
+			dto.setWriterId(writerId);
+			int num = service.insertNotice(dto);		
+			return "board/notice/noticeWriteSuccess";
+			
+		} else {
+			return "board/LoginFail";
+		}		
+		
+	}
+	@Secured("ROLE_USER")
 	@GetMapping(value="/board/noticeUpdateInsert")
 	public String updateNotice(@RequestParam("id") String id,
 							   @RequestParam("title") String title,
-							   @RequestParam("content") String content,							   
+							   @RequestParam("content") String content,		
+							   @AuthenticationPrincipal PrincipalDetails principalDetails,
 							   Model m) throws Exception{
-		NoticeDTO uDTO = new NoticeDTO();
-		
-		uDTO.setId(Integer.parseInt(id));
-		uDTO.setTitle(title);
-		uDTO.setContent(content);
-		
-		
-		int num = service.updateNotice(uDTO);
-		
-		return "board/notice/noticeUpdateSuccess";		
+		UserDTO userDTO = principalDetails.getUser();
+		String writerId = userDTO.getUsername();
+		if ("kyun".equals(writerId)) {
+			NoticeDTO uDTO = new NoticeDTO();
+			
+			uDTO.setModiuname(writerId);
+			uDTO.setId(Integer.parseInt(id));
+			uDTO.setTitle(title);
+			uDTO.setContent(content);
+			
+			System.out.println("why" + uDTO);
+			int num = service.updateNotice(uDTO);
+			
+			return "board/notice/noticeUpdateSuccess";	
+		} else {
+			return "board/LoginFail";
+		}
+			
 	}
 	
+	@Secured("ROLE_USER")
+	@GetMapping(value="/board/noticeDelete")
+	public String delete(HttpServletRequest request, 
+			@RequestParam int id,
+			@AuthenticationPrincipal PrincipalDetails principalDetails) throws Exception{
+		
+		UserDTO userDTO = principalDetails.getUser();
+		String writerId = userDTO.getUsername();
+		if ("kyun".equals(writerId)) {
+			int num = service.deleteNotice(id);
+			
+			return "board/notice/noticeDeleteSuccess";
+		} else {
+			return "board/LoginFail";
+		}
+		
+	}
+
+	@Secured("ROLE_USER")
+	@GetMapping(value="/board/noticeWrite")
+	public String writeForm(@AuthenticationPrincipal PrincipalDetails principalDetails) throws Exception{		
+		UserDTO userDTO = principalDetails.getUser();
+		String writerId = userDTO.getUsername();
+		if ("kyun".equals(writerId)) {
+			return "board/noticeWrite";
+		} else {
+			return "board/LoginFail";
+		}
+		
+	}
 }

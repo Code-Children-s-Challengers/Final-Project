@@ -18,10 +18,11 @@
 	<!-- 제목을 선택했을 때 조회수는 어떻게 늘리지? hit += 1을 적용해야하는데 방법을 잘... -->
 	
 	<insert id="insertNotice" parameterType="NoticeDTO">
-		insert into notice(id,title,content,regdate)
+		insert into notice(id,title,writerId,content,regdate)
 		values (
 				notice_seq.nextval,
 				#{title},			
+				#{writerId},
 				#{content},
 				SYSDATE
 				)		
@@ -86,7 +87,7 @@
     
     <update id="updateNotice" parameterType="noticeDTO">
     	update notice
-    	set title = #{title}, content = #{content}
+    	set title = #{title}, content = #{content}, modiuname = #{modiuname}, modidate = SYSDATE 
     	where id = #{id}
     </update>
     
