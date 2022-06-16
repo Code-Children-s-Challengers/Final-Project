@@ -4,6 +4,6 @@
   
 	<!-- --------------------------- <body> --------------------------------------- -->
 <script>
-  alert("관리자 혹은 작성자만 작업이 가능합니다.");
-  location.href="/hifive/board/noticeList";
+  alert("권한이 없습니다 로그인 정보를 확인해주세요.");
+  location.href="/hifive/board/QnABoardList";
 </script>

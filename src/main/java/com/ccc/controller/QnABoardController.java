@@ -161,7 +161,7 @@ public class QnABoardController {
 		
 		String checkWriterId = service.selectQnABoardContent(id).getWriterId();
 		System.out.println(writerId);
-		if (checkWriterId.equals(writerId) || "kyun".equals(writerId)) {
+		if (checkWriterId.equals(writerId) || "admin".equals(writerId)) {
 
 			int num = service.deleteQnABoard(id);
 			
@@ -193,7 +193,7 @@ public class QnABoardController {
 		String writerId = userDTO.getUsername();		
 		
 		System.out.println(writerId);
-		if ("kyun".equals(writerId)) {
+		if ("admin".equals(writerId)) {
 			return "board/QnABoardAWrite";
 		} else {
 			return "board/QnABoardLoginFail";
@@ -230,7 +230,7 @@ public class QnABoardController {
 		
 		String checkWriterId = service.selectQnABoardContent(id).getWriterId();
 		System.out.println(checkWriterId);
-		if (checkWriterId.equals(writerId) || "kyun".equals(writerId)) {
+		if (checkWriterId.equals(writerId) || "admin".equals(writerId)) {
 			m.addAttribute("id",id);
 			return "board/QnABoardQUpdate";
 			
@@ -253,13 +253,13 @@ public class QnABoardController {
 		String checkWriterId = service.selectQnABoardContent(id).getWriterId();
 		System.out.println("나오나?" + writerId);
 		System.out.println("나오나?" + checkWriterId);
-		if (checkWriterId.equals(writerId) || "kyun".equals(writerId)) {
+		if (checkWriterId.equals(writerId) || "admin".equals(writerId)) {
 			QnABoardDTO uDTO = new QnABoardDTO();
 			
 			uDTO.setId(id);
 			uDTO.setTitle(title);
 			uDTO.setQcontent(qcontent);
-			
+			uDTO.setModiuname(writerId);
 			
 			int num = service.updateQQnABoard(uDTO);
 			
@@ -281,7 +281,7 @@ public class QnABoardController {
 		
 		String checkWriterId = service.selectQnABoardContent(id).getWriterId();
 		System.out.println(writerId);
-		if ("kyun".equals(writerId)) {
+		if ("admin".equals(writerId)) {
 			m.addAttribute("id",id);
 			m.addAttribute("title",title);
 			return "board/QnABoardAUpdate";
@@ -302,7 +302,7 @@ public class QnABoardController {
 		
 		String checkWriterId = service.selectQnABoardContent(id).getWriterId();
 		System.out.println(writerId);
-		if ("kyun".equals(writerId)) {
+		if ("admin".equals(writerId)) {
 			QnABoardDTO uDTO = new QnABoardDTO();
 			
 			uDTO.setId(id);		

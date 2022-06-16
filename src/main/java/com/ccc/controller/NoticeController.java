@@ -108,7 +108,7 @@ public class NoticeController {
 		UserDTO userDTO = principalDetails.getUser();
 		String writerId = userDTO.getUsername();
 		System.out.println(writerId);
-		if ("kyun".equals(writerId)) {
+		if ("admin".equals(writerId)) {
 			m.addAttribute("id",id);
 			return "board/noticeUpdate";
 			
@@ -122,7 +122,7 @@ public class NoticeController {
 	public String writeSave(NoticeDTO dto,@AuthenticationPrincipal PrincipalDetails principalDetails) throws Exception{
 		UserDTO userDTO = principalDetails.getUser();
 		String writerId = userDTO.getUsername();
-		if ("kyun".equals(writerId)) {
+		if ("admin".equals(writerId)) {
 			dto.setWriterId(writerId);
 			int num = service.insertNotice(dto);		
 			return "board/notice/noticeWriteSuccess";
@@ -141,15 +141,14 @@ public class NoticeController {
 							   Model m) throws Exception{
 		UserDTO userDTO = principalDetails.getUser();
 		String writerId = userDTO.getUsername();
-		if ("kyun".equals(writerId)) {
+		if ("admin".equals(writerId)) {
 			NoticeDTO uDTO = new NoticeDTO();
 			
 			uDTO.setModiuname(writerId);
 			uDTO.setId(Integer.parseInt(id));
 			uDTO.setTitle(title);
-			uDTO.setContent(content);
+			uDTO.setContent(content);			
 			
-			System.out.println("why" + uDTO);
 			int num = service.updateNotice(uDTO);
 			
 			return "board/notice/noticeUpdateSuccess";	
@@ -167,7 +166,7 @@ public class NoticeController {
 		
 		UserDTO userDTO = principalDetails.getUser();
 		String writerId = userDTO.getUsername();
-		if ("kyun".equals(writerId)) {
+		if ("admin".equals(writerId)) {
 			int num = service.deleteNotice(id);
 			
 			return "board/notice/noticeDeleteSuccess";
@@ -182,7 +181,7 @@ public class NoticeController {
 	public String writeForm(@AuthenticationPrincipal PrincipalDetails principalDetails) throws Exception{		
 		UserDTO userDTO = principalDetails.getUser();
 		String writerId = userDTO.getUsername();
-		if ("kyun".equals(writerId)) {
+		if ("admin".equals(writerId)) {
 			return "board/noticeWrite";
 		} else {
 			return "board/NoticeLoginFail";
