@@ -33,10 +33,7 @@
 									<th>내용</th>
 									<td colspan="4">${n.content}</td>
 								</tr>
-								<tr>
-									<th>첨부파일</th>
-									<td colspan="3">${n.files}</td>
-								</tr>
+								
 							</tbody>
 						</table>
 					</div>
@@ -53,10 +50,7 @@
 			</main>		
 			
 		</div>
-	</div>
-	
-	
-		
+	</div>	
 
 
 	</div>
