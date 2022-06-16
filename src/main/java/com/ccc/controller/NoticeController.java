@@ -113,7 +113,7 @@ public class NoticeController {
 			return "board/noticeUpdate";
 			
 		} else {
-			return "board/LoginFail";
+			return "board/NoticeLoginFail";
 		}
 	}
 	
@@ -128,7 +128,7 @@ public class NoticeController {
 			return "board/notice/noticeWriteSuccess";
 			
 		} else {
-			return "board/LoginFail";
+			return "board/NoticeLoginFail";
 		}		
 		
 	}
@@ -154,7 +154,7 @@ public class NoticeController {
 			
 			return "board/notice/noticeUpdateSuccess";	
 		} else {
-			return "board/LoginFail";
+			return "board/NoticeLoginFail";
 		}
 			
 	}
@@ -172,7 +172,7 @@ public class NoticeController {
 			
 			return "board/notice/noticeDeleteSuccess";
 		} else {
-			return "board/LoginFail";
+			return "board/NoticeLoginFail";
 		}
 		
 	}
@@ -185,7 +185,7 @@ public class NoticeController {
 		if ("kyun".equals(writerId)) {
 			return "board/noticeWrite";
 		} else {
-			return "board/LoginFail";
+			return "board/NoticeLoginFail";
 		}
 		
 	}

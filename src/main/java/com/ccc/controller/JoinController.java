@@ -89,7 +89,7 @@ public class JoinController {
 	    System.out.println("email: "+email);
 		int serti = (int)((Math.random()* (99999 - 10000 + 1)) + 10000);
 	    
-	    String from = "hhss2259@naver.com";//보내는 이 메일주소
+	    String from = "kyun9911@naver.com";//보내는 이 메일주소
 	    String to = email;
 	    String title = "회원가입시 필요한 인증번호 입니다.";
 	    String content = "[인증번호] "+ serti +" 입니다. <br/> 인증번호 확인란에 기입해주십시오.";
