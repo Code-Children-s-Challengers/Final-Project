@@ -186,7 +186,8 @@
 
 # 🎸 사용 기술 및 언어
 
-![skill](https://github.com/dhslrl321/L7-monitor/blob/master/assets/skill.png)
+![skill](https://github.com/Code-Children-s-Challengers/Final-Project/blob/main/DA/PROJECT_IMAGE/language.PNG)
+
 
 # 📑 서비스 흐름 및 UI
 
