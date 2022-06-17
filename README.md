@@ -16,7 +16,7 @@
 | :------: | :------------------------------------------------: | :------------------------------------------------------------: | :-----------------------------------------------: | :---------------------------------------------------------: | 
 | **Name** |      👩🏻‍💻 [신한균](https://github.com/kkyuny)      |            🧑‍💻 [곽무진](https://github.com/angbuilgu)            | 🧑‍💻 [최홍석](https://github.com/hhss2259) |        🧑‍💻 [신영준](https://github.com/DevYJShin)         |
 | **Position** | **Back-End** | **Back-End** | **Back-End** | **Data-Analysis** |
-| **Role** | 일정 관리 및 팀원 조율 & **로그 분석 Daemon** 개발 | Client Side **로그 전달 Agent** 개발 및 탐지 룰 및 정확도 개선 | **Backend API 개발** 및 Front 통신 모듈 개발 및 인프라 구성 | **Backend API 개발** 및 Front 통신 모듈 개발 및 인프라 구성 |
+| **Role** | 일정 관리 및 팀원 조율 & **게시판 백엔드** 개발 |  **챌린지 CRUD** 개발 | **회원가입 및 마이페이지** 개발| **데이터 분석 개발** |
 
 
 <br>
@@ -149,8 +149,7 @@
 ![Google Colab](https://img.shields.io/badge/Google%20Colab-F9AB00.svg?&style=for-the-badge&logo=Google%20Colab&logoColor=white)
 ![NumPy](https://img.shields.io/badge/NumPy-013243.svg?&style=for-the-badge&logo=NumPy&logoColor=white)
 ![pandas](https://img.shields.io/badge/pandas-150458.svg?&style=for-the-badge&logo=pandas&logoColor=white)
-![Selenium](https://img.shields.io/badge/Selenium-43B02A.svg?&style=for-the-badge&logo=Selenium&logoColor=white)
-![Tableau](https://img.shields.io/badge/Tableau-3776AB.svg?&style=for-the-badge&logo=Tableau&logoColor=white)
+
 
 ## 📌 DataBase
 
@@ -164,7 +163,7 @@
 ![Eclipse IDE](https://img.shields.io/badge/Eclipse%20IDE-2C2255.svg?&style=for-the-badge&logo=Eclipse%20IDE&logoColor=white)
 ![Visual Studio Code](https://img.shields.io/badge/Visual%20Studio%20Code-007ACC.svg?&style=for-the-badge&logo=Visual%20Studio%20Code&logoColor=white)
 ![PyCharm](https://img.shields.io/badge/PyCharm-000000.svg?&style=for-the-badge&logo=PyCharm&logoColor=white)
-![Amazon AWS](https://img.shields.io/badge/Amazon%20AWS-232F3E.svg?&style=for-the-badge&logo=Amazon%20AWS&logoColor=FF9900)
+
 
 ## 📌 Project Collaborate Tool
 
@@ -186,7 +185,8 @@
 
 # 🎸 사용 기술 및 언어
 
-![skill](https://github.com/dhslrl321/L7-monitor/blob/master/assets/skill.png)
+![skill](https://github.com/Code-Children-s-Challengers/Final-Project/blob/main/DA/PROJECT_IMAGE/language.PNG)
+
 
 # 📑 서비스 흐름 및 UI
 
