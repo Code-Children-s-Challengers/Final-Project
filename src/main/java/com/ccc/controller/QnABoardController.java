@@ -6,14 +6,18 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.ccc.config.login.auth.PrincipalDetails;
 import com.ccc.dto.NoticeDTO;
 import com.ccc.dto.QnABoardDTO;
 import com.ccc.dto.QnABoardPageDTO;
+import com.ccc.dto.UserDTO;
 import com.ccc.service.QnABoardService;
 
 @Controller
@@ -90,34 +94,6 @@ public class QnABoardController {
 		return "board/QnABoardContent";
 	}
 	
-	@GetMapping(value="/board/QnABoardDelete")
-	public String delete(HttpServletRequest request, @RequestParam int id) throws Exception{
-		
-		int num = service.deleteQnABoard(id);
-		
-		return "board/QnABoard/QnABoardDeleteSuccess";
-	}
-
-	
-	@GetMapping(value="/board/QnABoardQWrite")
-	public String writeQForm() throws Exception{		
-		return "board/QnABoardQWrite";
-	}
-	
-	@GetMapping(value="/board/QnABoardAWrite")
-	public String writeAForm() throws Exception{		
-		return "board/QnABoardAWrite";
-	}
-	
-	@GetMapping(value="/board/QnABoardQWriteInsert")
-	public String writeQSave(QnABoardDTO dto) throws Exception{		
-		
-		System.out.println(dto);			
-		
-		int num = service.insertQQnABoard(dto);		
-		
-		return "board/QnABoard/QnABoardWriteSuccess";
-	}
 	
 	
 	@GetMapping(value="/board/QnABoardSearch")	
@@ -173,51 +149,174 @@ public class QnABoardController {
 		
 		return "board/QnABoardSearch";
 	}
-							
+
+	@Secured("ROLE_USER")
+	@GetMapping(value="/board/QnABoardDelete")
+	public String delete(HttpServletRequest request, @RequestParam int id,
+			@AuthenticationPrincipal PrincipalDetails principalDetails
+			) throws Exception{
+		
+		UserDTO userDTO = principalDetails.getUser();
+		String writerId = userDTO.getUsername();
+		
+		String checkWriterId = service.selectQnABoardContent(id).getWriterId();
+		System.out.println(writerId);
+		if (checkWriterId.equals(writerId) || "admin".equals(writerId)) {
+
+			int num = service.deleteQnABoard(id);
+			
+			return "board/QnABoard/QnABoardDeleteSuccess";
+			
+		} else {
+			return "board/QnABoardLoginFail";
+		}
+	}
+
+	@Secured("ROLE_USER")
+	@GetMapping(value="/board/QnABoardQWrite")
+	public String writeQForm(@AuthenticationPrincipal PrincipalDetails principalDetails) throws Exception{		
+		UserDTO userDTO = principalDetails.getUser();
+		String writerId = userDTO.getUsername();		
+		
+		System.out.println(writerId);
+		if (writerId != null) {
+			return "board/QnABoardQWrite";
+		} else {
+			return "board/QnABoardLoginFail";
+		}
+		
+	}
+	@Secured("ROLE_USER")
+	@GetMapping(value="/board/QnABoardAWrite")
+	public String writeAForm(@AuthenticationPrincipal PrincipalDetails principalDetails) throws Exception{		
+		UserDTO userDTO = principalDetails.getUser();
+		String writerId = userDTO.getUsername();		
+		
+		System.out.println(writerId);
+		if ("admin".equals(writerId)) {
+			return "board/QnABoardAWrite";
+		} else {
+			return "board/QnABoardLoginFail";
+		}
+		
+		
+	}
+	@Secured("ROLE_USER")
+	@GetMapping(value="/board/QnABoardQWriteInsert")
+	public String writeQSave(QnABoardDTO dto,
+			@AuthenticationPrincipal PrincipalDetails principalDetails) throws Exception{		
+		UserDTO userDTO = principalDetails.getUser();
+		String writerId = userDTO.getUsername();		
+		
+		System.out.println("여기" + writerId);
+		if (writerId != null) {
+			dto.setWriterId(writerId);
+			System.out.println(dto);			
+			
+			int num = service.insertQQnABoard(dto);		
+			
+			return "board/QnABoard/QnABoardWriteSuccess";
+		} else {
+			return "board/QnABoardLoginFail";
+		}
+		
+	}
+	@Secured("ROLE_USER")						
 	@GetMapping(value="/board/QnABoardQUpdate")
-	public String updateQForm(@RequestParam int id, Model m) throws Exception{		
-		m.addAttribute("id",id);
-		return "board/QnABoardQUpdate";
+	public String updateQForm(@RequestParam int id, Model m,
+			@AuthenticationPrincipal PrincipalDetails principalDetails) throws Exception{		
+		UserDTO userDTO = principalDetails.getUser();
+		String writerId = userDTO.getUsername();
+		
+		String checkWriterId = service.selectQnABoardContent(id).getWriterId();
+		System.out.println(checkWriterId);
+		if (checkWriterId.equals(writerId) || "admin".equals(writerId)) {
+			m.addAttribute("id",id);
+			return "board/QnABoardQUpdate";
+			
+		} else {
+			return "board/QnABoardLoginFail";
+		}
+		
 	}	
-	
+	@Secured("ROLE_USER")
 	@GetMapping(value="/board/QnABoardQUpdateInsert")
-	public String QnABoardQUpdate(@RequestParam("id") String id,
+	public String QnABoardQUpdate(@RequestParam("id") int id,
 							   @RequestParam("title") String title,
 							   @RequestParam("qcontent") String qcontent,							   
-							   Model m) throws Exception{
-		QnABoardDTO uDTO = new QnABoardDTO();
+							   Model m,
+							   @AuthenticationPrincipal PrincipalDetails principalDetails) throws Exception{
+			
+		UserDTO userDTO = principalDetails.getUser();
+		String writerId = userDTO.getUsername();
 		
-		uDTO.setId(Integer.parseInt(id));
-		uDTO.setTitle(title);
-		uDTO.setQcontent(qcontent);
-		
-		
-		int num = service.updateQQnABoard(uDTO);
-		
-		return "board/QnABoard/QnABoardUpdateSuccess";		
+		String checkWriterId = service.selectQnABoardContent(id).getWriterId();
+		System.out.println("나오나?" + writerId);
+		System.out.println("나오나?" + checkWriterId);
+		if (checkWriterId.equals(writerId) || "admin".equals(writerId)) {
+			QnABoardDTO uDTO = new QnABoardDTO();
+			
+			uDTO.setId(id);
+			uDTO.setTitle(title);
+			uDTO.setQcontent(qcontent);
+			uDTO.setModiuname(writerId);
+			
+			int num = service.updateQQnABoard(uDTO);
+			
+			return "board/QnABoard/QnABoardUpdateSuccess";
+			
+		} else {
+			return "board/QnABoardLoginFail";
+		}
 	}
-	
+	@Secured("ROLE_USER")
 	@GetMapping(value="/board/QnABoardAUpdate")
 	public String updateAForm(@RequestParam int id, 
 							@RequestParam String title,
-							Model m) throws Exception{		
-		m.addAttribute("id",id);
-		m.addAttribute("title",title);
-		return "board/QnABoardAUpdate";
+							Model m,
+							@AuthenticationPrincipal PrincipalDetails principalDetails) throws Exception{		
+		
+		UserDTO userDTO = principalDetails.getUser();
+		String writerId = userDTO.getUsername();
+		
+		String checkWriterId = service.selectQnABoardContent(id).getWriterId();
+		System.out.println(writerId);
+		if ("admin".equals(writerId)) {
+			m.addAttribute("id",id);
+			m.addAttribute("title",title);
+			return "board/QnABoardAUpdate";
+			
+		} else {
+			return "board/QnABoardLoginFail";
+		}
+		
 	}	
-	
+	@Secured("ROLE_USER")
 	@GetMapping(value="/board/QnABoardAUpdateInsert")
-	public String QnABoardAUpdate(@RequestParam("id") String id,							   
+	public String QnABoardAUpdate(@RequestParam("id") int id,							   
 							   @RequestParam("acontent") String acontent,							   
-							   Model m) throws Exception{
-		QnABoardDTO uDTO = new QnABoardDTO();
+							   Model m,
+							   @AuthenticationPrincipal PrincipalDetails principalDetails) throws Exception{
+		UserDTO userDTO = principalDetails.getUser();
+		String writerId = userDTO.getUsername();
 		
-		uDTO.setId(Integer.parseInt(id));		
-		uDTO.setAcontent(acontent);		
+		String checkWriterId = service.selectQnABoardContent(id).getWriterId();
+		System.out.println(writerId);
+		if ("admin".equals(writerId)) {
+			QnABoardDTO uDTO = new QnABoardDTO();
+			
+			uDTO.setId(id);		
+			uDTO.setAcontent(acontent);		
+			
+			int num = service.updateAQnABoard(uDTO);
+			
+			return "board/QnABoard/QnABoardUpdateSuccess";	
+			
+		} else {
+			return "board/QnABoardLoginFail";
+		}
 		
-		int num = service.updateAQnABoard(uDTO);
-		
-		return "board/QnABoard/QnABoardUpdateSuccess";		
+			
 	}
 	
 	

@@ -71,7 +71,7 @@
 							
 								if(j == i){
 								%>
-									<td>${answer}</td>
+									<td style="text-align:center">${answer}</td>
 								<%		
 								System.out.println(j);																
 							}

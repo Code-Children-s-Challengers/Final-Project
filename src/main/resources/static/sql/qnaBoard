@@ -2,7 +2,7 @@ create table qnaBoard
 (
   id number primary key,
   title nvarchar2(100),
-  writer_id NVARCHAR2(50),
+  writerid NVARCHAR2(50),
   qcontent NVARCHAR2(1000),
   acontent NVARCHAR2(1000),
   regdate QnABoardSearch,
@@ -13,12 +13,26 @@ create table qnaBoard
   keyword nvarchar2(100)
   
 );
+create table qnaBoard
+(
+  id number primary key,
+  title nvarchar2(100),
+  writerid NVARCHAR2(50),
+  qcontent NVARCHAR2(1000),
+  acontent NVARCHAR2(1000),
+  regdate date default null,  
+  hit number default 0,
+  files nvarchar2(1000) default null,
+  type nvarchar2(100) default null,
+  keyword nvarchar2(100) default null,
+  date1 nvarchar2(50),
+  tate2 nvarchar2(50),
+  modidate date default null,
+  reguname date default null,
+  modiuname date default null  
+);
 
 create sequence qnaboard_id_seq
     START WITH 1
     INCREMENT BY 1;
-    
-insert into qnaboard
-values (qnaboard_id_seq.nextval,'test','test','test','test',SYSDATE,0,'test');
-
-회원정보와 아직은 미연동된 DB 
+ 

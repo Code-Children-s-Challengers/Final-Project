@@ -39,10 +39,7 @@
 									<th>답변내용</th>
 									<td colspan="4">${n.acontent}</td>
 								</tr>
-								<tr>
-									<th>첨부파일</th>
-									<td colspan="3">${n.files}</td>
-								</tr>
+								
 							</tbody>
 						</table>
 					</div>	
@@ -57,8 +54,8 @@
 				<span>
 					<button id="ListButton">목록</button>
 					<button id="DeleteButton">글 삭제</button>			
-					<button id="UpdateQButton">글 수정(user)</button>
-					<button id="UpdateAButton">답변 작성(admin)</button>						
+					<button id="UpdateQButton">문의내용 수정</button>
+					<button id="UpdateAButton">답변하기</button>						
 				</span>
 			</div>			
 					

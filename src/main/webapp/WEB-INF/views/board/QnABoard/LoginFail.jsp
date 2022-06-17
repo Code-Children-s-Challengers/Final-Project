@@ -5,5 +5,5 @@
 	<!-- --------------------------- <body> --------------------------------------- -->
 <script>
   alert("권한이 없습니다 로그인 정보를 확인해주세요.");
-  location.href="/hifive/board/noticeList";
+  location.href="/hifive/board/QnABoardList";
 </script>

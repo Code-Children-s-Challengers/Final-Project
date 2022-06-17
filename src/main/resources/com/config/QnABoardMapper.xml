@@ -17,9 +17,10 @@
 	</select>	
 	
 	<insert id="insertQQnABoard" parameterType="QnABoardDTO">
-		insert into QnABoard(id,title,qcontent,regdate)
+		insert into QnABoard(id,title,writerId,qcontent,regdate)
 		values (qnaboard_id_seq.nextval,
 				#{title},				
+				#{writerId},
 				#{qcontent},										
 				sysdate				
 				)		
@@ -90,7 +91,7 @@
     
     <update id="updateQQnABoard" parameterType="QnABoardDTO">
     	update qnaboard
-    	set title = #{title}, qcontent = #{qcontent}
+    	set title = #{title}, qcontent = #{qcontent}, modiuname = #{modiuname}, modidate = SYSDATE
     	where id = #{id}
     </update>
     
