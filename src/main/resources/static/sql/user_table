@@ -24,5 +24,13 @@ create table profileImage
     constraint fk_id FOREIGN key(id) REFERENCES user_table(id)
 );
 
+create table challengeImage
+(
+    cnum            number(10),
+    mimetype      varchar(100)                          null,
+    data          blob                        null,
+    original_name varchar(100)                          null
+);
+
 commit;
 
