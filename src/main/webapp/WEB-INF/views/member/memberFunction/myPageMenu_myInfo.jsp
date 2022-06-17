@@ -81,12 +81,6 @@
           개인 정보 설정
         </a>
       </li>
-      <li>
-        <a href="/hifive/member/myFriend/${id}" class="nav-link link-dark">
-          <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"/></svg>
-          친구 목록 보기
-        </a>
-      </li>
     </ul>
     <hr>
     <div class="dropdown">

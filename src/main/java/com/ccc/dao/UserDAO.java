@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.ccc.dto.ChallengeImageDTO;
 import com.ccc.dto.ProfileImageDTO;
 import com.ccc.dto.UserDTO;
 
@@ -60,5 +61,20 @@ public class UserDAO {
 		return session.selectOne("com.config.LoginMapper.findLatestUser");
 	}
 
+	
+	//////
+	public ChallengeImageDTO findChallengeImage(int cnum) {
+		return session.selectOne("com.config.MemberMapper.findChallengeImage",cnum);
+	}
+	
+	public void insertChallengeImage(ChallengeImageDTO challengeImage) {
+		session.insert("com.config.MemberMapper.insertChallengeImage",challengeImage);		
+	}
+	public void updateChallengeImage(ChallengeImageDTO challengeImage) {
+		session.update("com.config.MemberMapper.updateChallengeImage",challengeImage);
+	}
+	public int updatePassword(Map<String,String> map) {
+		return session.update("com.config.MemberMapper.updatePassword",map);
+	}
 	
 }

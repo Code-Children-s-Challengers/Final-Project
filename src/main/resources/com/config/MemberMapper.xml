@@ -39,6 +39,37 @@
 	 	select * from user_table
 	 	where id = #{id}
 	 </select>
+	 
+	 
+	 
+	  <insert id="insertChallengeImage" parameterType="challengeImageDTO">
+		insert into ChallengeImage(cnum, mimetype, original_name, data)
+		values (#{cnum}, #{mimetype}, #{original_name}, #{data})
+	 </insert>
+	 
+	 <select id="findChallengeImage" parameterType="int" resultType="challengeImageDTO">
+	 	select * from ChallengeImage
+	 	where cnum = #{cnum}
+	 </select>
+	 
+	  <update id="updateChallengeImage" parameterType="challengeImageDTO">
+		update ChallengeImage
+		set 
+		mimetype=#{mimetype},
+		original_name=#{original_name},
+		data= #{data}
+		where cnum = #{cnum}
+	 </update>
+	 
+	 
+	 
+	   <update id="updatePassword" parameterType="map">
+		 update user_table
+	 	 set password=#{password}
+	 	where id = #{id}
+	 </update>
+	 
+	 
 </mapper>
 
 

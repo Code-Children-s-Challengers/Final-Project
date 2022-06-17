@@ -119,7 +119,7 @@
 											<td class="td_red" align ="center" style="display:none">challenge_sample</td>
 										</c:when>
 										<c:otherwise>
-											<img src="images/challenge/challenge_image/${dto.getPhoto()}" border="0" align="middle" width="150" height="150" style="">
+											<img src="/hifive/challengeImage/${dto.getCnum()}" border="0" align="middle" width="150" height="150" style="">
 											<td class="td_red" align ="center" style="display:none">${dto.getPhoto()}</td>
 										</c:otherwise>
 									</c:choose>

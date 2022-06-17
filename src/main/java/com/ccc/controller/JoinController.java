@@ -76,10 +76,10 @@ public class JoinController {
 	// 중복된 username이 존재하는가?
 	@RequestMapping(value = "/checkUsername", method = RequestMethod.POST)
 	@ResponseBody
-	public int checkUsername(@RequestBody String username) {
-		System.out.println(username);
-		System.out.println(uService.checkUsername(username));
-		return uService.checkUsername(username);
+	public int checkUsername(@RequestBody UserDTO user) {
+		System.out.println(user.getUsername());
+		System.out.println(uService.checkUsername(user.getUsername()));
+		return uService.checkUsername(user.getUsername());
 	}
 	
 	// email 인증 번호 발송

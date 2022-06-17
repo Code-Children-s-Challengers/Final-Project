@@ -21,6 +21,8 @@
 	
 	$(document).ready(function(){
 		$("#yes").on("click",function(){
+			console.log("1차성공");
+
 			var form = $('#make')[0];
 			var data = new FormData(form);
 			
@@ -43,6 +45,7 @@
 			}else if(start_date <= today.toISOString().substr(0,10)){
 				alert("시작 날짜는 오늘날짜 이후일 수 없습니다");
 			}else{
+				console.log("2차 성공");
 				$.ajax({
 					url:'makeChallenge',
 					type:'post',

@@ -10,8 +10,11 @@ $("#username").on("blur",function(){
 					//url : '${pageContext.request.contextPath}/checkUsername',
 					url : '/hifive/checkUsername',
 					type : 'post',
-					data : username,
-					cache : true,
+					data : JSON.stringify({
+						username:""+username
+					}),
+					cache : false,
+					contentType: 'application/json',
 					success : function(data) {
 						if (data == 0) {
 							$(".usernameSuccess").text("사용가능한 ID입니다.");

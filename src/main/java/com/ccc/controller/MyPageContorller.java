@@ -7,11 +7,13 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -90,6 +92,8 @@ public class MyPageContorller {
 		mav.addObject("phoneNumber2", user.getPhoneNumber().substring(3, 7));
 		mav.addObject("phoneNumber3", user.getPhoneNumber().substring(7,11));
 		mav.addObject("password1", user.getPassword());
+		mav.addObject("provider1", user.getProvider());
+		System.out.println( user.getProvider());
 		return mav;
 	}
 	
@@ -152,14 +156,6 @@ public class MyPageContorller {
 		
 	}
 	
-	
-	@Secured("ROLE_USER")
-	@GetMapping("/member/myFriend/{myId}")
-	public String myFriend(@PathVariable int myId, HttpSession session){
-		session.setAttribute("id", myId );
-		return "member/myFriend";
-	}
-	
 
 	//myPage에서 정보 저장하기
 	@Secured("ROLE_USER")
@@ -216,6 +212,48 @@ public class MyPageContorller {
 		Map<String, String> data = new HashMap<String, String>();
 	}
 	
+
+	@Secured("ROLE_USER")
+	@GetMapping("/member/myFriend/{myId}")
+	public String myFriend(@PathVariable int myId, HttpSession session){
+		session.setAttribute("id", myId);
+		
+		
+		return "member/myFriend";
+	}
+	
+	@Lazy
+	@Autowired
+	private  BCryptPasswordEncoder bCryptPasswordEncoder;
+	
+	@Secured("ROLE_USER")
+	@PostMapping("/myInfo/originalPw/{myId}")
+	@ResponseBody
+	public String originalPwChecking(@PathVariable int myId, @RequestBody UserDTO user ){
+		String originalPw = user.getPassword();
+		UserDTO originalUser = userDAO.findUser(myId);
+		String message;
+		if(bCryptPasswordEncoder.matches(originalPw, originalUser.getPassword())){
+			message="success";
+		}else {
+			message="fail";
+		}
+		return message;
+	}
+	
+	@Secured("ROLE_USER")
+	@PostMapping("/myInfo/newPw/{myId}")
+	@ResponseBody
+	public int newPwUpdate(@PathVariable int myId, @RequestBody UserDTO user ){
+		String newPw = user.getPassword();
+		System.out.println(newPw);
+		Map<String, String> map = new HashMap<String,String>();
+		map.put("id", Integer.toString(myId));
+		map.put("password", bCryptPasswordEncoder.encode(newPw));
+		int num = userDAO.updatePassword(map);
+		
+		return num;
+	}
 	
 	
 	

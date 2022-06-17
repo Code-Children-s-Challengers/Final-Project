@@ -9,10 +9,19 @@
 <style>
 
 </style>
+
 </head>
 <body>
 <jsp:include page="common/menu.jsp" flush="true"/><br>
 <hr>
-<jsp:include page="member/joinForm.jsp" flush="true"/><br>
+<div class="row">
+	<div class="col-sm-2">
+	</div>
+	<div class="col-sm-8">
+		<jsp:include page="member/joinForm.jsp" flush="true"/><br>
+	</div>
+	<div class="col-sm-2">
+	</div>
+</div>
 </body>
 </html>

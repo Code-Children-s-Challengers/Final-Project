@@ -59,7 +59,7 @@
 	<img src="images/challenge/challenge_sample.jpg" border="0" align="center" width="120">
 </c:when>
 <c:otherwise>
-	<img src="images/challenge/challenge_image/${photo}" border="0" align="center" width="120">
+	<img src="/hifive/challengeImage/${cnum}" border="0" align="center" width="120">
 </c:otherwise>
 </c:choose>
 </div><br>

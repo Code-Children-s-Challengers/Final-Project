@@ -2,26 +2,24 @@ package com.ccc.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Date;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,19 +27,26 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ccc.config.login.auth.PrincipalDetails;
+import com.ccc.dao.UserDAO;
 import com.ccc.dto.CPhotoDTO;
 import com.ccc.dto.ChallengeDTO;
-import com.ccc.service.ChallengeService;
+import com.ccc.dto.ChallengeImageDTO;
 import com.ccc.dto.PageDTO;
 import com.ccc.dto.PhotoPageDTO;
+import com.ccc.dto.ProfileImageDTO;
 import com.ccc.dto.ReportPageDTO;
+import com.ccc.service.ChallengeService;
 
 @Controller
 public class ChallengeController {
 	@Autowired
 	ChallengeService Cservice;
 	
+	@Autowired
+	UserDAO userDAO;
+	
 	////////////////////////////////////////////////////////////////////////////////// challenge 참가 페이지
+	@Secured("ROLE_USER")
 	@RequestMapping(value="/challenges", method = RequestMethod.GET)
 	public String Challenges(Model m, HttpServletRequest request, @AuthenticationPrincipal PrincipalDetails principalDetails) throws Exception{
 		String category = request.getParameter("category");
@@ -59,19 +64,19 @@ public class ChallengeController {
 			pp = Integer.parseInt(perPage);
 		}
 		
-		PageDTO dto = Cservice.categoryChallenge(category, Integer.parseInt(curPage),pp);
+		PageDTO dto = Cservice.categoryChallenge(category, Integer.parseInt(curPage),pp); //Page처리
 		dto.setPerPage(pp);
 		int tot = dto.getTotalRecord() / dto.getPerPage();
 		if(dto.getTotalRecord() % dto.getPerPage() != 0) tot++;
 		
 		
 		List<ChallengeDTO> allList = Cservice.allChallenge();
-		List<ChallengeDTO> hotList = new ArrayList<ChallengeDTO>();
+		List<ChallengeDTO> hotList = new ArrayList<ChallengeDTO>(); 
 		for(int i = 0; i < 4; i++) {
 			if(allList.size() == i) {
 				break;
 			}
-			hotList.add(allList.get(i));
+			hotList.add(allList.get(i)); // hot리스트에 추가한다?
 		}
 		m.addAttribute("curPage", curPage);
 		m.addAttribute("perPage", pp);
@@ -80,7 +85,7 @@ public class ChallengeController {
 		m.addAttribute("PageDTO", dto);
 		m.addAttribute("catogory", category);
 		
-		return "challenge";
+		return "challenge"; //challenge.jsp => 메인화면이겠군
 	}
 	
 	@RequestMapping(value="/challengescategory", method = RequestMethod.GET)
@@ -114,29 +119,33 @@ public class ChallengeController {
 		return "challenge/ajaxList";
 	}
 
-	@RequestMapping(value="/participantPopup", method = RequestMethod.GET)
+	@RequestMapping(value="/participantPopup", method = RequestMethod.GET) //참여할 수 있는 팝업창
 	public String participantPopup(HttpServletRequest request, Model m) throws Exception{
 		String cnum = request.getParameter("cnum");
-		String photo = request.getParameter("photo");
-		String name = request.getParameter("name");
-		String date = request.getParameter("date");
-		String people = request.getParameter("people");
-		String fee = request.getParameter("fee");
-		String holiday = request.getParameter("holiday");
+//		String photo = request.getParameter("photo");
+//		String name = request.getParameter("name");
+//		String date = request.getParameter("date");
+//		String people = request.getParameter("people");
+//		String fee = request.getParameter("fee");
+//		String holiday = request.getParameter("holiday");
+		
+		//홍석
+		ChallengeDTO challenge = Cservice.challengeByCnum(Integer.parseInt(cnum));
+		//
 
 		m.addAttribute("cnum", cnum);
-		m.addAttribute("photo", photo);
-		m.addAttribute("name", name);
-		m.addAttribute("date", date);
-		m.addAttribute("people", people);
-		m.addAttribute("fee", fee);
-		m.addAttribute("holiday", holiday);
+		m.addAttribute("photo", challenge.getPhoto());
+		m.addAttribute("name", challenge.getName());
+		m.addAttribute("date", challenge.getSday());
+		m.addAttribute("people", challenge.getParticipant());
+		m.addAttribute("fee", challenge.getFee());
+		m.addAttribute("holiday", challenge.getHoliday());
 		
 		return "challenge/participantPopup";
 	}
 	
 	
-	@RequestMapping(value="/challengeParticipate", method = RequestMethod.POST)
+	@RequestMapping(value="/challengeParticipate", method = RequestMethod.POST) // 실제 참가를 진행해주는 메서드
 	@ResponseBody
 	public String challengeParticipate(@RequestParam int cnum, @AuthenticationPrincipal PrincipalDetails principalDetails) throws Exception{
 		int unum = principalDetails.getUser().getId();
@@ -159,7 +168,7 @@ public class ChallengeController {
 		return "success";
 	}
 	
-	@RequestMapping(value="/makeChallengePopup", method = RequestMethod.GET)
+	@RequestMapping(value="/makeChallengePopup", method = RequestMethod.GET) //챌린지 만들기 팝업
 	public String makeChallengePopup() throws Exception{
 		
 		return "challenge/makeChallengePopup";
@@ -170,7 +179,8 @@ public class ChallengeController {
 		return "challenge/skipdayPopup";
 	}
 	
-	@RequestMapping(value="/makeChallenge", method = RequestMethod.POST)
+	@PostMapping("/makeChallenge")
+	//@RequestMapping(value="/makeChallenge", method = RequestMethod.POST)
 	@ResponseBody
 	public String makeChallenge(@RequestParam MultipartFile photo, @RequestParam String name, @RequestParam String category, @RequestParam Date start_date, @RequestParam Date end_date, @RequestParam int people, @RequestParam int fee, @RequestParam int holiday, @RequestParam String skiphidden, @AuthenticationPrincipal PrincipalDetails principalDetails) throws Exception{
 		int unum = principalDetails.getUser().getId();
@@ -180,24 +190,32 @@ public class ChallengeController {
         Date date = new Date(miliseconds);
         int cnum = Cservice.challengeNumber();
 		
-        String filename = "c_"+unum+"_"+Integer.toString(cnum+1)+".png";
-        System.out.println(photo.getClass());
-        if(photo.getSize() == 0) {
-        	filename = "challenge_sample.jpg";
-        }else {
-        	File savePath = new File("C://Users//sksms//Desktop//포트폴리오//final//Final-Project//src//main//resources//static//images//challenge//challenge_image", filename);
-    		try {
-    			photo.transferTo(savePath);
-    		} catch (IllegalStateException e) {
-    			return "fail";
-    		} catch (IOException e) {
-    			return "fail";
-    		}
-        }
+        
+       
+        /*
+         * 홍석 추가
+         */
+        System.out.println("please0");
+		ChallengeImageDTO challengeImage = new ChallengeImageDTO();
+		challengeImage.setCnum(cnum+1);
+		challengeImage.setMimetype(photo.getContentType());
+		System.out.println(photo.getContentType());
+		challengeImage.setOriginal_name(photo.getOriginalFilename());
+		System.out.println(photo.getOriginalFilename());
+		challengeImage.setData(photo.getBytes());
+		System.out.println("여긴가?");
+		
+		System.out.println("please1");
+		userDAO.insertChallengeImage(challengeImage);
+		System.out.println("please1");
+
+		/*
+         * 홍석 추가
+         */
 		
 		ChallengeDTO dto = new ChallengeDTO();
 		dto.setCategory(category);
-		dto.setPhoto(filename);
+		dto.setPhoto("사진");
 		dto.setName(name);
 		dto.setSday(start_date.toString());
 		dto.setEday(end_date.toString());
@@ -335,7 +353,7 @@ public class ChallengeController {
         }
         String filename = "c_"+Integer.toString(unum)+"_"+Integer.toString(cnum)+"_"+date.toString()+".png";
         
-		File savePath = new File("C://Users//sksms//Desktop//포트폴리오//final//Final-Project//src//main//resources//static//images//challenge//certification_image", filename);
+    	File savePath = new File("C://Users//홍석//git//Final-Project//src//main//resources//static//images//challenge//challenge_image", filename);
 		try {
 			photo.transferTo(savePath);
 		} catch (IllegalStateException e) {
@@ -480,4 +498,22 @@ public class ChallengeController {
 		e.printStackTrace();
 		return "error/error";
 	}
+	
+	
+	
+	// 저장된 챌린지 사진 가져오기
+	@Secured("ROLE_USER")
+	@GetMapping("/challengeImage/{cnum}")
+	public ResponseEntity<byte[]> findProfileImage(@PathVariable int cnum){
+		System.out.println(cnum);
+		ChallengeImageDTO challengeIamge = userDAO.findChallengeImage(cnum);
+		System.out.println(challengeIamge);
+
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Content-Type",challengeIamge.getMimetype());
+		headers.add("Content-Length", String.valueOf(challengeIamge.getData().length));
+		return new ResponseEntity<byte[]>(challengeIamge.getData(),headers, HttpStatus.OK);
+	}
+	
 }
+
