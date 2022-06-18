@@ -6,72 +6,56 @@
 <head>
 <meta charset="UTF-8">
 <title>Challenge</title>
-<script>
-	function makeChallengePopup(){
-		win = window.open("./makeChallengePopup","makechallengepopup","width = 600, height = 700, top = 100, left = 200, location = no");
-
-	}
-
-</script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<style>
+	.list-group-item:hover{
+		background-color:darkgray;
+		transition-duration: 0.5s;
+	}
+</style>
 </head>
 <body>
-<div>
-<jsp:include page="common/menu.jsp" flush="true"/><br>
-</div>
+
 <hr>
+<!--  헤더  -->
+<section class="text-center container">
+<jsp:include page="common/menu.jsp" flush="true"/><br>
+    <div class="row py-lg-4">
+      <div class="col-lg-6 col-md-8 mx-auto">
+        <h1 class="fw-light">새로운 도전을 즐기세요!</h1>
+        <p class="lead text-muted">나를 죽이지 못한 고통은 나를 더 강하게 만들 뿐</p>
+        <p>
+          <a id="chMaking" class="btn btn-primary my-2" style="display:inline-block">챌린지 만들기</a>
+          <a id="myCh" class="btn btn-primary my-2" style="display:inline-block">내 챌린지 보기</a>
+        </p>
+      </div>
+    </div>
+</section>
+<hr/>
+<!--  헤더  -->
+<!-- 본문 -->
 <div class ="row">
 	<div class="col-sm-2">
-	<ul class="list-group" id="scroll">
-	  <li class="list-group-item active" aria-current="true">챌린지 홈</li>
-	  <li class="list-group-item">챌린지 만들기</li>
-	  <li class="list-group-item">내 챌린지</li>
-	</ul>	
 	</div>
-	<div class="col-sm-7">
-	<button onclick="makeChallengePopup()" style="width:250px;
-	  height: 50px;
-	  border: 0;
-	  outline: none;
-	  border-radius: 40px;
-	  background: rgb(190, 210, 204);
-	  color: white;
-	  font-size: 1.2em;
-  	  letter-spacing: 2px;">challenge 생성</button>
-	<jsp:include page="challenge/challengeHot2.jsp" flush="true"/><br>
-	
-	<nav class="navbar navbar-light bg-light">
-	  <form class="container-fluid justify-content-start">
-	      <a class="navbar-brand" href="#">Category</a>
-	    <button class="btn btn-outline-dark me-2" type="button">Study</button>
-	    <button class="btn btn-outline-dark me-2" type="button">Fitness</button>
-	    <button class="btn btn-outline-dark me-2" type="button">Others...</button>
-	  </form>
-	</nav>
-	
+	<div class="col-sm-8" style="">
+	<jsp:include page="challenge/categoryTab.jsp" flush="true"/><br>		
+	<jsp:include page="challenge/challengeHot2.jsp" flush="true"/><br>	
 	<jsp:include page="challenge/challengeList2.jsp" flush="true"/><br>
 	</div>
 </div>
 </body>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <script>
 
 //스크롤이 생기도록 <br> 을 여러게 넣은 부분..
 $(document).ready(function(){
-
-	function scroll_follow(id)
-	{
-	  $(window).scroll(function( )  //스크롤이 움직일때마다 이벤트 발생
-	  { 
-	      var position = $(window).scrollTop(); // 현재 스크롤바의 위치값을 반환합니다.
-	      $(id).stop().animate({top:position+"px"}, 1); //해당 오브젝트 위치값 재설정
-	  });
-	}
-	
-	 scroll_follow( "#scroll" );
-
+	$("#chMaking").on("click", function(){
+		win = window.open("./makeChallengePopup","makechallengepopup","width = 600, height = 700, top = 100, left = 200, location = no");
+		$("#chMaking").attr("class", "list-group-item active" );
+		$("#chHome").attr("class", "list-group-item" );
+	});
 		
-	
 });
 </script>
 </html>

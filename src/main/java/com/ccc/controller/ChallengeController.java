@@ -44,9 +44,19 @@ public class ChallengeController {
 	
 	@Autowired
 	UserDAO userDAO;
+	///////////////////////////////////////
+	
+	@RequestMapping(value="/challengesAjax", method = RequestMethod.GET)
+	@ResponseBody
+	public String ChallengesAjax(Model m, @RequestParam("category") String category, @AuthenticationPrincipal PrincipalDetails principalDetails) throws Exception{
+		System.out.println("성공");
+		System.out.println(category);
+		
+		return "success"; //challenge.jsp => 메인화면이겠군
+	}
+	
 	
 	////////////////////////////////////////////////////////////////////////////////// challenge 참가 페이지
-	@Secured("ROLE_USER")
 	@RequestMapping(value="/challenges", method = RequestMethod.GET)
 	public String Challenges(Model m, HttpServletRequest request, @AuthenticationPrincipal PrincipalDetails principalDetails) throws Exception{
 		String category = request.getParameter("category");
@@ -501,7 +511,7 @@ public class ChallengeController {
 	
 	
 	
-	// 저장된 챌린지 사진 가져오기
+	// DB에 저장된 챌린지 사진 가져오기 -- 홍석
 	@Secured("ROLE_USER")
 	@GetMapping("/challengeImage/{cnum}")
 	public ResponseEntity<byte[]> findProfileImage(@PathVariable int cnum){
