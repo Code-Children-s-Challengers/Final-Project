@@ -81,13 +81,6 @@
          	 개인 정보 설정
         </a>
       </li>
-            <li>
-        <a href="http://127.0.0.1:8050" class="nav-link link-dark"> <%-- 영준_20220619 --%>
-          <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg>
-         	내 챌린지 기록보기
-        </a>
-      </li>
-      
     </ul>
     <hr>
     <div class="dropdown">

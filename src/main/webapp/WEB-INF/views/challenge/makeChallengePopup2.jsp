@@ -21,7 +21,7 @@
 	
 </style>
 
-<form class="row g-3" method="post" action="makeChallenge" enctype="multipart/form-data" id="chMaking">
+<form class="row g-3 needs-validation" method="post" action="makeChallenge" enctype="multipart/form-data" id="chMaking">
   <div class="col-sm-12 pt-5 text-center">
   	<div class="imageContainer ">
   		<img src="/hifive/images/challenge/noImage.gif" class="rounded" alt="..." id="chPhotoImage">
@@ -73,13 +73,13 @@
     </div>
   </div>
   <div class="col-sm-5">
-    <label for="end_date" class="form-label">최종일</label>
+    <label for="end_date" class="form-label">종료일</label>
     <input type="date" class="form-control" id="end_date" name="end_date" aria-describedby="EndV1 EndV2" required>
     <div id="EndV1" class="valid-feedback">
       Good!
     </div>
     <div id="EndV2" class="invalid-feedback">
-        최종일을 선택해주세요
+        종료일을 선택해주세요
     </div>
   </div>
   <div class="col-sm-1"></div>
@@ -119,7 +119,7 @@
   <div class="col-sm-1"></div> 
   <!--  -->
   <div class="col=sm-12">
-    <button class="btn btn-primary" type="submit">Submit form</button>
+    <button class="btn btn-primary" type="submit" id="submit" >Submit form</button>
   </div>
 </form>
 
@@ -134,7 +134,6 @@ var skiparray = new Array();
 
 $(document).ready(function(){
 	
-	var sel_file2;
 	//프로필 이미지 미리보기 기능
 	$("form").on("change","#chPhoto", handleChPhoto);
 	function handleChPhoto(e){
@@ -146,7 +145,6 @@ $(document).ready(function(){
 				alert("확장자는 이미지 확장자만 가능합니다.");
 				return;
 			}
-			sel_file2 = f;
 			var reader = new FileReader();
 			reader.onload = function(e){
 				$("#chPhotoImage").attr("src", e.target.result);
@@ -156,6 +154,89 @@ $(document).ready(function(){
 	}
 
 	
+	$("#submit").on("click", function(event){
+		console.log("hi");
+		console.log("hi");
+		console.log("hi");
+		var today = new Date();
+		
+		var name = $('#name').val();
+		var category = $('#category option:selected').val();
+		var start_date = $('#start_date').val();
+		var end_date = $('#end_date').val();
+		var people = $('#people').val();
+		var fee = $('#fee').val();
+		
+		console.log(name);
+		if(name == ""){
+			$("#name").addClass("is-invalid");
+			$("#name").removeClass("is-valid");
+		}else{
+			$("#name").addClass("is-valid");
+			$("#name").removeClass("is-invalid");
+		}
+		
+		if(category == ""){
+			$("#category").addClass("is-invalid");
+			$("#category").removeClass("is-valid");
+		}else{
+			$("#category").addClass("is-valid");
+			$("#category").removeClass("is-invalid");
+		}
+			
+		
+		if(start_date == ""){
+			$("#start_date").addClass("is-invalid");
+			$("#start_date").removeClass("is-valid");
+		}else{
+			$("#start_date").addClass("is-valid");
+			$("#start_date").removeClass("is-invalid");
+		}
+		
+		if(end_date == ""){
+			$("#end_date").addClass("is-invalid");
+			$("#end_date").removeClass("is-valid");
+		}else{
+			$("#end_date").addClass("is-valid");
+			$("#end_date").removeClass("is-invalid");
+		}
+		
+		
+		if(people == ""){
+			$("#people").addClass("is-invalid");
+			$("#people").removeClass("is-valid");
+		}else{
+			$("#people").addClass("is-valid");
+			$("#people").removeClass("is-invalid");
+		}
+		
+		if(fee == ""){
+			$("#fee").addClass("is-invalid");
+			$("#fee").removeClass("is-valid");
+		}else{
+			$("#fee").addClass("is-valid");
+			$("#fee").removeClass("is-invalid");
+		}
+		
+	});
+	
+	$("#start_date").on("change", function(){
+		var today = new Date();
+		var start_date= $("#start_date").val();
+		if(start_date <= today.toISOString().substr(0,10)){
+			alert("시작일은 오늘 날짜보다 빠를 수 없습니다");
+			$("#start_date").val("");
+		}
+	});
+	
+	$("#end_date").on("change", function(){
+		var start_date= $("#start_date").val();
+		var end_date= $("#end_date").val();
+		if(start_date >= end_date){
+			alert("종료일은 시작일보다 빠를 수 없습니다");
+			$("#end_date").val("");
+		}
+	});
 	
 	
 	$("#yes").on("click",function(){
@@ -210,30 +291,8 @@ $(document).ready(function(){
 		return false;
 		
 	});
-	$("#no").on("click",function(){
-		window.close();
-	});
-	$("#skip").on("click",function(){
-		win = window.open("./skipdayPopup", "_blank","width = 500, height = 300, top = 100, left = 200, location = no, status = no, fullscreen = no");
-		return false;
-	});
 });
 
-function addskipday(str){
-	skiparray.push(str);
-}
-function setskipday(){
-	var skipday = document.querySelector("#skipday");
-	var hidden = document.querySelector("#skiphidden");
-	skipday.innerHTML = ``;
-	hidden.value = "";
-	
-	var set = new Set(skiparray);
-	for(var i of set){
-		skipday.innerHTML += i + `<br>`;
-		hidden.value += i+" "
-	}
-}
 </script>
 
 
