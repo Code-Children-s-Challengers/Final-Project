@@ -44,25 +44,58 @@ public class ChallengeController {
 	
 	@Autowired
 	UserDAO userDAO;
-	///////////////////////////////////////
 	
+	
+	/////////////////////////////////////// ajax를 통한 카테고리별 탭 만들기 ///////////////
 	@RequestMapping(value="/challengesAjax", method = RequestMethod.GET)
-	@ResponseBody
-	public String ChallengesAjax(Model m, @RequestParam("category") String category, @AuthenticationPrincipal PrincipalDetails principalDetails) throws Exception{
-		System.out.println("성공");
-		System.out.println(category);
+	public String ChallengesAjax(Model m, HttpServletRequest request, @AuthenticationPrincipal PrincipalDetails principalDetails) throws Exception{
+		String category = request.getParameter("category");
+		String curPage = request.getParameter("curPage");
+		String perPage = request.getParameter("perPage");
 		
-		return "success"; //challenge.jsp => 메인화면이겠군
+		if(category == null) {
+			category = "study";
+		}
+		if(curPage == null) {
+			curPage = "1";
+		}
+		int pp = 8; // perPage
+		if(perPage != null) {			
+			pp = Integer.parseInt(perPage);
+		}
+		
+		PageDTO dto = Cservice.categoryChallenge(category, Integer.parseInt(curPage),pp); //Page처리
+		dto.setPerPage(pp);
+		int tot = dto.getTotalRecord() / dto.getPerPage();
+		if(dto.getTotalRecord() % dto.getPerPage() != 0) tot++;
+		
+		
+		List<ChallengeDTO> allList = Cservice.allChallenge();
+		List<ChallengeDTO> hotList = new ArrayList<ChallengeDTO>(); 
+		for(int i = 0; i < 4; i++) {
+			if(allList.size() == i) {
+				break;
+			}
+			hotList.add(allList.get(i)); // hot리스트에 추가한다?
+		}
+		m.addAttribute("curPage", curPage);
+		m.addAttribute("perPage", pp);
+		m.addAttribute("hotList", hotList);
+		m.addAttribute("totalPage", tot);
+		m.addAttribute("PageDTO", dto);
+		m.addAttribute("catogory", category);
+		
+		return "challenge/categoryData"; 
+		
 	}
 	
 	
 	////////////////////////////////////////////////////////////////////////////////// challenge 참가 페이지
 	@RequestMapping(value="/challenges", method = RequestMethod.GET)
-	public String Challenges(Model m, HttpServletRequest request, @AuthenticationPrincipal PrincipalDetails principalDetails) throws Exception{
+	public String Challenges(Model m, HttpServletRequest request) throws Exception{
 		String category = request.getParameter("category");
 		String curPage = request.getParameter("curPage");
 		String perPage = request.getParameter("perPage");
-		int unum = principalDetails.getUser().getId();
 		if(category == null) {
 			category = "study";
 		}
@@ -181,7 +214,7 @@ public class ChallengeController {
 	@RequestMapping(value="/makeChallengePopup", method = RequestMethod.GET) //챌린지 만들기 팝업
 	public String makeChallengePopup() throws Exception{
 		
-		return "challenge/makeChallengePopup";
+		return "challenge/makeChallengePopup2";
 	}
 	
 	@RequestMapping(value="/skipdayPopup", method = RequestMethod.GET)
@@ -512,7 +545,6 @@ public class ChallengeController {
 	
 	
 	// DB에 저장된 챌린지 사진 가져오기 -- 홍석
-	@Secured("ROLE_USER")
 	@GetMapping("/challengeImage/{cnum}")
 	public ResponseEntity<byte[]> findProfileImage(@PathVariable int cnum){
 		System.out.println(cnum);

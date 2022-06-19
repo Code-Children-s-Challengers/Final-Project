@@ -134,6 +134,8 @@
 	생성하시겠습니까?
 	<br>
 	<button id="yes">yes</button> <button id="no">no</button>
+	
+	
 </form>
 
 

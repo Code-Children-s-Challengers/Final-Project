@@ -38,9 +38,13 @@
 	<div class="col-sm-2">
 	</div>
 	<div class="col-sm-8" style="">
-	<jsp:include page="challenge/categoryTab.jsp" flush="true"/><br>		
-	<jsp:include page="challenge/challengeHot2.jsp" flush="true"/><br>	
-	<jsp:include page="challenge/challengeList2.jsp" flush="true"/><br>
+	<div id="categoryTab">
+		<jsp:include page="challenge/categoryTab.jsp" flush="true"/><br>		
+	</div>
+	<div id="content">
+		<jsp:include page="challenge/challengeHot2.jsp" flush="true"/><br>	
+		<jsp:include page="challenge/challengeList2.jsp" flush="true"/><br>
+	</div>
 	</div>
 </div>
 </body>

@@ -26,13 +26,14 @@
 		$("#study").attr("class", "nav-link active");
 		$("#exercise").attr("class", "nav-link");
 		$("#others").attr("class", "nav-link");
-		
+		//ajax를 통한 비동기 방법
 		$.ajax({
 			type:"get",
 			url:"/hifive/challengesAjax?category=study",
 			cache : false,
 			success : function(data) {
 				console.log(data);
+				$("#content").html(data);
 			}
 		});
 		
@@ -43,6 +44,16 @@
 		$("#study").attr("class", "nav-link");
 		$("#exercise").attr("class", "nav-link active");
 		$("#others").attr("class", "nav-link");
+		//ajax를 통한 비동기 방법
+		$.ajax({
+			type:"get",
+			url:"/hifive/challengesAjax?category=fitness",
+			cache : false,
+			success : function(data) {
+				console.log(data);
+				$("#content").html(data);
+			}
+		});
 	});
 	
 	
@@ -51,6 +62,16 @@
 		$("#study").attr("class", "nav-link");
 		$("#exercise").attr("class", "nav-link");
 		$("#others").attr("class", "nav-link active");
+		//ajax를 통한 비동기 방법
+		$.ajax({
+			type:"get",
+			url:"/hifive/challengesAjax?category=others",
+			cache : false,
+			success : function(data) {
+				console.log(data);
+				$("#content").html(data);
+			}
+		});
 	});
 	
 	
