@@ -53,8 +53,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.userService(principalOauth2UserService)
 		// 구글 로그인이 완료된 뒤의 후처리가 필요하다. 
 		// 여기서는 사용자 프로필 정보를 가져오고 그 정보를 토대로 회원가입을 자동으로 진행시키기도 함 
-	
 		; 
+
+        http
+            .oauth2Login()
+                .successHandler(customAuthSuccessHandler);
 
 	}
 

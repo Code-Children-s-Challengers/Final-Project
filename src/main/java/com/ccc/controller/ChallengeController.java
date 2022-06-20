@@ -242,7 +242,7 @@ public class ChallengeController {
          * 홍석 추가
          */
 		ChallengeImageDTO challengeImage = new ChallengeImageDTO();
-		challengeImage.setCnum(cnum+1); //cnum과 한 단계 차이는 현상이 발생 중, 임시 해결책
+		challengeImage.setCnum(cnum+1);
 		challengeImage.setMimetype(photo.getContentType());
 		challengeImage.setOriginal_name(photo.getOriginalFilename());
 		challengeImage.setData(photo.getBytes());
@@ -263,6 +263,7 @@ public class ChallengeController {
 		dto.setFee(fee);
 		dto.setMpeople(people);
 		
+		String skiphidden= "0";
 //		num = Cservice.challengeAdd(dto);
 //		if(skiphidden != null && skiphidden.length() > 5) {
 //			num = Cservice.insertHoliday(Integer.toString(cnum+1), skiphidden);
@@ -298,9 +299,12 @@ public class ChallengeController {
 //////////////////////////////////////////////////////////////////////////////////내 challenge 페이지
 
 	
+	@Secured("ROLE_USER")
 	@RequestMapping(value="/mychallenges", method = RequestMethod.GET)
 	public String myChallenges(Model m, HttpServletRequest request, @AuthenticationPrincipal PrincipalDetails principalDetails) throws Exception{
-		int unum = principalDetails.getUser().getId();
+		UserDTO user = userDAO.findByUsername(principalDetails.getUser().getUsername());
+		int unum =  user.getId();
+		
 		String curPage = request.getParameter("curPage");
 		String perPage = request.getParameter("perPage");
 		if(curPage == null) {

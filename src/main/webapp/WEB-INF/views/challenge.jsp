@@ -67,11 +67,18 @@
 $(document).ready(function(){
 	$("#chMaking").on("click", function(){
 		if( $(".loginChecker").attr("data-id") == 0){
+			alert("로그인이 필요합니다.");
 			location.href="/hifive/loginForm";
 		}else{
 			win = window.open("./makeChallengePopup","makechallengepopup","width = 600, height = 700, top = 100, left = 200, location = no");
-			$("#chMaking").attr("class", "list-group-item active" );
-			$("#chHome").attr("class", "list-group-item" );
+		}
+	});
+	
+	$("#myCh").on("click", function(){
+		if( $(".loginChecker").attr("data-id") == 0){
+			location.href="/hifive/loginForm";
+		}else{
+			location.href="/hifive/mychallenges";
 		}
 	});
 		

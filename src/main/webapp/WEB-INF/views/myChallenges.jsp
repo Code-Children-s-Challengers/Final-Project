@@ -9,6 +9,6 @@
 </head>
 <body>
 <hr>
-<jsp:include page="challenge/myChallengeList.jsp" flush="true"/><br>
+<jsp:include page="challenge/myChallengeList2.jsp" flush="true"/><br>
 </body>
 </html>
