@@ -9,16 +9,13 @@
 <style>
 </style>
 <script>
-
 </script>
-
 </head>
 <body>
 <jsp:include page="common/menu.jsp" flush="true"/><br>
-<hr>
 <jsp:include page="main/main.jsp" flush="true"/><br>
+<jsp:include page="footer/footer.jsp" flush="true"/>
 </body>
 <div>
 </div>
-
 </html>
