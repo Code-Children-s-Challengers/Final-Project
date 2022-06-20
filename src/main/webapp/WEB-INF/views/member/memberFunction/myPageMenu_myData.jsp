@@ -19,7 +19,7 @@
 </svg>
 	
 	
-<h1 class="visually-hidden">Sidebars</h1>	
+<h1 class="visually-hidden">Sidebars examples</h1>	
   <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 350px;height:700px;">
     <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
       <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
@@ -34,15 +34,15 @@
         </a>
       </li>
       <li>
-        <a href="/hifive/member/myInfo/${id}" class="nav-link active">
+        <a href="/hifive/member/myInfo/${id}" class="nav-link link-dark">
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg>
-          개인 정보 설정
+         	 개인 정보 설정
         </a>
       </li>
       <li>
-        <a href="/hifive/member/data/${id}" class="nav-link link-dark">
+        <a href="/hifive/member/data/${id}" class="nav-link active">
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"/></svg>
-          프로젝트 현황 보기
+   		       프로젝트 현황 보기
         </a>
       </li>
     </ul>
