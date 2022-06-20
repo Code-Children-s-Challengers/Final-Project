@@ -1,0 +1,16 @@
+.footer {
+    /* position: absolute; */
+    position: fixed; /* 이 부분을 고정 */
+    left: 0;
+    bottom: 0;  /* 하단에 여백 없이 */
+    width: 100%; /* 가로 사이즈를 브라우저에 가득 채움 */
+    
+  padding: 10px 0 0;
+  text-align: center;
+  color:  #aaa;
+  background: #263343;
+}
+
+.footer:hover {
+  color: #fff
+}
