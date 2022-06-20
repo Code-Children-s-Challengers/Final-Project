@@ -186,20 +186,22 @@ public class ChallengeController {
 		m.addAttribute("fee", challenge.getFee());
 		m.addAttribute("holiday", challenge.getHoliday());
 		
-		return "challenge/participantPopup";
+		return "challenge/participantPopup2";
 	}
 	
 	@Secured("ROLE_USER")
 	@RequestMapping(value="/challengeParticipate", method = RequestMethod.POST) // 실제 참가를 진행해주는 메서드
 	@ResponseBody
 	public String challengeParticipate(@RequestParam int cnum, @AuthenticationPrincipal PrincipalDetails principalDetails) throws Exception{
-		int unum = principalDetails.getUser().getId();
+		UserDTO user = userDAO.findByUsername(principalDetails.getUser().getUsername());
+		int unum =  user.getId();
+		
 		int num = 0;
 		if(Cservice.findParticipant(unum, cnum) >= 1) {
 			return "already participated";
 		}else {
 			ChallengeDTO dto = Cservice.challengeByCnum(cnum);
-			if(dto.getFee() > principalDetails.getUser().getPoint()) {
+			if(dto.getFee() > user.getPoint()) {
 				return "nomoney";
 			}
 			if(dto.getParticipant() >= dto.getMpeople()) {

@@ -37,7 +37,7 @@
         <p class="lead text-muted">나를 죽이지 못한 고통은 나를 더 강하게 만들 뿐</p>
         <p>
           <a id="chMaking" class="btn btn-primary my-2" style="display:inline-block">챌린지 만들기</a>
-          <a id="myCh" class="btn btn-primary my-2" style="display:inline-block">내 챌린지 보기</a>
+          <a id="chHome" class="btn btn-primary my-2" style="display:inline-block">챌린지 찾기</a>
         </p>
       </div>
     </div>
@@ -59,7 +59,6 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <script>
 
-//스크롤이 생기도록 <br> 을 여러게 넣은 부분..
 $(document).ready(function(){
 	$("#chMaking").on("click", function(){
 		if( $(".loginChecker").attr("data-id") == 0){
@@ -70,12 +69,8 @@ $(document).ready(function(){
 		}
 	});
 	
-	$("#myCh").on("click", function(){
-		if( $(".loginChecker").attr("data-id") == 0){
-			location.href="/hifive/loginForm";
-		}else{
-			location.href="/hifive/mychallenges";
-		}
+	$("#chHome").on("click", function(){
+		location.href="/hifive/challenges"
 	});
 		
 });

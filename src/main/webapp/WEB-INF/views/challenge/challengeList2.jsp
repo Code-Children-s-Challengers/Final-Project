@@ -10,11 +10,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<script>
 	$(document).ready(function(){
-		$(".ch").on("click",function(){
-			var cnum = $(this).attr("data-value");
-			console.log(cnum);
-			win = window.open("./participantPopup?cnum="+cnum,"participant","width = 500, height = 500, top = 100, left = 200, location = no");
-		});
+		
 	});
 	
 	</script>
@@ -27,10 +23,23 @@
 		width:100%;
 		height:50%;
 	}
+	div.card:hover{
+		background-color:darkgray;
+		transition-duration: 0.5s;
+	}
+	div.card:hover .card-img-top{
+		opacity:0.5;
+	}
+	#participate{
+		display:inline-block;
+		position:relative;
+		left: 170px;
+		bottom:10px;
+	}
 </style>	
 </head>
 
-<div class="py-5 bg-light" >
+<div class="py-5 mb-5 bg-light border border-5" >
     <div class="container"  style="margin-left:85px">
 		<div class="row row-cols-1 row-cols-md-4 g-4">
 			<c:set var="list" value ="${PageDTO.getList()}"></c:set>
@@ -39,9 +48,14 @@
 		   			<div class="card h-100 ch" data-value="${dto.getCnum()}">
 		      			<img src="/hifive/challengeImage/${dto.getCnum()}" class="card-img-top" alt="...">
 		       			<div class="card-body">
-		        			<h5 class="card-title">${dto.getName()}</h5>
-		        			<p class="card-text">${dto.getSday()} ~ ${dto.getEday()}<br/>참여인원: ${dto.getParticipant()}/${dto.getMpeople()}<br/>참가비: ${dto.getFee()}P<br/>${dto.getCnum()}</p>
-		      			</div>
+				        	<h5 class="card-title">${dto.getName()}</h5>
+				        	<p class="card-text">
+				        		<span class="badge rounded-pill bg-warning text-dark">기간</span>&nbsp;&nbsp;${dto.getSday()}~${dto.getEday()}<br/>
+				        		<span class="badge rounded-pill bg-warning text-dark">참가 인원</span>&nbsp;&nbsp; ${dto.getParticipant()}/${dto.getMpeople()}<br/>
+				        		<span class="badge rounded-pill bg-warning text-dark">참가비</span>&nbsp;&nbsp; ${dto.getFee()}P<br/>
+				        		<button type="button" class="btn btn-secondary btn-sm" id="participate">참가하기</button>
+				        	</p>
+				      	</div>
 		    		</div>
 		  		</div>
 			</c:forEach>

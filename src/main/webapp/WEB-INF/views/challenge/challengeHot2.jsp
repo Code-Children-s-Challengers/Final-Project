@@ -11,36 +11,76 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<script>
 	$(document).ready(function(){
-		$(".ch").on("click",function(){
+		$(".participate").on("click",function(){
 			var cnum = $(this).attr("data-value");
-			console.log(cnum);
-			win = window.open("./participantPopup?cnum="+cnum,"participant","width = 500, height = 500, top = 100, left = 200, location = no");
+			
+			$.ajax({
+				url:'/hifive/challengeParticipate',
+				type:'post',
+				data:{
+					"cnum":cnum
+				},
+			dataType:'text',
+			success:function(responseData, status, xhr){
+				console.log(responseData);
+				if(responseData == "success"){
+					alert("참가됨");
+				}else if(responseData == "already participated"){
+					alert("이미 참가중");
+				}else if(responseData == "nomoney"){
+					alert("참가비 부족");
+				}else if(responseData == "full"){
+					alert("정원초과");
+				}else{
+					alert("오류 발생");
+				}
+			}
 		});
 	});
+});
 	</script>
-<style>
-	div.col{
-		width:180px;
-		height:300px;	
-	}
-	.card-img-top{
-		width:100%;
-		height:50%;
-	}
-</style>
+	<style>
+		div.col{
+			width:300px;
+			height:300px;	
+		}
+		.card-img-top{
+			width:100%;
+			height:50%;
+		}
+		div.card:hover{
+			background-color:darkgray;
+			transition-duration: 0.5s;
+		}
+		div.card:hover .card-img-top{
+				opacity:0.5;
+		}
+		#participate{
+			display:inline-block;
+			position:relative;
+			left: 170px;
+			bottom:10px;
+			
+		}
+	</style>
 </head>
- <div class="py-5 bg-light">
-    <div class="container"  style="margin-left:85px">
+ <div class="py-5 mb-5 bg-light  border border-5 " >
+    <div class="container" style="margin-left:85px" >
 	<!--  -->        
-		<div class="row row-cols-1 row-cols-md-4 g-4">
+		<div class="row row-cols-md-4 g-4">
 		  	<c:set var="list" value ="${hotList}"></c:set>
 		  	<c:forEach var="dto" items="${list}" varStatus="status">	
 		  	<div class="col">
-		    	<div class="card border-danger h-100 ch" data-value="${dto.getCnum()}">
-		      	<img src="/hifive/challengeImage/${dto.getCnum()}" class="card-img-top" alt="...">
+		    	<div class="card border-danger h-100 ch">
+		      		<img src="/hifive/challengeImage/${dto.getCnum()}" class="card-img-top" alt="...">
 		      	<div class="card-body">
 		        	<h5 class="card-title">${dto.getName()}</h5>
-		        	<p class="card-text">${dto.getSday()} ~ ${dto.getEday()}<br/>참여인원: ${dto.getParticipant()}/${dto.getMpeople()}<br/>참가비: ${dto.getFee()}P<br/>${dto.getCnum()}</p>
+		        	<p class="card-text">
+		        		<span class="badge rounded-pill bg-danger">기간</span>&nbsp;&nbsp;${dto.getSday()}~${dto.getEday()}<br/>
+		        		<span class="badge rounded-pill bg-danger">참가 인원</span>&nbsp;&nbsp; ${dto.getParticipant()}/${dto.getMpeople()}<br/>
+		        		<span class="badge rounded-pill bg-danger">참가비</span>&nbsp;&nbsp; ${dto.getFee()}P<br/>
+		        		<button type="button" class="btn btn-secondary btn-sm participate" id="participate"  data-value="${dto.getCnum()}">참가하기</button>
+		        	</p>
 		      	</div>
 		   	 </div>
 		 	</div>
