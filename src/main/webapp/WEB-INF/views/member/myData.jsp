@@ -70,7 +70,6 @@
 	<!-- 기본 틀 -->
 	
 </body>
-
 <!-- 제이쿼리 CDN -->		
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <!-- bootstrap / js -->
