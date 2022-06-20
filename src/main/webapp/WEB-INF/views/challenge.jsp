@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,6 +17,15 @@
 </style>
 </head>
 <body>
+<sec:authorize access="isAnonymous()">
+     <input type="hidden" class="loginChecker" data-id="0"/>
+</sec:authorize>
+<!-- 로그인 중인 사용자 -->
+<sec:authorize access="isAuthenticated()">
+    <sec:authentication property="principal" var="user"/> 
+     <input type="hidden" class="loginChecker" data-id="1"/>    
+</sec:authorize>
+
 
 <hr>
 <!--  헤더  -->
@@ -55,9 +66,13 @@
 //스크롤이 생기도록 <br> 을 여러게 넣은 부분..
 $(document).ready(function(){
 	$("#chMaking").on("click", function(){
-		win = window.open("./makeChallengePopup","makechallengepopup","width = 600, height = 700, top = 100, left = 200, location = no");
-		$("#chMaking").attr("class", "list-group-item active" );
-		$("#chHome").attr("class", "list-group-item" );
+		if( $(".loginChecker").attr("data-id") == 0){
+			location.href="/hifive/loginForm";
+		}else{
+			win = window.open("./makeChallengePopup","makechallengepopup","width = 600, height = 700, top = 100, left = 200, location = no");
+			$("#chMaking").attr("class", "list-group-item active" );
+			$("#chHome").attr("class", "list-group-item" );
+		}
 	});
 		
 });

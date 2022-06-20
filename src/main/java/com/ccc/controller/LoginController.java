@@ -3,11 +3,14 @@ package com.ccc.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -25,7 +28,13 @@ public class LoginController {
 	JavaMailSender mailSender;
 	
 	@GetMapping("/loginForm")
-	public String loginForm() {
+	public String loginForm(HttpServletRequest request, Model m) {
+		//이전 페이지로 되돌아가기 위한 Referer 헤더값을 세션의 prePage attribute로 저장
+		String uri = request.getHeader("Referer");
+		if(uri != null && !uri.contains("/loginForm")) {
+			request.getSession().setAttribute("prevPage",uri);
+		}
+		System.out.println(uri);
 		return "loginForm";
 	}
 	

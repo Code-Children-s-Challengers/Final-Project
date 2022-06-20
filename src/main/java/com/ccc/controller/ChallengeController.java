@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -33,8 +34,8 @@ import com.ccc.dto.ChallengeDTO;
 import com.ccc.dto.ChallengeImageDTO;
 import com.ccc.dto.PageDTO;
 import com.ccc.dto.PhotoPageDTO;
-import com.ccc.dto.ProfileImageDTO;
 import com.ccc.dto.ReportPageDTO;
+import com.ccc.dto.UserDTO;
 import com.ccc.service.ChallengeService;
 
 @Controller
@@ -126,7 +127,7 @@ public class ChallengeController {
 		m.addAttribute("hotList", hotList);
 		m.addAttribute("totalPage", tot);
 		m.addAttribute("PageDTO", dto);
-		m.addAttribute("catogory", category);
+		m.addAttribute("catogory", category);		
 		
 		return "challenge"; //challenge.jsp => 메인화면이겠군
 	}
@@ -162,6 +163,7 @@ public class ChallengeController {
 		return "challenge/ajaxList";
 	}
 
+	@Secured("ROLE_USER")
 	@RequestMapping(value="/participantPopup", method = RequestMethod.GET) //참여할 수 있는 팝업창
 	public String participantPopup(HttpServletRequest request, Model m) throws Exception{
 		String cnum = request.getParameter("cnum");
@@ -187,7 +189,7 @@ public class ChallengeController {
 		return "challenge/participantPopup";
 	}
 	
-	
+	@Secured("ROLE_USER")
 	@RequestMapping(value="/challengeParticipate", method = RequestMethod.POST) // 실제 참가를 진행해주는 메서드
 	@ResponseBody
 	public String challengeParticipate(@RequestParam int cnum, @AuthenticationPrincipal PrincipalDetails principalDetails) throws Exception{
@@ -212,8 +214,7 @@ public class ChallengeController {
 	}
 	
 	@RequestMapping(value="/makeChallengePopup", method = RequestMethod.GET) //챌린지 만들기 팝업
-	public String makeChallengePopup() throws Exception{
-		
+	public String makeChallengePopup(Model m) throws Exception{
 		return "challenge/makeChallengePopup2";
 	}
 	
@@ -225,8 +226,10 @@ public class ChallengeController {
 	@PostMapping("/makeChallenge")
 	//@RequestMapping(value="/makeChallenge", method = RequestMethod.POST)
 	@ResponseBody
-	public String makeChallenge(@RequestParam MultipartFile photo, @RequestParam String name, @RequestParam String category, @RequestParam Date start_date, @RequestParam Date end_date, @RequestParam int people, @RequestParam int fee, @RequestParam int holiday, @RequestParam String skiphidden, @AuthenticationPrincipal PrincipalDetails principalDetails) throws Exception{
-		int unum = principalDetails.getUser().getId();
+	public String makeChallenge(@RequestParam MultipartFile photo, @RequestParam String name, @RequestParam String category, @RequestParam Date start_date, @RequestParam Date end_date, @RequestParam int people, @RequestParam int fee, @RequestParam int holiday, @AuthenticationPrincipal PrincipalDetails principalDetails) throws Exception{
+		UserDTO user = userDAO.findByUsername(principalDetails.getUser().getUsername());
+		int unum =  user.getId();
+		
 		int num = 0;
 		
 		long miliseconds = System.currentTimeMillis();
@@ -238,19 +241,13 @@ public class ChallengeController {
         /*
          * 홍석 추가
          */
-        System.out.println("please0");
 		ChallengeImageDTO challengeImage = new ChallengeImageDTO();
-		challengeImage.setCnum(cnum+1);
+		challengeImage.setCnum(cnum+1); //cnum과 한 단계 차이는 현상이 발생 중, 임시 해결책
 		challengeImage.setMimetype(photo.getContentType());
-		System.out.println(photo.getContentType());
 		challengeImage.setOriginal_name(photo.getOriginalFilename());
-		System.out.println(photo.getOriginalFilename());
 		challengeImage.setData(photo.getBytes());
-		System.out.println("여긴가?");
 		
-		System.out.println("please1");
 		userDAO.insertChallengeImage(challengeImage);
-		System.out.println("please1");
 
 		/*
          * 홍석 추가
@@ -534,9 +531,9 @@ public class ChallengeController {
 	}
 
 //////////////////////////////////////////////////////// report page
-	
+//	
 	// 에러처리
-	@ExceptionHandler({Exception.class})
+	@ExceptionHandler({AccessDeniedException.class})
 	public String errorPage(Exception e) {
 		e.printStackTrace();
 		return "error/error";

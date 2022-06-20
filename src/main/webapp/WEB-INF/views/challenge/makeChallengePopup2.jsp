@@ -3,7 +3,6 @@
 <%@page import="com.ccc.dto.ChallengeDTO"%>
 <%@page import="java.util.List"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <style>
 	
@@ -21,7 +20,7 @@
 	
 </style>
 
-<form class="row g-3 needs-validation" method="post" action="makeChallenge" enctype="multipart/form-data" id="chMaking">
+<form class="row g-3 needs-validation" method="post" action="/hifive/makeChallenge/${id}" enctype="multipart/form-data" id="chMaking" novalidate>
   <div class="col-sm-12 pt-5 text-center">
   	<div class="imageContainer ">
   		<img src="/hifive/images/challenge/noImage.gif" class="rounded" alt="..." id="chPhotoImage">
@@ -29,14 +28,14 @@
   </div>
   <div class="col-sm-3"></div>
   <div class="col-sm-6 pb-3">
-  	<input class="form-control" type="file" name="photo" id="chPhoto" accept="image/*">
+  	<input class="form-control" type="file" name="photo" id="chPhoto" accept="image/*" >
   </div>
   <div class="col-sm-3"></div>
   <!--  -->
   <div class="col-sm-1"></div>
   <div class="col-sm-6">
     <label for="name" class="form-label">제목</label>
-    <input type="text" class="form-control" id="name" name="name" required aria-describedby="titleV1 titleV2">
+    <input type="text" class="form-control" id="name" name="name" aria-describedby="titleV1 titleV2" required >
     <div id="titleV1" class="valid-feedback">
       Good!
     </div>
@@ -46,7 +45,7 @@
   </div>
   <div class="col-sm-4">
     <label for="category" class="form-label">카테고리</label>
-    <select class="form-select" id="category" name="category" aria-describedby="CategoryV1 CategoryV2" required>
+    <select class="form-select" id="category" name="category" aria-describedby="CategoryV1 CategoryV2" required >
       <option selected disabled value="">Choose...</option>
       <option value="study">Study</option>
       <option value="fitness">Exercise</option>
@@ -64,7 +63,7 @@
   <div class="col-sm-1"></div>
   <div class="col-sm-5">
     <label for="start_date" class="form-label">시작일</label>
-    <input type="date" class="form-control" id="start_date" name="start_date" aria-describedby="StartV1 StartV2" required>
+    <input type="date" class="form-control" id="start_date" name="start_date" aria-describedby="StartV1 StartV2" required >
     <div id="StartV1" class="valid-feedback">
       Good!
     </div>
@@ -74,7 +73,7 @@
   </div>
   <div class="col-sm-5">
     <label for="end_date" class="form-label">종료일</label>
-    <input type="date" class="form-control" id="end_date" name="end_date" aria-describedby="EndV1 EndV2" required>
+    <input type="date" class="form-control" id="end_date" name="end_date" aria-describedby="EndV1 EndV2"  required >
     <div id="EndV1" class="valid-feedback">
       Good!
     </div>
@@ -87,7 +86,7 @@
   <div class="col-sm-1"></div>
   <div class="col-sm-5">
     <label for="people" class="form-label">최대 참여자 수</label>
-    <input type="number" class="form-select" id="people" name="people" aria-describedby="peopleV1 peopleV2" required >
+    <input type="number" class="form-select" id="people" name="people" aria-describedby="peopleV1 peopleV2"  min="1" required >
     <div id="peopleV1" class="valid-feedback">
       Good!
     </div>
@@ -97,7 +96,7 @@
   </div>
   <div class="col-sm-5">
     <label for="fee" class="form-label">포인트</label>
-    <input type="number" class="form-control" id="fee" name="fee" aria-describedby="pointV1 pointV2" required>
+    <input type="number" class="form-control" id="fee" name="fee" aria-describedby="pointV1 pointV2"  min="0" required>
      <div id="pointV1" class="valid-feedback">
       Good!
     </div>
@@ -109,16 +108,20 @@
   <!--  -->
   <div class="col-sm-1"></div>   
   <div class="col-sm-10">
-    <div class="form-check">
-      <input class="form-check-input" type="checkbox" value="1" name="holiday" id="holiday">
-      <label class="form-check-label" for="holiday">
-        	휴일(주말, 공휴일)에는 인증을 제외하시겠습니까?
-      </label>
-    </div> 
+   		<label for="restOnHoliday" class="form-label">휴일에는 인증을 쉬시겠습니까?</label>
+    	<div class="form-check" id="restOnHoliday">
+		    <input type="radio" class="form-check-input" id="holiday1" name="holiday" required value="1">
+		    <label class="form-check-label" for="holiday1">Yes</label>
+		  </div>
+		  <div class="form-check mb-3">
+		    <input type="radio" class="form-check-input" id="holiday2" name="holiday" required value="0">
+		    <label class="form-check-label" for="holiday2">No</label>
+		    <div class="invalid-feedback">Yes를 체크하면 휴일에는 인증을 쉴 수 있습니다</div>
+		  </div>
   </div>
   <div class="col-sm-1"></div> 
   <!--  -->
-  <div class="col=sm-12">
+  <div class="col=sm-12 text-center">
     <button class="btn btn-primary" type="submit" id="submit" >Submit form</button>
   </div>
 </form>
@@ -128,9 +131,11 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <script>
 
-var skiparray = new Array();
 
-
+// inValid라는 함수를 만들 수 있다!!
+$.fn.isValid = function(){
+	  return this[0].checkValidity()
+	}
 
 $(document).ready(function(){
 	
@@ -152,73 +157,20 @@ $(document).ready(function(){
 				reader.readAsDataURL(f);
 			});
 	}
-
 	
-	$("#submit").on("click", function(event){
+	//submit 시 유효성 체크
+	$("#chMaking").on("submit", function(event){
+		 if (! $("#chMaking").isValid()) {
+	          event.preventDefault()
+	          event.stopPropagation()
+	          console.log("why");
+	        }
+
+		 $("#chMaking").addClass('was-validated');
 		console.log("hi");
-		console.log("hi");
-		console.log("hi");
-		var today = new Date();
-		
-		var name = $('#name').val();
-		var category = $('#category option:selected').val();
-		var start_date = $('#start_date').val();
-		var end_date = $('#end_date').val();
-		var people = $('#people').val();
-		var fee = $('#fee').val();
-		
-		console.log(name);
-		if(name == ""){
-			$("#name").addClass("is-invalid");
-			$("#name").removeClass("is-valid");
-		}else{
-			$("#name").addClass("is-valid");
-			$("#name").removeClass("is-invalid");
-		}
-		
-		if(category == ""){
-			$("#category").addClass("is-invalid");
-			$("#category").removeClass("is-valid");
-		}else{
-			$("#category").addClass("is-valid");
-			$("#category").removeClass("is-invalid");
-		}
-			
-		
-		if(start_date == ""){
-			$("#start_date").addClass("is-invalid");
-			$("#start_date").removeClass("is-valid");
-		}else{
-			$("#start_date").addClass("is-valid");
-			$("#start_date").removeClass("is-invalid");
-		}
-		
-		if(end_date == ""){
-			$("#end_date").addClass("is-invalid");
-			$("#end_date").removeClass("is-valid");
-		}else{
-			$("#end_date").addClass("is-valid");
-			$("#end_date").removeClass("is-invalid");
-		}
-		
-		
-		if(people == ""){
-			$("#people").addClass("is-invalid");
-			$("#people").removeClass("is-valid");
-		}else{
-			$("#people").addClass("is-valid");
-			$("#people").removeClass("is-invalid");
-		}
-		
-		if(fee == ""){
-			$("#fee").addClass("is-invalid");
-			$("#fee").removeClass("is-valid");
-		}else{
-			$("#fee").addClass("is-valid");
-			$("#fee").removeClass("is-invalid");
-		}
-		
 	});
+	 
+	
 	
 	$("#start_date").on("change", function(){
 		var today = new Date();
@@ -238,59 +190,20 @@ $(document).ready(function(){
 		}
 	});
 	
-	
-	$("#yes").on("click",function(){
-		console.log("1차성공");
-
-		var form = $('#make')[0];
-		var data = new FormData(form);
-		
-		var name = $('#name').val();
-		var category = $('#category').val();
-		var start_date = $('#start_date').val();
-		var end_date = $('#end_date').val();
-		var people = $('#people').val();
-		var fee = $('#fee').val();
-		var today = new Date();
-		
-		if(name == "" || category == "" || start_date == "" || end_date == "" || people == "" || fee == ""){
-			alert("모든 항목을 채워주세요");
-		}else if(people < 1){
-			alert("최소 인원은 1입니다");
-		}else if(people < 0){
-			alert("최소 비용은 0입니다");
-		}else if(start_date >= end_date){
-			alert("종료 날짜는 시작 날짜 이전일 수 없습니다");
-		}else if(start_date <= today.toISOString().substr(0,10)){
-			alert("시작 날짜는 오늘날짜 이후일 수 없습니다");
-		}else{
-			console.log("2차 성공");
-			$.ajax({
-				url:'makeChallenge',
-				type:'post',
-				enctype:'multipart/form-data',
-				data:data,
-				processData: false,
-			    contentType: false,
-			dataType:'text',
-			success:function(responseData, status, xhr){
-				if(responseData == "success"){
-					alert("챌린지를 등록했습니다");
-					opener.location.reload();
-					window.close();
-				}else{
-					alert("오류 발생");
-					window.close();
-				}
-			},
-			error:function(xhr, status, e){
-				console.log("Error: "+e);
-			}
-			});
+	$("#people").on("change",function(){
+		if($("#people").val()<1){
+			alert("참여자 수는 1보다 작을 수 없습니다")
+			$("#people").val(1);
 		}
-		return false;
-		
-	});
+	})
+	
+	$("#point").on("change",function(){
+		if($("#point").val()<0){
+			alert("포인트는 0보다 작을 수 없습니다")
+			$("#point").val(0);
+		}
+	})
+
 });
 
 </script>
