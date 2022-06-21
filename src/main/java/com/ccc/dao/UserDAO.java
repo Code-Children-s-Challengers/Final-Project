@@ -2,6 +2,7 @@ package com.ccc.dao;
 
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
@@ -89,6 +90,10 @@ public class UserDAO {
 	public void insertCPhoto(CPhotoImageDTO insertPhoto) {
 		session.selectOne("com.config.MemberMapper.insertCPhoto",insertPhoto);
 
+	}
+	//cPhoto리스트 가져오기
+	public List<CPhotoImageDTO> findCPhotoImage(int cnum) {
+		return session.selectList("com.config.MemberMapper.findCPhotoImage",cnum);
 	}
 	
 }

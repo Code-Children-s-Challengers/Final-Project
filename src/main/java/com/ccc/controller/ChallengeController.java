@@ -633,6 +633,22 @@ public class ChallengeController {
 		return new ResponseEntity<byte[]>(challengeIamge.getData(),headers, HttpStatus.OK);
 	}
 	
+	// DB에 저장된 인증 사진 가져오기 -- 홍석
+	@GetMapping("/cPhotoImage/{cnum}")
+	public List<ResponseEntity<byte[]>> findCPhotoImage(@PathVariable int cnum){
+		System.out.println(cnum);
+		List<CPhotoImageDTO> list = userDAO.findCPhotoImage(cnum);
+
+		
+		List<ResponseEntity<byte[]>> list2 = new ArrayList<ResponseEntity<byte[]>>();
+		for(CPhotoImageDTO cphoto : list) {
+			HttpHeaders headers = new HttpHeaders();
+			headers.add("Content-Type",cphoto.getMimetype());
+			headers.add("Content-Length", String.valueOf(cphoto.getData().length));
+			list2.add( new ResponseEntity<byte[]>(cphoto.getData(),headers, HttpStatus.OK));
+		}
+		return list2;
+	}
 	
 	
 }

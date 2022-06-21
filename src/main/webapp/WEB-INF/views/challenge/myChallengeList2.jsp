@@ -109,7 +109,7 @@ unum: ${unum}
 <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img src="..." class="d-block w-100" alt="...">
+      <img src="/hifive/cPhotoImage/${dto.getCnum()}" class="d-block w-100" alt="...">
       <div class="container">하하하하하</div>
     </div>
     <div class="carousel-item">
