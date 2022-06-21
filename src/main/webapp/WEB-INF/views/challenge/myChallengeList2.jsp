@@ -16,12 +16,10 @@
 	 });
 	</script>
 <style>
-	div.cal{
-		height:600px;
-	}
+	
 	.card-img-top{
 		width:100%;
-		height:200px;
+		height:220px;';
 	}
 	div.card:hover{
 		background-color:darkgray;
@@ -44,6 +42,11 @@
 	}
 </style>	
 </head>
+<!-- 당일 인증 여부 -->
+<c:forEach var="map" items="${chList}" varStatus="status2">	
+	<input type="hidden" value="${map.values}" id="valid${map.cnum}"/>
+</c:forEach>
+<!-- 당일 인증 여부 -->
 
 <div class="py-5 bg-light border border-5 justify-content-center"  >
     <div class="container justify-content-around"  style="width:901px;padding:0;">
@@ -52,9 +55,9 @@
 			<c:set var="list" value ="${PageDTO.getList()}"></c:set>
 			<c:forEach var="dto" items="${list}" varStatus="status">	
 		  		<!-- card -->
-		  		<div class="col" data-bs-toggle="modal" data-bs-target="#closely${dto.getCnum()}" id="myCh${dto.getCnum()}">
-		   			<div class="card mb-3">
-				  		<div class="row g-0">
+		  		<div class="col " data-bs-toggle="modal" data-bs-target="#closely${dto.getCnum()}">
+		   			<div class="card mb-3 border border-5" id="myCh${dto.getCnum()}" >				  	
+				  		<div class="row g-0 ">
 				    	<div class="col-md-4">
 		      				<img src="/hifive/challengeImage/${dto.getCnum()}" class="card-img-top" alt="...">
 				    	</div>
@@ -200,7 +203,8 @@
 				dataType: 'text',
 				success: function(data){
 					alert(data);	
-					$(".btn-close").click;
+					$(".btn-close").click();
+					window.location.reload();
 				}
 			});			 
 			 

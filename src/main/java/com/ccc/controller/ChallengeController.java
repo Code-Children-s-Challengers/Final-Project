@@ -307,6 +307,8 @@ public class ChallengeController {
 	@Secured("ROLE_USER")
 	@RequestMapping(value="/mychallenges", method = RequestMethod.GET)
 	public String myChallenges(Model m, HttpServletRequest request, @AuthenticationPrincipal PrincipalDetails principalDetails) throws Exception{
+        System.out.println("hi");
+
 		UserDTO user = userDAO.findByUsername(principalDetails.getUser().getUsername());
 		int unum =  user.getId();
 		
@@ -325,6 +327,23 @@ public class ChallengeController {
 		int tot = dto.getTotalRecord() / dto.getPerPage();
 		if(dto.getTotalRecord() % dto.getPerPage() != 0) tot++;
 		
+		// ChallengList 중에서 오늘 날짜에, validate가 1인 사진이 등록되어 있는 챌린지들은?
+		//cnum, date 해서 갯수를 가지고 온다
+		long miliseconds = System.currentTimeMillis();
+        Date date = new Date(miliseconds);
+        List<HashMap<String, Integer>> chList = new ArrayList<HashMap<String,Integer>>();
+        for(ChallengeDTO ch :  dto.getList()) {
+        	int i = userDAO.findTodayCh(ch.getCnum(), unum, date.toString());
+        	HashMap<String, Integer> map = new HashMap<String,Integer>();
+        	map.put("cnum", ch.getCnum());
+        	map.put("values", i);
+        	chList.add(map);
+        }
+		
+        System.out.println(chList);
+        System.out.println("hi");
+		
+        m.addAttribute("chList", chList);
 		m.addAttribute("unum",unum);
 		m.addAttribute("curPage", curPage);
 		m.addAttribute("perPage", pp);
