@@ -69,11 +69,10 @@
 	 	where id = #{id}
 	 </update>
 	 
-	 <select id="findAllCphotoForValididy" parameterType="map" resultType="int">
-	 	select count(*)
-	 	from cPhotoImage
-	 	where cnum=#{cnum} and unum=#{unum} and UPLOADDATE=#{date}
-	 
+	 <select id="findAllCphotoForValidity" parameterType="hashmap" resultType="int">
+		select count(*)
+		from cphotoImage
+		where cnum=#{cnum} and unum=#{unum} and uploaddate= #{date} 
 	 </select>
 	  <insert id="insertCPhoto" parameterType="cPhotoImageDTO" >
 	 	insert into CPHOTOIMAGE

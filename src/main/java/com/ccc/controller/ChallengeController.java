@@ -307,7 +307,6 @@ public class ChallengeController {
 	@Secured("ROLE_USER")
 	@RequestMapping(value="/mychallenges", method = RequestMethod.GET)
 	public String myChallenges(Model m, HttpServletRequest request, @AuthenticationPrincipal PrincipalDetails principalDetails) throws Exception{
-        System.out.println("hi");
 
 		UserDTO user = userDAO.findByUsername(principalDetails.getUser().getUsername());
 		int unum =  user.getId();
@@ -331,19 +330,22 @@ public class ChallengeController {
 		//cnum, date 해서 갯수를 가지고 온다
 		long miliseconds = System.currentTimeMillis();
         Date date = new Date(miliseconds);
-        List<HashMap<String, Integer>> chList = new ArrayList<HashMap<String,Integer>>();
+        //List<HashMap<String, Integer>> chList = new ArrayList<HashMap<String,Integer>>();
         for(ChallengeDTO ch :  dto.getList()) {
-        	int i = userDAO.findTodayCh(ch.getCnum(), unum, date.toString());
-        	HashMap<String, Integer> map = new HashMap<String,Integer>();
-        	map.put("cnum", ch.getCnum());
-        	map.put("values", i);
-        	chList.add(map);
+        	Map<String, String> map = new HashMap<String,String>();
+        	map.put("cnum", Integer.toString(ch.getCnum()));
+        	map.put("unum", Integer.toString(unum));
+        	map.put("date", date.toString());
+        	int i = userDAO.findAllCphotoForValidity(map);
+        	System.out.println("cnum:"+ch.getCnum());
+        	System.out.println("unum:"+unum);
+        	System.out.println(i);
+        	ch.setTodayCheck(i);
         }
 		
-        System.out.println(chList);
-        System.out.println("hi");
-		
-        m.addAttribute("chList", chList);
+        //System.out.println(chList);
+        
+       //m.addAttribute("chList", chList);
 		m.addAttribute("unum",unum);
 		m.addAttribute("curPage", curPage);
 		m.addAttribute("perPage", pp);
@@ -467,7 +469,7 @@ public class ChallengeController {
         map.put("unum", Integer.toString(unum));
         map.put("date", date.toString());
         // 오늘 인증을 한 상태이면 더 이상 인증 못함
-        int count = userDAO.findAllCphotoForValididy(map);
+        int count = userDAO.findAllCphotoForValidity(map);
         if(count!=0) {
         	return "fail";
         }
@@ -624,13 +626,14 @@ public class ChallengeController {
 	public ResponseEntity<byte[]> findProfileImage(@PathVariable int cnum){
 		System.out.println(cnum);
 		ChallengeImageDTO challengeIamge = userDAO.findChallengeImage(cnum);
-		System.out.println(challengeIamge);
 
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Content-Type",challengeIamge.getMimetype());
 		headers.add("Content-Length", String.valueOf(challengeIamge.getData().length));
 		return new ResponseEntity<byte[]>(challengeIamge.getData(),headers, HttpStatus.OK);
 	}
+	
+	
 	
 }
 

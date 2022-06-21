@@ -82,21 +82,12 @@ public class UserDAO {
 
 	/// 챌린지 인증 이미지//////////
 	// 동일한 날짜에 이미 인증이 이루어졌는가?
-	public int findAllCphotoForValididy(Map<String,String> map) {
-		return session.selectOne("com.config.MemberMapper.findAllCphotoForValididy",map);
+	public int findAllCphotoForValidity(Map<String,String> map) {
+		return session.selectOne("com.config.MemberMapper.findAllCphotoForValidity",map);
 	}
 	//cPhoto넣기
 	public void insertCPhoto(CPhotoImageDTO insertPhoto) {
 		session.selectOne("com.config.MemberMapper.insertCPhoto",insertPhoto);
-
-	}
-	//todayChallenge
-	public int findTodayCh(int cnum, int unum, String date) {
-		Map<String, String> map = new HashMap<String,String>();
-		map.put("cnum", Integer.toString(cnum));
-		map.put("unum", Integer.toString(cnum));
-		map.put("date", date);
-		return session.selectOne("com.config.MemberMapper.findAllCphotoForValididy",map);
 
 	}
 	

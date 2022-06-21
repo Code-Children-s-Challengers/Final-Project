@@ -1,9 +1,13 @@
 package com.ccc.dto;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.type.Alias;
+
+import lombok.Data;
 @Alias("PageDTO")
+@Data
 public class PageDTO {
 	List<ChallengeDTO> list; // 목록
 	int curPage; // 현재 페이지
@@ -34,6 +38,5 @@ public class PageDTO {
 	public void setTotalRecord(int totalRecord) {
 		this.totalRecord = totalRecord;
 	}
-	
 	
 }

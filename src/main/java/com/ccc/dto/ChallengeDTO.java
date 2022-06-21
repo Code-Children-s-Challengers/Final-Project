@@ -1,7 +1,8 @@
 package com.ccc.dto;
 
-import java.sql.Date;
+import lombok.Data;
 
+@Data
 public class ChallengeDTO {
 	private int cnum; // pk
 	private String name;
@@ -14,6 +15,8 @@ public class ChallengeDTO {
 	private int holiday; // 공휴일에 쉬는지
 	private String photo;
 	
+	//홍석
+	private int todayCheck;
 	
 	
 	public int getCnum() {

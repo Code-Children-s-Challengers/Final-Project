@@ -40,6 +40,14 @@
 	  width: 100%;
 	  object-fit: fill;
 	}
+	.success{
+		position:relative;
+		bottom:10px;
+	}
+	.notYet{
+		position:relative;
+		bottom:10px;
+	}
 </style>	
 </head>
 <!-- 당일 인증 여부 -->
@@ -56,7 +64,20 @@
 			<c:forEach var="dto" items="${list}" varStatus="status">	
 		  		<!-- card -->
 		  		<div class="col " data-bs-toggle="modal" data-bs-target="#closely${dto.getCnum()}">
-		   			<div class="card mb-3 border border-5" id="myCh${dto.getCnum()}" >				  	
+		   			
+		   			
+		   			<c:choose>
+		   			<c:when test="${dto.getTodayCheck() eq 1}">
+		   			<div class="card mb-3 border border-3 border-success" id="myCh${dto.getCnum()}" >
+		   			<span class="badge rounded-pill bg-success success">Success</span>
+		   			</c:when>
+		   			<c:when test="${dto.getTodayCheck() eq 0}"> 
+		   			<div class="card mb-3 border border-3 border-warning" id="myCh${dto.getCnum()}" >
+		   			<span class="badge rounded-pill bg-warning text-dark notYet">인증이 필요합니다</span>
+		   			</c:when>
+		   			</c:choose>
+		   			
+		   			  	
 				  		<div class="row g-0 ">
 				    	<div class="col-md-4">
 		      				<img src="/hifive/challengeImage/${dto.getCnum()}" class="card-img-top" alt="...">
@@ -81,8 +102,40 @@
 			        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 			      </div>
 			      <div class="modal-body">
-			        	날짜:${dto.getSday()} ~ ${dto.getEday()}<br/>
-						unum: ${unum}
+			      
+			      
+날짜:${dto.getSday()} ~ ${dto.getEday()}<br/>
+unum: ${unum}
+<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="..." class="d-block w-100" alt="...">
+      <div class="container">하하하하하</div>
+    </div>
+    <div class="carousel-item">
+      <img src="..." class="d-block w-100" alt="...">
+      <div class="container">호호홓</div>
+    </div>
+    <div class="carousel-item">
+      <img src="..." class="d-block w-100" alt="...">
+      <div class="container">ㅎ;ㅎ;ㅎ;</div>
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>			      
+			      
+			      
+			      
+			      
+			  	      
+			      
 			      </div>
 			      <div class="modal-footer">
 			        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -100,7 +153,7 @@
 			        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 			      </div>
 			      <div class="modal-body">
-<!-- form -->
+<!-- 인증 사진을 올리기 위한 form -->
 <form class="row g-3 needs-validation" method="post" action="/hifive/upload/${unum}" enctype="multipart/form-data" id="uploadForm${dto.getCnum()}" novalidate>
 	<div class="col-sm-12 pt-5 text-center">
   		<div class="imageContainer ">
