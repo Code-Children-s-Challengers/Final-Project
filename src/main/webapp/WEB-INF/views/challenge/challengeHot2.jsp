@@ -46,12 +46,10 @@
 				});
 				
 				
-			}, delayInMilliseconds);
+			}, delayInMilliseconds);//end of setTimeOut
+		}); //end of event
 
-			
-		});
-
-});
+	}); //end of ready
 	</script>
 	<style>
 		div.col{
