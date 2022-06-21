@@ -53,7 +53,7 @@
 				        		<span class="badge rounded-pill bg-warning text-dark">기간</span>&nbsp;&nbsp;${dto.getSday()}~${dto.getEday()}<br/>
 				        		<span class="badge rounded-pill bg-warning text-dark">참가 인원</span>&nbsp;&nbsp; ${dto.getParticipant()}/${dto.getMpeople()}<br/>
 				        		<span class="badge rounded-pill bg-warning text-dark">참가비</span>&nbsp;&nbsp; ${dto.getFee()}P<br/>
-				        		<button type="button" class="btn btn-secondary btn-sm" id="participate">참가하기</button>
+		        				<button type="button" class="btn btn-secondary btn-sm participate" id="participate" data-value="${dto.getCnum()}"  data-bs-toggle="modal" data-bs-target="#participateCheck">참가하기</button>
 				        	</p>
 				      	</div>
 		    		</div>

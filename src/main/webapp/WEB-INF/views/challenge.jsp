@@ -58,6 +58,7 @@
 	</div>
 	</div>
 </div>
+
 </body>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
@@ -65,6 +66,7 @@
 
 //스크롤이 생기도록 <br> 을 여러게 넣은 부분..
 $(document).ready(function(){
+	// 챌린지 만들기
 	$("#chMaking").on("click", function(){
 		if( $(".loginChecker").attr("data-id") == 0){
 			alert("로그인이 필요합니다.");
@@ -74,14 +76,25 @@ $(document).ready(function(){
 		}
 	});
 	
+	//my챌린지 확인하기
 	$("#myCh").on("click", function(){
 		if( $(".loginChecker").attr("data-id") == 0){
+			alert("로그인이 필요합니다.");
 			location.href="/hifive/loginForm";
 		}else{
 			location.href="/hifive/mychallenges";
 		}
 	});
-		
+	
+	//챌린지 참여하기 전 로그인 확인
+	$(".participate").on("click", function(){
+		if( $(".loginChecker").attr("data-id") == 0){
+			alert("로그인이 필요합니다.");
+			location.href="/hifive/loginForm";
+		}
+	});
+
+	
 });
 </script>
 </html>
