@@ -25,10 +25,10 @@ div.card:hover{
 	}
 </style>
 
-<div class="py-5 mb-5 bg-light border border-5">
-    <div class="container"  style="margin-left:85px">
+<div class="py-5 mb-5 bg-light  border border-5 justify-content-center">
+    <div class="container justify-content-around" style="width:901px;padding:0;" >
 	<!--  -->        
-		<div class="row row-cols-1 row-cols-md-4 g-4">
+		<div class="row row-cols-1 row-cols-md-4 g-4   justify-content-start align-self-center" style="width:100%;margin:0;">
 		  	<c:set var="list" value ="${hotList}"></c:set>
 		  	<c:forEach var="dto" items="${list}" varStatus="status">	
 		  	<div class="col">
@@ -51,9 +51,9 @@ div.card:hover{
     </div>
 </div>
 
-<div class="py-5 mb-5 bg-light border border-5" >
-    <div class="container"  style="margin-left:85px">
-		<div class="row row-cols-1 row-cols-md-4 g-4">
+<div class="py-5 mb-5 bg-light  border border-5 justify-content-center" >
+    <div class="container justify-content-around" style="width:901px;padding:0;" >
+		<div class="row row-cols-1 row-cols-md-4 g-4 justify-content-start align-self-center" style="width:100%;margin:0;">
 			<c:set var="list2" value ="${PageDTO.getList()}"></c:set>
 			<c:forEach var="dto" items="${list2}" varStatus="status">	
 		  		<div class="col">

@@ -41,6 +41,7 @@
 	</script>
 	<style>
 		div.col{
+			display:inline-block;
 			width:300px;
 			height:300px;	
 		}
@@ -64,13 +65,13 @@
 		}
 	</style>
 </head>
- <div class="py-5 mb-5 bg-light  border border-5 " >
-    <div class="container" style="margin-left:85px" >
+ <div class="py-5 mb-5 bg-light  border border-5 justify-content-center" >
+    <div class="container justify-content-around" style="width:901px;padding:0;" >
 	<!--  -->        
-		<div class="row row-cols-md-4 g-4">
+		<div class="row row-cols-md-4 g-4 justify-content-start align-self-center" style="width:100%;margin:0;">
 		  	<c:set var="list" value ="${hotList}"></c:set>
 		  	<c:forEach var="dto" items="${list}" varStatus="status">	
-		  	<div class="col">
+		  	<div class="col ">
 		    	<div class="card border-danger h-100 ch">
 		      		<img src="/hifive/challengeImage/${dto.getCnum()}" class="card-img-top" alt="...">
 		      	<div class="card-body">
