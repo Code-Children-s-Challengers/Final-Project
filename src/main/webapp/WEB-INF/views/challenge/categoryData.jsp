@@ -69,7 +69,7 @@
 	
 </style>
 
-<div class="py-5 mb-5 bg-light  border border-5 justify-content-center">
+<div class="py-5 mb-5 bg-light  border border-5 justify-content-center" style="width:1020px">
     <div class="container justify-content-around" style="width:901px;padding:0;" >
 	<!--  -->        
 		<div class="row row-cols-1 row-cols-md-4 g-4   justify-content-start align-self-center" style="width:100%;margin:0;">
@@ -77,7 +77,7 @@
 		  	<c:forEach var="dto" items="${list}" varStatus="status">	
 		  	<!-- card -->
 		  	<div class="col">
-		    	<div class="card border-danger h-100 ch" data-value="${dto.getCnum()}">
+		    	<div class="card border border-2 border-danger h-100 ch" data-value="${dto.getCnum()}">
 		      		<img src="/hifive/challengeImage/${dto.getCnum()}" class="card-img-top" alt="...">
 		      	<div class="card-body">
 		        	<h5 class="card-title">${dto.getName()}</h5>
@@ -116,7 +116,7 @@
     </div>
 </div>
 
-<div class="py-5 mb-5 bg-light  border border-5 justify-content-center" >
+<div class="py-5 mb-5 bg-light  border border-5 justify-content-center" style="width:1020px" >
     <div class="container justify-content-around" style="width:901px;padding:0;" >
 	<!--  -->        
 		<div class="row row-cols-1 row-cols-md-4 g-4 justify-content-start align-self-center" style="width:100%;margin:0;">

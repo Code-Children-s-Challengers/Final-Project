@@ -144,6 +144,7 @@ $(document).ready(function(){
 								<td height="10">
 							</tr>
 							<tr>
+							<!-- comment -->
 								<td class= "td_default" align ="center">
 									<a class= "a_black" href=""> 
 									Comment: ${dto.getComent()}<br>

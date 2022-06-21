@@ -46,12 +46,14 @@
 <!--  헤더  -->
 <!-- 본문 -->
 <div class ="row">
-	<div class="col-sm-2">
+	<div class="col-sm-3">
 	</div>
-	<div class="col-sm-8" style="">
-	<div id="content">
-		<jsp:include page="challenge/myChallengeList2.jsp" flush="true"/><br>
+	<div class="col-sm-6" style="">
+		<div id="content">
+			<jsp:include page="challenge/myChallengeList2.jsp" flush="true"/><br>
+		</div>
 	</div>
+	<div class="col-sm-3">
 	</div>
 </div>
 </body>

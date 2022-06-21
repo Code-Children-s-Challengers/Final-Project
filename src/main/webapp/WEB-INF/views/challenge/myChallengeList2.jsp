@@ -9,12 +9,15 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<script>
-	
+	 $(document).ready(function(){
+		 $(".closely").on("click", function(){
+			 
+		 });
+	 });
 	</script>
 <style>
 	div.cal{
-		width:80%;
-		height:700px;
+		height:600px;
 	}
 	.card-img-top{
 		width:100%;
@@ -27,16 +30,29 @@
 	div.card:hover .card-img-top{
 			opacity:0.5;
 	}
+		
+	.imageContainer{
+		display:inline-block;
+		height:180px;
+		width: 250px;
+	}
+	
+	.imageContainer > img {
+	  height: 100%;
+	  width: 100%;
+	  object-fit: fill;
+	}
 </style>	
 </head>
 
-<div class="py-5 bg-light" >
-    <div class="container"  style="margin-left:85px">
-		<div class="row row-cols-1 row-cols-md-1 g-4">
-			
+<div class="py-5 bg-light border border-5 justify-content-center"  >
+    <div class="container justify-content-around"  style="width:901px;padding:0;">
+	<!--  -->     	
+		<div class="row row-cols-1 row-cols-md-1 g-4 justify-content-start align-self-center" style="width:100%;margin:0;">	
 			<c:set var="list" value ="${PageDTO.getList()}"></c:set>
 			<c:forEach var="dto" items="${list}" varStatus="status">	
-		  		<div class="col">
+		  		<!-- card -->
+		  		<div class="col" data-bs-toggle="modal" data-bs-target="#closely${dto.getCnum()}" id="myCh${dto.getCnum()}">
 		   			<div class="card mb-3">
 				  		<div class="row g-0">
 				    	<div class="col-md-4">
@@ -46,16 +62,154 @@
 				      		<div class="card-body">
 				        		<h5 class="card-title">${dto.getName()}</h5>
 		        			<p class="card-text">${dto.getSday()} ~ ${dto.getEday()}<br/>참여인원: ${dto.getParticipant()}/${dto.getMpeople()}<br/>참가비: ${dto.getFee()}P<br/>${dto.getCnum()}</p>
+				      		<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#upload${dto.getCnum()}">사진 인증하기</button>
 				      		</div>
 				   		</div>
 					  	</div>
 					</div>
 		  		</div>
+		  	<!-- card -->
+		  	<!-- Modal -->
+			<div class="modal fade" id="closely${dto.getCnum()}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			  <div class="modal-dialog modal-xl">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h5 class="modal-title" id="exampleModalLabel">참여하기</h5>
+			        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			      </div>
+			      <div class="modal-body">
+			        	날짜:${dto.getSday()} ~ ${dto.getEday()}<br/>
+						unum: ${unum}
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+		 	<!-- Modal -->
+		 	<!-- Modal -->
+			<div class="modal fade" id="upload${dto.getCnum()}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			  <div class="modal-dialog modal-xl">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h5 class="modal-title" id="exampleModalLabel">참여하기</h5>
+			        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			      </div>
+			      <div class="modal-body">
+<!-- form -->
+<form class="row g-3 needs-validation" method="post" action="/hifive/upload/${unum}" enctype="multipart/form-data" id="uploadForm${dto.getCnum()}" novalidate>
+	<div class="col-sm-12 pt-5 text-center">
+  		<div class="imageContainer ">
+  			<img src="/hifive/images/challenge/noImage.gif" class="rounded" alt="..." id="uploadPhotoImage">
+  		</div>
+  	</div>
+  	<div class="col-sm-3"></div>
+  <div class="col-sm-6 pb-3">
+  	<input class="form-control" type="file" name="uploadPh" id="uploadPh" accept="image/*" required >
+  </div>
+  <div class="col-sm-3"></div>
+  <!--  -->
+   <div class="col-sm-1"></div>
+  <div class="col-sm-6">
+    <label for="comment" class="form-label">Comment</label>
+    <input type="text" class="form-control" id="c_comment" name="c_comment" aria-describedby="commentV1 commentV2" required >
+    <div id="commentV1" class="valid-feedback">
+      Good!
+    </div>
+    <div id="commentV2" class="invalid-feedback">
+      	한마디 적어주십쇼!
+    </div>
+  </div>
+  <div class="col-sm-4">
+     <label for="start_date" class="form-label">인증 날짜</label>
+    <input type="date" class="form-control" id="realDate" name="realDate"  disabled >
+  </div>
+  <div class="col-sm-1"></div>
+  <!--  -->	
+ </form>
+ <!-- form -->
+ 
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+			        <button type="button" class="btn btn-primary upload" data-cnum="${dto.getCnum()}" data-unum="${unum}">인증사진 올리기</button>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+		 	<!-- Modal -->
 			</c:forEach>
-			
 		</div>
 	</div>
 </div>
 
 
 
+<script>
+	$(document).ready(function(){
+		
+		//프로필 이미지 미리보기 기능
+		$("form").on("change","#uploadPh", handleChPhoto);
+		function handleChPhoto(e){
+			console.log("hi");
+			var files = e.target.files;
+			var filesArr = Array.prototype.slice.call(files);
+			filesArr.forEach(function(f){
+				if(!f.type.match("image.*")){
+					alert("확장자는 이미지 확장자만 가능합니다.");
+					return;
+				}
+				var reader = new FileReader();
+				reader.onload = function(e){
+					$("#uploadPhotoImage").attr("src", e.target.result);
+					}
+					reader.readAsDataURL(f);
+				});
+		}
+		
+		// inValid라는 함수를 만들 수 있다!!
+		$.fn.isValid = function(){
+			  return this[0].checkValidity()
+			}
+		
+		// 클릭 이벤트 발생 시 ajax처리한다
+		$(".upload").on("click",function(){
+			//form의 data-cnum
+			var cnum = $(this).attr("data-cnum");
+			console.log(cnum);
+			
+			// 부트스트랩 유효성 검증  
+			if (! $("#uploadForm"+cnum).isValid()) {
+		          event.preventDefault()
+		          event.stopPropagation()
+		          console.log("why");
+		        }			
+			 $("#uploadForm"+cnum).addClass('was-validated');
+			// 부트스트랩 유효성 검증  
+
+			//ajax로 formData를 전송한다, 전송 대상 : 사진, comment
+			var formData = new FormData($("#uploadForm"+cnum)[0]);
+			$.ajax({
+				url: "/hifive/upload/"+cnum,
+				type:"post",
+				data : formData,
+				cache: false,
+				contentType: false,
+				processData: false,
+				dataType: 'text',
+				success: function(data){
+					alert(data);	
+					$(".btn-close").click;
+				}
+			});			 
+			 
+		});
+		
+		
+		
+		
+	});
+
+	
+</script>

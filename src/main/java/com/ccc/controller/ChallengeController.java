@@ -4,7 +4,9 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -30,6 +32,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.ccc.config.login.auth.PrincipalDetails;
 import com.ccc.dao.UserDAO;
 import com.ccc.dto.CPhotoDTO;
+import com.ccc.dto.CPhotoImageDTO;
 import com.ccc.dto.ChallengeDTO;
 import com.ccc.dto.ChallengeImageDTO;
 import com.ccc.dto.PageDTO;
@@ -322,7 +325,7 @@ public class ChallengeController {
 		int tot = dto.getTotalRecord() / dto.getPerPage();
 		if(dto.getTotalRecord() % dto.getPerPage() != 0) tot++;
 		
-		
+		m.addAttribute("unum",unum);
 		m.addAttribute("curPage", curPage);
 		m.addAttribute("perPage", pp);
 		m.addAttribute("totalPage", tot);
@@ -362,6 +365,7 @@ public class ChallengeController {
 		return "myChallengeRetrieve";
 	}
 	
+	//인증완료했는가 안 했는가?
 	@RequestMapping(value="/uploadCertificationCheck", method = RequestMethod.GET)
 	@ResponseBody
 	public String uploadCertificationCheck(HttpServletRequest request) throws Exception{
@@ -378,12 +382,15 @@ public class ChallengeController {
 		}
 	}
 	
+	//인증 창
 	@RequestMapping(value="/uploadCertificationPopup", method = RequestMethod.GET)
 	public String uploadCertificationPopup(Model m, HttpServletRequest request) throws Exception{
 		m.addAttribute("cnum", request.getParameter("cnum"));
 		return "challenge/uploadCertificationPopup";
 	}
 	
+	
+	//인증하기-- 무진님 버진
 	@RequestMapping(value="/uploadCertification", method = RequestMethod.POST)
 	@ResponseBody
 	public String uploadCertification(@RequestParam MultipartFile photo, @RequestParam int cnum, @RequestParam String comment, @AuthenticationPrincipal PrincipalDetails principalDetails) throws Exception{
@@ -392,11 +399,16 @@ public class ChallengeController {
 
 		long miliseconds = System.currentTimeMillis();
         Date date = new Date(miliseconds);
+        
+        //이미 인증을 했는지 안 했는지 확인한다.
         PhotoPageDTO pdto = Cservice.userChallengeRetrieve(unum, cnum, 1, 2);
         List<CPhotoDTO> list = pdto.getList();
         if(list != null && list.size() > 0 && list.get(0).getUploaddate().equals(date.toString())) {
         	return "alreadyUpload";
         }
+        ///////////////////
+        
+        
         String filename = "c_"+Integer.toString(unum)+"_"+Integer.toString(cnum)+"_"+date.toString()+".png";
         
     	File savePath = new File("C://Users//홍석//git//Final-Project//src//main//resources//static//images//challenge//challenge_image", filename);
@@ -418,6 +430,47 @@ public class ChallengeController {
 		dto.setUploaddate(date.toString());
 		num = Cservice.certificationAdd(dto);
 		
+		return "success";
+	}
+	
+	//인증하기 -- 홍석버전
+	@ResponseBody
+	@PostMapping("/upload/{cnum}")
+	public String upload(@PathVariable int cnum,  @RequestParam("uploadPh") MultipartFile uploadPh, CPhotoImageDTO cphoto, @AuthenticationPrincipal PrincipalDetails p) {
+		
+		//unum 가지고 옴
+		int unum = (userDAO.findByUsername(p.getUsername())).getId();
+			
+		long miliseconds = System.currentTimeMillis();
+        Date date = new Date(miliseconds);
+        Map<String,String> map = new HashMap<String,String>();
+        map.put("cnum", Integer.toString(cnum));
+        map.put("unum", Integer.toString(unum));
+        map.put("date", date.toString());
+        // 오늘 인증을 한 상태이면 더 이상 인증 못함
+        int count = userDAO.findAllCphotoForValididy(map);
+        if(count!=0) {
+        	return "fail";
+        }
+        
+        //인증 사진을 DB에 저장
+        CPhotoImageDTO insertPhoto = new CPhotoImageDTO();
+        insertPhoto.setC_comment(cphoto.getC_comment());
+        insertPhoto.setCnum(cnum);
+        try {
+			insertPhoto.setData(uploadPh.getBytes());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+        insertPhoto.setMimetype(uploadPh.getContentType());
+        insertPhoto.setOriginal_name(uploadPh.getOriginalFilename());
+        insertPhoto.setUnum(unum);
+        insertPhoto.setUploaddate(date.toString());
+        insertPhoto.setValidates(1);
+        
+        userDAO.insertCPhoto(insertPhoto);
+        
+        //성공 메세지
 		return "success";
 	}
 	

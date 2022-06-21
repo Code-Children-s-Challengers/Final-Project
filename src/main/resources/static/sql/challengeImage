@@ -5,3 +5,15 @@ create table challengeImage
     data          blob                        null,
     original_name varchar(100)                          null
 );
+
+create table cPhotoImage
+(
+  cnum number(10),
+  UNUM NUMBER(5,0), 
+  mimetype varchar(100) null,
+  data blob null,
+  original_name varchar(100) null,
+  COMENT VARCHAR2(25 BYTE) DEFAULT NULL, 
+  "UPLOADDATE" DATE NOT NULL ENABLE, 
+  "VALIDATES" NUMBER(1,0) DEFAULT 1
+);

@@ -46,16 +46,22 @@
 <!--  헤더  -->
 <!-- 본문 -->
 <div class ="row">
-	<div class="col-sm-2">
+	<div class="col-sm-3">
 	</div>
-	<div class="col-sm-8" style="">
+	<div class="col-sm-6 " style="">
 	<div id="categoryTab">
 		<jsp:include page="challenge/categoryTab.jsp" flush="true"/><br>		
 	</div>
 	<div id="content">
+		<div>
 		<jsp:include page="challenge/challengeHot2.jsp" flush="true"/>	
+		</div>
+		<div>
 		<jsp:include page="challenge/challengeList2.jsp" flush="true"/>
+		</div>
 	</div>
+	</div>
+	<div class="col-sm-3">
 	</div>
 </div>
 

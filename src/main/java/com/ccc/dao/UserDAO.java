@@ -1,12 +1,14 @@
 package com.ccc.dao;
 
 
+import java.sql.Date;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.ccc.dto.CPhotoImageDTO;
 import com.ccc.dto.ChallengeImageDTO;
 import com.ccc.dto.ProfileImageDTO;
 import com.ccc.dto.UserDTO;
@@ -62,7 +64,8 @@ public class UserDAO {
 	}
 
 	
-	//////
+	////// 홍석/////////
+	////챌린지 이미지////
 	public ChallengeImageDTO findChallengeImage(int cnum) {
 		return session.selectOne("com.config.MemberMapper.findChallengeImage",cnum);
 	}
@@ -75,6 +78,17 @@ public class UserDAO {
 	}
 	public int updatePassword(Map<String,String> map) {
 		return session.update("com.config.MemberMapper.updatePassword",map);
+	}
+
+	/// 챌린지 인증 이미지//////////
+	// 동일한 날짜에 이미 인증이 이루어졌는가?
+	public int findAllCphotoForValididy(Map<String,String> map) {
+		return session.selectOne("com.config.MemberMapper.findAllCphotoForValididy",map);
+	}
+	//cPhoto넣기
+	public void insertCPhoto(CPhotoImageDTO insertPhoto) {
+		session.selectOne("com.config.MemberMapper.insertCPhoto",insertPhoto);
+
 	}
 	
 }
