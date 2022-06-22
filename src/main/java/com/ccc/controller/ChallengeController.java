@@ -111,11 +111,11 @@ public class ChallengeController {
 			pp = Integer.parseInt(perPage);
 		}
 		
-		PageDTO dto = Cservice.categoryChallengeAll(category, Integer.parseInt(curPage),pp); //Page처리
+		PageDTO dto = Cservice.categoryChallenge(category, Integer.parseInt(curPage),pp); //Page처리
 		dto.setPerPage(pp);
 		int tot = dto.getTotalRecord() / dto.getPerPage();
 		if(dto.getTotalRecord() % dto.getPerPage() != 0) tot++;
-		
+		System.out.println(dto.getTotalRecord());
 		
 		List<ChallengeDTO> allList = Cservice.allChallenge();
 		List<ChallengeDTO> hotList = new ArrayList<ChallengeDTO>(); 
@@ -125,6 +125,8 @@ public class ChallengeController {
 			}
 			hotList.add(allList.get(i)); // hot리스트에 추가한다?
 		}
+		System.out.println("totalPage"+tot);
+
 		m.addAttribute("curPage", curPage);
 		m.addAttribute("perPage", pp);
 		m.addAttribute("hotList", hotList);

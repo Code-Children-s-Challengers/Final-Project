@@ -124,7 +124,28 @@
 			</c:forEach>
 		</div>
 	</div>
+<input type="hidden" id="curPage" data-curPage="${curPage}" />
+<nav aria-label="Page navigation example">
+  <ul class="pagination mt-4 justify-content-center">
+    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+        <c:forEach  begin="1" end="${totalPage}"  varStatus="status2">	
+    		<li class="page-item" id="page${status2.count}" data-page="${status2.count}"><a class="page-link">${status2.count}</a></li> <!-- 2부터 시작 -->
+		 </c:forEach>
+    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+  </ul>
+</nav>
 </div>
+
+<script>
+	$(document).ready(function(){
+
+		$(".page-item").on("click",function(){
+			var curPage = $("#curPage").attr("data-curPage");
+			var clickPage = $(this).attr("data-page");
+		});
+		
+	});
+</script>
 
 
 
