@@ -229,8 +229,8 @@ public class ChallengeController {
 	}
 	
 	@PostMapping("/makeChallenge")
-	//@RequestMapping(value="/makeChallenge", method = RequestMethod.POST)
 	@ResponseBody
+	//@RequestMapping(value="/makeChallenge", method = RequestMethod.POST)
 	public String makeChallenge(@RequestParam MultipartFile photo, @RequestParam String name, @RequestParam String category, @RequestParam Date start_date, @RequestParam Date end_date, @RequestParam int people, @RequestParam int fee, @RequestParam int holiday, @AuthenticationPrincipal PrincipalDetails principalDetails) throws Exception{
 		UserDTO user = userDAO.findByUsername(principalDetails.getUser().getUsername());
 		int unum =  user.getId();
