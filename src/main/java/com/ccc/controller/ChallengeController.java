@@ -330,23 +330,29 @@ public class ChallengeController {
 		//cnum, date 해서 갯수를 가지고 온다
 		long miliseconds = System.currentTimeMillis();
         Date date = new Date(miliseconds);
-        //List<HashMap<String, Integer>> chList = new ArrayList<HashMap<String,Integer>>();
         for(ChallengeDTO ch :  dto.getList()) {
         	Map<String, String> map = new HashMap<String,String>();
         	map.put("cnum", Integer.toString(ch.getCnum()));
         	map.put("unum", Integer.toString(unum));
         	map.put("date", date.toString());
-        	System.out.println("cnum: "+ch.getCnum());
-        	System.out.println("unum: "+unum);
-        	System.out.println("date: "+date.toString());
         	int i = userDAO.findAllCphotoForValidity(map);
-        	System.out.println(i);
         	ch.setTodayCheck(i);
         }
 		
-        //System.out.println(chList);
+        for(ChallengeDTO ch : dto.getList()) {
+        	 Map<String,String> map2 = new HashMap<String,String>();
+             map2.put("cnum", Integer.toString(ch.getCnum()));
+             map2.put("unum", Integer.toString(unum));
+             List<CPhotoImageDTO> cphotoList = userDAO.findAllCphoto(map2);
+        	
+             for(CPhotoImageDTO cphoto : cphotoList) {
+            	 Map<String,String> map = new HashMap<String,String>();
+            	 cphoto.getC_comment();
+             }
+        }
         
-       //m.addAttribute("chList", chList);
+        
+        
 		m.addAttribute("unum",unum);
 		m.addAttribute("curPage", curPage);
 		m.addAttribute("perPage", pp);
@@ -658,7 +664,7 @@ public class ChallengeController {
 //	}
 	
 	@GetMapping("/cPhotoImage/{cnum}/{unum}/{uploaddate}")
-	public ResponseEntity<byte[]> findCPhotoImage(@PathVariable int cnum,@PathVariable int unum, @PathVariable String uploaddate){
+	public ResponseEntity<byte[]> findCPhotoImage(Model m, @PathVariable int cnum,@PathVariable int unum, @PathVariable String uploaddate){
 		long miliseconds = System.currentTimeMillis();
         Date date = new Date(miliseconds);
 		
@@ -670,6 +676,8 @@ public class ChallengeController {
 		
 		CPhotoImageDTO cphoto = userDAO.findCPhotoImage(map);
 		CPhotoImageDTO cphotoBasic = new CPhotoImageDTO();
+		
+		
 		if(cphoto == null) {
 			HttpHeaders headers = new HttpHeaders();
 			headers.add("Content-Type",cphotoBasic.getMimetype());

@@ -91,9 +91,13 @@ public class UserDAO {
 		session.selectOne("com.config.MemberMapper.insertCPhoto",insertPhoto);
 
 	}
-	//cPhoto 가져오기
+	//특정 날의 특정 유저의 특정 챌린지의 cPhoto 가져오기
 	public CPhotoImageDTO findCPhotoImage(Map<String,String> map) {
 		return session.selectOne("com.config.MemberMapper.findCPhotoImage",map);
+	}
+	//특정 유저의 특정 챌린지의 모든 cPhoto 가져오기
+	public List<CPhotoImageDTO> findAllCphoto(Map<String, String> map2) {
+		return session.selectList("com.config.MemberMapper.findAllCphoto",map2);
 	}
 	
 }

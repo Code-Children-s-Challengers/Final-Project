@@ -106,11 +106,12 @@
 			        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 			      </div>
 			      <div class="modal-body">
-			      
-			      
-날짜:${dto.getSday()} ~ ${dto.getEday()}<br/>
-차이:<input type="text" id="a${dto.getCnum()}"/>
-unum: ${unum}
+
+		      
+<h4><span class="badge rounded-pill bg-dark">제목</span>&nbsp;&nbsp;${dto.getName()} </h4>			      
+<h4><span class="badge rounded-pill bg-dark">기간</span>&nbsp;&nbsp;${dto.getSday()} ~ ${dto.getEday()} </h4>			      
+<h4><span class="badge rounded-pill bg-dark">챌린지 번호</span>&nbsp;&nbsp;${dto.getCnum()} </h4>	
+
 <div id="carousel${dto.getCnum()}" class="carousel slide cPhotoZone" data-bs-ride="carousel">
   <div class="carousel-inner" id="inner${dto.getCnum()}">
    <!-- 들어가야할 내용 --> 
@@ -273,9 +274,9 @@ unum: ${unum}
 				var today = dateToString(date);
 				
 				if(i==0){
-					$("#inner"+cnum).append('<div class="carousel-item active cPhotoImage" id="cPhotoImage'+i+'"><img src="/hifive/cPhotoImage/'+cnum+'/'+unum+'/'+today+'" class="d-block w-100" alt="..."><div class="container">하하하하하</div></div>');
+					$("#inner"+cnum).append('<div class="carousel-item active cPhotoImage" id="cPhotoImage'+i+'"><img src="/hifive/cPhotoImage/'+cnum+'/'+unum+'/'+today+'" class="d-block w-100" alt="..."><div class="container">'+today+'</div></div>');
 				}else{
-					$("#inner"+cnum).append('<div class="carousel-item cPhotoImage" id="cPhotoImage'+i+'"><img src="/hifive/cPhotoImage/'+cnum+'/'+unum+'/'+today+'" class="d-block w-100" alt="..."><div class="container">하하하하하</div></div>');
+					$("#inner"+cnum).append('<div class="carousel-item cPhotoImage" id="cPhotoImage'+i+'"><img src="/hifive/cPhotoImage/'+cnum+'/'+unum+'/'+today+'" class="d-block w-100" alt="..."><div class="container">'+today+'</div></div>');
 				}
 				console.log(today);				
 				

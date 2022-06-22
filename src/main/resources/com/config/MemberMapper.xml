@@ -85,6 +85,12 @@
 		where cnum= #{cnum} and unum= #{unum} and uploaddate = #{uploaddate}
 	 </select>
 	 
+	 <select id="findAllCphoto" parameterType="map" resultType="cPhotoImageDTO">
+		select *
+		from cphotoImage
+		where cnum= #{cnum} and unum= #{unum}
+	 </select>
+	 
 	 
 	 
 </mapper>
