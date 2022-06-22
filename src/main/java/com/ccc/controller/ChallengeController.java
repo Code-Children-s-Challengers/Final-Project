@@ -63,7 +63,7 @@ public class ChallengeController {
 		if(curPage == null) {
 			curPage = "1";
 		}
-		int pp = 8; // perPage
+		int pp = 6; // perPage
 		if(perPage != null) {			
 			pp = Integer.parseInt(perPage);
 		}
@@ -106,7 +106,7 @@ public class ChallengeController {
 		if(curPage == null) {
 			curPage = "1";
 		}
-		int pp = 8; // perPage
+		int pp = 6; // perPage
 		if(perPage != null) {			
 			pp = Integer.parseInt(perPage);
 		}

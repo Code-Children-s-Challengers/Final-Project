@@ -36,12 +36,32 @@
         <h1 class="fw-light">새로운 도전을 즐기세요!</h1>
         <p class="lead text-muted">나를 죽이지 못한 고통은 나를 더 강하게 만들 뿐</p>
         <p>
-          <a id="chMaking" class="btn btn-primary my-2" style="display:inline-block">챌린지 만들기</a>
+          <a id="chMaking" class="btn btn-primary my-2" style="display:inline-block" data-bs-toggle="modal" data-bs-target="#chMakingPage">챌린지 만들기</a>
           <a id="myCh" class="btn btn-primary my-2" style="display:inline-block">내 챌린지 보기</a>
         </p>
       </div>
     </div>
 </section>
+<!--  모달 -->
+<div class="modal fade" id="chMakingPage" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+		<jsp:include page="challenge/makeChallengePopup2.jsp" flush="true"/><br>		
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--  모달 -->
+
+
 <hr/>
 <!--  헤더  -->
 <!-- 본문 -->
@@ -73,12 +93,12 @@
 //스크롤이 생기도록 <br> 을 여러게 넣은 부분..
 $(document).ready(function(){
 	// 챌린지 만들기
-	$("#chMaking").on("click", function(){
+	$("#chMaking").on("click", function(event){
 		if( $(".loginChecker").attr("data-id") == 0){
 			alert("로그인이 필요합니다.");
+			event.preventDefault();
 			location.href="/hifive/loginForm";
-		}else{
-			win = window.open("./makeChallengePopup","makechallengepopup","width = 600, height = 700, top = 100, left = 200, location = no");
+			
 		}
 	});
 	

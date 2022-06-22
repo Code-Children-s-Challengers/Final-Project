@@ -36,7 +36,7 @@
         <h1 class="fw-light">새로운 도전을 즐기세요!</h1>
         <p class="lead text-muted">나를 죽이지 못한 고통은 나를 더 강하게 만들 뿐</p>
         <p>
-          <a id="chMaking" class="btn btn-primary my-2" style="display:inline-block">챌린지 만들기</a>
+          <a id="chMaking" class="btn btn-primary my-2" style="display:inline-block" data-bs-toggle="modal" data-bs-target="#chMakingPage2">챌린지 만들기</a>
           <a id="chHome" class="btn btn-primary my-2" style="display:inline-block">챌린지 찾기</a>
         </p>
       </div>
@@ -44,6 +44,26 @@
 </section>
 <hr/>
 <!--  헤더  -->
+<!--  모달 -->
+<div class="modal fade" id="chMakingPage2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+		<jsp:include page="challenge/makeChallengePopup2.jsp" flush="true"/><br>		
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--  모달 -->
+
+
 <!-- 본문 -->
 <div class ="row">
 	<div class="col-sm-2">
@@ -66,8 +86,6 @@ $(document).ready(function(){
 		if( $(".loginChecker").attr("data-id") == 0){
 			alert("로그인이 필요합니다.");
 			location.href="/hifive/loginForm";
-		}else{
-			win = window.open("./makeChallengePopup","makechallengepopup","width = 600, height = 700, top = 100, left = 200, location = no");
 		}
 	});
 	

@@ -20,7 +20,7 @@
 	
 </style>
 
-<form class="row g-3 needs-validation" method="post" action="/hifive/makeChallenge/${id}" enctype="multipart/form-data" id="chMaking" novalidate>
+<form class="row g-3 needs-validation" method="post" action="/hifive/makeChallenge/${id}" enctype="multipart/form-data" id="chMakingForm" novalidate>
   <div class="col-sm-12 pt-5 text-center">
   	<div class="imageContainer ">
   		<img src="/hifive/images/challenge/noImage.gif" class="rounded" alt="..." id="chPhotoImage">
@@ -122,7 +122,7 @@
   <div class="col-sm-1"></div> 
   <!--  -->
   <div class="col=sm-12 text-center">
-    <button class="btn btn-primary" type="submit" id="submit" >Submit form</button>
+    <button class="btn btn-primary submit" type="button" id="chSubmit" >Submit form</button>
   </div>
 </form>
 
@@ -132,12 +132,8 @@
 <script>
 
 
-// inValid라는 함수를 만들 수 있다!!
-$.fn.isValid = function(){
-	  return this[0].checkValidity()
-	}
-
 $(document).ready(function(){
+	
 	
 	//프로필 이미지 미리보기 기능
 	$("form").on("change","#chPhoto", handleChPhoto);
@@ -158,16 +154,40 @@ $(document).ready(function(){
 			});
 	}
 	
+	// inValid라는 함수를 만들 수 있다!!
+	$.fn.isValid = function(){
+		  return this[0].checkValidity()
+		}
+	
+	
 	//submit 시 유효성 체크
-	$("#chMaking").on("submit", function(event){
-		 if (! $("#chMaking").isValid()) {
+	$(".submit").on("click" ,function(event){
+		console.log($("#chMaking"))
+		if (! $("#chMakingForm").isValid()) {
 	          event.preventDefault()
 	          event.stopPropagation()
 	          console.log("why");
-	        }
-
-		 $("#chMaking").addClass('was-validated');
-		console.log("hi");
+		}
+		
+		 $("#chMakingForm").addClass('was-validated');
+  		console.log("hi");
+  		
+  		//ajax로 formData를 전송한다
+ 		var formData = new FormData($("#chMakingForm")[0]);
+ 		$.ajax({
+ 			url: "/hifive/makeChallenge",
+ 			type:"post",
+ 			data : formData,
+ 			cache: false,
+ 			contentType: false,
+ 			processData: false,
+ 			dataType: 'text',
+ 			success: function(data){
+ 				alert(data);	
+ 				$(".btn-close").click();
+ 				window.location.reload();
+ 			}
+ 		});		    	
 	});
 	 
 	

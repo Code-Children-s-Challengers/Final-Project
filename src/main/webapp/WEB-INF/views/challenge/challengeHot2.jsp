@@ -75,12 +75,20 @@
 			bottom:10px;
 			
 		}
+		.myTitle{
+		  	overflow: hidden;
+		  	text-overflow: ellipsis;
+		  	white-space: nowrap;
+		  	width: 240px;
+		  	height: 25px;
+		}
+		
 	</style>
 </head>
  <div class="py-5 mb-5 bg-light border border-5 justify-content-center" >
-    <div class="container justify-content-around" style="width:901px;padding:0;" >
-	<!--  -->        
-		<div class="row row-cols-md-4 g-4 justify-content-start align-self-center" style="width:100%;margin:0;">
+    <div class="container justify-content-around" style="width:100%;padding:0;" >
+	<!--  -->       
+		<div class="row row-cols-md-4 g-4 justify-content-start align-self-center" style="width:100%;padding-left:5.5%;">
 		  	<c:set var="list" value ="${hotList}"></c:set>
 		  	<c:forEach var="dto" items="${list}" varStatus="status">	
 		  	<!-- card -->
@@ -88,9 +96,9 @@
 		    	<div class="card border border-2 border-danger h-100 ch">
 		      		<img src="/hifive/challengeImage/${dto.getCnum()}" class="card-img-top" alt="...">
 		      	<div class="card-body">
-		        	<h5 class="card-title">${dto.getName()}</h5>
+		        	<h5 class="card-title myTitle">${dto.getName()}</h5>
 		        	<p class="card-text">
-		        		<span class="badge rounded-pill bg-danger">기간</span>&nbsp;&nbsp;${dto.getSday()}~${dto.getEday()}<br/>
+		        		<span class="badge rounded-pill bg-danger">기간</span>&nbsp;&nbsp;${dto.getSday()}~${dto.getEday()}</<br/>
 		        		<span class="badge rounded-pill bg-danger">참가 인원</span>&nbsp;&nbsp; ${dto.getParticipant()}/${dto.getMpeople()}<br/>
 		        		<span class="badge rounded-pill bg-danger">참가비</span>&nbsp;&nbsp; ${dto.getFee()}P<br/>
 		        		<button type="button" class="btn btn-secondary btn-sm participate"  data-cnum="${dto.getCnum()}" data-bs-toggle="modal" data-bs-target="#participateCheck${dto.getCnum()}">참가하기</button>
