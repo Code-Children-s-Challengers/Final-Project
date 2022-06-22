@@ -48,6 +48,10 @@
 		position:relative;
 		bottom:10px;
 	}
+	.cPhotoZone{
+		width:600px;
+		heigth:600px;
+	}
 </style>	
 </head>
 <!-- 당일 인증 여부 -->
@@ -68,11 +72,11 @@
 		   			
 		   			<c:choose>
 		   			<c:when test="${dto.getTodayCheck() eq 1}">
-		   			<div class="card mb-3 border border-3 border-success" id="myCh${dto.getCnum()}" >
+		   			<div class="card mb-3 border border-3 border-success" id="myCh${dto.getCnum()}" data-sday="${dto.getSday()}" data-eday="${dto.getEday()}" data-cnum="${dto.getCnum()}" data-unum="${unum}"  >
 		   			<span class="badge rounded-pill bg-success success">Success</span>
 		   			</c:when>
 		   			<c:when test="${dto.getTodayCheck() eq 0}"> 
-		   			<div class="card mb-3 border border-3 border-warning" id="myCh${dto.getCnum()}" >
+		   			<div class="card mb-3 border border-3 border-warning" id="myCh${dto.getCnum()}" data-sday="${dto.getSday()}" data-eday="${dto.getEday()}" data-cnum="${dto.getCnum()}" data-unum="${unum}" >
 		   			<span class="badge rounded-pill bg-warning text-dark notYet">인증이 필요합니다</span>
 		   			</c:when>
 		   			</c:choose>
@@ -94,7 +98,7 @@
 		  		</div>
 		  	<!-- card -->
 		  	<!-- Modal -->
-			<div class="modal fade" id="closely${dto.getCnum()}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal fade closely" id="closely${dto.getCnum()}" data-sday="${dto.getSday()}" data-eday="${dto.getEday()}" data-cnum="${dto.getCnum()}" data-unum="${unum}"  tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			  <div class="modal-dialog modal-xl">
 			    <div class="modal-content">
 			      <div class="modal-header">
@@ -105,36 +109,22 @@
 			      
 			      
 날짜:${dto.getSday()} ~ ${dto.getEday()}<br/>
+차이:<input type="text" id="a${dto.getCnum()}"/>
 unum: ${unum}
-<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img src="/hifive/cPhotoImage/${dto.getCnum()}" class="d-block w-100" alt="...">
-      <div class="container">하하하하하</div>
-    </div>
-    <div class="carousel-item">
-      <img src="..." class="d-block w-100" alt="...">
-      <div class="container">호호홓</div>
-    </div>
-    <div class="carousel-item">
-      <img src="..." class="d-block w-100" alt="...">
-      <div class="container">ㅎ;ㅎ;ㅎ;</div>
-    </div>
+<div id="carousel${dto.getCnum()}" class="carousel slide cPhotoZone" data-bs-ride="carousel">
+  <div class="carousel-inner" id="inner${dto.getCnum()}">
+   <!-- 들어가야할 내용 --> 
+   <!-- 들어가야할 내용 -->    
   </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+  <button class="carousel-control-prev" type="button" data-bs-target="#carousel${dto.getCnum()}" data-bs-slide="prev">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
     <span class="visually-hidden">Previous</span>
   </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+  <button class="carousel-control-next" type="button" data-bs-target="#carousel${dto.getCnum()}" data-bs-slide="next">
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
     <span class="visually-hidden">Next</span>
   </button>
-</div>			      
-			      
-			      
-			      
-			      
-			  	      
+</div> 			  	      
 			      
 			      </div>
 			      <div class="modal-footer">
@@ -205,6 +195,8 @@ unum: ${unum}
 <script>
 	$(document).ready(function(){
 		
+		
+		
 		//프로필 이미지 미리보기 기능
 		$("form").on("change","#uploadPh", handleChPhoto);
 		function handleChPhoto(e){
@@ -263,6 +255,60 @@ unum: ${unum}
 			 
 		});
 		
+		
+		$(".card").on("click",function(){
+			var cnum = $(this).attr("data-cnum");
+			var unum = $(this).attr("data-unum");
+			var sday = $(this).attr("data-sday");
+			var eday = $(this).attr("data-eday");
+			var validDay = getDateDiff(sday, eday)+1;
+			console.log(validDay) 
+			
+			
+			$("#a"+cnum).val(validDay);
+			
+			for(var i = 0 ;i<validDay; i++){
+				var date = new Date(sday)
+				date.setDate(date.getDate()+i);
+				var today = dateToString(date);
+				
+				if(i==0){
+					$("#inner"+cnum).append('<div class="carousel-item active cPhotoImage" id="cPhotoImage'+i+'"><img src="/hifive/cPhotoImage/'+cnum+'/'+unum+'/'+today+'" class="d-block w-100" alt="..."><div class="container">하하하하하</div></div>');
+				}else{
+					$("#inner"+cnum).append('<div class="carousel-item cPhotoImage" id="cPhotoImage'+i+'"><img src="/hifive/cPhotoImage/'+cnum+'/'+unum+'/'+today+'" class="d-block w-100" alt="..."><div class="container">하하하하하</div></div>');
+				}
+				console.log(today);				
+				
+			}
+			
+			
+		});
+		//날짜 차이 계산 해주는 함수
+		const getDateDiff = (d1, d2) => {
+			  const date1 = new Date(d1);
+			  const date2 = new Date(d2);
+			  
+			  const diffDate = date1.getTime() - date2.getTime();
+			  
+			  return Math.abs(diffDate / (1000 * 60 * 60 * 24)); // 밀리세컨 * 초 * 분 * 시 = 일
+		}
+		
+		//자바스크립트 날짜 => 문자열 포맷함수
+		function dateToString(date)
+		{
+					var dd = date.getDate();
+					var mm = date.getMonth()+1; //January is 0!
+				
+					var yyyy = date.getFullYear();
+					if(dd<10){dd='0'+dd} if(mm<10){mm='0'+mm}
+					
+					yyyy = yyyy.toString();
+					mm = mm.toString();
+					dd = dd.toString();
+				
+					var s1 = yyyy+"-"+mm+"-"+dd;
+					return s1;
+		}
 		
 		
 		

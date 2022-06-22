@@ -91,9 +91,9 @@ public class UserDAO {
 		session.selectOne("com.config.MemberMapper.insertCPhoto",insertPhoto);
 
 	}
-	//cPhoto리스트 가져오기
-	public List<CPhotoImageDTO> findCPhotoImage(int cnum) {
-		return session.selectList("com.config.MemberMapper.findCPhotoImage",cnum);
+	//cPhoto 가져오기
+	public CPhotoImageDTO findCPhotoImage(Map<String,String> map) {
+		return session.selectOne("com.config.MemberMapper.findCPhotoImage",map);
 	}
 	
 }

@@ -79,10 +79,10 @@
 		values(#{cnum},#{unum},#{mimetype},#{data}, #{original_name},#{c_comment},#{uploaddate},	#{validates})
 	 </insert>
 	 
-	 <select id="findCPhotoImage" parameterType="int" resultType="cPhotoImageDTO">
+	 <select id="findCPhotoImage" parameterType="map" resultType="cPhotoImageDTO">
 		select *
 		from cphotoImage
-		where cnum=#{cnum} and unum=#{unum}
+		where cnum= #{cnum} and unum= #{unum} and uploaddate = #{uploaddate}
 	 </select>
 	 
 	 

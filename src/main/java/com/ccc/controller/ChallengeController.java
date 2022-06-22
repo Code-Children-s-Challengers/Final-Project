@@ -119,7 +119,7 @@ public class ChallengeController {
 		
 		List<ChallengeDTO> allList = Cservice.allChallenge();
 		List<ChallengeDTO> hotList = new ArrayList<ChallengeDTO>(); 
-		for(int i = 0; i < 4; i++) {
+		for(int i = 0; i < 3; i++) {
 			if(allList.size() == i) {
 				break;
 			}
@@ -336,9 +336,10 @@ public class ChallengeController {
         	map.put("cnum", Integer.toString(ch.getCnum()));
         	map.put("unum", Integer.toString(unum));
         	map.put("date", date.toString());
+        	System.out.println("cnum: "+ch.getCnum());
+        	System.out.println("unum: "+unum);
+        	System.out.println("date: "+date.toString());
         	int i = userDAO.findAllCphotoForValidity(map);
-        	System.out.println("cnum:"+ch.getCnum());
-        	System.out.println("unum:"+unum);
         	System.out.println(i);
         	ch.setTodayCheck(i);
         }
@@ -468,6 +469,7 @@ public class ChallengeController {
         map.put("cnum", Integer.toString(cnum));
         map.put("unum", Integer.toString(unum));
         map.put("date", date.toString());
+        System.out.println("date:" + date.toString());
         // 오늘 인증을 한 상태이면 더 이상 인증 못함
         int count = userDAO.findAllCphotoForValidity(map);
         if(count!=0) {
@@ -634,22 +636,55 @@ public class ChallengeController {
 	}
 	
 	// DB에 저장된 인증 사진 가져오기 -- 홍석
-	@GetMapping("/cPhotoImage/{cnum}")
-	public List<ResponseEntity<byte[]>> findCPhotoImage(@PathVariable int cnum){
-		System.out.println(cnum);
-		List<CPhotoImageDTO> list = userDAO.findCPhotoImage(cnum);
-
+//	@ResponseBody
+//	@GetMapping("/cPhotoImage/{cnum}/{unum}")
+//	public List<ResponseEntity<byte[]>> findCPhotoImage(@PathVariable int cnum,@PathVariable int unum){
+//		System.out.println(cnum);
+//		
+//		Map<String,Integer> map = new HashMap<String,Integer>();
+//		map.put("cnum", cnum);
+//		map.put("unum", unum);
+//		List<CPhotoImageDTO> list = userDAO.findCPhotoImage(map);
+//
+//		
+//		List<ResponseEntity<byte[]>> list2 = new ArrayList<ResponseEntity<byte[]>>();
+//		for(CPhotoImageDTO cphoto : list) {
+//			HttpHeaders headers = new HttpHeaders();
+//			headers.add("Content-Type",cphoto.getMimetype());
+//			headers.add("Content-Length", String.valueOf(cphoto.getData().length));
+//			list2.add( new ResponseEntity<byte[]>(cphoto.getData(),headers, HttpStatus.OK));
+//		}
+//		return list2;
+//	}
+	
+	@GetMapping("/cPhotoImage/{cnum}/{unum}/{uploaddate}")
+	public ResponseEntity<byte[]> findCPhotoImage(@PathVariable int cnum,@PathVariable int unum, @PathVariable String uploaddate){
+		long miliseconds = System.currentTimeMillis();
+        Date date = new Date(miliseconds);
 		
-		List<ResponseEntity<byte[]>> list2 = new ArrayList<ResponseEntity<byte[]>>();
-		for(CPhotoImageDTO cphoto : list) {
+		Map<String,String> map = new HashMap<String,String>();
+		map.put("cnum", Integer.toString(cnum));
+		map.put("unum", Integer.toString(unum));
+		map.put("uploaddate", uploaddate);
+		System.out.println(map);
+		
+		CPhotoImageDTO cphoto = userDAO.findCPhotoImage(map);
+		CPhotoImageDTO cphotoBasic = new CPhotoImageDTO();
+		if(cphoto == null) {
+			HttpHeaders headers = new HttpHeaders();
+			headers.add("Content-Type",cphotoBasic.getMimetype());
+			headers.add("Content-Length", String.valueOf(cphotoBasic.getData().length));
+			return new ResponseEntity<byte[]>(cphotoBasic.getData(),headers, HttpStatus.OK);
+		}else {
 			HttpHeaders headers = new HttpHeaders();
 			headers.add("Content-Type",cphoto.getMimetype());
 			headers.add("Content-Length", String.valueOf(cphoto.getData().length));
-			list2.add( new ResponseEntity<byte[]>(cphoto.getData(),headers, HttpStatus.OK));
+			return  new ResponseEntity<byte[]>(cphoto.getData(),headers, HttpStatus.OK);
 		}
-		return list2;
+		
+		
 	}
-	
+
 	
 }
 
