@@ -116,7 +116,7 @@
     </div>
 </div>
 
-<div class="py-5 mb-5 bg-light  border border-5 justify-content-center" style="width:1020px" >
+<div class="py-5 mb-5 bg-light  border border-5 justify-content-center"  >
     <div class="container justify-content-around" style="width:901px;padding:0;" >
 	<!--  -->        
 		<div class="row row-cols-1 row-cols-md-4 g-4 justify-content-start align-self-center" style="width:100%;margin:0;">

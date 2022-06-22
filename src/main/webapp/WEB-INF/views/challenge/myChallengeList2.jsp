@@ -72,14 +72,15 @@
 		   			
 		   			<c:choose>
 		   			<c:when test="${dto.getTodayCheck() eq 1}">
-		   			<div class="card mb-3 border border-3 border-success" id="myCh${dto.getCnum()}" data-sday="${dto.getSday()}" data-eday="${dto.getEday()}" data-cnum="${dto.getCnum()}" data-unum="${unum}"  >
+		   			<div class="card mb-3 border border-3 border-success" id="myCh${dto.getCnum()}" data-sday="${dto.getSday()}" data-eday="${dto.getEday()}" data-cnum="${dto.getCnum()}" data-unum="${unum}" data-comment="${dto.getCommentList()}">
 		   			<span class="badge rounded-pill bg-success success">Success</span>
 		   			</c:when>
 		   			<c:when test="${dto.getTodayCheck() eq 0}"> 
-		   			<div class="card mb-3 border border-3 border-warning" id="myCh${dto.getCnum()}" data-sday="${dto.getSday()}" data-eday="${dto.getEday()}" data-cnum="${dto.getCnum()}" data-unum="${unum}" >
+		   			<div class="card mb-3 border border-3 border-warning" id="myCh${dto.getCnum()}" data-sday="${dto.getSday()}" data-eday="${dto.getEday()}" data-cnum="${dto.getCnum()}" data-unum="${unum}" data-comment="${dto.getCommentList()}">
 		   			<span class="badge rounded-pill bg-warning text-dark notYet">인증이 필요합니다</span>
 		   			</c:when>
 		   			</c:choose>
+		   			
 		   			
 		   			  	
 				  		<div class="row g-0 ">
@@ -116,6 +117,7 @@
   <div class="carousel-inner" id="inner${dto.getCnum()}">
    <!-- 들어가야할 내용 --> 
    <!-- 들어가야할 내용 -->    
+   
   </div>
   <button class="carousel-control-prev" type="button" data-bs-target="#carousel${dto.getCnum()}" data-bs-slide="prev">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -258,27 +260,61 @@
 		
 		
 		$(".card").on("click",function(){
+			
 			var cnum = $(this).attr("data-cnum");
 			var unum = $(this).attr("data-unum");
 			var sday = $(this).attr("data-sday");
 			var eday = $(this).attr("data-eday");
-			var validDay = getDateDiff(sday, eday)+1;
-			console.log(validDay) 
-			
-			
+			var commentList = $(this).attr("data-comment");
 			$("#a"+cnum).val(validDay);
 			
+			// 일단 안에 비우고 시작
+			$("#inner"+cnum).html("");
+			
+			// 인증 기간 (ex 3일)
+			var validDay = getDateDiff(sday, eday)+1;
+			
+			
+			
+			var commentList2 = commentList.slice(1,-1);
+			console.log(commentList2);
+			var commentList3 = commentList2.split(", ");
+			console.log(commentList3.length);
+			var commentList4 = [];
+			
+			for( var i2 =0 ;i2<commentList3.length; i2++){
+				var a = commentList3[i2].slice(1,-1)
+				console.log(a.split("="));
+				commentList4.push(a.split("="));
+			}
+			
+			
+			console.log(commentList4);
+			var commentDay = []; // 코멘트를 남긴 날들
+			var realComment = []; //실제 코멘트 내용
+			for(var i3=0 ; i3<commentList4.length; i3++){
+				commentDay.push(commentList4[i3][0]);
+				realComment.push(commentList4[i3][1]);
+			}
+			
 			for(var i = 0 ;i<validDay; i++){
-				var date = new Date(sday)
-				date.setDate(date.getDate()+i);
-				var today = dateToString(date);
 				
-				if(i==0){
-					$("#inner"+cnum).append('<div class="carousel-item active cPhotoImage" id="cPhotoImage'+i+'"><img src="/hifive/cPhotoImage/'+cnum+'/'+unum+'/'+today+'" class="d-block w-100" alt="..."><div class="container">'+today+'</div></div>');
+				//유효한 date들을 문자열로 만든다 => YYYY-MM-DD 형식의 문자열로 만들어줌
+				var date = new Date(sday)
+				date.setDate(date.getDate()+i); 
+				var today = dateToString(date); //실질적인 날짜
+				
+				var commentChecker = commentDay.indexOf(today); //일치하는 날이 있으면 그 위치
+				if(commentChecker == -1){
+					//기록 남긴 적 없음
 				}else{
-					$("#inner"+cnum).append('<div class="carousel-item cPhotoImage" id="cPhotoImage'+i+'"><img src="/hifive/cPhotoImage/'+cnum+'/'+unum+'/'+today+'" class="d-block w-100" alt="..."><div class="container">'+today+'</div></div>');
+					if(i==0){ //첫번째 슬라이드에는 active 추가
+						$("#inner"+cnum).append('<div class="carousel-item active cPhotoImage" id="cPhotoImage'+i+'"><img src="/hifive/cPhotoImage/'+cnum+'/'+unum+'/'+today+'" class="d-block w-100" alt="..."><div class="container">'+today+'</div><div class="container">'+realComment[commentChecker]+'</div></div>');
+					}else{ //두 번째 슬라이드부터는 active 추가X
+						$("#inner"+cnum).append('<div class="carousel-item cPhotoImage" id="cPhotoImage'+i+'"><img src="/hifive/cPhotoImage/'+cnum+'/'+unum+'/'+today+'" class="d-block w-100" alt="..."><div class="container">'+today+'</div><div class="container">'+realComment[commentChecker]+'</div></div>');
+					}
 				}
-				console.log(today);				
+				
 				
 			}
 			

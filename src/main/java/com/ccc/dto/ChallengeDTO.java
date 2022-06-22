@@ -1,5 +1,8 @@
 package com.ccc.dto;
 
+import java.util.List;
+import java.util.Map;
+
 import lombok.Data;
 
 @Data
@@ -17,7 +20,7 @@ public class ChallengeDTO {
 	
 	//홍석
 	private int todayCheck;
-	
+	private List<Map<String,String>> commentList;
 	
 	public int getCnum() {
 		return cnum;

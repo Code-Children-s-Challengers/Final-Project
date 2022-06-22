@@ -76,7 +76,7 @@ public class ChallengeController {
 		
 		List<ChallengeDTO> allList = Cservice.allChallenge();
 		List<ChallengeDTO> hotList = new ArrayList<ChallengeDTO>(); 
-		for(int i = 0; i < 4; i++) {
+		for(int i = 0; i < 3; i++) {
 			if(allList.size() == i) {
 				break;
 			}
@@ -345,10 +345,15 @@ public class ChallengeController {
              map2.put("unum", Integer.toString(unum));
              List<CPhotoImageDTO> cphotoList = userDAO.findAllCphoto(map2);
         	
+             //챌린지 별로 코멘트들을 모아둔다.
+             List<Map<String, String>> commentList = new ArrayList<Map<String,String>>();
              for(CPhotoImageDTO cphoto : cphotoList) {
             	 Map<String,String> map = new HashMap<String,String>();
-            	 cphoto.getC_comment();
+            	 // key => cnum+uploaddate / value -> comment
+            	 map.put(cphoto.getUploaddate(), cphoto.getC_comment());
+            	 commentList.add(map);
              }
+             ch.setCommentList(commentList);
         }
         
         
