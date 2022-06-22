@@ -58,6 +58,12 @@
 		where sday >= #{today} and category = #{category}
 	</select>
 	
+	<select id="categoryChallengeAll" resultType="ChallengeDTO" parameterType="hashmap">
+		select *
+		from challenges
+		where category = #{category}
+	</select>
+	
 	<select id="findParticipant" resultType="int" parameterType="hashmap">
 		select count(*)
 		from cparticipant

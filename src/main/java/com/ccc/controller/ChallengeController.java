@@ -111,7 +111,7 @@ public class ChallengeController {
 			pp = Integer.parseInt(perPage);
 		}
 		
-		PageDTO dto = Cservice.categoryChallenge(category, Integer.parseInt(curPage),pp); //Page처리
+		PageDTO dto = Cservice.categoryChallengeAll(category, Integer.parseInt(curPage),pp); //Page처리
 		dto.setPerPage(pp);
 		int tot = dto.getTotalRecord() / dto.getPerPage();
 		if(dto.getTotalRecord() % dto.getPerPage() != 0) tot++;

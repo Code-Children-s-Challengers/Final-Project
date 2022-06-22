@@ -244,4 +244,26 @@ public class ChallengeDAO {
 		map.put("unum", unum);
 		return session.update("com.config.ChallengeMapper.challengeCompleteUpdate", map);
 	}
+
+	public PageDTO categoryChallengeAll(String category, int curPage, int perPage) throws Exception{
+		Date date = new Date();
+		long timeInMilliSeconds = date.getTime();
+        java.sql.Date sqlDate = new java.sql.Date(timeInMilliSeconds);
+        HashMap<String, String> map = new HashMap<String, String>();
+        map.put("today", sqlDate.toString());
+        map.put("category", category);
+        
+        
+        PageDTO pageDTO = new PageDTO();
+		int offset = (curPage-1)*perPage;
+		List<ChallengeDTO> list = session.selectList("com.config.ChallengeMapper.categoryChallengeAll", map,new RowBounds(offset,perPage));
+		
+		int totalRecord = categoryNumber(category);
+		
+		pageDTO.setList(list);
+		pageDTO.setCurPage(curPage);
+		pageDTO.setTotalRecord(totalRecord);
+		return pageDTO;
+	}
+
 }

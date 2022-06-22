@@ -37,4 +37,5 @@ public interface ChallengeService {
 	public int challengeCompleteCheck(String cnum, String unum) throws Exception;
 	public int challengeCompleteUpdate(String cnum, String unum) throws Exception;
 	public int challengeAdd_Participate(ChallengeDTO dto, int unum, int cnum, String skiphidden) throws Exception;
+	public PageDTO categoryChallengeAll(String category, int parseInt, int pp) throws Exception;
 }

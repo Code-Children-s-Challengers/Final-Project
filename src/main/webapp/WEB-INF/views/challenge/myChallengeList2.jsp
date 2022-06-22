@@ -305,13 +305,18 @@
 				var today = dateToString(date); //실질적인 날짜
 				
 				var commentChecker = commentDay.indexOf(today); //일치하는 날이 있으면 그 위치
+				console.log(commentChecker);
 				if(commentChecker == -1){
-					//기록 남긴 적 없음
+					if(i==0){ //첫번째 슬라이드에는 active 추가
+						$("#inner"+cnum).append('<div class="carousel-item active cPhotoImage" id="cPhotoImage'+i+'"><img src="/hifive/cPhotoImage/'+cnum+'/'+unum+'/'+today+'" class="d-block w-100" alt="..."><div class="container">'+today+'</div><div class="container border border-danger border-3">'+'인증 실패'+'</div></div>');
+					}else{ //두 번째 슬라이드부터는 active 추가X
+						$("#inner"+cnum).append('<div class="carousel-item cPhotoImage" id="cPhotoImage'+i+'"><img src="/hifive/cPhotoImage/'+cnum+'/'+unum+'/'+today+'" class="d-block w-100" alt="..."><div class="container">'+today+'</div><div class="container border border-danger border-3">'+'인증 실패'+'</div></div>');
+					}
 				}else{
 					if(i==0){ //첫번째 슬라이드에는 active 추가
-						$("#inner"+cnum).append('<div class="carousel-item active cPhotoImage" id="cPhotoImage'+i+'"><img src="/hifive/cPhotoImage/'+cnum+'/'+unum+'/'+today+'" class="d-block w-100" alt="..."><div class="container">'+today+'</div><div class="container">'+realComment[commentChecker]+'</div></div>');
+						$("#inner"+cnum).append('<div class="carousel-item active cPhotoImage" id="cPhotoImage'+i+'"><img src="/hifive/cPhotoImage/'+cnum+'/'+unum+'/'+today+'" class="d-block w-100" alt="..."><div class="container">'+today+'</div><div class="container border border-success border-3">'+realComment[commentChecker]+'</div></div>');
 					}else{ //두 번째 슬라이드부터는 active 추가X
-						$("#inner"+cnum).append('<div class="carousel-item cPhotoImage" id="cPhotoImage'+i+'"><img src="/hifive/cPhotoImage/'+cnum+'/'+unum+'/'+today+'" class="d-block w-100" alt="..."><div class="container">'+today+'</div><div class="container">'+realComment[commentChecker]+'</div></div>');
+						$("#inner"+cnum).append('<div class="carousel-item cPhotoImage" id="cPhotoImage'+i+'"><img src="/hifive/cPhotoImage/'+cnum+'/'+unum+'/'+today+'" class="d-block w-100" alt="..."><div class="container">'+today+'</div><div class="container border border-success border-3">'+realComment[commentChecker]+'</div></div>');
 					}
 				}
 				

@@ -182,4 +182,11 @@ public class ChallengeServiceImpl implements ChallengeService {
 		return num;
 	}
 
+	//홍석
+	@Override
+	public PageDTO categoryChallengeAll(String category, int parseInt, int pp) throws Exception{
+		return dao.categoryChallengeAll(category, parseInt,pp);
+	}
+
+
 }
