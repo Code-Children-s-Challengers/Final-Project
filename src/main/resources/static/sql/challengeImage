@@ -9,11 +9,11 @@ create table challengeImage
 create table cPhotoImage
 (
   cnum number(10),
-  UNUM NUMBER(5,0), 
-  mimetype varchar(100) null,
+  unum number(10), 
+  mimetype varchar2(100) null,
   data blob null,
-  original_name varchar(100) null,
-  COMENT VARCHAR2(25 BYTE) DEFAULT NULL, 
-  "UPLOADDATE" DATE NOT NULL ENABLE, 
-  "VALIDATES" NUMBER(1,0) DEFAULT 1
+  original_name varchar2(100) null,
+  c_comment VARCHAR2(25 BYTE) DEFAULT NULL, 
+  uploaddate varchar2(200), 
+  validates NUMBER(10) DEFAULT 1
 );
