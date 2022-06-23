@@ -197,6 +197,9 @@
 # User Interface
 
 ![ui](https://github.com/dhslrl321/L7-monitor/blob/master/assets/ui.png)
+![ui](https://github.com/Code-Children-s-Challengers/Final-Project/blob/main/DA/PROJECT_IMAGE/INTERFACE1.PNG)
+
+
 
 - **실시간 트래픽 모니터링**
   - Line Graph
