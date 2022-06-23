@@ -31,7 +31,7 @@
 <!--  헤더  -->
 <section class="text-center container">
 <jsp:include page="common/menu.jsp" flush="true"/><br>
-    <div class="row py-lg-4">
+    <div class="row py-lg-3">
       <div class="col-lg-6 col-md-8 mx-auto">
         <h1 class="fw-light">새로운 도전을 즐기세요!</h1>
         <p class="lead text-muted">나를 죽이지 못한 고통은 나를 더 강하게 만들 뿐</p>
@@ -39,6 +39,9 @@
           <a id="chMaking" class="btn btn-primary my-2" style="display:inline-block" data-bs-toggle="modal" data-bs-target="#chMakingPage2">챌린지 만들기</a>
           <a id="chHome" class="btn btn-primary my-2" style="display:inline-block">챌린지 찾기</a>
         </p>
+		<p>
+        <span class="badge bg-dark">현재 Point</span><span class="badge bg-light text-dark">${point}P</span>
+        <p>
       </div>
     </div>
 </section>

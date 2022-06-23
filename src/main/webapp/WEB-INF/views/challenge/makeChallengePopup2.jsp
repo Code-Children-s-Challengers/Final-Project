@@ -95,7 +95,7 @@
     </div>
   </div>
   <div class="col-sm-5">
-    <label for="fee" class="form-label">포인트</label>
+    <label for="fee" class="form-label"><span class="badge rounded-pill bg-dark">P</span>&nbsp;포인트 &nbsp;&nbsp;</label>
     <input type="number" class="form-control" id="fee" name="fee" aria-describedby="pointV1 pointV2"  min="0" required>
      <div id="pointV1" class="valid-feedback">
       Good!
@@ -181,9 +181,14 @@ $(document).ready(function(){
 	 			processData: false,
 	 			dataType: 'text',
 	 			success: function(data){
-	 				alert(data);	
-	 				$(".btn-close").click();
-	 				window.location.reload();
+	 				if(data == "fail"){
+	 					alert("포인트가 부족합니다.");
+	 				}else if (data = "success"){
+	 					alert("챌린지를 만들었습니다.");	
+		 				$(".btn-close").click();
+		 				window.location.reload();
+	 				}
+	 				
 	 			}
 	 		});	
 		}

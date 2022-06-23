@@ -17,3 +17,12 @@ create table cPhotoImage
   uploaddate varchar2(200), 
   validates NUMBER(10) DEFAULT 1
 );
+
+create table point
+(
+  cnum number(10),
+  unum number(10), 
+  point number(10) null,
+  endDday varchar2(255) null,
+  valid number(10)
+);

@@ -10,42 +10,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<script>
 	$(document).ready(function(){
-		$(".participateCheck").on("click",function(){
-			var cnum = $(this).attr("data-cnum");
-			console.log(cnum);
-			$('.btn-close').click(); 
-			console.log(cnum);
-			// 0.5초 후 ajax를 실행한다
-			var delayInMilliseconds = 500; 
-			setTimeout(function() {
-			 	
-				//ajax
-				$.ajax({
-					url:'/hifive/challengeParticipate',
-					type:'post',
-					data:{
-						"cnum":cnum
-					},
-				dataType:'text',
-				success:function(responseData, status, xhr){
-						console.log(responseData);
-						if(responseData == "success"){
-							alert("참가되었습니다!");
-						}else if(responseData == "already participated"){
-							alert("이미 참가 중입니다!");
-						}else if(responseData == "nomoney"){
-							alert("참가비가 부족합니다!");
-						}else if(responseData == "full"){
-							alert("참여자 수가 가득 찼습니다!");
-						}else{
-							alert("오류 발생");
-						}
-					}
-				});
-				
-				
-			}, delayInMilliseconds);//end of setTimeOut
-		}); //end of event
+		
 	});
 	
 	</script>

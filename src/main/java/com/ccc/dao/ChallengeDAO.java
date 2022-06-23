@@ -1,9 +1,9 @@
 package com.ccc.dao;
 
-import java.sql.Timestamp;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
@@ -265,6 +265,24 @@ public class ChallengeDAO {
 		pageDTO.setCurPage(curPage);
 		pageDTO.setTotalRecord(totalRecord);
 		return pageDTO;
+	}
+
+	//홍석
+	public int pointAccount(int unum, int cnum, String endDay, int point) {
+		Map<String, String> map = new HashMap<String,String>();
+		map.put("unum", Integer.toString(unum));
+		map.put("cnum", Integer.toString(cnum));
+		map.put("endDay", endDay);
+		map.put("point", Integer.toString(point));
+		return session.insert("com.config.MemberMapper.pointAccount", map);
+	}
+	
+	//홍석
+	public int pointMinus(int unum, int cnum, int point) {
+		Map<String, String> map = new HashMap<String,String>();
+		map.put("unum", Integer.toString(unum));
+		map.put("point", Integer.toString(point));
+		return session.insert("com.config.MemberMapper.pointMinus", map);
 	}
 
 }

@@ -196,6 +196,7 @@ public class ChallengeController {
 		return "challenge/participantPopup2";
 	}
 	
+	// 챌린지 참가하기 => 사용
 	@Secured("ROLE_USER")
 	@RequestMapping(value="/challengeParticipate", method = RequestMethod.POST) // 실제 참가를 진행해주는 메서드
 	@ResponseBody
@@ -214,7 +215,7 @@ public class ChallengeController {
 			if(dto.getParticipant() >= dto.getMpeople()) {
 				return "full";
 			}
-			num = Cservice.Participate(unum,cnum);
+			num = Cservice.ParticipatePoint(unum,cnum, dto.getEday(), dto.getFee());
 		}
 		if(num == 0) {
 			return "fail";
@@ -232,6 +233,7 @@ public class ChallengeController {
 		return "challenge/skipdayPopup";
 	}
 	
+	//챌린지 만들기 => 사용
 	@PostMapping("/makeChallenge")
 	@ResponseBody
 	//@RequestMapping(value="/makeChallenge", method = RequestMethod.POST)
@@ -245,6 +247,10 @@ public class ChallengeController {
         Date date = new Date(miliseconds);
         int cnum = Cservice.challengeNumber();
 		
+        //금액이 부족하면
+        if(user.getPoint() < fee) {
+        	return "fail";
+        }
         
        
         /*
@@ -278,7 +284,7 @@ public class ChallengeController {
 //			num = Cservice.insertHoliday(Integer.toString(cnum+1), skiphidden);
 //		}
 //		num = Cservice.Participate(unum, cnum+1);
-		num = Cservice.challengeAdd_Participate(dto,unum,cnum+1,skiphidden);
+		num = Cservice.challengeAdd_Participate(dto,unum,cnum+1,skiphidden, dto.getEday(), dto.getFee());
 		
 		return "success";
 	}
@@ -492,6 +498,7 @@ public class ChallengeController {
         }
         dto2.setList(list2);
         
+        m.addAttribute("point",user.getPoint());
         m.addAttribute("PageDTO2", dto2); // 이미 시작한 챌린지들만 담은 pageDTO
         m.addAttribute("PageDTO", dto);// 모든 나의 챌린지
 		m.addAttribute("unum",unum);

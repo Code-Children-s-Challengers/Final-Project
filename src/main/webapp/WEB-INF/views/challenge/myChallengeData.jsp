@@ -40,7 +40,7 @@
 		   			<c:choose>
 		   			<c:when test="${tab == 'complete'}"><!-- 완료한 챌린지일 때-->
 		   				<div class="card mb-3 border border-3 border-dark" id="myCh${dto.getCnum()}" data-sday="${dto.getSday()}" data-eday="${dto.getEday()}" data-cnum="${dto.getCnum()}" data-unum="${unum}" data-comment="${dto.getCommentList()}">
-		   				<span class="badge rounded-pill bg-dark text-white success">종료한챌린지입니다</span>
+		   				<span class="badge rounded-pill bg-dark text-white success">종료한 챌린지입니다</span>
 		   			</c:when>
 		   			<c:when test="${tab == 'wait'}"> <!-- 대기 중인 챌린지일 때-->
 		   				<div class="card mb-3 border border-3 border-secondary" id="myCh${dto.getCnum()}" data-sday="${dto.getSday()}" data-eday="${dto.getEday()}" data-cnum="${dto.getCnum()}" data-unum="${unum}" data-comment="${dto.getCommentList()}">

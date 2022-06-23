@@ -58,12 +58,11 @@ public class ChallengeServiceImpl implements ChallengeService {
 	}
 	
 	@Override
-	@Transactional
-	public int Participate(int unum, int cnum) throws Exception{
+	public int Participate(int unum, int cnum) throws Exception {
 		int num = 0;
 		try {
-			num = dao.challengeParticipate(unum, cnum);
-			num = dao.challengePeopleUpdate(cnum);
+			num = dao.challengeParticipate(unum, cnum); //챌린지 참여
+			num = dao.challengePeopleUpdate(cnum); //챌린지 인원수 조정
 		}catch (Exception e){
 			e.printStackTrace();
 			throw new Exception("fail");
@@ -71,27 +70,14 @@ public class ChallengeServiceImpl implements ChallengeService {
 		return num;
 	}
 
+
 	@Override
 	public int challengeAdd(ChallengeDTO dto) throws Exception {
 		int num = dao.challengeAdd(dto);
 		return num;
 	}
 	
-	@Override
-	@Transactional
-	public int challengeAdd_Participate(ChallengeDTO dto, int unum, int cnum, String skiphidden) throws Exception{
-		int num = 0;
-		try{
-			num = dao.challengeAdd(dto);
-			if(skiphidden != null && skiphidden.length() > 5) {
-				num = dao.insertHoliday(Integer.toString(cnum), skiphidden);
-			}
-			num = Participate(unum, cnum);
-        }catch (Exception e){
-            throw new Exception("fail");
-        }
-		return num;
-	}
+
 
 	@Override
 	public PageDTO userChallenge(int unum, int curPage, int perPage) throws Exception {
@@ -188,5 +174,39 @@ public class ChallengeServiceImpl implements ChallengeService {
 		return dao.categoryChallengeAll(category, parseInt,pp);
 	}
 
+	//홍석
+	@Override
+	@Transactional
+	public int ParticipatePoint(int unum, int cnum, String endDay, int point) throws Exception{
+		int num = 0;
+		try {
+			num = dao.challengeParticipate(unum, cnum); //챌린지 참여
+			num = dao.challengePeopleUpdate(cnum); //챌린지 인원수 +1
+			//홍석 추가
+			num = dao.pointAccount(unum, cnum, endDay, point); //금액 저장하기
+			num = dao.pointMinus(unum,cnum, point); //user_table에서 금액빼기
+		}catch (Exception e){
+			e.printStackTrace();
+			throw new Exception("fail");
+		}
+		return num;
+	}
+	
+	// 생성하면서 자동 참가
+	@Override
+	@Transactional
+	public int challengeAdd_Participate(ChallengeDTO dto, int unum, int cnum, String skiphidden, String endDay, int point) throws Exception{
+		int num = 0;
+		try{
+			num = dao.challengeAdd(dto); //챌린지 만들기
+			if(skiphidden != null && skiphidden.length() > 5) {
+				num = dao.insertHoliday(Integer.toString(cnum), skiphidden);
+			}
+			num = ParticipatePoint(unum, cnum, endDay, point); //챌린지 참여하기
+        }catch (Exception e){
+            throw new Exception("fail"); 
+        }
+		return num;
+	}
 
 }
