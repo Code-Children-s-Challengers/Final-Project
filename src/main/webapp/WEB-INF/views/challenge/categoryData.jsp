@@ -75,10 +75,10 @@
 	
 </style>
 
-<div class="py-5 mb-5 bg-light  border border-5 justify-content-center">
-    <div class="container justify-content-around" style="width:100%;padding:0;" >
+<div class="py-5 mb-5 bg-light  border border-5" style="margin:auto;">
+    <div class="container" style="width:100%;padding:0;margin:auto;" >
 	<!--  -->        
-		<div class="row row-cols-1 row-cols-md-4 g-4   justify-content-start align-self-center" style="width:100%;padding-left:5.5%;">
+		<div class="row row-cols-1 row-cols-md-3 g-4 " style="width:900px;margin:auto;">
 		  	<c:set var="list" value ="${hotList}"></c:set>
 		  	<c:forEach var="dto" items="${list}" varStatus="status">	
 		  	<!-- card -->
@@ -122,10 +122,10 @@
     </div>
 </div>
 
-<div class="py-5 mb-5 bg-light  border border-5 justify-content-center"  >
-    <div class="container justify-content-around" style="width:100%;padding:0;" >
+<div class="py-5 mb-5 bg-light  border border-5 "  style="margin:auto;">
+    <div class="container " style="width:100%;padding:0;margin:auto;" >
 	<!--  -->        
-		<div class="row row-cols-1 row-cols-md-4 g-4 justify-content-start align-self-center" style="width:100%;padding-left:5.5%;">
+		<div class="row row-cols-1 row-cols-md-3 g-4 " style="width:900px;margin:auto;">
 			<c:set var="list2" value ="${PageDTO.getList()}"></c:set>
 			<c:forEach var="dto" items="${list2}" varStatus="status">	
 		  		<!-- card -->
