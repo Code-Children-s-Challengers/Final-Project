@@ -24,7 +24,8 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <script>
  $(document).ready(function(){
-	$("#study").on("click",function(){
+	// 카테고리 선택 과정//
+	 $("#study").on("click",function(){
 		console.log("study");	
 		$("#study").attr("class", "nav-link active");
 		$("#exercise").attr("class", "nav-link");
@@ -35,7 +36,6 @@
 			url:"/hifive/challengesAjax?category=study",
 			cache : false,
 			success : function(data) {
-				console.log(data);
 				$("#content").html(data);
 			}
 		});
@@ -53,7 +53,6 @@
 			url:"/hifive/challengesAjax?category=fitness",
 			cache : false,
 			success : function(data) {
-				console.log(data);
 				$("#content").html(data);
 			}
 		});
@@ -71,11 +70,11 @@
 			url:"/hifive/challengesAjax?category=others",
 			cache : false,
 			success : function(data) {
-				console.log(data);
 				$("#content").html(data);
 			}
 		});
 	});
+	// 카테고리 선택 과정//
 	
 	
  });

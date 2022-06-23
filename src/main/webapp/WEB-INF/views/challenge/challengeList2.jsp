@@ -125,25 +125,71 @@
 		</div>
 	</div>
 <input type="hidden" id="curPage" data-curPage="${curPage}" />
+<input type="hidden" id="tot" data-tot="${totalPage}" />
 <nav aria-label="Page navigation example">
   <ul class="pagination mt-4 justify-content-center">
-    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+    <li class="page-item" id="previous"><a class="page-link" id="previousLink" >Previous</a></li>
         <c:forEach  begin="1" end="${totalPage}"  varStatus="status2">	
-    		<li class="page-item" id="page${status2.count}" data-page="${status2.count}"><a class="page-link">${status2.count}</a></li> <!-- 2부터 시작 -->
+    		<li class="page-item pageNumber" id="page${status2.count}" data-page="${status2.count}"><a class="page-link">${status2.count}</a></li> <!-- 2부터 시작 -->
 		 </c:forEach>
-    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+    <li class="page-item" id="next"><a class="page-link" id="nextLink">Next</a></li>
   </ul>
 </nav>
 </div>
 
 <script>
 	$(document).ready(function(){
-
-		$(".page-item").on("click",function(){
-			var curPage = $("#curPage").attr("data-curPage");
+		// 페이지 선택 과정
+		var curPage = $("#curPage").attr("data-curPage");
+		$("#page"+curPage).addClass("active");
+		
+		var tot = $("#tot").attr("data-tot");
+		if(curPage == 1){
+			$('#previousLink').on('click', function(){console.log("why"); return false;});
+			$("#previous").addClass("disabled");
+		}
+		if(curPage == tot ){
+			$('#nextLink').on('click', function(){console.log("why"); return false;});
+			$("#next").addClass("disabled");
+		}
+		
+		
+		$(".pageNumber").on("click",function(){
 			var clickPage = $(this).attr("data-page");
+			$.ajax({
+				type:"get",
+				url:"/hifive/challengesAjax?category=study&curPage="+clickPage,
+				cache : false,
+				success : function(data) {
+					$("#content").html(data);
+				}
+			});
 		});
 		
+		$("#nextLink").on("click",function(){
+			var nextPage = Number(curPage)+1;
+			$.ajax({
+				type:"get",
+				url:"/hifive/challengesAjax?category=study&curPage="+nextPage,
+				cache : false,
+				success : function(data) {
+					$("#content").html(data);
+				}
+			});
+		});
+		
+		$("#previousLink").on("click",function(){
+			var previousPage = Number(curPage)-1;
+			$.ajax({
+				type:"get",
+				url:"/hifive/challengesAjax?category=study&curPage="+previousPage,
+				cache : false,
+				success : function(data) {
+					$("#content").html(data);
+				}
+			});
+		});
+		// 페이지 선택 과정
 	});
 </script>
 

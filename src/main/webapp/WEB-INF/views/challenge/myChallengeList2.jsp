@@ -49,9 +49,10 @@
 		bottom:10px;
 	}
 	.cPhotoZone{
-		width:600px;
-		heigth:600px;
+		width:300px;
+		heigth:200px;
 	}
+	
 </style>	
 </head>
 <!-- 당일 인증 여부 -->

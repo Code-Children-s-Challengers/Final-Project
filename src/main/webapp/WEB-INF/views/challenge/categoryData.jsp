@@ -166,4 +166,73 @@
 			</c:forEach>
 		</div>
 	</div>
+<input type="hidden" id="curPage2" data-curPage="${curPage}" />
+<input type="hidden" id="tot2" data-tot="${totalPage}" />
+<input type="hidden" id="category2" data-category="${category}"/>
+<nav aria-label="Page navigation example">
+  <ul class="pagination mt-4 justify-content-center">
+    <li class="page-item" id="previous" ><a class="page-link" id="previousLink">Previous</a></li>
+        <c:forEach  begin="1" end="${totalPage}"  varStatus="status2">	
+    		<li class="page-item pageNumber" id="page2${status2.count}" data-page="${status2.count}"><a class="page-link">${status2.count}</a></li> <!-- 2부터 시작 -->
+		 </c:forEach>
+    <li class="page-item" id="next"><a class="page-link" id="nextLink">Next</a></li>
+  </ul>
+</nav>	
+	
 </div>
+<script>
+	$(document).ready(function(){
+		// 페이지 선택 과정
+		var category2 = $("#category2").attr("data-category");
+		var curPage2 = $("#curPage2").attr("data-curPage");
+		$("#page2"+curPage2).addClass("active");
+		
+		var tot2 = $("#tot2").attr("data-tot");
+		if(curPage2 == 1){
+			$("#previous").addClass("disabled");
+			$('#previousLink').on('click', function(){console.log("why"); return false;});
+		}
+		
+		if(curPage2 ==tot2){
+			$("#next").addClass("disabled");
+			$('#nextLink').on('click', function(){console.log("why"); return false;});
+		}
+		
+		$(".pageNumber").on("click",function(){
+			var clickPage2 = $(this).attr("data-page");
+			$.ajax({
+				type:"get",
+				url:"/hifive/challengesAjax?category="+category2+"&curPage="+clickPage2,
+				cache : false,
+				success : function(data) {
+					$("#content").html(data);
+				}
+			});
+		});
+		
+		$("#nextLink").on("click",function(){
+			var nextPage = Number(curPage2)+1;
+			$.ajax({
+				type:"get",
+				url:"/hifive/challengesAjax?category="+category2+"&curPage="+nextPage,
+				cache : false,
+				success : function(data) {
+					$("#content").html(data);
+				}
+			});
+		});
+		
+		$("#previousLink").on("click",function(){
+			var previousPage = Number(curPage2)-1;
+			$.ajax({
+				type:"get",
+				url:"/hifive/challengesAjax?category="+category2+"&curPage="+previousPage,
+				cache : false,
+				success : function(data) {
+					$("#content").html(data);
+				}
+			});
+		});
+		// 페이지 선택 과정
+	});
+</script>

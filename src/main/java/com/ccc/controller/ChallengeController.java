@@ -87,7 +87,7 @@ public class ChallengeController {
 		m.addAttribute("hotList", hotList);
 		m.addAttribute("totalPage", tot);
 		m.addAttribute("PageDTO", dto);
-		m.addAttribute("catogory", category);
+		m.addAttribute("category", category);
 		
 		return "challenge/categoryData"; 
 		
@@ -132,7 +132,7 @@ public class ChallengeController {
 		m.addAttribute("hotList", hotList);
 		m.addAttribute("totalPage", tot);
 		m.addAttribute("PageDTO", dto);
-		m.addAttribute("catogory", category);		
+		m.addAttribute("category", category);		
 		
 		return "challenge"; //challenge.jsp => 메인화면이겠군
 	}
