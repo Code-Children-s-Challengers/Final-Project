@@ -71,10 +71,10 @@
     <div class="container justify-content-around"  style="width:901px;padding:0;">
 	<!--  -->     	
 		<div class="row row-cols-1 row-cols-md-1 g-4 justify-content-start align-self-center" style="width:100%;margin:0;">	
-			<c:set var="list" value ="${PageDTO.getList()}"></c:set>
+			<c:set var="list" value ="${PageDTO2.getList()}"></c:set>
 			<c:forEach var="dto" items="${list}" varStatus="status">	
 		  		<!-- card -->
-		  		<div class="col " data-bs-toggle="modal" data-bs-target="#closely${dto.getCnum()}">
+		  		<div class="col" data-bs-toggle="modal" data-bs-target="#closely${dto.getCnum()}" >
 		   			
 		   			
 		   			<c:choose>
@@ -98,7 +98,14 @@
 				      		<div class="card-body">
 				        		<h5 class="card-title">${dto.getName()}</h5>
 		        			<p class="card-text">${dto.getSday()} ~ ${dto.getEday()}<br/>참여인원: ${dto.getParticipant()}/${dto.getMpeople()}<br/>참가비: ${dto.getFee()}P<br/>${dto.getCnum()}</p>
-				      		<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#upload${dto.getCnum()}">사진 인증하기</button>
+				      		<c:choose>
+				      			<c:when test="${dto.getTodayCheck() eq 1}"> <!-- 오늘 인증을 완료한 사람은 사진 올리기 기능을 사용할 수 없다-->
+				      				<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#upload${dto.getCnum()}" disabled>사진 인증하기</button>
+				      			</c:when>
+				      			<c:when test="${dto.getTodayCheck() eq 0}"><!-- 아직 당일 인증을 완료한 사람은 사진 올리기 기능을 사용할 수 있다-->
+				      				<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#upload${dto.getCnum()}" >사진 인증하기</button>
+				      			</c:when>
+				      		</c:choose>
 				      		</div>
 				   		</div>
 					  	</div>
@@ -225,42 +232,43 @@
 				});
 		}
 		
-		// inValid라는 함수를 만들 수 있다!!
-		$.fn.isValid = function(){
-			  return this[0].checkValidity()
-			}
+		
 		
 		// 클릭 이벤트 발생 시 ajax처리한다
 		$(".upload").on("click",function(){
+			// inValid라는 함수를 만들 수 있다!!
+			$.fn.isValid = function(){
+				  return this[0].checkValidity()
+				}
+			
 			//form의 data-cnum
 			var cnum = $(this).attr("data-cnum");
 			console.log(cnum);
-			
+			console.log($("#uploadForm"+cnum));
 			// 부트스트랩 유효성 검증  
 			if (! $("#uploadForm"+cnum).isValid()) {
 		          event.preventDefault()
 		          event.stopPropagation()
 		          console.log("why");
-		        }			
-			 $("#uploadForm"+cnum).addClass('was-validated');
-			// 부트스트랩 유효성 검증  
-
-			//ajax로 formData를 전송한다, 전송 대상 : 사진, comment
-			var formData = new FormData($("#uploadForm"+cnum)[0]);
-			$.ajax({
-				url: "/hifive/upload/"+cnum,
-				type:"post",
-				data : formData,
-				cache: false,
-				contentType: false,
-				processData: false,
-				dataType: 'text',
-				success: function(data){
-					alert(data);	
-					$(".btn-close").click();
-					window.location.reload();
-				}
-			});			 
+		          $("#uploadForm"+cnum).addClass('was-validated');
+		        }else{
+		        	//ajax로 formData를 전송한다, 전송 대상 : 사진, comment
+					var formData = new FormData($("#uploadForm"+cnum)[0]);
+					$.ajax({
+						url: "/hifive/upload/"+cnum,
+						type:"post",
+						data : formData,
+						cache: false,
+						contentType: false,
+						processData: false,
+						dataType: 'text',
+						success: function(data){
+							alert(data);	
+							$(".btn-close").click();
+							window.location.reload();
+						}
+					});			
+		        }			 
 			 
 		});
 		
@@ -310,13 +318,9 @@
 				var photoDay = dateToString(date); //실질적인 날짜				
 				
 				var commentChecker = commentDay.indexOf(photoDay); //일치하는 날이 있으면 그 위치(인덱스), 일치한 날이 없으면 -1
-				console.log(commentChecker);
 				
 				//실질적으로 인증한 마지막 날
 				var lastDay = new Date(commentDay[commentDay.length-1])
-				console.log(commentDay);
-				console.log(lastDay);
-				console.log(date);
 				
 				if(commentChecker != -1){ //인증한 날이 있을 때					
 					if(i==0){ //첫번째 슬라이드에는 active 추가

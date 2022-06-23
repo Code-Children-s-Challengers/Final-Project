@@ -3,6 +3,7 @@ package com.ccc.controller;
 import java.io.File;
 import java.io.IOException;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -111,7 +112,7 @@ public class ChallengeController {
 			pp = Integer.parseInt(perPage);
 		}
 		
-		
+		//카테고리별로 오늘 날짜 이후의 챌린지를 보여준다.
 		PageDTO dto = Cservice.categoryChallenge(category, Integer.parseInt(curPage),pp); //Page처리
 		dto.setPerPage(pp);
 		int tot = dto.getTotalRecord() / dto.getPerPage();
@@ -306,6 +307,113 @@ public class ChallengeController {
 	
 //////////////////////////////////////////////////////////////////////////////////내 challenge 페이지
 
+	@Secured("ROLE_USER")
+	@GetMapping("/myChallengeTab")
+	public String myChallengeTab(Model m, HttpServletRequest request, @AuthenticationPrincipal PrincipalDetails principalDetails) throws Exception{
+		//userId
+		UserDTO user = userDAO.findByUsername(principalDetails.getUser().getUsername());
+		int unum =  user.getId();
+		
+		//어떤 tab을 선택했는가
+		String tab = request.getParameter("tab");
+		System.out.println("tab: "+tab);
+		
+		// db에서 가져온 pageDTO
+		PageDTO dto = Cservice.userChallenge(unum, 0,0);
+		
+		// 이미 start했으며 종료하지 않은 챌린지들만 따로 담을 pageDTO
+		PageDTO dto2 = new PageDTO();
+		List<ChallengeDTO> list2 = new ArrayList<ChallengeDTO>();
+		
+		// 아직 대기 중인 챌린지들만 따로 담을 pageDTO
+		PageDTO dto3 = new PageDTO();
+		List<ChallengeDTO> list3 = new ArrayList<ChallengeDTO>();
+		
+		// 이미 종료한 챌린지들만 따로 담을 pageDTO
+		PageDTO dto4 = new PageDTO();
+		List<ChallengeDTO> list4 = new ArrayList<ChallengeDTO>();
+		
+		// 이미 종료한 챌린지들만 따로 담을 pageDTO
+		PageDTO dto5 = new PageDTO();
+		List<ChallengeDTO> list5 = new ArrayList<ChallengeDTO>();
+		
+		// 오늘 날짜
+		long miliseconds = System.currentTimeMillis();
+        Date date = new Date(miliseconds);
+		
+      
+        
+               
+		// ChallengList 중에서 오늘 날짜에, validate가 1인 사진이 등록되어 있는 챌린지들은?
+		//cnum, date 해서 갯수를 가지고 온다		
+        for(ChallengeDTO ch :  dto.getList()) {
+        	Map<String, String> map = new HashMap<String,String>();
+        	map.put("cnum", Integer.toString(ch.getCnum()));
+        	map.put("unum", Integer.toString(unum));
+        	map.put("date", date.toString());
+        	int i = userDAO.findAllCphotoForValidity(map);
+        	ch.setTodayCheck(i); // 오늘 인증했으면 1, 아직 인증하지 않았으면 0; 1=> 초록색으로 표시, 0=> 노란색으로 표시
+        }
+		
+        // 챌린지 별 코멘트 리스트
+        for(ChallengeDTO ch : dto.getList()) {
+        	 Map<String,String> map2 = new HashMap<String,String>();
+             map2.put("cnum", Integer.toString(ch.getCnum()));
+             map2.put("unum", Integer.toString(unum));
+             List<CPhotoImageDTO> cphotoList = userDAO.findAllCphoto(map2);
+        	
+             //챌린지 별로 코멘트들을 모아둔다.
+             List<Map<String, String>> commentList = new ArrayList<Map<String,String>>();
+             for(CPhotoImageDTO cphoto : cphotoList) {
+            	 Map<String,String> map = new HashMap<String,String>();
+            	 // key => cnum+uploaddate / value -> comment
+            	 map.put(cphoto.getUploaddate(), cphoto.getC_comment());
+            	 commentList.add(map);
+             }
+             ch.setCommentList(commentList); //ChallengDTO 각각에 코멘트를 담아둔다.
+        }
+        
+        
+        
+        for(ChallengeDTO ch : dto.getList()) {
+        	//개별 챌린지챌린지의 시작 날짜
+        	String startDay = ch.getSday();
+        	String endDay = ch.getEday();
+        	
+        	//포매터(날짜를 비교하기 위한 수단)
+        	 SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        	 java.util.Date startDate =  formatter.parse(startDay);
+        	 java.util.Date endDate =  formatter.parse(endDay);
+        	 
+        	 if((startDate.before(date) || startDate.equals(date)) && (endDate.after(date) || endDate.equals(date)) ) { //1. 현재 참여 중인 챌린지 => 시작일이 오늘보다 빠르거나 같고 종료일이 오늘보다 느리거나 같은 챌린지
+        		 list2.add(ch);       		 
+        	 }else if(startDate.after(date)) { //2. 시작일이 오늘 날짜보다 더 늦은 챌린지
+        		 list3.add(ch);  
+        	 }else if(endDate.before(date)) { //3. 종료일이 이미 오늘 날짜를 지난 챌린지
+        		 list4.add(ch);  
+        	 }
+        }
+
+        dto2.setList(list2); //1
+        dto3.setList(list3); //1
+        dto4.setList(list4); //1
+        
+        
+     // 어떤 DTO를 보낼 것인가 dto2, dto3, dto4, dto5 네 개 중 하나
+        if(tab.equals("ing")) {
+        	m.addAttribute("PageDTO2", dto2);
+        }else if(tab.equals("wait")) {
+        	m.addAttribute("PageDTO2", dto3);
+        }else if(tab.equals("complete")) {
+        	m.addAttribute("PageDTO2", dto4);
+        }
+        
+        m.addAttribute("tab", tab);
+        m.addAttribute("PageDTO", dto);// 모든 나의 챌린지
+		m.addAttribute("unum",unum);
+		return "challenge/myChallengeData";
+	}
+	
 	
 	@Secured("ROLE_USER")
 	@RequestMapping(value="/mychallenges", method = RequestMethod.GET)
@@ -328,20 +436,25 @@ public class ChallengeController {
 		dto.setPerPage(pp);
 		int tot = dto.getTotalRecord() / dto.getPerPage();
 		if(dto.getTotalRecord() % dto.getPerPage() != 0) tot++;
+	
 		
-		// ChallengList 중에서 오늘 날짜에, validate가 1인 사진이 등록되어 있는 챌린지들은?
-		//cnum, date 해서 갯수를 가지고 온다
+		// 오늘 날짜
 		long miliseconds = System.currentTimeMillis();
         Date date = new Date(miliseconds);
+        
+        
+		// ChallengList 중에서 오늘 날짜에, validate가 1인 사진이 등록되어 있는 챌린지들은?
+		//cnum, date 해서 갯수를 가지고 온다		
         for(ChallengeDTO ch :  dto.getList()) {
         	Map<String, String> map = new HashMap<String,String>();
         	map.put("cnum", Integer.toString(ch.getCnum()));
         	map.put("unum", Integer.toString(unum));
         	map.put("date", date.toString());
         	int i = userDAO.findAllCphotoForValidity(map);
-        	ch.setTodayCheck(i);
+        	ch.setTodayCheck(i); // 오늘 인증했으면 1, 아직 인증하지 않았으면 0; 1=> 초록색으로 표시, 0=> 노란색으로 표시
         }
 		
+        // 챌린지 별 코멘트 리스트
         for(ChallengeDTO ch : dto.getList()) {
         	 Map<String,String> map2 = new HashMap<String,String>();
              map2.put("cnum", Integer.toString(ch.getCnum()));
@@ -359,13 +472,32 @@ public class ChallengeController {
              ch.setCommentList(commentList);
         }
         
+     // 이미 start한 챌린지들만 따로 담을 pageDTO
+     		PageDTO dto2 = new PageDTO();
+     		List<ChallengeDTO> list2 = new ArrayList<ChallengeDTO>();
+     		
+        for(ChallengeDTO ch : dto.getList()) {
+        	//개별 챌린지챌린지의 시작 날짜
+        	String startDay = ch.getSday();
+        	String endDay = ch.getEday();
+        	
+        	//포매터(날짜를 비교하기 위한 수단)
+        	 SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        	 java.util.Date startDate =  formatter.parse(startDay);
+        	 java.util.Date endDate =  formatter.parse(endDay);
+        	 
+        	 if((startDate.before(date) || startDate.equals(date)) && (endDate.after(date) || endDate.equals(date))) { //시작날짜가 오늘 날짜보다 빠르거나 같으면 dto2의 챌린지 list에 담는다 
+        		 list2.add(ch);       		 
+        	 }
+        }
+        dto2.setList(list2);
         
-        
+        m.addAttribute("PageDTO2", dto2); // 이미 시작한 챌린지들만 담은 pageDTO
+        m.addAttribute("PageDTO", dto);// 모든 나의 챌린지
 		m.addAttribute("unum",unum);
 		m.addAttribute("curPage", curPage);
 		m.addAttribute("perPage", pp);
 		m.addAttribute("totalPage", tot);
-		m.addAttribute("PageDTO", dto);
 		return "myChallenges";
 	}
 	

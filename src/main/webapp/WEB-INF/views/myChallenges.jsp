@@ -44,7 +44,7 @@
 </section>
 <hr/>
 <!--  헤더  -->
-<!--  모달 -->
+<!--  챌린지 만들기 모달 -->
 <div class="modal fade" id="chMakingPage2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
@@ -61,7 +61,7 @@
     </div>
   </div>
 </div>
-<!--  모달 -->
+<!--  챌린지 만들기 모달 -->
 
 
 <!-- 본문 -->
@@ -69,9 +69,14 @@
 	<div class="col-sm-2">
 	</div>
 	<div class="col-sm-8" style="">
+		<!-- 챌린지 tab -->
+			<jsp:include page="challenge/myChallengeTab.jsp" flush="true"/>
+		<!-- 챌린지 tab -->
+		<!-- 내 챌린지 본문 -->
 		<div id="content">
 			<jsp:include page="challenge/myChallengeList2.jsp" flush="true"/><br>
 		</div>
+		<!-- 내 챌린지 본문 -->
 	</div>
 	<div class="col-sm-2">
 	</div>
@@ -82,6 +87,8 @@
 <script>
 
 $(document).ready(function(){
+	
+	
 	$("#chMaking").on("click", function(){
 		if( $(".loginChecker").attr("data-id") == 0){
 			alert("로그인이 필요합니다.");

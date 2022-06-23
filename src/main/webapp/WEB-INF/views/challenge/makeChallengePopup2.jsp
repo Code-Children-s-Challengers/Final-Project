@@ -154,40 +154,41 @@ $(document).ready(function(){
 			});
 	}
 	
-	// inValid라는 함수를 만들 수 있다!!
-	$.fn.isValid = function(){
-		  return this[0].checkValidity()
-		}
+
 	
 	
 	//submit 시 유효성 체크
 	$(".submit").on("click" ,function(event){
+		$.fn.isValid = function(){
+			  return this[0].checkValidity()
+			}
 		console.log($("#chMaking"))
 		if (! $("#chMakingForm").isValid()) {
 	          event.preventDefault()
 	          event.stopPropagation()
 	          console.log("why");
+	          $("#chMakingForm").addClass('was-validated');
+		}else{
+			
+			//ajax로 formData를 전송한다
+	 		var formData = new FormData($("#chMakingForm")[0]);
+	 		$.ajax({
+	 			url: "/hifive/makeChallenge",
+	 			type:"post",
+	 			data : formData,
+	 			cache: false,
+	 			contentType: false,
+	 			processData: false,
+	 			dataType: 'text',
+	 			success: function(data){
+	 				alert(data);	
+	 				$(".btn-close").click();
+	 				window.location.reload();
+	 			}
+	 		});	
 		}
-		
-		 $("#chMakingForm").addClass('was-validated');
-  		console.log("hi");
-  		
-  		//ajax로 formData를 전송한다
- 		var formData = new FormData($("#chMakingForm")[0]);
- 		$.ajax({
- 			url: "/hifive/makeChallenge",
- 			type:"post",
- 			data : formData,
- 			cache: false,
- 			contentType: false,
- 			processData: false,
- 			dataType: 'text',
- 			success: function(data){
- 				alert(data);	
- 				$(".btn-close").click();
- 				window.location.reload();
- 			}
- 		});		    	
+	
+    	
 	});
 	 
 	

@@ -112,7 +112,8 @@ public class ChallengeDAO {
         
 		PageDTO pageDTO = new PageDTO();
 		int offset = (curPage-1)*perPage;
-		List<ChallengeDTO> list = session.selectList("com.config.ChallengeMapper.userChallenge", unum,new RowBounds(offset,perPage));
+		//List<ChallengeDTO> list = session.selectList("com.config.ChallengeMapper.userChallenge", unum,new RowBounds(offset,perPage));
+		List<ChallengeDTO> list = session.selectList("com.config.ChallengeMapper.userChallenge", unum); //page는 안 만들 예정
 		
 		int totalRecord = userChallengeNumber(unum);
 		

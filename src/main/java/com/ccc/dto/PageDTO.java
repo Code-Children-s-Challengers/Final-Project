@@ -11,7 +11,7 @@ import lombok.Data;
 public class PageDTO {
 	List<ChallengeDTO> list; // 목록
 	int curPage; // 현재 페이지
-	int perPage = 8; // 페이지 당 보여줄 개수
+	int perPage = 6; // 페이지 당 보여줄 개수
 	int totalRecord; // 전체 레코드 개수
 	
 	public List<ChallengeDTO> getList() {
