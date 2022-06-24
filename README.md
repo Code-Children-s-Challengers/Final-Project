@@ -1,9 +1,7 @@
 # Final-Projec Name : HIGH FIVE 🙏🏻
 
 <br>
-[![aidnd](/src/Assets/Img/airdndCapture.png)](https://www.youtube.com/watch?v=iB43qkoJuB0)   
-
-![image](https://user-images.githubusercontent.com/96436971/164655321-ab346abf-df0d-4e83-bf33-b5fe1330fe5e.png)
+![image](https://github.com/Code-Children-s-Challengers/Final-Project/blob/main/DA/PROJECT_IMAGE/INTERFACE1.PNG)
 
 ## ⏰ 프로젝트 기간
 2022.05.02 ~ 2022.06.28
