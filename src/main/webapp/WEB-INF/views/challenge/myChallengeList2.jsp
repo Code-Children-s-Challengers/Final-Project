@@ -160,15 +160,15 @@
 			      </div>
 			      <div class="modal-body">
 <!-- 인증 사진을 올리기 위한 form -->
-<form class="row g-3 needs-validation" method="post" action="/hifive/upload/${unum}" enctype="multipart/form-data" id="uploadForm${dto.getCnum()}" novalidate>
+<form class="row g-3 needs-validation" method="post" action="/hifive/upload/${unum}" enctype="multipart/form-data" id="uploadForm${dto.getCnum()}"  novalidate>
 	<div class="col-sm-12 pt-5 text-center">
   		<div class="imageContainer ">
-  			<img src="/hifive/images/challenge/noImage.gif" class="rounded" alt="..." id="uploadPhotoImage">
+  			<img src="/hifive/images/challenge/noImage.gif" class="rounded" alt="..." id="uploadPhotoImage${dto.getCnum()}">
   		</div>
   	</div>
   	<div class="col-sm-3"></div>
   <div class="col-sm-6 pb-3">
-  	<input class="form-control" type="file" name="uploadPh" id="uploadPh" accept="image/*" required >
+  	<input class="form-control uploadPh" type="file" name="uploadPh" id="uploadPh" accept="image/*"  data-cnum="${dto.getCnum()}" required >
   </div>
   <div class="col-sm-3"></div>
   <!--  -->
@@ -214,9 +214,10 @@
 		$(".today").val(new Date().toISOString().substring(0, 10));
 		
 		//프로필 이미지 미리보기 기능
-		$("form").on("change","#uploadPh", handleChPhoto);
+		$("form").on("change",".uploadPh", handleChPhoto);
 		function handleChPhoto(e){
-			console.log("hi");
+			var cnum = $(this).attr("data-cnum")
+			console.log(cnum);
 			var files = e.target.files;
 			var filesArr = Array.prototype.slice.call(files);
 			filesArr.forEach(function(f){
@@ -226,7 +227,7 @@
 				}
 				var reader = new FileReader();
 				reader.onload = function(e){
-					$("#uploadPhotoImage").attr("src", e.target.result);
+					$("#uploadPhotoImage"+cnum).attr("src", e.target.result);
 					}
 					reader.readAsDataURL(f);
 				});
