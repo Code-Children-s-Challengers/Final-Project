@@ -285,4 +285,33 @@ public class ChallengeDAO {
 		return session.insert("com.config.MemberMapper.pointMinus", map);
 	}
 
+	//홍석 챌린지 취소하기
+	public int cancle(int cnum, int unum) {
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("cnum", cnum);
+		map.put("unum", unum);
+		return session.delete("com.config.MemberMapper.cancle", map);
+	}
+
+
+	//챌린지 인원수 감소
+	public int partMinus(int cnum) {
+		return session.update("com.config.MemberMapper.partMinus", cnum);
+	}
+	
+	//user에가 point 복구하기 
+	public int refillFee(int unum, int point) {
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("unum", unum);
+		map.put("point", point);
+		return session.update("com.config.MemberMapper.refillFee", map);
+	}
+	
+	//예치금 리스트에서 삭제하기
+	public int deleteAccount(int cnum, int unum) {
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("cnum", cnum);
+		map.put("unum", unum);
+		return session.update("com.config.MemberMapper.deleteAccount", map);
+	}
 }

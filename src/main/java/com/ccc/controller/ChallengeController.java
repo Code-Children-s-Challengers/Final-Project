@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -840,6 +841,32 @@ public class ChallengeController {
 		
 	}
 
+	//아직 시작하지 않은 챌린지 취소하기
+	@GetMapping("/cancle/{cnum}/{unum}")
+	@ResponseBody
+	public String cancle(@PathVariable int cnum,@PathVariable int unum) {
+		System.out.println("챌린지 취소하기 거의 다 왔다 힘내자!");
+		
+		int num = Cservice.cancleCh(cnum, unum);
+		String message;
+		if( num == 1){
+			message = "success";
+		}else {
+			message = "fail";
+		}
+		
+		return message;
+	}
 	
+	//챌린지 완료 후 포인트 환급받기
+	@PostMapping("/pointBack/{cnum}/{unum}")
+	@ResponseBody
+	public String pointBack(@PathVariable int cnum,@PathVariable int unum,@RequestBody String realPoint) {
+		
+		System.out.println("==cnum"+cnum);
+		System.out.println("==unum"+unum);
+		System.out.println("==realPoint"+realPoint);
+		return "캬캬캬캬";
+	}
 }
 

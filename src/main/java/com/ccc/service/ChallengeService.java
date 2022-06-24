@@ -19,7 +19,6 @@ public interface ChallengeService {
 	public PageDTO categoryChallenge(String category, int curPage, int perPage) throws Exception;
 	public int findParticipant(int unum, int cnum) throws Exception;
 	public int Participate(int unum, int cnum) throws Exception;
-	public int ParticipatePoint(int unum, int cnum,String endDay, int point) throws Exception;
 	public int challengeAdd(ChallengeDTO dto) throws Exception;
 	public PageDTO userChallenge(int unum, int curPage, int perPage) throws Exception;
 	public PhotoPageDTO userChallengeRetrieve(int unum, int cnum, int curPage, int perPage) throws Exception;
@@ -39,4 +38,9 @@ public interface ChallengeService {
 	public int challengeCompleteUpdate(String cnum, String unum) throws Exception;
 	public int challengeAdd_Participate(ChallengeDTO dto, int unum, int cnum, String skiphidden, String endDay, int point) throws Exception;
 	public PageDTO categoryChallengeAll(String category, int parseInt, int pp) throws Exception;
+	
+	
+	//홍석 추가
+	public int ParticipatePoint(int unum, int cnum,String endDay, int point) throws Exception;
+	public int cancleCh(int cnum, int unum);
 }

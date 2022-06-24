@@ -35,6 +35,7 @@
 						}else{
 							alert("오류 발생");
 						}
+						window.location.reload()
 					}
 				});
 				

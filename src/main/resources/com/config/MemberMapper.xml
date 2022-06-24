@@ -104,6 +104,28 @@
 		where id = #{unum}
 	 </update>
 	 
+	 <delete id="cancle" parameterType="map" >
+	 	delete from cparticipant
+	 	where cnum = #{cnum} and unum = #{unum}
+	 </delete>
+	 
+	  <update id="partMinus" parameterType="int" >
+		update CHALLENGES
+		set participant = participant-1
+		where cnum = #{cnum}
+	 </update>
+	 
+	 <update id="refillFee" parameterType="map" >
+		update user_table
+		set point = point + #{point}
+		where id = #{unum}
+	 </update>
+	 
+	 <delete id="deleteAccount" parameterType="map" >
+	 	delete from point
+	 	where cnum = #{cnum} and unum = #{unum}
+	 </delete>
+	 
 </mapper>
 
 

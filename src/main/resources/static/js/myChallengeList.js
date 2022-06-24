@@ -1,9 +1,9 @@
-
+		$(".today").val(new Date().toISOString().substring(0, 10));
 		
 		//프로필 이미지 미리보기 기능
-		$("form").on("change","#uploadPh", handleChPhoto);
+		$("form").on("change",".ploadPh", handleChPhoto);
 		function handleChPhoto(e){
-			console.log("hi");
+			var cnum = $(this).attr("data-cnum");
 			var files = e.target.files;
 			var filesArr = Array.prototype.slice.call(files);
 			filesArr.forEach(function(f){
@@ -13,11 +13,12 @@
 				}
 				var reader = new FileReader();
 				reader.onload = function(e){
-					$("#uploadPhotoImage").attr("src", e.target.result);
+					$("#uploadPhotoImage"+cnum).attr("src", e.target.result);
 					}
 					reader.readAsDataURL(f);
 				});
 		}
+		
 		// 클릭 이벤트 발생 시 ajax처리한다
 		$(".upload").on("click",function(){
 			//여기다가 설정해주어야 되는 군...
@@ -156,3 +157,81 @@
 					var s1 = yyyy+"-"+mm+"-"+dd;
 					return s1;
 		}
+		
+		//환급받기
+		$(".pointBack").on("click",function(){
+			
+			var cnum = $(this).attr("data-cnum");
+			var unum = $(this).attr("data-unum");
+			var sday = $(this).attr("data-sday");
+			var eday = $(this).attr("data-eday");
+			var fee = $(this).attr("data-fee");
+			var commentList = $(this).attr("data-comment");
+			console.log(cnum);
+			console.log(unum);
+			console.log(sday);
+			console.log(eday);
+			console.log(commentList);
+			
+			// 소요 기간 (ex 3일)
+			var validDay = getDateDiff(sday, eday)+1;
+			$("#a"+cnum).text(validDay);
+			
+			
+			var commentList2 = commentList.slice(1,-1);
+			var commentList3 = commentList2.split(", ");
+			var commentList4 = [];
+			
+			for( var i2 =0 ;i2<commentList3.length; i2++){
+				var a = commentList3[i2].slice(1,-1)
+				console.log(a.split("="));
+				commentList4.push(a.split("="));
+			}
+			
+			
+			var commentDay = []; // 코멘트를 남긴 날들 ex) 2022-06-22, 2022-06-23...
+			var realComment = []; //실제 코멘트 내용 ex)운동1, 운동2 ...
+			for(var i3=0 ; i3<commentList4.length; i3++){
+				commentDay.push(commentList4[i3][0]);
+				realComment.push(commentList4[i3][1]);
+			}
+			
+			// 실제 인증횟수
+			var cphotoCount = commentDay.length;
+			$("#b"+cnum).text(cphotoCount);
+			
+			// 달성률
+			var aRate = ((cphotoCount/validDay) * 100).toFixed(2);
+			$("#c"+cnum).text(aRate+"%");
+			
+			//환급 포인트
+			var returnP 
+			if(aRate < 80){
+				returnP = fee*(cphotoCount/validDay);
+				console.log(returnP);
+			}else{
+				returnP = fee + fee*0.1*cphotoCount;
+			}
+			$("#d"+cnum).text(returnP);
+			$("#realPointBack"+cnum).val(returnP);
+			
+		});
+		
+		$(".realPointBack").on("click",function(){
+			var cnum = $(this).attr("data-cnum");
+			var unum = $(this).attr("data-unum");
+			var realPoint = $("#realPointBack"+cnum).val();
+			$.ajax({
+				url: "/hifive/pointBack/"+cnum+"/"+unum,
+				type:"post",
+				contentType:"application/json",
+				dataTypoe:"text",
+				data: JSON.stringify({
+					"realPoint":realPoint
+				}),
+				success:function(data){
+					alert(data);
+				}
+			});
+			
+		});		

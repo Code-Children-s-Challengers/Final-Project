@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import org.w3c.dom.CDATASection;
 
 import com.ccc.dao.ChallengeDAO;
 import com.ccc.dto.CPhotoDTO;
@@ -206,6 +207,28 @@ public class ChallengeServiceImpl implements ChallengeService {
         }catch (Exception e){
             throw new Exception("fail"); 
         }
+		return num;
+	}
+
+	//챌린지 취소하기 
+	@Override
+	@Transactional
+	public int cancleCh(int cnum, int unum) {
+		int num = dao.cancle(cnum, unum); //cparticipant에서 삭제 - 성공
+		num = dao.partMinus(cnum); // 챌린지 인원수 감소 - 반쯤만 성공
+		
+		ChallengeDTO ch; //챌린지 찾아오기
+		try {
+			ch = dao.searchChallengeByNum(cnum);
+			System.out.println("++++++++" +ch);
+			num = dao.refillFee(unum, ch.getFee());// user point 복구시키기
+			System.out.println("======" +ch.getFee());
+			num = dao.deleteAccount(cnum, unum); // account에서 삭제하기
+			System.out.println("*****" +ch.getFee());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		return num;
 	}
 
