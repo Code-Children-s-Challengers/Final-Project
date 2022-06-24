@@ -1,7 +1,6 @@
 # Final-Projec Name : HIGH FIVE 🙏🏻
 
 <br>
-![image](https://github.com/Code-Children-s-Challengers/Final-Project/blob/main/DA/PROJECT_IMAGE/INTERFACE1.PNG)
 
 ## ⏰ 프로젝트 기간
 2022.05.02 ~ 2022.06.28
