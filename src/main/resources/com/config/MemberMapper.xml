@@ -126,6 +126,18 @@
 	 	where cnum = #{cnum} and unum = #{unum}
 	 </delete>
 	 
+	 <update id="pointBackComplete" parameterType="map" >
+	 	update point
+    	set valid = 1
+    	where cnum = #{cnum} and unum = #{unum}
+	 </update>
+	 
+	  <select id="findValidP" parameterType="map" resultType="int" >
+	 	select valid
+	 	from point
+    	where cnum = #{cnum} and unum = #{unum}
+	 </select>
+	 
 </mapper>
 
 

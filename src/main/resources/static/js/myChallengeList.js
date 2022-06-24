@@ -222,15 +222,14 @@
 			var unum = $(this).attr("data-unum");
 			var realPoint = $("#realPointBack"+cnum).val();
 			$.ajax({
-				url: "/hifive/pointBack/"+cnum+"/"+unum,
-				type:"post",
-				contentType:"application/json",
+				url: "/hifive/pointBack/"+cnum+"/"+unum+"/"+realPoint,
+				type:"get",
+				contentType:"text",
 				dataTypoe:"text",
-				data: JSON.stringify({
-					"realPoint":realPoint
-				}),
 				success:function(data){
+					$(".btn-close").click();
 					alert(data);
+					window.location.reload();
 				}
 			});
 			

@@ -113,7 +113,7 @@
 			$('#previousLink').on('click', function(){console.log("why"); return false;});
 			$("#previous").addClass("disabled");
 		}
-		if(curPage == tot ){
+		if(curPage == tot ||tot ==0 ){
 			$('#nextLink').on('click', function(){console.log("why"); return false;});
 			$("#next").addClass("disabled");
 		}

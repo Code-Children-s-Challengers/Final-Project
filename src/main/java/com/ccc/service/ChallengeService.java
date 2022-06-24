@@ -43,4 +43,6 @@ public interface ChallengeService {
 	//홍석 추가
 	public int ParticipatePoint(int unum, int cnum,String endDay, int point) throws Exception;
 	public int cancleCh(int cnum, int unum);
+	public int pointBack(int cnum, int unum, int realPoint);
+	public int findValidP(int cnum, int unum);
 }

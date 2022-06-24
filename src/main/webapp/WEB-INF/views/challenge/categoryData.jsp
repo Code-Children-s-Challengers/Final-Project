@@ -189,12 +189,13 @@
 		$("#page2"+curPage2).addClass("active");
 		
 		var tot2 = $("#tot2").attr("data-tot");
+		console.log(tot2);
 		if(curPage2 == 1){
 			$("#previous").addClass("disabled");
 			$('#previousLink').on('click', function(){console.log("why"); return false;});
 		}
 		
-		if(curPage2 ==tot2){
+		if(curPage2 ==tot2 ||tot2 ==0){
 			$("#next").addClass("disabled");
 			$('#nextLink').on('click', function(){console.log("why"); return false;});
 		}

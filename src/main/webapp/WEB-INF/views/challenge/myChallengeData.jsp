@@ -85,7 +85,14 @@
 		        			<p class="card-text">${dto.getSday()} ~ ${dto.getEday()}<br/>참여인원: ${dto.getParticipant()}/${dto.getMpeople()}<br/>참가비: ${dto.getFee()}P<br/>${dto.getCnum()}</p>
 								<c:choose>
 									<c:when test="${tab == 'complete'}"><!-- 완료한 챌린지일 때-->
-										<button type="button" class="btn btn-primary pointBack" data-cnum="${dto.getCnum()}" data-unum="${unum}" data-sday="${dto.getSday()}" data-eday="${dto.getEday()}" data-comment="${dto.getCommentList()}" data-fee="${dto.getFee()}" data-bs-toggle="modal" data-bs-target="#pointBack${dto.getCnum()}">Point 환급 받기</button>
+										<c:choose>
+											<c:when test="${dto.getValidP() eq 0}"><!-- 아직 환급 받지 않은 챌린지 -->
+												<button type="button" class="btn btn-primary pointBack" data-cnum="${dto.getCnum()}" data-unum="${unum}" data-sday="${dto.getSday()}" data-eday="${dto.getEday()}" data-comment="${dto.getCommentList()}" data-fee="${dto.getFee()}" data-bs-toggle="modal" data-bs-target="#pointBack${dto.getCnum()}">Point 환급 받기</button>
+											</c:when>
+											<c:when test="${dto.getValidP() eq 1}"><!-- 이미 환급받은 챌린지 -->
+												<button type="button" class="btn btn-primary" disabled>환급 완료</button>
+											</c:when>
+										</c:choose>
 									</c:when>
 									<c:when test="${tab == 'wait'}"> <!-- 대기 중인 챌린지일 때-->
 										<button type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#cancle${dto.getCnum()}">챌린지 취소하기</button>

@@ -232,4 +232,17 @@ public class ChallengeServiceImpl implements ChallengeService {
 		return num;
 	}
 
+	@Override
+	@Transactional
+	public int pointBack(int cnum, int unum, int realPoint) {
+		int num = dao.refillFee(unum, realPoint); //user Point 복구해주기
+		num = dao.pointBackComplete(cnum, unum); // account에서 더 이상 환급 불가능 표시 바꿔주기
+		return num;
+	}
+
+	@Override
+	public int findValidP(int cnum, int unum) {
+		return dao.findValidP(cnum, unum);
+	}
+
 }

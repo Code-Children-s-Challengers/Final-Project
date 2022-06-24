@@ -314,4 +314,20 @@ public class ChallengeDAO {
 		map.put("unum", unum);
 		return session.update("com.config.MemberMapper.deleteAccount", map);
 	}
+	
+	
+	//Account에서 valid를 1로 만들기 더 이상 환급 불가능
+	public int pointBackComplete(int cnum, int unum) {
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("cnum", cnum);
+		map.put("unum", unum);
+		return session.update("com.config.MemberMapper.pointBackComplete", map);
+	}
+
+	public int findValidP(int cnum, int unum) {
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("cnum", cnum);
+		map.put("unum", unum);
+		return session.selectOne("com.config.MemberMapper.findValidP", map);
+	}
 }

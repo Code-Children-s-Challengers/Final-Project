@@ -338,11 +338,11 @@ public class ChallengeController {
 		
 		// 이미 종료한 챌린지들만 따로 담을 pageDTO
 		PageDTO dto4 = new PageDTO();
-		List<ChallengeDTO> list4 = new ArrayList<ChallengeDTO>();
+		List<ChallengeDTO> list4 = new ArrayList<ChallengeDTO>(); // 데이터 정제용
+		List<ChallengeDTO> list5 = new ArrayList<ChallengeDTO>(); //실제 완료 챌린지들을 담는 용도
 		
-		// 이미 종료한 챌린지들만 따로 담을 pageDTO
-		PageDTO dto5 = new PageDTO();
-		List<ChallengeDTO> list5 = new ArrayList<ChallengeDTO>();
+
+		
 		
 		// 오늘 날짜
 		long miliseconds = System.currentTimeMillis();
@@ -394,17 +394,21 @@ public class ChallengeController {
         	 
         	 if((startDate.before(date) || startDate.equals(date)) && (endDate.after(date) || endDate.equals(date)) ) { //1. 현재 참여 중인 챌린지 => 시작일이 오늘보다 빠르거나 같고 종료일이 오늘보다 느리거나 같은 챌린지
         		 list2.add(ch);       		 
-        	 }else if(startDate.after(date)) { //2. 시작일이 오늘 날짜보다 더 늦은 챌린지
+        	 }else if(startDate.after(date)) { //2. 시작일이 오늘 날짜보다 더 늦은 챌린지(대기 중인 챌린지) =>  wait tab
         		 list3.add(ch);  
-        	 }else if(endDate.before(date)) { //3. 종료일이 이미 오늘 날짜를 지난 챌린지
+        	 }else if(endDate.before(date)) { //3. 종료일이 이미 오늘 날짜를 지난 챌린지(완료한 tab) =>  complete tab
         		 list4.add(ch);  
         	 }
         }
-
-        dto2.setList(list2); //1
-        dto3.setList(list3); //1
-        dto4.setList(list4); //1
         
+        //완료한 데이터의 경우 환급 여부를 살펴본다
+        for(ChallengeDTO ch : list4) {
+        	ch.setValidP(Cservice.findValidP(ch.getCnum(), unum)); //환급여부를 살펴온다
+        	list5.add(ch);
+        }
+        dto2.setList(list2); //1 참여 중인 챌린지
+        dto3.setList(list3); //2 대기 중인 챌린지
+        dto4.setList(list5); //3 완료한 챌린지ㄴ
         
      // 어떤 DTO를 보낼 것인가 dto2, dto3, dto4, dto5 네 개 중 하나
         if(tab.equals("ing")) {
@@ -859,14 +863,14 @@ public class ChallengeController {
 	}
 	
 	//챌린지 완료 후 포인트 환급받기
-	@PostMapping("/pointBack/{cnum}/{unum}")
+	@GetMapping("/pointBack/{cnum}/{unum}/{realPoint}")
 	@ResponseBody
-	public String pointBack(@PathVariable int cnum,@PathVariable int unum,@RequestBody String realPoint) {
+	public String pointBack(@PathVariable int cnum,@PathVariable int unum,@PathVariable int realPoint) {
 		
-		System.out.println("==cnum"+cnum);
-		System.out.println("==unum"+unum);
-		System.out.println("==realPoint"+realPoint);
-		return "캬캬캬캬";
+		int num = Cservice.pointBack(cnum, unum, realPoint);
+		
+		
+		return "success";
 	}
 }
 

@@ -21,6 +21,7 @@ public class ChallengeDTO {
 	//홍석
 	private int todayCheck;
 	private List<Map<String,String>> commentList;
+	private int validP; // 환급여부
 	
 	public int getCnum() {
 		return cnum;
