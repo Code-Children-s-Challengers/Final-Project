@@ -25,8 +25,8 @@
 </sec:authorize>
 
 
-<hr>
 <!--  헤더  -->
+<hr>
 <section class="text-center container">
 <jsp:include page="common/menu.jsp" flush="true"/><br>
     <div class="row py-lg-3">

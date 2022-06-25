@@ -17,6 +17,7 @@ $("#emailSending").click(function(){
         		$("#emailChecking").css("display","inline-block");
         		$(".emailSuccess").text("인증번호를 입력한 뒤 이메일 인증을 눌러주십시오.");
         		$(".emailSuccess").css("color","green");
+        		$("#emailChecking").attr("disabled", false);
         		code = data;
         		console.log(data);
         	}
@@ -26,7 +27,11 @@ $("#emailSending").click(function(){
 
 //이메일 인증번호 대조
 $("#emailChecking").click(function(){
-	if($("#email2").val() == code){
+	if($("#email2").val()==""){
+		$(".emailSuccess").text("이메일을 입력 후 인증번호를 요청해주세요");
+		$(".emailSuccess").css("color","red");
+		$("#emailChecker").val("false")
+	}else if($("#email2").val() == code){
 		$(".emailSuccess").text("인증번호가 일치합니다.");
 		$(".emailSuccess").css("color","green");
 		$("#emailChecker").val("true");

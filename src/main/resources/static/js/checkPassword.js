@@ -10,6 +10,17 @@ $("#password").blur(function(){
 		$(".passwordSuccess").text("사용가능한 비밀번호입니다.");
 		$(".passwordSuccess").css("color", "green");
 	}
+	
+	if(password1RegExp.test(password) && $("#password2").val() == $("#password").val()){
+		$(".passwordSuccess").text("비밀번호가 일치합니다.");
+		$(".passwordSuccess2").text("비밀번호가 일치합니다.");
+		$(".passwordSuccess2").css("color", "green");
+		$("#passwordChecker").val("true");
+	}else{
+		$(".passwordSuccess2").text("동일한 비밀번호를 입력해주세요");
+		$(".passwordSuccess2").css("color", "red");
+		$("#passwordChecker").val("false");
+	}
 });
 
 $("#password2").blur(function(){
