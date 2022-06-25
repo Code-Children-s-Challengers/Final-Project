@@ -11,11 +11,14 @@
 	<div>
 		<div>
 		<main>
+			<div class="top">
+			<div class="title">
 			<select id = "selectBoard">
 				<option value="notice" selected><h2>공지사항</h2></option>
 				<option value="QnABoard"><h2>문의사항</h2></option>								
-			</select>					
+			</select><br/>					
 			<h3>공지사항 검색</h3>
+			</div>
 			<form id="searchButton">
 				<fieldset>					
 					<label>검색분류</label>
@@ -24,19 +27,23 @@
 						<option  value="writerId">작성자</option>
 					</select> 
 					<label>검색어</label>
-					<input type="text" name="keyword" value=""/>
-					<input type="date"><input type="date">
-					<input type="submit" value="검색" />
+					<input type="text" name="keyword" value="" />
+					<input type="date"><input type="date" />
+					<input type="submit" value="검색"  />
 				</fieldset>
 			</form>			
+			</div>
 			
-			<div>
+			<div class="bottom">
+			<div class="content">
+				
 				<h3>공지사항 목록</h3>
+				
 				<table>
 					<thead>
 						<tr>
 							<th>번호</th>
-							<th>제목</th>
+							<th id="titleList">제목</th>
 							<th>작성자</th>
 							<th>작성일</th>
 							<th>조회수</th>
@@ -79,16 +86,17 @@
 					
 					</tbody>
 				</table>
-			</div>		
-			
+					
+			<div class="bottom">
 			<c:forEach var="i" begin="1" end="${totalPage}">
 				<a href="noticeList?curPage=${i}">${i}</a><span>  </span>
-			</c:forEach>
+			</c:forEach><br/>
 			
 			
-			<div>
-				<button id="writeButton">글쓰기</button>
+				<button id="writeButton" class="btn btn-secondary">글쓰기</button>
 			</div>
+		</div>
+		</div>
 	
 		</main>			
 		</div>

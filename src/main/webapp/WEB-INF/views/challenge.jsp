@@ -105,6 +105,7 @@ $(document).ready(function(){
 		}
 	});
 	
+	
 	//my챌린지 확인하기
 	$("#myCh").on("click", function(){
 		if( $(".loginChecker").attr("data-id") == 0){

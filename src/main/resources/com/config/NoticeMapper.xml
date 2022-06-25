@@ -20,7 +20,7 @@
 	<insert id="insertNotice" parameterType="NoticeDTO">
 		insert into notice(id,title,writerId,content,regdate)
 		values (
-				notice_seq.nextval,
+				notice_id_seq.nextval,
 				#{title},			
 				#{writerId},
 				#{content},

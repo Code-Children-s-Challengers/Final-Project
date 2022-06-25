@@ -6,18 +6,19 @@
 	<div>
 		<div>
 		<main>
+			<div class="content">
 			<h2>공지사항 작성하기</h2>
 			<form id="noticeSave" method="GET">
 				<table>
 					<tbody>						
 						<tr>
 							<th>제목</th>
-							<td><input type="text" id="title" name = "title" value=""  placeholder="제목을 입력하세요" size="30"></td>
+							<td><input type="text" id="title" name = "title" value=""  placeholder="제목을 입력하세요" maxLength="30" style="width:100%"></td>
 						</tr>
 						<tr>
 							<th>내용</th>
-							<td><textarea id="qcontent" name="qcontent" placeholder="내용을 입력하세요" style="height:100px; width:100%"; ></textarea>
-					 </div></td>
+							<td><textarea id="qcontent" name="qcontent" placeholder="내용을 입력하세요" style="height:400px; width:100%" ></textarea>
+					 </div></td> 
 						</tr>
 						<!-- 
 						<tr>
@@ -27,15 +28,18 @@
 						 -->				
 						
 						<tr>
-							<td><button id="noticeSave">글 저장</button></td>
-												
+											
 						</tr>	
 						
 					</tbody>
 				</table>
+				<div class="bottom">
+				<button id="noticeSave" class="btn btn-secondary">글 저장</button>	
+				<button type="button" id="listButton" class="btn btn-primary">목록</button>		
+				</div>
 			</form>
-				<td><button id="listButton">목록</button></td>		
-			
+
+			</div>
 		</main>			
 		</div>
 	</div> 	
