@@ -77,20 +77,42 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 </head>
 <body>
-	<sec:authentication property="principal.user.nickname" var="nickname"/>
-	<sec:authentication property="principal.user.id" var="id"/>
-	<jsp:include page="../common/menu.jsp" flush="true"/><br>
-	<h1 class="mt-5">&nbsp;&nbsp;My Page</h1>
-		<div class="row">
-		<div class="col-sm-3">
-			<jsp:include page="memberFunction/myPageMenu_myPage.jsp" flush="true"/><br>
-		</div>
-		<div class="col-sm-9">
-			<h2 class="miniHead">프로필 수정</h2>
-			<jsp:include page="memberFunction/myPageContent.jsp" flush="true"/><br>
-		</div>
+<!--  헤더  -->
+<hr>
+<section class="text-center container">
+<jsp:include page="../common/menu.jsp" flush="true"/><br>
+    <div class="row py-lg-3">
+      <div class="col-lg-6 col-md-8 mx-auto">
+        <h1 class="fw-light">새로운 도전을 즐기세요!</h1>
+        <p class="lead text-muted">나를 죽이지 못한 고통은 나를 더 강하게 만들 뿐</p>
+        <p>
+          <a id="chHome" class="btn btn-success my-2" style="display:inline-block">챌린지 시작하기</a>
+        </p>
+        <p>
+        <sec:authorize access="isAuthenticated()">
+		<sec:authentication property="principal.user.nickname" var="nickname"/>
+		     <span class="badge bg-light text-dark">환영합니다 ${nickname}님!</span>
+		</sec:authorize>
+    	<sec:authorize access="isAnonymous()">
+		     <span class="badge bg-light text-dark">로그인 하시면 더 많은 컨텐츠를 즐길 수 있습니다!</span>
+		</sec:authorize>
+        <p>
+      </div>
+    </div>
+</section>
+<hr/>
+<!--  헤더  -->
 
-		</div>
+
+<div class="row">
+	<div class="col-sm-3">
+		<jsp:include page="memberFunction/myPageMenu_myPage.jsp" flush="true"/><br>
+	</div>
+	<div class="col-sm-9">
+		<h2 class="miniHead mb-4">프로필 수정</h2>
+		<jsp:include page="memberFunction/myPageContent.jsp" flush="true"/><br>
+	</div>
+</div>
 		
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="/hifive/js/myPageProfileImage.js"></script>
@@ -99,7 +121,9 @@
 <script>
 		$(document).ready(function(){
 			
-			
+			$("#chHome").on("click", function(){
+				location.href="/hifive/challenges"
+			});	
 		});			
 </script>
 

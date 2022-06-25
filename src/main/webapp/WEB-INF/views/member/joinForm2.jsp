@@ -19,6 +19,9 @@
 	.phone{
 		width:10%;
 	}
+	#username2{
+		width:70%;
+	}
 </style>
 
 
@@ -42,10 +45,52 @@
 				<label for="username">아이디</label>
 			</th>
 			<td>
-				<input class="form-control"  id="username" type="text" name="username" placeholder="아이디를 입력해주세요." required maxlength="14"/><br/>
-				<span class="point usernameSuccess"></span><br/>
-				<span class="point">※ 영문자, 소문자 입력가능, 최소 4자 이상, 최대 12자 까지 입력</span>
+				<input class="form-control"  id="username" type="text" name="username" placeholder="중복확인을 눌러주세요" required maxlength="14" readOnly/>
+				<button type="button" id="usernameChecking" class="btn btn-primary btn-sm doubleCheck" data-bs-toggle="modal" data-bs-target="#usernameModal">중복 확인</button>
+				<button type="button" id="usernameCancle" class="btn btn-primary btn-sm doubleCheck" data-bs-toggle="modal" data-bs-target="#usernameCancleModal" disabled>다시 설정하기</button><br/>
+				<span class="point usernameSuccess mb-2"></span><br/>
 				<input type="hidden" id="usernameChecker"/>
+				<!-- Modal -->
+				<div class="modal fade" id="usernameModal" tabindex="-1" aria-labelledby="usernameModal2" aria-hidden="true">
+				  <div class="modal-dialog">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <h5 class="modal-title" id="usernameModal2">Modal title</h5>
+				        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				      </div>
+				      <div class="modal-body">
+				      	<input class="form-control mb-2"  id="username2" type="text" name="username2" placeholder="입력해주세요" required maxlength="14" />				
+				      	<button type="button" id="usernameChecking2" class="btn btn-primary btn-sm doubleCheck " >중복 확인</button><br/>
+				      	<span class="point usernameSuccess2 mb-2"></span><br/>
+						<span class="point">※ 영문자, 소문자 입력가능, 최소 4자 이상, 최대 12자 까지 입력</span>
+				      </div>
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+				        <button type="button" class="btn btn-primary" disabled id="usernameUsing">사용하기</button>
+				      </div>
+				    </div>
+				  </div>
+				</div>		
+				<!-- Modal -->
+				<!-- Modal -->
+				<div class="modal fade" id="usernameCancleModal" tabindex="-1" aria-labelledby="usernameCancleModal2" aria-hidden="true">
+				  <div class="modal-dialog">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <h5 class="modal-title" id="usernameCancleModal2">Modal title</h5>
+				        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				      </div>
+				      <div class="modal-body">
+				      	ID를 다시 설정하시겠습니까?
+				      </div>
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+				        <button type="button" class="btn btn-primary"  id="realCancle">ID 다시 설정하기</button>
+				      </div>
+				    </div>
+				  </div>
+				</div>		
+				<!-- Modal -->				
 			</td>
 		</tr>
 		<tr>
@@ -175,7 +220,6 @@
 
 	$(document).ready(function(){
 		
-	
 	});
 	
 </script>
