@@ -38,9 +38,7 @@ PASSWORD = 'hifive' # 비밀번호
 
 
 query = """ \
-
 SELECT * from CHALLENGES
-
 """
 
 # connection
@@ -54,7 +52,7 @@ df = pd.read_sql(query, connection)
 df = preprocess(df)
 
 # challenge
-INQ_CHLG = ['1일만보걷기도전']
+INQ_CHLG = ['카페에서텀블러사용도전', '1일만보걷기도전', '1일1커밋도전']
 
 # 조회년도
 INQ_YEAR = 2021
