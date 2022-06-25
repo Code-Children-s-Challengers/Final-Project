@@ -48,20 +48,17 @@
 					
 					<td>
 						<p>
-							<input id="phone1" type="text" name="phone1" placeholder="${phoneNumber1}" required size=3 />-
-							<input id="phone2" type="text" name="phone2" placeholder="${phoneNumber2}" required size=4/>-
-							<input id="phone3" type="text" name="phone3" placeholder="${phoneNumber1}3" required size=4/>
-							<button type="button" id="phoneNumberSending" class="doubleCheck" >인증번호 보내기</button><br/>
+							<input id="phone1" class="form-control" type="text" name="phone1" placeholder="${phoneNumber1}" required maxLength=3 style="display:inline-block;width:13%"/>-
+							<input id="phone2" class="form-control" type="text" name="phone2" placeholder="${phoneNumber2}" required maxLength=4 style="display:inline-block;width:15%"/>-
+							<input id="phone3" class="form-control" type="text" name="phone3" placeholder="${phoneNumber1}3" required maxLength=4 style="display:inline-block;width:15%"/>
+							<button type="button" id="phoneNumberSending" class="btn btn-primary doubleCheck" style="display:inline-block;width:15%;">확인</button><br/>
 							<br/>
-							<input id="phoneNumber2" type="text" name="phoneNumber2" placeholder="인증번호 입력" disabled required/>
-							<button type="button" id="phoneNumberChecking" class="doubleCheck" >인증번호 확인</button><br/>
+							<input id="phoneNumber2"  class="form-control" type="text" name="phoneNumber2" placeholder="인증번호 입력"  disabled required style="display:inline-block;width:60%"/>
+							<button type="button" id="phoneNumberChecking" class="doubleCheck btn btn-primary " disabled >인증번호 확인</button><br/>
 							<span class="point phoneNumberSuccess">휴대폰 번호 입력후 인증번호 보내기를 해주십시오.</span>
 							<input type="hidden" id="phoneNumberChecker" value="true"/> 
 						</p>
-						<p class="tip">
-							최초 가입 시에만 사용하고 있습니다. 따로 저장되지 않습니다.
-						</p>
-						<input class="btn btn-primary" type="button" value="완료" id="complete">
+						<input class="btn btn-primary" type="button" value="완료" id="complete" disabled>
 					</td>
 				</tr>
 				</table>
@@ -89,17 +86,17 @@
 		  <div class="card card-body">
 			<div class="row">
 				<div class="row" style="margin-bottom:10px;">
-					<span> 현재 비밀번호 &nbsp; <button id="originalPwChecking" type="button" class="btn btn-warning" style="width:100px;">확인</button></span>
+					<span> 현재 비밀번호 &nbsp; <button id="originalPwChecking" type="button" class="btn btn-warning btn-sm" style="width:100px;">확인</button></span>
 				</div>
-		  		<input id="originalPw" class="form-control form-control-sm" type="password"  aria-label=".form-control-sm example">				
+		  		<input id="originalPw" class="form-control form-control-sm" type="password"  aria-label=".form-control-sm example" >				
 		  	</div><br/>
 		  	<div class="row">
 				<span>새로운 비밀번호</span><br/>
-		  		<input id="newPw" class="form-control form-control-sm" type="password"  aria-label=".form-control-sm example" disabled>				  		
+		  		<input id="newPw" class="form-control form-control-sm" type="password"  aria-label=".form-control-sm example" disabled >				  		
 		  	</div><br/>
 		  	<div class="row">
 				<span>새로운 비밀번호 확인</span><br/>
-		  		<input id="newPw2" class="form-control form-control-sm" type="password" aria-label=".form-control-sm example" disabled>				  		
+		  		<input id="newPw2" class="form-control form-control-sm" type="password" aria-label=".form-control-sm example" disabled >				  		
 		  	</div>
 		  	<div id="tip2" class="alert alert-light" role="alert" style="margin-top:10px">
 		  		<svg id="icon" class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>

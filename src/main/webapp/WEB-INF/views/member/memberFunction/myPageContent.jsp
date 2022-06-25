@@ -18,7 +18,7 @@
 	th{
 		text-align:center;
 		width: 200px;
-		background-color:lightgray;
+		background-color:	#AECDFF;
 	}
 	td{
 		padding-left:50px;
@@ -84,5 +84,5 @@
 			</tr>		
 			
 			</table><br/>
-			<input type="submit" id="submit" value="저장"/>
+			<input type="submit" id="submit" class="btn btn-primary" value="저장"/>
 </form>
