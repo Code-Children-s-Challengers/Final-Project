@@ -97,7 +97,7 @@ def monthly_plot(df_monthly):
     fig.update_traces(textfont_size=12, textangle=0, textposition="outside", cliponaxis=True)
     
     fig['layout']['yaxis'].title.text = ''
-    fig['layout']['xaxis'].title.text = '월별 달성 횟수'
+    fig['layout']['xaxis'].title.text = '월별 프로젝트 달성 횟수'
     fig['layout']['yaxis']['autorange'] = "reversed"
     
     fig.update_layout(xaxis_range=[0, 100])
@@ -136,7 +136,7 @@ def prj_ach_plot(df_prj_ach):
     
     # 배경 및 축 옵션설정
     fig['layout']['yaxis'].title.text = ''
-    fig['layout']['xaxis'].title.text = ''
+    fig['layout']['xaxis'].title.text = '프로젝트 달성 횟수'
 
     fig.update_layout(xaxis_range=[0, 100])
 
