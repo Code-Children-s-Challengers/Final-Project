@@ -40,7 +40,10 @@
         </a>
       </li>
       <li>
-        <a href="/hifive/member/data/${id}" class="nav-link active">
+        <%-- 
+        <a href="/hifive/member/myData/${id}" class="nav-link active">
+        --%>
+        <a href="http://127.0.0.1:8050/" class="nav-link link-dark">
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"/></svg>
    		       프로젝트 현황 보기
         </a>
