@@ -16,7 +16,7 @@
         <p>
         <sec:authorize access="isAuthenticated()">
 		<sec:authentication property="principal.user.nickname" var="nickname"/>
-		     <span class="badge bg-light text-dark">환영합니다 ${nickname}님!</span>
+		     <span class="badge bg-light text-dark">환영합니다!</span>
 		</sec:authorize>
     	<sec:authorize access="isAnonymous()">
 		     <span class="badge bg-light text-dark">로그인 하시면 더 많은 컨텐츠를 즐길 수 있습니다!</span>

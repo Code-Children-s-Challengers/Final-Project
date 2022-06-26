@@ -16,7 +16,7 @@
 <!--  헤더  -->
 <hr>
 <section class="text-center container">
-<jsp:include page="common/menu.jsp" flush="true"/><br>
+	<jsp:include page="common/menu.jsp" flush="true"/><br>
     <div class="row py-lg-3">
       <div class="col-lg-6 col-md-8 mx-auto">
         <h1 class="fw-light">회원가입 페이지</h1>
