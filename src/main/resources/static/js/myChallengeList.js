@@ -95,6 +95,9 @@
 			}
 			
 			for(var i = 0 ;i<validDay; i++){
+				//어제날짜 구하기
+				var today = new Date();
+				today.setHours(0,0,0,0);
 				
 				//유효한 date들을 문자열로 만든다 => YYYY-MM-DD 형식의 문자열로 만들어줌
 				var date = new Date(sday)
@@ -112,7 +115,7 @@
 					}else{ //두 번째 슬라이드부터는 active 추가X
 						$("#inner"+cnum).append('<div class="carousel-item cPhotoImage" id="cPhotoImage'+i+'"><img src="/hifive/cPhotoImage/'+cnum+'/'+unum+'/'+photoDay+'"  alt="..."><h3>'+photoDay+'&nbsp;<span class="badge rounded-pill bg-success">인증 성공</span></h3><div class="container">'+realComment[commentChecker]+'</div></div>');
 					}
-				}else if( date> lastDay){ //인증할 날이 아직 다가오지 않았을 때 
+				}else if( new Date(photoDay) > today){ //인증할 날이 아직 다가오지 않았을 때 
 					if(i==0){ //첫번째 슬라이드에는 active 추가
 						$("#inner"+cnum).append('<div class="carousel-item active cPhotoImage" id="cPhotoImage'+i+'"><img src="/hifive/cPhotoImage/'+cnum+'/'+unum+'/'+photoDay+'" alt="..."><h3>'+photoDay+'&nbsp;<span class="badge rounded-pill bg-warning text-dark">인증 예정</span></h3><div class="container">'+'해당 날짜에 인증해주세요'+'</div></div>');
 					}else{ //두 번째 슬라이드부터는 active 추가X

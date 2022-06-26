@@ -79,11 +79,11 @@
 		   			
 		   			<c:choose>
 		   			<c:when test="${dto.getTodayCheck() eq 1}">
-		   			<div class="card mb-4 border border-3 border-success" id="myCh${dto.getCnum()}" data-sday="${dto.getSday()}" data-eday="${dto.getEday()}" data-cnum="${dto.getCnum()}" data-unum="${unum}" data-comment="${dto.getCommentList()}">
+		   			<div class="card border border-3 border-success" id="myCh${dto.getCnum()}" data-sday="${dto.getSday()}" data-eday="${dto.getEday()}" data-cnum="${dto.getCnum()}" data-unum="${unum}" data-comment="${dto.getCommentList()}">
 		   			<span class="badge rounded-pill bg-success success">Success</span>
 		   			</c:when>
 		   			<c:when test="${dto.getTodayCheck() eq 0}"> 
-		   			<div class="card mb-4 border border-3 border-warning" id="myCh${dto.getCnum()}" data-sday="${dto.getSday()}" data-eday="${dto.getEday()}" data-cnum="${dto.getCnum()}" data-unum="${unum}" data-comment="${dto.getCommentList()}">
+		   			<div class="card border border-3 border-warning" id="myCh${dto.getCnum()}" data-sday="${dto.getSday()}" data-eday="${dto.getEday()}" data-cnum="${dto.getCnum()}" data-unum="${unum}" data-comment="${dto.getCommentList()}">
 		   			<span class="badge rounded-pill bg-warning text-dark notYet">인증이 필요합니다</span>
 		   			</c:when>
 		   			</c:choose>
@@ -108,6 +108,7 @@
 				      		</c:choose>
 				      		</div>
 				   		</div>
+					  	</div>
 					  	</div>
 					</div>
 		  		
@@ -244,13 +245,10 @@
 			
 			//form의 data-cnum
 			var cnum = $(this).attr("data-cnum");
-			console.log(cnum);
-			console.log($("#uploadForm"+cnum));
 			// 부트스트랩 유효성 검증  
 			if (! $("#uploadForm"+cnum).isValid()) {
 		          event.preventDefault()
 		          event.stopPropagation()
-		          console.log("why");
 		          $("#uploadForm"+cnum).addClass('was-validated');
 		        }else{
 		        	//ajax로 formData를 전송한다, 전송 대상 : 사진, comment

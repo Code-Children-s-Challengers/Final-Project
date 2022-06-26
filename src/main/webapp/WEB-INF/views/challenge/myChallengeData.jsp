@@ -52,21 +52,21 @@
 		   			<!-- 큰 조건절 -->
 		   			<c:choose>
 		   			<c:when test="${tab == 'complete'}"><!-- 완료한 챌린지일 때-->
-		   				<div class="card mb-4 border border-3 border-dark" id="myCh${dto.getCnum()}" data-sday="${dto.getSday()}" data-eday="${dto.getEday()}" data-cnum="${dto.getCnum()}" data-unum="${unum}" data-comment="${dto.getCommentList()}">
+		   				<div class="card border border-3 border-dark" id="myCh${dto.getCnum()}" data-sday="${dto.getSday()}" data-eday="${dto.getEday()}" data-cnum="${dto.getCnum()}" data-unum="${unum}" data-comment="${dto.getCommentList()}">
 		   				<span class="badge rounded-pill bg-dark text-white success">종료한 챌린지입니다</span>
 		   			</c:when>
 		   			<c:when test="${tab == 'wait'}"> <!-- 대기 중인 챌린지일 때-->
-		   				<div class="card mb-4 border border-3 border-secondary" id="myCh${dto.getCnum()}" data-sday="${dto.getSday()}" data-eday="${dto.getEday()}" data-cnum="${dto.getCnum()}" data-unum="${unum}" data-comment="${dto.getCommentList()}">
+		   				<div class="card border border-3 border-secondary" id="myCh${dto.getCnum()}" data-sday="${dto.getSday()}" data-eday="${dto.getEday()}" data-cnum="${dto.getCnum()}" data-unum="${unum}" data-comment="${dto.getCommentList()}">
 		   				<span class="badge rounded-pill bg-secondary notYet">대기 중인 챌린지입니다</span>
 					</c:when>
 					<c:when test="${tab == 'ing'}"> <!-- 참여 중인 챌린지일 때-->
 		   				<c:choose>
 		   					<c:when test="${dto.getTodayCheck() eq 1}"><!-- 오늘 인증을 완료했을 때 -->
-				   				<div class="card mb-4 border border-3 border-success" id="myCh${dto.getCnum()}" data-sday="${dto.getSday()}" data-eday="${dto.getEday()}" data-cnum="${dto.getCnum()}" data-unum="${unum}" data-comment="${dto.getCommentList()}">
+				   				<div class="card border border-3 border-success" id="myCh${dto.getCnum()}" data-sday="${dto.getSday()}" data-eday="${dto.getEday()}" data-cnum="${dto.getCnum()}" data-unum="${unum}" data-comment="${dto.getCommentList()}">
 				   				<span class="badge rounded-pill bg-success success">Success</span>
 				   			</c:when>
 				   			<c:when test="${dto.getTodayCheck() eq 0}"> <!-- 아직 인증을 하지 않았을 때-->
-				   				<div class="card mb-4 border border-3 border-warning" id="myCh${dto.getCnum()}" data-sday="${dto.getSday()}" data-eday="${dto.getEday()}" data-cnum="${dto.getCnum()}" data-unum="${unum}" data-comment="${dto.getCommentList()}">
+				   				<div class="card border border-3 border-warning" id="myCh${dto.getCnum()}" data-sday="${dto.getSday()}" data-eday="${dto.getEday()}" data-cnum="${dto.getCnum()}" data-unum="${unum}" data-comment="${dto.getCommentList()}">
 		   						<span class="badge rounded-pill bg-warning text-dark notYet">인증이 필요합니다</span>
 				   			</c:when>
 		   				</c:choose>
@@ -111,6 +111,8 @@
 				      		</div>
 				   		</div>
 					  	</div>
+					  	</div>
+					  	
 					</div>
 		  		
 		  	<!-- card -->
