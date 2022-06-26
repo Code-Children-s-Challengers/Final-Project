@@ -20,7 +20,7 @@
 						</tr>
 						<tr>
 							<th>내용</th>
-							<td><textarea id="qcontent" name="qcontent" placeholder="내용을 입력하세요" style="height:400px; width:100%"; ></textarea></td>
+							<td><textarea id="qcontent" name="qcontent" placeholder="내용을 입력하세요" style="height:200px; width:100%"; ></textarea></td>
 						</tr>
 						<!-- 
 						<tr>

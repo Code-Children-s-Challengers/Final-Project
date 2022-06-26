@@ -4,6 +4,6 @@
   
 	<!-- --------------------------- <body> --------------------------------------- -->
 <script>
-  alert("공지사항  삭제 성공");
+  alert("문의사항  삭제 성공");
   location.href="/hifive/board/QnABoardList?curPage=1";
 </script>

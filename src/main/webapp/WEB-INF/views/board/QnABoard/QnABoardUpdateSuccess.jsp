@@ -4,6 +4,6 @@
   
 	<!-- --------------------------- <body> --------------------------------------- -->
 <script>
-  alert("수정 성공");
+  alert("작업 성공");
   location.href="/hifive/board/QnABoardList";
 </script>
