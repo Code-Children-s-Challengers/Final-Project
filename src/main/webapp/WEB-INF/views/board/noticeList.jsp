@@ -21,11 +21,11 @@
 <jsp:include page="../common/header.jsp" flush="true"/><br> <!-- header -->
 </div>
 <div class="row">
-	<div class="col-sm-2"></div>
-	<div class="col-sm-8">
+	<div class="col-sm-1"></div>
+	<div class="col-sm-10">
 		<jsp:include page="notice/noticeList.jsp" flush="true"/><br> <!-- 본문 -->
 	</div>
-	<div class="col-sm-2"></div>
+	<div class="col-sm-1"></div>
 </div>
 </body>
 <!-- 부트스트랩 JS  CDN -->
