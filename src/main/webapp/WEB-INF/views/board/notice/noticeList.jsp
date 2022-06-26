@@ -11,7 +11,8 @@
 	<div>
 		<div>
 		<main>
-			<div class="top">
+			<div class="container2">
+			<div class="content">
 			<div class="title">
 			<select id = "selectBoard">
 				<option value="notice" selected><h2>공지사항</h2></option>
@@ -34,11 +35,11 @@
 			</form>			
 			</div>
 			
-			<div class="bottom">
-			<div class="content">
-				
-				<h3>공지사항 목록</h3>
-				
+			
+			<div class="content" style="margin-top:40px;">
+			<div class="title">	
+			<h3>공지사항 목록</h3>
+			</div>	
 				<table>
 					<thead>
 						<tr>
@@ -88,10 +89,9 @@
 				</table>
 					
 			<div class="bottom">
-			<c:forEach var="i" begin="1" end="${totalPage}">
+				<c:forEach var="i" begin="1" end="${totalPage}">
 				<a href="noticeList?curPage=${i}">${i}</a><span>  </span>
-			</c:forEach><br/>
-			
+				</c:forEach><br/><br/>
 			
 				<button id="writeButton" class="btn btn-secondary">글쓰기</button>
 			</div>

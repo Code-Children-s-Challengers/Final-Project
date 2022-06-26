@@ -1,0 +1,47 @@
+@charset "UTF-8";
+
+.container2{
+ 	display:inline-block;
+ 	width:100%;
+ 	text-align:center;
+ }
+
+.content{
+ 	display:inline-block;
+ 	width:80%;
+ 	margin:auto; 
+ }
+ 
+ .title{
+ 	dispaly:inline-block;
+ 	text-align:left;
+ 	margin-bottom:15px;
+ }
+ table{
+ 	width:100%;
+	border: 1px solid #333333;
+	border-collapse: separate;
+ }
+ fieldset{
+ 	width:100%;
+	border: 1px solid #333333;
+	background-color:	#AECDFF;
+	padding: 10px 0;
+ }
+ 
+ th{
+ 	width:17%;
+	background-color:	#AECDFF;
+	text-align:center;
+ }
+ td{
+ 
+	text-align:left;
+}
+ .story{
+ 	height:400px;
+ }
+.bottom{
+ 	display:inline-block;
+ 	margin-top:10px;
+ }

@@ -9,37 +9,7 @@
 <title>notice</title>
 <!-- 부트스트랩 CSS CDN -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-<style>
-	form{
-		width:700px;
-	}
-	h2{
-		display:inline-block;
-	}
-	
-	th{
-		width:20%;
-		background-color:	#AECDFF;
-		text-align:center;
-	}
-	table{
-		margin-top:10px;
-		width:100%;
-		border-collapse: separate;
-	}
-	.content{
-		width:800px;
-		margin:auto;
-	}
-	btn{
-		display:inline-block;
-	}
-	.bottom{
-		margin-top:15px;
-		text-align:center;
-	}
-
-</style>
+<link href="/hifive/css/notice_write_update.css" rel="stylesheet">
 </head>
 <body>
 <div>

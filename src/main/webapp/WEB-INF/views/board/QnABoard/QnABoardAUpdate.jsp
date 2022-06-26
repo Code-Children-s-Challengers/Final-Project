@@ -9,25 +9,30 @@
 		<c:set var="title" value ="${title}"></c:set>
 		
 		<main>
-			<h2>답변 작성하기</h2>
+			<div class="container2">
+			<div class="content">
+			<div class="title">
+			<h2>답변 작성하기</h2><br/>
 			<h3>*답변이 완료된 경우 답변내용이 수정됨</h3>
+			</div>
+			<div class="subject">
 			<form id="QnABoardSave" method="GET">
+				<input type="hidden" id="title" name = "title" value="${title}">
 				<table>
 					<tbody>
 						<tr>
 							<th>글 번호</th>
-							<td>${id}</span></td>
-							<input type="hidden" id="id" name = "id" value="${id}"></td>
+							<td style="width:100%;">${id}</td>
 						</tr>						
 						<tr>
 							<th>제목</th>
-							<td>${title}</span></td>
-							<input type="hidden" id="title" name = "title" value="${title}"></td>
+							<td>${title}</td>
+						
 						</tr>
 						<tr>
 							<th>내용</th>
-							<td><textarea id="acontent" name="acontent" placeholder="내용을 입력하세요" style="height:100px; width:100%"; ></textarea>
-					 </div></td>
+							<td><textarea id="acontent" name="acontent" placeholder="내용을 입력하세요" style="height:400px; width:100%;" ></textarea>
+					 	</td>
 						</tr>
 						<!-- 
 						<tr>
@@ -35,17 +40,15 @@
 							<td><input type="file"></td>
 						</tr>
 						 -->				
-						
-						<tr>
-							<td><button id="QnABoardSave">글 수정</button></td>
-												
-						</tr>	
-						
 					</tbody>
 				</table>
+				<div class="bottom">
+				<button type="button" id="listButton" class="btn btn-primary">목록</button>
+				<button  id="QnABoardSave"  class="btn btn-secondary">글 수정</button>
+				</div>
 			</form>
-				<td><button id="listButton">목록</button></td>		
-			
+			</div>
+			</div>
 		</main>			
 		</div>
 	</div> 	

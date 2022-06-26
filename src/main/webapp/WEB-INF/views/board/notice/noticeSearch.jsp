@@ -8,14 +8,17 @@
 	
   	
 	<!-- --------------------------- <body> --------------------------------------- -->
-	<div>
-		<div>
+	
 		<main>
+			<div class="container2">
+			<div class="content">
+			<div class="title">
 			<select id = "selectBoard">
 				<option value="notice" selected><h2>공지사항</h2></option>
 				<option value="QnABoard"><h2>문의사항</h2></option>								
-			</select>					
+			</select><br/>							
 			<h3>공지사항 검색</h3>
+			</div>
 			<form id="searchButton">
 				<fieldset>					
 					<label>검색분류</label>
@@ -29,14 +32,16 @@
 					<input type="submit" value="검색" />
 				</fieldset>
 			</form>					
-			
-			<div>
+			</div>
+			<div class="content" style="margin-top:40px;">
+			<div class="title">	
 				<h3>공지사항 목록</h3>
+			</div>	
 				<table>
 					<thead>
 						<tr>
 							<th>번호</th>
-							<th>제목</th>
+							<th >제목</th>
 							<th>작성자</th>
 							<th>작성일</th>
 							<th>조회수</th>
@@ -61,24 +66,23 @@
 					<% } %>
 					
 					</tbody>
-				</table>
-			</div>			
+				</table>			
 			
 			<c:set var="totalRecord" value ="${pDTO.totalRecord}"></c:set>
 			<c:set var="perPage" value ="${pDTO.perPage}"></c:set>
 			<c:set var="totalPage" value ="${totalPage}"></c:set>
-									
-			<c:forEach var="i" begin="1" end="${totalPage}">
-				<a href="noticeSearch?curPage=${i}&type=${type}&keyword=${keyword}">${i}</a><span>  </span>
-			</c:forEach>
-						
-			<div>
-				<button id="writeButton">글쓰기</button>
+			
+			<div class="bottom">						
+				<c:forEach var="i" begin="1" end="${totalPage}">
+					<a href="noticeSearch?curPage=${i}&type=${type}&keyword=${keyword}">${i}</a><span>  </span>
+				</c:forEach><br/><br/>
+				<button id="writeButton" class="btn btn-secondary">글쓰기</button>
 			</div>
-	
-		</main>			
 		</div>
-	</div> 
+		</div>
+		
+		</main>			
+		 
 	<script>
 	var writeButton = document.querySelector("#writeButton");
 	function moveWrite(){

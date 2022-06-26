@@ -12,11 +12,15 @@
 	<div>
 		<div>
 		<main>
+			<div class="container2">
+			<div class="content">
+			<div class="title">
 			<select id = "selectBoard">
 				<option value="notice"><h2>공지사항</h2></option>
 				<option value="QnABoard" selected><h2>문의사항</h2></option>							
-			</select>					
+			</select><br/>						
 			<h3>문의사항 검색</h3>
+			</div>
 			<form id="searchButton">
 				<fieldset>					
 					<label>검색분류</label>
@@ -30,9 +34,12 @@
 					<input type="submit" value="검색" />
 				</fieldset>
 			</form>			
+			</div>
 			
-			<div>
+			<div class="content" style="margin-top:40px;">
+			<div class="title">
 				<h3>문의사항 목록</h3>
+			</div>	
 				<table>
 					<thead>
 						<tr>
@@ -100,7 +107,7 @@
 					
 					</tbody>
 				</table>
-			</div>			
+						
 			
 			<c:set var="totalRecord" value ="${pDTO.totalRecord}"></c:set>
 			<c:set var="perPage" value ="${pDTO.perPage}"></c:set>
@@ -108,14 +115,13 @@
 			
 			<c:forEach var="i" begin="1" end="${totalPage}">
 				<a href="QnABoardList?curPage=${i}">${i}</a><span>  </span>
-			</c:forEach>
+			</c:forEach><br/><br/>
 			
-			
-			<div>
-				<button id="writeQButton">문의글 작성</button>
-				
+			<div class="bottom">
+				<button id="writeQButton" class="btn btn-secondary">문의글 작성</button>
 			</div>
-	
+			</div>
+			</div>
 		</main>			
 		</div>
 	</div> 

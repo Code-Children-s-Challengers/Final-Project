@@ -11,7 +11,7 @@
         <h1 class="fw-light">새로운 도전을 즐기세요!</h1>
         <p class="lead text-muted">나를 죽이지 못한 고통은 나를 더 강하게 만들 뿐</p>
         <p>
-          <a id="chHome" class="btn btn-success my-2" style="display:inline-block">챌린지 시작하기</a>
+          <a id="chHome" class="btn btn-success my-2" style="display:inline-block">메인페이지로 돌아가기</a>
         </p>
         <p>
         <sec:authorize access="isAuthenticated()">
@@ -27,3 +27,12 @@
 </section>
 <hr/>
 <!--  헤더  -->
+
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script>
+	$(document).ready(function(){
+		$("#chHome").on("click",function(){
+			location.href="/hifive/";
+		});
+	});
+</script>

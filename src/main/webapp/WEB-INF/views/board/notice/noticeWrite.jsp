@@ -6,8 +6,12 @@
 	<div>
 		<div>
 		<main>
+			<div class="container2">
 			<div class="content">
+			<div class="title">
 			<h2>공지사항 작성하기</h2>
+			</div>
+			<div class="subject">
 			<form id="noticeSave" method="GET">
 				<table>
 					<tbody>						
@@ -18,7 +22,7 @@
 						<tr>
 							<th>내용</th>
 							<td><textarea id="qcontent" name="qcontent" placeholder="내용을 입력하세요" style="height:400px; width:100%" ></textarea>
-					 </div></td> 
+						</td> 
 						</tr>
 						<!-- 
 						<tr>
@@ -27,18 +31,15 @@
 						</tr>
 						 -->				
 						
-						<tr>
-											
-						</tr>	
-						
 					</tbody>
 				</table>
 				<div class="bottom">
+				<button type="button" id="listButton" class="btn btn-primary">목록</button>
 				<button id="noticeSave" class="btn btn-secondary">글 저장</button>	
-				<button type="button" id="listButton" class="btn btn-primary">목록</button>		
 				</div>
 			</form>
-
+			</div>
+			</div>
 			</div>
 		</main>			
 		</div>

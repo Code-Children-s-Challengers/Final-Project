@@ -4,8 +4,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 			<main>
-				<h2>세부 공지사항</h2>				
-				<div>
+				<div class="container2">
+				<div class="content">
+				<div class="title">
+				<h2>세부 공지사항</h2>
+				</div>			
+				<div class="subject">
 						<table>
 							<% 
 							NoticeDTO n = (NoticeDTO)request.getAttribute("dto");							
@@ -30,7 +34,7 @@
 								</tr>
 															
 								<tr>
-									<th>내용</th>
+									<th class="story">내용</th>
 									<td colspan="4">${n.content}</td>
 								</tr>
 								
@@ -38,22 +42,17 @@
 						</table>
 					</div>
 					
-					<div>
-						<span>
-							<button id="ListButton">목록</button>
-							<button id="DeleteButton">글 삭제</button>
-							<button id="UpdateButton">글 수정</button>
-						</span>
+					<div class="bottom">
+							<button id="ListButton" class="btn btn-primary">목록</button>
+							<button id="DeleteButton" class="btn btn-secondary">글 삭제</button>
+							<button id="UpdateButton" class="btn btn-secondary">글 수정</button>
 					</div>		
 					
-					
+				</div>	
+				</div>	
 			</main>		
 			
-		</div>
-	</div>	
-
-
-	</div>
+	
 	<script>
 	var ListButton = document.querySelector("#ListButton");
 	function moveList(){

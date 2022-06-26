@@ -4,8 +4,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 			<main>
-				<h2>세부 문의내역</h2>				
-				<div>
+				<div class="container2">
+				<div class="content">
+				<div class="title">
+				<h2>세부 문의내역</h2>			
+				</div>
+				<div class="subject">	
+				
 						<table>
 							<% 
 							QnABoardDTO n = (QnABoardDTO)request.getAttribute("dto");							
@@ -15,10 +20,14 @@
 								<tr>
 									<th>작성번호</th>
 									<td id ="writeNum" colspan="3">${n.id}</td>
+								</tr>	
+								<tr>	
 									<th>작성자</th>
-									<td>${n.writerId}</td>		
+									<td>${n.writerId}</td>	
+								</tr>	
+								<tr>	
 									<th>작성일</th>
-									<td colspan="3">${n.regdate}	</td>
+									<td colspan="3">${n.regdate}</td>
 								</tr>
 								<tr>
 									<th>제목</th>
@@ -32,33 +41,25 @@
 								</tr>
 															
 								<tr>
-									<th>질문내용</th>
+									<th style="height:300px;">질문내용</th>
 									<td colspan="4">${n.qcontent}</td>
 								</tr>
 								<tr>
-									<th>답변내용</th>
+									<th style="height:300px;">답변내용</th>
 									<td colspan="4">${n.acontent}</td>
 								</tr>
 								
 							</tbody>
 						</table>
 					</div>	
-			<div>											
-			
-			
-			<div>
-									
-			</div>
-			
-			<div>
-				<span>
-					<button id="ListButton">목록</button>
-					<button id="DeleteButton">글 삭제</button>			
-					<button id="UpdateQButton">문의내용 수정</button>
-					<button id="UpdateAButton">답변하기</button>						
-				</span>
-			</div>			
-					
+					<div class="bottom">
+						<button id="ListButton" class="btn btn-primary">목록</button>
+						<button id="DeleteButton"  class="btn btn-secondary">글 삭제</button>			
+						<button id="UpdateQButton"  class="btn btn-secondary">문의내용 수정</button>
+						<button id="UpdateAButton"  class="btn btn-secondary">답변하기</button>						
+					</div>			
+			</div>		
+			</div>		
 			</main>		
 	
 	<script>
