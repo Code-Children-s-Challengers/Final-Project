@@ -67,10 +67,10 @@
 </c:forEach>
 <!-- 당일 인증 여부 -->
 
-<div class="py-5 bg-light border border-5 justify-content-center"  >
+<div class="py-5 justify-content-center"  >
     <div class="container justify-content-around"  style="width:901px;padding:0;">
 	<!--  -->     	
-		<div class="row row-cols-1 row-cols-md-1 g-4 justify-content-start align-self-center" style="width:100%;margin:0;">	
+		<div class="row row-cols-1 row-cols-md-1 g-5 justify-content-start align-self-center" style="width:100%;margin:0;">	
 			<c:set var="list" value ="${PageDTO2.getList()}"></c:set>
 			<c:forEach var="dto" items="${list}" varStatus="status">	
 		  		<!-- card -->
@@ -79,11 +79,11 @@
 		   			
 		   			<c:choose>
 		   			<c:when test="${dto.getTodayCheck() eq 1}">
-		   			<div class="card mb-3 border border-3 border-success" id="myCh${dto.getCnum()}" data-sday="${dto.getSday()}" data-eday="${dto.getEday()}" data-cnum="${dto.getCnum()}" data-unum="${unum}" data-comment="${dto.getCommentList()}">
+		   			<div class="card mb-4 border border-3 border-success" id="myCh${dto.getCnum()}" data-sday="${dto.getSday()}" data-eday="${dto.getEday()}" data-cnum="${dto.getCnum()}" data-unum="${unum}" data-comment="${dto.getCommentList()}">
 		   			<span class="badge rounded-pill bg-success success">Success</span>
 		   			</c:when>
 		   			<c:when test="${dto.getTodayCheck() eq 0}"> 
-		   			<div class="card mb-3 border border-3 border-warning" id="myCh${dto.getCnum()}" data-sday="${dto.getSday()}" data-eday="${dto.getEday()}" data-cnum="${dto.getCnum()}" data-unum="${unum}" data-comment="${dto.getCommentList()}">
+		   			<div class="card mb-4 border border-3 border-warning" id="myCh${dto.getCnum()}" data-sday="${dto.getSday()}" data-eday="${dto.getEday()}" data-cnum="${dto.getCnum()}" data-unum="${unum}" data-comment="${dto.getCommentList()}">
 		   			<span class="badge rounded-pill bg-warning text-dark notYet">인증이 필요합니다</span>
 		   			</c:when>
 		   			</c:choose>
@@ -110,7 +110,7 @@
 				   		</div>
 					  	</div>
 					</div>
-		  		</div>
+		  		
 		  	<!-- card -->
 		  	<!-- Modal -->
 			<div class="modal fade closely" id="closely${dto.getCnum()}" data-sday="${dto.getSday()}" data-eday="${dto.getEday()}" data-cnum="${dto.getCnum()}" data-unum="${unum}"  tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
