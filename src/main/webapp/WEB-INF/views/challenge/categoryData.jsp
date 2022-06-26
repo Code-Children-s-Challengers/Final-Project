@@ -73,10 +73,16 @@
 		  	width: 240px;
 		  	height: 25px;
 		}
-	
+	.hotCh{
+			display:inline-block;
+			position:relative;
+			left: 170px;
+			bottom:320px;
+			width:100px;
+		}
 </style>
 
-<div class="py-5 mb-5 bg-light  border border-5" style="margin:auto;">
+<div class="py-5 mb-5 " style="margin:auto;">
     <div class="container" style="width:100%;padding:0;margin:auto;" >
 	<!--  -->        
 		<div class="row row-cols-1 row-cols-md-3 g-4 " style="width:900px;margin:auto;">
@@ -88,12 +94,13 @@
 		      		<img src="/hifive/challengeImage/${dto.getCnum()}" class="card-img-top" alt="...">
 		      	<div class="card-body">
 		        	<h5 class="card-title myTitle">${dto.getName()}</h5>
-		        	<p class="card-text">
+		        	<div class="card-text">
 		        		<span class="badge rounded-pill bg-danger">기간</span>&nbsp;&nbsp;${dto.getSday()}~${dto.getEday()}<br/>
 		        		<span class="badge rounded-pill bg-danger">참가 인원</span>&nbsp;&nbsp; ${dto.getParticipant()}/${dto.getMpeople()}<br/>
 		        		<span class="badge rounded-pill bg-danger">참가비</span>&nbsp;&nbsp; ${dto.getFee()}P<br/>
 		        		<button type="button" class="btn btn-secondary btn-sm participate" id="participate1" data-value="${dto.getCnum()}"  data-bs-toggle="modal" data-bs-target="#participateCheck${dto.getCnum()}">참가하기</button>
-		        	</p>
+		        		<h2><span class="badge rounded-pill bg-danger hotCh">HOT</span></h2>
+		        	</div>
 		      	</div>
 		 		</div>
 		 	</div>
@@ -123,7 +130,7 @@
     </div>
 </div>
 
-<div class="py-5 mb-5 bg-light  border border-5 "  style="margin:auto;">
+<div class="py-5 mb-5 "  style="margin:auto;">
     <div class="container " style="width:100%;padding:0;margin:auto;" >
 	<!--  -->        
 		<div class="row row-cols-1 row-cols-md-3 g-4 " style="width:900px;margin:auto;">

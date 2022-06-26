@@ -46,7 +46,7 @@
 </style>	
 </head>
 
-<div class="py-5 bg-light border border-5 mb-5" style="margin:auto;" >
+<div class="py-5  mb-5" style="margin:auto;" >
     <div class="container" style="width:100%;padding:0;margin:auto;" >
 		<div class="row row-cols-1 row-cols-md-3 g-4 " style="width:900px;margin:auto;" >
 			<c:set var="list" value ="${PageDTO.getList()}"></c:set>
