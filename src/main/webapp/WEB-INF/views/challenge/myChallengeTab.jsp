@@ -15,7 +15,7 @@
     <a class="nav-link" id="wait">대기 중인 챌린지</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" id="complete">완료된 챌린지</a>
+    <a class="nav-link" id="complete">완료한 챌린지</a>
   </li>
   <li class="nav-item">
     <a class="nav-link disabled" id="manage">챌린지 관리하기</a>

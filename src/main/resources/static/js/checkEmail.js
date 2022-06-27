@@ -19,7 +19,6 @@ $("#emailSending").click(function(){
         		$(".emailSuccess").css("color","green");
         		$("#emailChecking").attr("disabled", false);
         		code = data;
-        		console.log(data);
         	}
         }
     });

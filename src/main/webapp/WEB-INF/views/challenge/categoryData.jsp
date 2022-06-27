@@ -82,7 +82,7 @@
 		}
 </style>
 
-<div class="py-5 mb-5 " style="margin:auto;">
+<div class="pt-5 " style="margin:auto;">
     <div class="container" style="width:100%;padding:0;margin:auto;" >
 	<!--  -->        
 		<div class="row row-cols-1 row-cols-md-3 g-4 " style="width:900px;margin:auto;">
@@ -130,7 +130,7 @@
     </div>
 </div>
 
-<div class="py-5 mb-5 "  style="margin:auto;">
+<div class="mb-5 "  style="margin:auto;">
     <div class="container " style="width:100%;padding:0;margin:auto;" >
 	<!--  -->        
 		<div class="row row-cols-1 row-cols-md-3 g-4 " style="width:900px;margin:auto;">
