@@ -41,11 +41,11 @@
 								</tr>
 															
 								<tr>
-									<th style="height:300px;">질문내용</th>
+									<th style="height:150px;">질문내용</th>
 									<td colspan="4">${n.qcontent}</td>
 								</tr>
 								<tr>
-									<th style="height:300px;">답변내용</th>
+									<th style="height:150px;">답변내용</th>
 									<td colspan="4">${n.acontent}</td>
 								</tr>
 								

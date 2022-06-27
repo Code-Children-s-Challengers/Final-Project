@@ -86,7 +86,7 @@
 	<script>
 	var writeButton = document.querySelector("#writeButton");
 	function moveWrite(){
-		location.href = "/hifive/noticeWrite";
+		location.href = "noticeWrite";
 	}              
 	writeButton.addEventListener("click",moveWrite);
 	

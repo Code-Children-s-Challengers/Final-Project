@@ -19,7 +19,7 @@
 </head>
 <body>
 <div>
-<jsp:include page="../common/header.jsp" flush="true"/><br> <!-- header -->
+<jsp:include page="../common/menu.jsp" flush="true"/><br>
 </div>
 <div class="row">
 	<div class="col-sm-1"></div>

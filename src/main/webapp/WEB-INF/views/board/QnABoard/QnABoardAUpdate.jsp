@@ -16,22 +16,24 @@
 			<h3>*답변이 완료된 경우 답변내용이 수정됨</h3>
 			</div>
 			<div class="subject">
+			
 			<form id="QnABoardSave" method="GET">
 				<input type="hidden" id="title" name = "title" value="${title}">
+				<input type="hidden" id="id" name = "id" value="${id}">
 				<table>
 					<tbody>
 						<tr>
 							<th>글 번호</th>
-							<td style="width:100%;">${id}</td>
+							<td id="id" name = "id" style="width:100%;">${id}</td>
 						</tr>						
 						<tr>
 							<th>제목</th>
-							<td>${title}</td>
+							<td id="title" name = "title">${title}</td>
 						
 						</tr>
 						<tr>
 							<th>내용</th>
-							<td><textarea id="acontent" name="acontent" placeholder="내용을 입력하세요" style="height:400px; width:100%;" ></textarea>
+							<td><textarea id="acontent" name="acontent" placeholder="내용을 입력하세요" style="height:200px; width:100%;" ></textarea>
 					 	</td>
 						</tr>
 						<!-- 
@@ -44,7 +46,7 @@
 				</table>
 				<div class="bottom">
 				<button type="button" id="listButton" class="btn btn-primary">목록</button>
-				<button  id="QnABoardSave"  class="btn btn-secondary">글 수정</button>
+				<button  id="QnABoardSave"  class="btn btn-secondary">답변하기</button>
 				</div>
 			</form>
 			</div>
@@ -60,10 +62,10 @@
 			event.preventDefault();
 			var mesg = "";
 			
-			
-			var id = QnABoardSave[0].value;			
+			var id = QnABoardSave[1].value;			
 			var acontent = QnABoardSave[2].value;
 			//var files = noticeSave[3].value;
+			//아하 value로 입력되어 있는 것들만 값이 넘어온다!
 			
 			console.log(id);			
 			console.log(acontent);			
