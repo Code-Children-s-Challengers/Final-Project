@@ -195,20 +195,3 @@
   - QNABOARD
 
 
-
-
-# 🎥 시연 영상 및 사용법
-
-# 시연 영상
-
-[![시연](https://img.youtube.com/vi/v_qsQnZcDeI/0.jpg)](https://www.youtube.com/watch?v=v_qsQnZcDeI)
-
-# 사용법
-
-```
-$ git clone https://github.com/BORI-BoB/L7-monitor.git
-
-$ git checkout -t origin/develop
-
-$ ./execute-service.sh
-```
